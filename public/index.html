@@ -1644,6 +1644,18 @@
   body.on-coderun .main .header.fd-header .fd-sub {
     color: rgba(255,255,255,0.78);
   }
+  body.on-coderun .main .header.fd-header .fd-powered {
+    margin-top: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+  body.on-coderun .main .header.fd-header .fd-powered span {
+    color: var(--clin-yellow);
+    font-weight: 700;
+  }
   @media (max-width: 640px) {
     body.on-coderun .main .header.fd-header { padding: 14px 18px 12px; }
   }
@@ -6233,7 +6245,8 @@ function renderRunCodeHeader() {
   return `
     <div class="header fd-header">
       <img src="/fielddose-logo-stacked.png" alt="FieldDose — Calculate. Confirm. Save Lives." class="fd-logo">
-      <div class="page-meta fd-sub">Weight-based ACLS dosing, protocols &amp; electrical reference</div>
+      <div class="page-meta fd-sub">Regional Common Treatment Guidelines</div>
+      <div class="fd-powered">Powered by <span>GNFR</span></div>
     </div>
   `;
 }

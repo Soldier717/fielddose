@@ -60,6 +60,16 @@
     z-index: 1;
   }
 
+  /* Standalone FieldDose: no sidebar — single full-width column */
+  .app.fielddose-standalone {
+    display: block;
+    grid-template-columns: none;
+  }
+  .app.fielddose-standalone > .main {
+    height: 100vh;
+    width: 100%;
+  }
+
   /* ====== MOBILE HAMBURGER ====== */
   .mobile-header {
     display: none;

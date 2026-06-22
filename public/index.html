@@ -323,6 +323,18 @@
     letter-spacing: 0.05em;
   }
 
+  /* ====== FIELDDOSE LOGO HEADER ====== */
+  .fd-logo {
+    height: 92px;
+    width: auto;
+    max-width: 100%;
+    display: block;
+  }
+  .fd-sub { margin-top: 12px; }
+  @media (max-width: 640px) {
+    .fd-logo { height: 58px; }
+  }
+
   .content { padding: 32px 48px 60px; }
 
   /* ====== SECTIONS ====== */
@@ -1612,6 +1624,18 @@
     background: var(--clin-blue);
     color: white;
     border-bottom: none;
+  }
+  /* Logo header: white backdrop so the navy/red FieldDose mark reads */
+  body.on-coderun .main .header.fd-header {
+    background: #ffffff;
+    border-bottom: 3px solid var(--clin-red);
+    padding: 22px 40px 20px;
+  }
+  body.on-coderun .main .header.fd-header .fd-sub {
+    color: var(--clin-text-dim);
+  }
+  @media (max-width: 640px) {
+    body.on-coderun .main .header.fd-header { padding: 14px 18px 12px; }
   }
   body.on-coderun .main .header .breadcrumb,
   body.on-coderun .main .header .page-meta {
@@ -6197,11 +6221,9 @@ function renderRunCode() {
 ============================================================ */
 function renderRunCodeHeader() {
   return `
-    <div class="header">
-      <img src="/misfits-badge.png" alt="FieldDose" class="header-badge" title="FieldDose">
-      <div class="breadcrumb">FIELDDOSE <span class="sep">/</span> FIELD ACLS REFERENCE</div>
-      <h1 class="page-title">Field<span class="accent">Dose</span></h1>
-      <div class="page-meta">Weight-based ACLS dosing, protocols & electrical reference</div>
+    <div class="header fd-header">
+      <img src="/fielddose-logo.png" alt="FieldDose — Calculate. Confirm. Save Lives. Powered by GNFR" class="fd-logo">
+      <div class="page-meta fd-sub">Weight-based ACLS dosing, protocols &amp; electrical reference</div>
     </div>
   `;
 }

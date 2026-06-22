@@ -934,7 +934,7 @@
   /* ============================================================
      CODE TIMER
   ============================================================ */
-  .ct-wrap { max-width: 980px; }
+  .ct-wrap { max-width: 980px; margin-left: auto; margin-right: auto; }
 
   .ct-disclaimer {
     background: linear-gradient(90deg, rgba(200,52,26,0.15), rgba(200,52,26,0.05));
@@ -1630,6 +1630,10 @@
     background: #ffffff;
     border-bottom: 3px solid var(--clin-red);
     padding: 22px 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
   body.on-coderun .main .header.fd-header .fd-sub {
     color: var(--clin-text-dim);

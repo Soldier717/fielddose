@@ -324,15 +324,21 @@
   }
 
   /* ====== FIELDDOSE LOGO HEADER ====== */
+  /* white rounded card so the navy/red logo reads on the navy bar.
+     height includes 14px vertical padding (border-box) → ~84px visible logo */
   .fd-logo {
-    height: 92px;
+    height: 112px;
     width: auto;
     max-width: 100%;
     display: block;
+    background: #ffffff;
+    padding: 14px 24px;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.28);
   }
-  .fd-sub { margin-top: 12px; }
+  .fd-sub { margin-top: 14px; }
   @media (max-width: 640px) {
-    .fd-logo { height: 58px; }
+    .fd-logo { height: 80px; padding: 10px 16px; border-radius: 12px; }
   }
 
   .content { padding: 32px 48px 60px; }
@@ -1627,16 +1633,16 @@
   }
   /* Logo header: white backdrop so the navy/red FieldDose mark reads */
   body.on-coderun .main .header.fd-header {
-    background: #ffffff;
+    background: var(--clin-blue);
     border-bottom: 3px solid var(--clin-red);
-    padding: 22px 40px 20px;
+    padding: 26px 40px 22px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
   body.on-coderun .main .header.fd-header .fd-sub {
-    color: var(--clin-text-dim);
+    color: rgba(255,255,255,0.78);
   }
   @media (max-width: 640px) {
     body.on-coderun .main .header.fd-header { padding: 14px 18px 12px; }

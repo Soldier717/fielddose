@@ -324,21 +324,21 @@
   }
 
   /* ====== FIELDDOSE LOGO HEADER ====== */
-  /* white rounded card so the navy/red logo reads on the navy bar.
-     height includes 14px vertical padding (border-box) → ~84px visible logo */
+  /* white rounded badge so the stacked navy/red logo reads on the navy bar.
+     height includes 18px vertical padding (border-box) → ~150px visible logo */
   .fd-logo {
-    height: 112px;
+    height: 186px;
     width: auto;
     max-width: 100%;
     display: block;
     background: #ffffff;
-    padding: 14px 24px;
-    border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.28);
+    padding: 18px 28px;
+    border-radius: 16px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.30);
   }
-  .fd-sub { margin-top: 14px; }
+  .fd-sub { margin-top: 16px; }
   @media (max-width: 640px) {
-    .fd-logo { height: 80px; padding: 10px 16px; border-radius: 12px; }
+    .fd-logo { height: 128px; padding: 12px 18px; border-radius: 14px; }
   }
 
   .content { padding: 32px 48px 60px; }
@@ -6232,7 +6232,7 @@ function renderRunCode() {
 function renderRunCodeHeader() {
   return `
     <div class="header fd-header">
-      <img src="/fielddose-logo.png" alt="FieldDose — Calculate. Confirm. Save Lives. Powered by GNFR" class="fd-logo">
+      <img src="/fielddose-logo-stacked.png" alt="FieldDose — Calculate. Confirm. Save Lives." class="fd-logo">
       <div class="page-meta fd-sub">Weight-based ACLS dosing, protocols &amp; electrical reference</div>
     </div>
   `;

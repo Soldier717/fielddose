@@ -2997,6 +2997,163 @@
     .cr-more-subtab { font-size: 11px; padding: 12px 4px; letter-spacing: 0.02em; }
   }
 </style>
+
+<style>
+  /* ============================================================
+     QUICK-REFERENCE LEFT DASHBOARD (qref-*) — additive & isolated.
+     Mounted at <body> end; owns nothing outside .qref-*.
+     Does not touch the code calculator, its bottom tabs, or routing.
+  ============================================================ */
+  .qref-fab {
+    position: fixed; top: 10px; left: 10px;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; color: var(--clin-blue);
+    border: 1px solid var(--clin-border); border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.28);
+    cursor: pointer; z-index: 450;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .qref-fab svg { width: 24px; height: 24px; stroke: var(--clin-blue); stroke-width: 2.4; fill: none; }
+  .qref-fab:active { transform: scale(0.94); }
+
+  .qref-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45);
+    opacity: 0; visibility: hidden;
+    transition: opacity .25s ease, visibility .25s ease;
+    z-index: 1000;
+  }
+  .qref-backdrop.open { opacity: 1; visibility: visible; }
+
+  .qref-drawer {
+    position: fixed; top: 0; left: 0; bottom: 0;
+    width: min(330px, 86vw);
+    background: var(--clin-surface);
+    border-right: 1px solid var(--clin-border);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.18);
+    transform: translateX(-100%);
+    transition: transform .28s cubic-bezier(.4,0,.2,1);
+    z-index: 1001;
+    display: flex; flex-direction: column;
+  }
+  .qref-drawer.open { transform: translateX(0); }
+
+  .qref-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    padding: 16px 16px 14px;
+    background: var(--clin-blue); color: #fff;
+    border-bottom: 3px solid var(--clin-red);
+  }
+  .qref-head-title { font-size: 17px; font-weight: 800; letter-spacing: .02em; }
+  .qref-head-sub { font-size: 11px; opacity: .8; margin-top: 2px; letter-spacing: .06em; text-transform: uppercase; }
+  .qref-x {
+    background: rgba(255,255,255,0.16); border: none; color: #fff;
+    width: 32px; height: 32px; border-radius: 8px; font-size: 22px; line-height: 1;
+    cursor: pointer; flex-shrink: 0;
+  }
+  .qref-x:active { background: rgba(255,255,255,0.3); }
+
+  .qref-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 8px 0 24px; }
+
+  .qref-section-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px 6px;
+    font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--clin-text-muted);
+  }
+
+  .qref-card {
+    display: flex; align-items: center; gap: 12px;
+    width: calc(100% - 20px); margin: 4px 10px;
+    padding: 12px 14px;
+    background: var(--clin-surface);
+    border: 1px solid var(--clin-border); border-left: 3px solid var(--clin-blue);
+    border-radius: 9px; cursor: pointer; text-align: left;
+    transition: background .12s ease;
+  }
+  .qref-card:active { background: var(--clin-surface-alt); }
+  .qref-card-ico {
+    width: 30px; height: 30px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--clin-blue);
+  }
+  .qref-card-ico svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2; fill: none; }
+  .qref-card-text { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .qref-card-name { font-size: 14.5px; font-weight: 600; color: var(--clin-text); }
+  .qref-card-meta { font-size: 11px; color: var(--clin-text-muted); font-weight: 500; }
+
+  .qref-empty {
+    margin: 8px 16px; padding: 22px 16px;
+    border: 1px dashed var(--clin-border); border-radius: 10px;
+    text-align: center; color: var(--clin-text-muted); font-size: 13px; line-height: 1.5;
+  }
+
+  /* full-screen viewer for tool cards (documents reuse it later) */
+  .qref-viewer {
+    position: fixed; inset: 0;
+    background: var(--clin-bg);
+    opacity: 0; visibility: hidden;
+    transition: opacity .2s ease, visibility .2s ease;
+    z-index: 1100;
+    display: flex; flex-direction: column;
+  }
+  .qref-viewer.open { opacity: 1; visibility: visible; }
+  .qref-viewer-head {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
+    background: var(--clin-blue); color: #fff;
+    border-bottom: 3px solid var(--clin-red);
+  }
+  .qref-back {
+    background: rgba(255,255,255,0.16); border: none; color: #fff;
+    border-radius: 8px; padding: 7px 12px; font-size: 14px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+  }
+  .qref-back:active { background: rgba(255,255,255,0.3); }
+  .qref-back svg { width: 16px; height: 16px; stroke: #fff; stroke-width: 2.5; fill: none; }
+  .qref-viewer-title { font-size: 16px; font-weight: 800; }
+  .qref-viewer-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px 18px 40px; }
+
+  /* tool: MAP calculator */
+  .qref-tool { max-width: 460px; margin: 0 auto; }
+  .qref-tool-inputs { display: flex; gap: 14px; }
+  .qref-field { flex: 1; }
+  .qref-field label {
+    display: block; font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--clin-text-dim); margin-bottom: 6px;
+  }
+  .qref-field input {
+    width: 100%; box-sizing: border-box;
+    font-size: 30px; font-weight: 800; text-align: center;
+    padding: 14px 10px;
+    border: 1px solid var(--clin-border); border-radius: 10px;
+    background: var(--clin-surface); color: var(--clin-text);
+  }
+  .qref-field input:focus { outline: none; border-color: var(--clin-blue); box-shadow: 0 0 0 3px var(--clin-blue-light); }
+  .qref-unit { text-align: center; font-size: 11px; color: var(--clin-text-muted); margin-top: 4px; }
+
+  .qref-result {
+    margin-top: 22px; padding: 24px 18px;
+    background: var(--clin-surface); border: 1px solid var(--clin-border);
+    border-radius: 14px; text-align: center;
+  }
+  .qref-result-label { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--clin-text-muted); }
+  .qref-result-value { font-size: 56px; font-weight: 800; color: var(--clin-blue); line-height: 1.05; margin: 6px 0 2px; }
+  .qref-result-value small { font-size: 18px; font-weight: 700; color: var(--clin-text-muted); }
+  .qref-result-value.dim { color: var(--clin-text-muted); }
+  .qref-chip { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 20px; }
+  .qref-chip.ok  { background: #e3f4e8; color: #1d7a39; }
+  .qref-chip.low { background: var(--clin-blue-light); color: var(--clin-red); }
+
+  .qref-formula { margin-top: 16px; text-align: center; font-size: 13px; color: var(--clin-text-dim); }
+  .qref-formula code { background: var(--clin-surface-alt); padding: 2px 7px; border-radius: 5px; }
+  .qref-disclaimer {
+    margin-top: 22px; padding: 12px 14px;
+    background: var(--clin-surface-alt); border-radius: 9px;
+    font-size: 11.5px; line-height: 1.5; color: var(--clin-text-dim);
+  }
+</style>
 </head>
 <body>
 
@@ -7596,6 +7753,212 @@ function bindRunCodeEvents() {
   // Bind the tab content elements (Start/Reset/drugs/shock/rhythm/log)
   rcBindDynamicElements();
 }
+</script>
+
+<!-- ============ Quick-Reference Left Dashboard (qref) ============ -->
+<button class="qref-fab" id="qref-fab" aria-label="Open reference menu" title="Quick Reference">
+  <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+</button>
+<div class="qref-backdrop" id="qref-backdrop"></div>
+<aside class="qref-drawer" id="qref-drawer" aria-hidden="true" aria-label="Quick Reference">
+  <div class="qref-head">
+    <div>
+      <div class="qref-head-title">Quick Reference</div>
+      <div class="qref-head-sub">Tools &amp; Protocols</div>
+    </div>
+    <button class="qref-x" id="qref-close" aria-label="Close">&times;</button>
+  </div>
+  <div class="qref-body" id="qref-body"><!-- rendered by JS --></div>
+</aside>
+<div class="qref-viewer" id="qref-viewer" role="dialog" aria-modal="true">
+  <div class="qref-viewer-head">
+    <button class="qref-back" id="qref-viewer-back">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Back
+    </button>
+    <div class="qref-viewer-title" id="qref-viewer-title"></div>
+  </div>
+  <div class="qref-viewer-body" id="qref-viewer-body"></div>
+</div>
+
+<script>
+/* ============================================================
+   Quick-Reference Left Dashboard (QRef) — additive & isolated.
+   No dependency on the calculator (render/ctState/cr/currentPage).
+============================================================ */
+(function () {
+  'use strict';
+
+  // Built-in TOOL cards (fixed order). Add more by appending here.
+  const TOOL_CARDS = [
+    {
+      id: 'map',
+      name: 'MAP Calculator',
+      meta: 'Mean arterial pressure',
+      icon: '<svg viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>',
+      render: renderMapTool,
+      bind: bindMapTool,
+    },
+  ];
+
+  const $ = (id) => document.getElementById(id);
+
+  function openDrawer() {
+    $('qref-backdrop').classList.add('open');
+    $('qref-drawer').classList.add('open');
+    $('qref-drawer').setAttribute('aria-hidden', 'false');
+  }
+  function closeDrawer() {
+    $('qref-backdrop').classList.remove('open');
+    $('qref-drawer').classList.remove('open');
+    $('qref-drawer').setAttribute('aria-hidden', 'true');
+  }
+
+  function renderDrawer() {
+    const tools = TOOL_CARDS.map((c) => `
+      <button class="qref-card" data-qref-tool="${c.id}">
+        <span class="qref-card-ico">${c.icon}</span>
+        <span class="qref-card-text">
+          <span class="qref-card-name">${c.name}</span>
+          <span class="qref-card-meta">${c.meta || ''}</span>
+        </span>
+      </button>`).join('');
+
+    $('qref-body').innerHTML = `
+      <div class="qref-section-head"><span>Tools</span></div>
+      ${tools}
+      <div class="qref-section-head"><span>References</span></div>
+      <div class="qref-empty">Upload PDF / image reference cards here &mdash; coming in the next build.</div>
+    `;
+
+    document.querySelectorAll('[data-qref-tool]').forEach((el) => {
+      el.addEventListener('click', () => {
+        const card = TOOL_CARDS.find((c) => c.id === el.dataset.qrefTool);
+        if (card) openViewer(card);
+      });
+    });
+  }
+
+  function openViewer(card) {
+    $('qref-viewer-title').textContent = card.name;
+    $('qref-viewer-body').innerHTML = '<div class="qref-tool">' + card.render() + '</div>';
+    if (card.bind) card.bind();
+    $('qref-viewer').classList.add('open');
+  }
+  function closeViewer() {
+    $('qref-viewer').classList.remove('open');
+    $('qref-viewer-body').innerHTML = '';
+  }
+
+  // ---- MAP calculator tool ----
+  function renderMapTool() {
+    return `
+      <div class="qref-tool-inputs">
+        <div class="qref-field">
+          <label for="qref-map-sbp">Systolic</label>
+          <input id="qref-map-sbp" type="number" inputmode="numeric" min="0" max="400" placeholder="—">
+          <div class="qref-unit">SBP · mmHg</div>
+        </div>
+        <div class="qref-field">
+          <label for="qref-map-dbp">Diastolic</label>
+          <input id="qref-map-dbp" type="number" inputmode="numeric" min="0" max="400" placeholder="—">
+          <div class="qref-unit">DBP · mmHg</div>
+        </div>
+      </div>
+      <div class="qref-result">
+        <div class="qref-result-label">Mean Arterial Pressure</div>
+        <div class="qref-result-value dim" id="qref-map-out">—</div>
+        <div id="qref-map-chip"></div>
+      </div>
+      <div class="qref-formula">MAP = <code>(SBP + 2 × DBP) ÷ 3</code></div>
+      <div class="qref-disclaimer">
+        A MAP ≥ 65 mmHg is a common adult perfusion goal &mdash; always confirm
+        against current local protocols and medical control. Training &amp;
+        reference only.
+      </div>
+    `;
+  }
+
+  function bindMapTool() {
+    const sbpEl = $('qref-map-sbp');
+    const dbpEl = $('qref-map-dbp');
+    const out = $('qref-map-out');
+    const chip = $('qref-map-chip');
+
+    function recompute() {
+      const sbp = parseFloat(sbpEl.value);
+      const dbp = parseFloat(dbpEl.value);
+      if (!isFinite(sbp) || !isFinite(dbp) || sbp <= 0 || dbp <= 0) {
+        out.textContent = '—';
+        out.classList.add('dim');
+        chip.innerHTML = '';
+        return;
+      }
+      const map = Math.round((sbp + 2 * dbp) / 3);
+      out.classList.remove('dim');
+      out.innerHTML = map + ' <small>mmHg</small>';
+      chip.innerHTML = map >= 65
+        ? '<span class="qref-chip ok">≥ 65 · at / above target</span>'
+        : '<span class="qref-chip low">&lt; 65 · below target</span>';
+    }
+    sbpEl.addEventListener('input', recompute);
+    dbpEl.addEventListener('input', recompute);
+    sbpEl.focus();
+  }
+
+  // Park the button on the same row as the "Regional Common Treatment
+  // Guidelines" tag, pinned hard left. Measured so it tracks the logo's
+  // scaling and re-renders; clamped to stay inside the red band.
+  function positionFab() {
+    const fab = $('qref-fab');
+    const header = document.querySelector('.fd-header');
+    if (!fab || !header) return;
+    const h = header.getBoundingClientRect();
+    const logo = document.querySelector('.fd-logo');
+    if (logo && !logo.complete) logo.addEventListener('load', scheduleReposition, { once: true });
+    const sub = document.querySelector('.fd-sub');
+    const centerY = sub ? (sub.getBoundingClientRect().top + sub.offsetHeight / 2)
+                        : (h.bottom - 24);
+    let top = centerY - fab.offsetHeight / 2;             // align with the tag line
+    top = Math.min(top, h.bottom - fab.offsetHeight - 6); // stay inside the red band
+    top = Math.max(top, h.top + 6);
+    fab.style.top = Math.round(top) + 'px';
+    fab.style.left = Math.round(h.left + 10) + 'px';
+  }
+
+  let repositionPending = false;
+  function scheduleReposition() {
+    if (repositionPending) return;
+    repositionPending = true;
+    requestAnimationFrame(() => { repositionPending = false; positionFab(); });
+  }
+
+  function init() {
+    renderDrawer();
+    $('qref-fab').addEventListener('click', openDrawer);
+    $('qref-close').addEventListener('click', closeDrawer);
+    $('qref-backdrop').addEventListener('click', closeDrawer);
+    $('qref-viewer-back').addEventListener('click', closeViewer);
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if ($('qref-viewer').classList.contains('open')) closeViewer();
+      else if ($('qref-drawer').classList.contains('open')) closeDrawer();
+    });
+
+    // keep the button under the logo through layout/resize/re-render
+    positionFab();
+    window.addEventListener('load', scheduleReposition);
+    window.addEventListener('resize', scheduleReposition);
+    const main = document.getElementById('main');
+    if (main) new MutationObserver(scheduleReposition).observe(main, { childList: true });
+    setTimeout(scheduleReposition, 400);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 </body>
 </html>

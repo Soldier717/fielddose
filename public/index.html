@@ -6883,8 +6883,9 @@ function rcRenderTabCode(kg, elec) {
 const CC_PROTOCOLS = [
   { cat: 'Cardiac Arrest', list: [
     { id: 'vfvt', name: 'VF / Pulseless VT', banner: 'Ventricular Fibrillation & VT without a Pulse', sections: [
-      { label: 'Primary Treatment', items: ['CPR','Defibrillation — Anterior/Posterior placement (Handtevy for peds energy)','Advanced airway management as needed','Epinephrine 0.5–1 mg IV/IO every 3–5 min (max 3 mg) · Peds 0.01 mg/kg'] },
-      { label: 'Anti-Dysrhythmic — choose one', items: ['Amiodarone 300 mg IV/IO (1st) → 150 mg (2nd) · Peds 5 mg/kg, up to 3 doses (≤ adult total)','Lidocaine 1.5 mg/kg IV/IO (1st) → 0.5 mg/kg (2nd) · Peds 1 mg/kg','Magnesium Sulfate 2 g IV/IO — torsades or refractory VT · Peds 50 mg/kg (max 2 g)'] },
+      { label: 'Primary Treatment', items: ['CPR','Defibrillation — Anterior/Posterior placement (Handtevy for peds energy)','Advanced airway management as needed'] },
+      { label: 'Primary Medication — Anti-Dysrhythmic (choose one)', items: ['Amiodarone 300 mg IV/IO (1st) → 150 mg (2nd) · Peds 5 mg/kg, up to 3 doses (≤ adult total)','Lidocaine 1.5 mg/kg IV/IO (1st) → 0.5 mg/kg (2nd) · Peds 1 mg/kg','Magnesium Sulfate 2 g IV/IO — torsades or refractory VT · Peds 50 mg/kg (max 2 g)'] },
+      { label: 'Secondary Medication — Epinephrine', items: ['Epinephrine 0.5–1 mg IV/IO every 3–5 min (max 3 mg) · Peds 0.01 mg/kg'] },
       { label: 'Refractory VF (Adult)', items: ['Dual Sequential Defibrillation (DSD) after 3rd shock — shocks < 1 sec apart'] },
       { label: 'Suspected Hyperkalemia', items: ['Calcium Chloride 1 g IV/IO'] },
     ], pearls: [
@@ -6929,17 +6930,17 @@ const CC_PROTOCOLS = [
       { label: 'Adjuncts', items: ['Diphenhydramine 50 mg IV/IO','Solu-Medrol 125 mg IV/IO','Albuterol 2.5 mg Neb if wheezing'] },
     ]},
     { id: 'croup', name: 'Croup', banner: 'Croup', sections: [
-      { label: 'Treatment', items: ['Dexamethasone 10 mg PO'] },
+      { label: 'Treatment', items: ['Dexamethasone 10 mg PO','Racemic Epinephrine 2.25% 0.5 mL in 3 mL NS Neb — stridor at rest'] },
     ]},
   ]},
   { cat: 'Cardiac', list: [
     { id: 'brady', name: 'Bradycardia', banner: 'Symptomatic Bradycardia', sections: [
       { label: 'First', items: ['Prioritize oxygenation & ventilation','Peds HR < 60 with hypoperfusion → Medical Cardiac Arrest'] },
-      { label: 'Symptomatic', items: ['Atropine 1 mg IV/IO (repeat q3–5 min, max 3 mg) · Peds 0.02 mg/kg (min 0.1 mg, max 0.5 mg)'] },
-      { label: 'If Atropine Ineffective', items: ['Transcutaneous Pacing — rate 80, titrate mA to capture','Epinephrine 2–10 mcg/min IV/IO'] },
+      { label: 'Symptomatic · Stable', items: ['Atropine 1 mg IV/IO (repeat q3–5 min, max 3 mg) · Peds 0.02 mg/kg (min 0.1 mg, max 0.5 mg)'] },
+      { label: 'Symptomatic · Unstable', items: ['Transcutaneous Pacing — rate 80, titrate mA to capture','Epinephrine 2–10 mcg/min IV/IO'] },
       { label: 'Suspected Hyperkalemia / Beta-Blocker / CCB Tox', items: ['Calcium Chloride 1 g IV/IO'] },
     ], pearls: [
-      'Do not repeat Atropine if the initial dose is ineffective',
+      'Repeating Atropine in a stable patient is at paramedic discretion',
       'For high-degree AV blocks, consider moving directly to pacing or epinephrine',
       'Push-dose epinephrine may be given while the infusion is prepared',
     ]},

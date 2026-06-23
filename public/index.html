@@ -327,18 +327,14 @@
   /* white rounded badge so the stacked navy/red logo reads on the navy bar.
      height includes 18px vertical padding (border-box) → ~150px visible logo */
   .fd-logo {
-    height: 186px;
-    width: auto;
-    max-width: 100%;
+    width: min(560px, 100%);
+    height: auto;
     display: block;
-    background: #ffffff;
-    padding: 18px 28px;
-    border-radius: 16px;
-    box-shadow: 0 3px 14px rgba(0,0,0,0.30);
+    filter: drop-shadow(0 3px 14px rgba(0,0,0,0.30));
   }
   .fd-sub { margin-top: 16px; }
   @media (max-width: 640px) {
-    .fd-logo { height: 128px; padding: 12px 18px; border-radius: 14px; }
+    .fd-logo { width: min(440px, 100%); }
   }
 
   .content { padding: 32px 48px 60px; }
@@ -6244,9 +6240,8 @@ function renderRunCode() {
 function renderRunCodeHeader() {
   return `
     <div class="header fd-header">
-      <img src="/fielddose-logo-stacked.png" alt="FieldDose — Calculate. Confirm. Save Lives." class="fd-logo">
+      <img src="/fielddose-logo.png" alt="FieldDose — Calculate. Confirm. Save Lives. Powered by GNFR." class="fd-logo">
       <div class="page-meta fd-sub">Regional Common Treatment Guidelines</div>
-      <div class="fd-powered">Powered by <span>GNFR</span></div>
     </div>
   `;
 }

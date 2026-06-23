@@ -3153,6 +3153,65 @@
     background: var(--clin-surface-alt); border-radius: 9px;
     font-size: 11.5px; line-height: 1.5; color: var(--clin-text-dim);
   }
+
+  /* references: section actions, search, per-card controls */
+  .qref-head-actions { display: flex; gap: 6px; }
+  .qref-btn {
+    background: var(--clin-surface-alt); border: 1px solid var(--clin-border);
+    color: var(--clin-blue); font-weight: 700; font-size: 12px;
+    border-radius: 7px; padding: 4px 10px; cursor: pointer;
+  }
+  .qref-btn.active { background: var(--clin-blue); color: #fff; border-color: var(--clin-blue); }
+  .qref-search {
+    width: calc(100% - 20px); margin: 4px 10px 6px; box-sizing: border-box;
+    padding: 9px 12px; font-size: 14px;
+    border: 1px solid var(--clin-border); border-radius: 8px;
+    background: var(--clin-surface); color: var(--clin-text);
+  }
+  .qref-search:focus { outline: none; border-color: var(--clin-blue); }
+  .qref-card-ctrls { display: flex; gap: 3px; flex-shrink: 0; }
+  .qref-card-ctrls button {
+    width: 28px; height: 28px; padding: 0;
+    border: 1px solid var(--clin-border); background: var(--clin-surface);
+    border-radius: 6px; cursor: pointer; font-size: 13px; line-height: 1;
+    color: var(--clin-text-dim); display: flex; align-items: center; justify-content: center;
+  }
+  .qref-card-ctrls button:active { background: var(--clin-surface-alt); }
+  .qref-card-ctrls button.del { color: var(--clin-red); }
+
+  /* document viewer */
+  .qref-open {
+    margin-left: auto; background: rgba(255,255,255,0.16); border: none; color: #fff;
+    border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 700;
+    cursor: pointer; text-decoration: none; flex-shrink: 0;
+  }
+  .qref-open:active { background: rgba(255,255,255,0.3); }
+  .qref-doc-img { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: 6px; }
+  .qref-viewer-body.is-pdf { padding: 0; }
+  .qref-doc-frame { width: 100%; height: 100%; border: 0; display: block; }
+
+  /* name / rename prompt */
+  .qref-prompt-back {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1200; padding: 24px;
+  }
+  .qref-prompt-back.open { display: flex; }
+  .qref-prompt-box {
+    width: 100%; max-width: 360px; background: var(--clin-surface);
+    border-radius: 14px; padding: 20px; box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .qref-prompt-title { font-size: 15px; font-weight: 800; color: var(--clin-text); margin-bottom: 12px; }
+  .qref-prompt-input {
+    width: 100%; box-sizing: border-box; padding: 11px 12px; font-size: 15px;
+    border: 1px solid var(--clin-border); border-radius: 9px;
+    background: var(--clin-bg); color: var(--clin-text);
+  }
+  .qref-prompt-input:focus { outline: none; border-color: var(--clin-blue); box-shadow: 0 0 0 3px var(--clin-blue-light); }
+  .qref-prompt-actions { display: flex; gap: 10px; margin-top: 16px; }
+  .qref-prompt-actions button { flex: 1; padding: 10px; border-radius: 9px; font-size: 14px; font-weight: 700; cursor: pointer; border: 1px solid var(--clin-border); }
+  .qref-prompt-cancel { background: var(--clin-surface); color: var(--clin-text-dim); }
+  .qref-prompt-save { background: var(--clin-blue); color: #fff; border-color: var(--clin-blue); }
 </style>
 </head>
 <body>
@@ -7776,8 +7835,20 @@ function bindRunCodeEvents() {
       <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Back
     </button>
     <div class="qref-viewer-title" id="qref-viewer-title"></div>
+    <a class="qref-open" id="qref-doc-open" target="_blank" rel="noopener" style="display:none">Open ↗</a>
   </div>
   <div class="qref-viewer-body" id="qref-viewer-body"></div>
+</div>
+<input type="file" id="qref-file" accept="image/*,application/pdf" style="display:none">
+<div class="qref-prompt-back" id="qref-prompt">
+  <div class="qref-prompt-box">
+    <div class="qref-prompt-title" id="qref-prompt-title"></div>
+    <input class="qref-prompt-input" id="qref-prompt-input" type="text" autocomplete="off">
+    <div class="qref-prompt-actions">
+      <button class="qref-prompt-cancel" id="qref-prompt-cancel">Cancel</button>
+      <button class="qref-prompt-save" id="qref-prompt-save">Save</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -7801,6 +7872,49 @@ function bindRunCodeEvents() {
   ];
 
   const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  function fmtSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1048576) return Math.round(b / 1024) + ' KB';
+    return (b / 1048576).toFixed(1) + ' MB';
+  }
+  const PDF_ICON = '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>';
+  const IMG_ICON = '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+
+  // ---- references state + IndexedDB (device-local) ----
+  let refCards = [];        // cached, sorted by order
+  let editMode = false;
+  let searchTerm = '';
+  let docUrl = null;        // active object URL in the viewer
+  const DB_NAME = 'fielddose-qref';
+  const STORE = 'cards';
+
+  function dbOpen() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(DB_NAME, 1);
+      req.onupgradeneeded = () => {
+        if (!req.result.objectStoreNames.contains(STORE)) {
+          req.result.createObjectStore(STORE, { keyPath: 'id' });
+        }
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  function dbTx(mode, fn) {
+    return dbOpen().then((db) => new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE, mode);
+      const req = fn(tx.objectStore(STORE));
+      tx.oncomplete = () => resolve(req && 'result' in req ? req.result : undefined);
+      tx.onerror = () => reject(tx.error);
+      tx.onabort = () => reject(tx.error);
+    }));
+  }
+  const dbGetAll = () => dbTx('readonly', (s) => s.getAll());
+  const dbPut = (card) => dbTx('readwrite', (s) => s.put(card));
+  const dbDelete = (id) => dbTx('readwrite', (s) => s.delete(id));
+  const uid = () => 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 
   function openDrawer() {
     $('qref-backdrop').classList.add('open');
@@ -7826,8 +7940,15 @@ function bindRunCodeEvents() {
     $('qref-body').innerHTML = `
       <div class="qref-section-head"><span>Tools</span></div>
       ${tools}
-      <div class="qref-section-head"><span>References</span></div>
-      <div class="qref-empty">Upload PDF / image reference cards here &mdash; coming in the next build.</div>
+      <div class="qref-section-head">
+        <span>References</span>
+        <span class="qref-head-actions">
+          <button class="qref-btn" id="qref-edit-toggle">Edit</button>
+          <button class="qref-btn" id="qref-add">+ Add</button>
+        </span>
+      </div>
+      <input class="qref-search" id="qref-search" type="search" placeholder="Search references…" autocomplete="off">
+      <div id="qref-ref-cards"></div>
     `;
 
     document.querySelectorAll('[data-qref-tool]').forEach((el) => {
@@ -7836,17 +7957,160 @@ function bindRunCodeEvents() {
         if (card) openViewer(card);
       });
     });
+
+    $('qref-add').addEventListener('click', () => $('qref-file').click());
+    $('qref-edit-toggle').addEventListener('click', () => {
+      editMode = !editMode;
+      $('qref-edit-toggle').classList.toggle('active', editMode);
+      renderRefCards();
+    });
+    $('qref-search').addEventListener('input', (e) => {
+      searchTerm = e.target.value.trim().toLowerCase();
+      renderRefCards();
+    });
+    loadReferences();
+  }
+
+  // ---- references list + CRUD ----
+  async function loadReferences() {
+    try { refCards = (await dbGetAll()) || []; }
+    catch (e) { refCards = []; }
+    refCards.sort((a, b) => (a.order || 0) - (b.order || 0));
+    renderRefCards();
+  }
+
+  function renderRefCards() {
+    const wrap = $('qref-ref-cards');
+    const search = $('qref-search');
+    if (!wrap) return;
+    if (!refCards.length) {
+      if (search) search.style.display = 'none';
+      wrap.innerHTML = '<div class="qref-empty">No references yet.<br>Tap <b>+ Add</b> to upload a PDF or image.</div>';
+      return;
+    }
+    if (search) search.style.display = '';
+    const list = searchTerm ? refCards.filter((c) => c.name.toLowerCase().includes(searchTerm)) : refCards;
+    if (!list.length) {
+      wrap.innerHTML = '<div class="qref-empty">No matches.</div>';
+      return;
+    }
+    wrap.innerHTML = list.map((c) => {
+      const ico = c.type === 'pdf' ? PDF_ICON : IMG_ICON;
+      const ctrls = editMode
+        ? '<span class="qref-card-ctrls">' +
+          '<button data-act="up" title="Move up">↑</button>' +
+          '<button data-act="down" title="Move down">↓</button>' +
+          '<button data-act="rename" title="Rename">✎</button>' +
+          '<button class="del" data-act="del" title="Delete">✕</button>' +
+          '</span>'
+        : '';
+      return '<div class="qref-card" data-qref-doc="' + c.id + '">' +
+        '<span class="qref-card-ico">' + ico + '</span>' +
+        '<span class="qref-card-text">' +
+        '<span class="qref-card-name">' + esc(c.name) + '</span>' +
+        '<span class="qref-card-meta">' + c.type.toUpperCase() + ' · ' + fmtSize(c.size) + '</span>' +
+        '</span>' + ctrls + '</div>';
+    }).join('');
+
+    wrap.querySelectorAll('[data-qref-doc]').forEach((el) => {
+      el.addEventListener('click', (ev) => {
+        const card = refCards.find((c) => c.id === el.dataset.qrefDoc);
+        if (!card) return;
+        const actBtn = ev.target.closest('[data-act]');
+        if (actBtn) { ev.stopPropagation(); handleCardAction(actBtn.dataset.act, card); }
+        else openDocViewer(card);
+      });
+    });
+  }
+
+  function handleCardAction(act, card) {
+    if (act === 'del') {
+      if (!window.confirm('Delete “' + card.name + '”?')) return;
+      dbDelete(card.id).then(loadReferences);
+    } else if (act === 'rename') {
+      showPrompt('Rename reference', card.name).then((name) => {
+        if (name == null) return;
+        card.name = name;
+        dbPut(card).then(loadReferences);
+      });
+    } else if (act === 'up' || act === 'down') {
+      const i = refCards.indexOf(card);
+      const j = act === 'up' ? i - 1 : i + 1;
+      if (j < 0 || j >= refCards.length) return;
+      const other = refCards[j];
+      const tmp = card.order; card.order = other.order; other.order = tmp;
+      Promise.all([dbPut(card), dbPut(other)]).then(loadReferences);
+    }
+  }
+
+  function addFile(file) {
+    if (!file) return;
+    const type = file.type === 'application/pdf' ? 'pdf'
+               : file.type.indexOf('image/') === 0 ? 'image' : null;
+    if (!type) { window.alert('Please choose a PDF or image file.'); return; }
+    if (file.size > 25 * 1048576 &&
+        !window.confirm('This file is ' + fmtSize(file.size) + '. Large files may be slow or fail to save. Add anyway?')) return;
+    const base = file.name.replace(/\.[^.]+$/, '');
+    showPrompt('Name this reference', base).then((name) => {
+      if (name == null) return;
+      const maxOrder = refCards.reduce((m, c) => Math.max(m, c.order || 0), 0);
+      const card = { id: uid(), name: name, type: type, mime: file.type, size: file.size, blob: file, order: maxOrder + 1, createdAt: Date.now() };
+      dbPut(card).then(loadReferences).catch(() => window.alert('Could not save the file (storage may be full).'));
+    });
+  }
+
+  // ---- name / rename prompt ----
+  let promptResolve = null;
+  function showPrompt(title, initial) {
+    return new Promise((resolve) => {
+      promptResolve = resolve;
+      $('qref-prompt-title').textContent = title;
+      const input = $('qref-prompt-input');
+      input.value = initial || '';
+      $('qref-prompt').classList.add('open');
+      setTimeout(() => { input.focus(); input.select(); }, 30);
+    });
+  }
+  function closePrompt(val) {
+    $('qref-prompt').classList.remove('open');
+    const r = promptResolve; promptResolve = null;
+    if (r) r(val);
   }
 
   function openViewer(card) {
+    $('qref-doc-open').style.display = 'none';
+    $('qref-viewer-body').classList.remove('is-pdf');
     $('qref-viewer-title').textContent = card.name;
     $('qref-viewer-body').innerHTML = '<div class="qref-tool">' + card.render() + '</div>';
     if (card.bind) card.bind();
     $('qref-viewer').classList.add('open');
   }
+  function openDocViewer(card) {
+    revokeDocUrl();
+    docUrl = URL.createObjectURL(card.blob);
+    $('qref-viewer-title').textContent = card.name;
+    const body = $('qref-viewer-body');
+    const openBtn = $('qref-doc-open');
+    if (card.type === 'image') {
+      body.classList.remove('is-pdf');
+      body.innerHTML = '<img class="qref-doc-img" src="' + docUrl + '" alt="">';
+      openBtn.style.display = 'none';
+    } else {
+      body.classList.add('is-pdf');
+      body.innerHTML = '<iframe class="qref-doc-frame" src="' + docUrl + '"></iframe>';
+      openBtn.href = docUrl;
+      openBtn.style.display = '';
+    }
+    $('qref-viewer').classList.add('open');
+  }
+  function revokeDocUrl() {
+    if (docUrl) { URL.revokeObjectURL(docUrl); docUrl = null; }
+  }
   function closeViewer() {
     $('qref-viewer').classList.remove('open');
     $('qref-viewer-body').innerHTML = '';
+    $('qref-viewer-body').classList.remove('is-pdf');
+    revokeDocUrl();
   }
 
   // ---- MAP calculator tool ----
@@ -7938,9 +8202,22 @@ function bindRunCodeEvents() {
     $('qref-close').addEventListener('click', closeDrawer);
     $('qref-backdrop').addEventListener('click', closeDrawer);
     $('qref-viewer-back').addEventListener('click', closeViewer);
+
+    $('qref-file').addEventListener('change', (e) => {
+      addFile(e.target.files && e.target.files[0]);
+      e.target.value = '';
+    });
+    $('qref-prompt-save').addEventListener('click', () => closePrompt($('qref-prompt-input').value.trim() || null));
+    $('qref-prompt-cancel').addEventListener('click', () => closePrompt(null));
+    $('qref-prompt-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); closePrompt($('qref-prompt-input').value.trim() || null); }
+      else if (e.key === 'Escape') { e.stopPropagation(); closePrompt(null); }
+    });
+
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
-      if ($('qref-viewer').classList.contains('open')) closeViewer();
+      if ($('qref-prompt').classList.contains('open')) closePrompt(null);
+      else if ($('qref-viewer').classList.contains('open')) closeViewer();
       else if ($('qref-drawer').classList.contains('open')) closeDrawer();
     });
 

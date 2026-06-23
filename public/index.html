@@ -7925,6 +7925,9 @@ function bindRunCodeEvents() {
     if (!r.ok) throw new Error('list failed');
     return (await r.json()).cards || [];
   }
+  // Mutations return fresh data from the server response (the list blob is
+  // eventually consistent, so we trust the response over a re-fetch). Return
+  // null on cancel/error so callers leave the current list untouched.
   async function apiUpload(file, name, type) {
     const res = await authedFetch((pw) => fetch(API, {
       method: 'POST',
@@ -7936,9 +7939,9 @@ function bindRunCodeEvents() {
       },
       body: file,
     }));
-    if (res == null) return false;
-    if (!res.ok) { await apiError(res, 'Upload failed.'); return false; }
-    return true;
+    if (res == null) return null;
+    if (!res.ok) { await apiError(res, 'Upload failed.'); return null; }
+    return (await res.json()).card || null;
   }
   async function apiPatch(payload) {
     const res = await authedFetch((pw) => fetch(API, {
@@ -7946,18 +7949,18 @@ function bindRunCodeEvents() {
       headers: { 'x-qref-password': pw, 'content-type': 'application/json' },
       body: JSON.stringify(payload),
     }));
-    if (res == null) return false;
-    if (!res.ok) { await apiError(res, 'Update failed.'); return false; }
-    return true;
+    if (res == null) return null;
+    if (!res.ok) { await apiError(res, 'Update failed.'); return null; }
+    return (await res.json()).cards || null;
   }
   async function apiDelete(id) {
     const res = await authedFetch((pw) => fetch(API + '?id=' + encodeURIComponent(id), {
       method: 'DELETE',
       headers: { 'x-qref-password': pw },
     }));
-    if (res == null) return false;
-    if (!res.ok) { await apiError(res, 'Delete failed.'); return false; }
-    return true;
+    if (res == null) return null;
+    if (!res.ok) { await apiError(res, 'Delete failed.'); return null; }
+    return (await res.json()).cards || null;
   }
 
   function openDrawer() {
@@ -8067,38 +8070,103 @@ function bindRunCodeEvents() {
     });
   }
 
+  function applyCards(cards) {
+    if (!cards) return;
+    refCards = cards;
+    refCards.sort((a, b) => (a.order || 0) - (b.order || 0));
+    renderRefCards();
+  }
+
   async function handleCardAction(act, card) {
     if (act === 'del') {
       if (!window.confirm('Delete “' + card.name + '”?')) return;
-      if (await apiDelete(card.id)) loadReferences();
+      applyCards(await apiDelete(card.id));
     } else if (act === 'rename') {
       const name = await showPrompt('Rename reference', card.name);
       if (name == null) return;
-      if (await apiPatch({ action: 'rename', id: card.id, name: name })) loadReferences();
+      applyCards(await apiPatch({ action: 'rename', id: card.id, name: name }));
     } else if (act === 'up' || act === 'down') {
       const i = refCards.indexOf(card);
       const j = act === 'up' ? i - 1 : i + 1;
       if (j < 0 || j >= refCards.length) return;
       const ids = refCards.map((c) => c.id);
       ids.splice(j, 0, ids.splice(i, 1)[0]);   // move card to its new slot
-      if (await apiPatch({ action: 'reorder', ids: ids })) loadReferences();
+      applyCards(await apiPatch({ action: 'reorder', ids: ids }));
     }
+  }
+
+  const UPLOAD_CAP = 4.4 * 1048576;   // serverless payload ceiling
+  const IMG_EXT = /\.(jpe?g|png|gif|webp|heic|heif|bmp|tiff?)$/i;
+
+  // Decide image vs pdf. Mobile often leaves file.type blank, so fall back to
+  // the filename extension, and treat an unknown type as an image to try.
+  function detectType(file) {
+    if (file.type === 'application/pdf' || /\.pdf$/i.test(file.name || '')) return 'pdf';
+    if ((file.type && file.type.indexOf('image/') === 0) || IMG_EXT.test(file.name || '')) return 'image';
+    if (!file.type) return 'image';
+    return null;
+  }
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => { resolve(img); URL.revokeObjectURL(url); };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('decode')); };
+      img.src = url;
+    });
+  }
+
+  // Re-encode any decodable image (incl. iPhone HEIC) to a JPEG that displays on
+  // every device and fits under the upload cap. Returns null if it can't decode.
+  async function compressImage(file) {
+    let img;
+    try { img = await loadImage(file); } catch (e) { return null; }
+    let w = img.naturalWidth || img.width;
+    let h = img.naturalHeight || img.height;
+    if (!w || !h) return null;
+    const MAX_DIM = 2200;
+    const scale = Math.min(1, MAX_DIM / Math.max(w, h));
+    w = Math.round(w * scale); h = Math.round(h * scale);
+    const canvas = document.createElement('canvas');
+    canvas.width = w; canvas.height = h;
+    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+    const toBlob = (q) => new Promise((r) => canvas.toBlob(r, 'image/jpeg', q));
+    let q = 0.85, blob = await toBlob(q);
+    while (blob && blob.size > 3.8 * 1048576 && q > 0.4) { q -= 0.15; blob = await toBlob(q); }
+    return blob;
   }
 
   async function addFile(file) {
     if (!file) return;
-    const type = file.type === 'application/pdf' ? 'pdf'
-               : file.type.indexOf('image/') === 0 ? 'image' : null;
+    const type = detectType(file);
     if (!type) { window.alert('Please choose a PDF or image file.'); return; }
-    // Uploads route through the serverless function, which caps payloads ~4.4 MB.
-    if (file.size > 4.4 * 1048576) {
-      window.alert('This file is ' + fmtSize(file.size) + '. The limit is about 4.4 MB — please compress it and try again.');
+    const base = (file.name || 'reference').replace(/\.[^.]+$/, '');
+
+    let upload = file;
+    if (type === 'image') {
+      const jpeg = await compressImage(file);   // normalize HEIC/large photos → JPEG
+      if (jpeg) {
+        upload = jpeg;
+      } else if (file.size > UPLOAD_CAP) {
+        window.alert("Couldn't process this image, and it's " + fmtSize(file.size) +
+          ' (over the ~4.4 MB limit). Try a screenshot of it instead.');
+        return;
+      }
+    } else if (file.size > UPLOAD_CAP) {   // pdf
+      window.alert('This PDF is ' + fmtSize(file.size) +
+        '. The limit is about 4.4 MB — please compress it and try again.');
       return;
     }
-    const base = file.name.replace(/\.[^.]+$/, '');
+
     const name = await showPrompt('Name this reference', base);
     if (name == null) return;
-    if (await apiUpload(file, name, type)) loadReferences();
+    const card = await apiUpload(upload, name, type);
+    if (card) {
+      refCards.push(card);          // show immediately; the shared list is eventually consistent
+      refCards.sort((a, b) => (a.order || 0) - (b.order || 0));
+      renderRefCards();
+    }
   }
 
   // ---- name / rename prompt ----

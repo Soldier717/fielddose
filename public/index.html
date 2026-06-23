@@ -7888,34 +7888,77 @@ function bindRunCodeEvents() {
   let editMode = false;
   let searchTerm = '';
   let docUrl = null;        // active object URL in the viewer
-  const DB_NAME = 'fielddose-qref';
-  const STORE = 'cards';
+  // ---- cloud sync API (shared across all devices via /api/qref) ----
+  const API = '/api/qref';
+  let qrefPw = sessionStorage.getItem('qref_pw') || '';
 
-  function dbOpen() {
-    return new Promise((resolve, reject) => {
-      const req = indexedDB.open(DB_NAME, 1);
-      req.onupgradeneeded = () => {
-        if (!req.result.objectStoreNames.contains(STORE)) {
-          req.result.createObjectStore(STORE, { keyPath: 'id' });
-        }
-      };
-      req.onsuccess = () => resolve(req.result);
-      req.onerror = () => reject(req.error);
-    });
+  // Get the edit password, prompting once and caching for the session.
+  async function ensurePw() {
+    if (qrefPw) return qrefPw;
+    const pw = await showPrompt('Enter the upload password', '');
+    if (pw == null || pw === '') return null;
+    qrefPw = pw;
+    sessionStorage.setItem('qref_pw', pw);
+    return pw;
   }
-  function dbTx(mode, fn) {
-    return dbOpen().then((db) => new Promise((resolve, reject) => {
-      const tx = db.transaction(STORE, mode);
-      const req = fn(tx.objectStore(STORE));
-      tx.oncomplete = () => resolve(req && 'result' in req ? req.result : undefined);
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error);
+  // Run an authed mutation; on a wrong-password (401) clear the cache and retry once.
+  async function authedFetch(opts) {
+    let pw = await ensurePw();
+    if (pw == null) return null;
+    let res = await opts(pw);
+    if (res.status === 401) {
+      qrefPw = ''; sessionStorage.removeItem('qref_pw');
+      pw = await ensurePw();
+      if (pw == null) return null;
+      res = await opts(pw);
+    }
+    return res;
+  }
+  async function apiError(res, fallback) {
+    let msg = fallback;
+    try { const j = await res.json(); if (j && j.error) msg = j.error; } catch {}
+    window.alert(msg);
+  }
+
+  async function apiList() {
+    const r = await fetch(API, { cache: 'no-store' });
+    if (!r.ok) throw new Error('list failed');
+    return (await r.json()).cards || [];
+  }
+  async function apiUpload(file, name, type) {
+    const res = await authedFetch((pw) => fetch(API, {
+      method: 'POST',
+      headers: {
+        'x-qref-password': pw,
+        'x-qref-name': encodeURIComponent(name),
+        'x-qref-type': type,
+        'content-type': file.type || 'application/octet-stream',
+      },
+      body: file,
     }));
+    if (res == null) return false;
+    if (!res.ok) { await apiError(res, 'Upload failed.'); return false; }
+    return true;
   }
-  const dbGetAll = () => dbTx('readonly', (s) => s.getAll());
-  const dbPut = (card) => dbTx('readwrite', (s) => s.put(card));
-  const dbDelete = (id) => dbTx('readwrite', (s) => s.delete(id));
-  const uid = () => 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  async function apiPatch(payload) {
+    const res = await authedFetch((pw) => fetch(API, {
+      method: 'PATCH',
+      headers: { 'x-qref-password': pw, 'content-type': 'application/json' },
+      body: JSON.stringify(payload),
+    }));
+    if (res == null) return false;
+    if (!res.ok) { await apiError(res, 'Update failed.'); return false; }
+    return true;
+  }
+  async function apiDelete(id) {
+    const res = await authedFetch((pw) => fetch(API + '?id=' + encodeURIComponent(id), {
+      method: 'DELETE',
+      headers: { 'x-qref-password': pw },
+    }));
+    if (res == null) return false;
+    if (!res.ok) { await apiError(res, 'Delete failed.'); return false; }
+    return true;
+  }
 
   function openDrawer() {
     $('qref-backdrop').classList.add('open');
@@ -7974,7 +8017,7 @@ function bindRunCodeEvents() {
 
   // ---- references list + CRUD ----
   async function loadReferences() {
-    try { refCards = (await dbGetAll()) || []; }
+    try { refCards = await apiList(); }
     catch (e) { refCards = []; }
     refCards.sort((a, b) => (a.order || 0) - (b.order || 0));
     renderRefCards();
@@ -8024,40 +8067,38 @@ function bindRunCodeEvents() {
     });
   }
 
-  function handleCardAction(act, card) {
+  async function handleCardAction(act, card) {
     if (act === 'del') {
       if (!window.confirm('Delete “' + card.name + '”?')) return;
-      dbDelete(card.id).then(loadReferences);
+      if (await apiDelete(card.id)) loadReferences();
     } else if (act === 'rename') {
-      showPrompt('Rename reference', card.name).then((name) => {
-        if (name == null) return;
-        card.name = name;
-        dbPut(card).then(loadReferences);
-      });
+      const name = await showPrompt('Rename reference', card.name);
+      if (name == null) return;
+      if (await apiPatch({ action: 'rename', id: card.id, name: name })) loadReferences();
     } else if (act === 'up' || act === 'down') {
       const i = refCards.indexOf(card);
       const j = act === 'up' ? i - 1 : i + 1;
       if (j < 0 || j >= refCards.length) return;
-      const other = refCards[j];
-      const tmp = card.order; card.order = other.order; other.order = tmp;
-      Promise.all([dbPut(card), dbPut(other)]).then(loadReferences);
+      const ids = refCards.map((c) => c.id);
+      ids.splice(j, 0, ids.splice(i, 1)[0]);   // move card to its new slot
+      if (await apiPatch({ action: 'reorder', ids: ids })) loadReferences();
     }
   }
 
-  function addFile(file) {
+  async function addFile(file) {
     if (!file) return;
     const type = file.type === 'application/pdf' ? 'pdf'
                : file.type.indexOf('image/') === 0 ? 'image' : null;
     if (!type) { window.alert('Please choose a PDF or image file.'); return; }
-    if (file.size > 25 * 1048576 &&
-        !window.confirm('This file is ' + fmtSize(file.size) + '. Large files may be slow or fail to save. Add anyway?')) return;
+    // Uploads route through the serverless function, which caps payloads ~4.4 MB.
+    if (file.size > 4.4 * 1048576) {
+      window.alert('This file is ' + fmtSize(file.size) + '. The limit is about 4.4 MB — please compress it and try again.');
+      return;
+    }
     const base = file.name.replace(/\.[^.]+$/, '');
-    showPrompt('Name this reference', base).then((name) => {
-      if (name == null) return;
-      const maxOrder = refCards.reduce((m, c) => Math.max(m, c.order || 0), 0);
-      const card = { id: uid(), name: name, type: type, mime: file.type, size: file.size, blob: file, order: maxOrder + 1, createdAt: Date.now() };
-      dbPut(card).then(loadReferences).catch(() => window.alert('Could not save the file (storage may be full).'));
-    });
+    const name = await showPrompt('Name this reference', base);
+    if (name == null) return;
+    if (await apiUpload(file, name, type)) loadReferences();
   }
 
   // ---- name / rename prompt ----
@@ -8087,8 +8128,7 @@ function bindRunCodeEvents() {
     $('qref-viewer').classList.add('open');
   }
   function openDocViewer(card) {
-    revokeDocUrl();
-    docUrl = URL.createObjectURL(card.blob);
+    docUrl = card.url;   // public cloud URL; no object URL to revoke
     $('qref-viewer-title').textContent = card.name;
     const body = $('qref-viewer-body');
     const openBtn = $('qref-doc-open');
@@ -8104,14 +8144,11 @@ function bindRunCodeEvents() {
     }
     $('qref-viewer').classList.add('open');
   }
-  function revokeDocUrl() {
-    if (docUrl) { URL.revokeObjectURL(docUrl); docUrl = null; }
-  }
   function closeViewer() {
     $('qref-viewer').classList.remove('open');
     $('qref-viewer-body').innerHTML = '';
     $('qref-viewer-body').classList.remove('is-pdf');
-    revokeDocUrl();
+    docUrl = null;
   }
 
   // ---- MAP calculator tool ----

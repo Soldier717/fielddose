@@ -6,7 +6,7 @@
  *  - Blob uploads:         cache-first (reference cards viewable offline once loaded).
  *  - Fonts + static files: cache-first.
  */
-const CACHE = 'fielddose-v1';
+const CACHE = 'fielddose-v2';
 
 const PRECACHE = [
   '/',
@@ -57,6 +57,30 @@ async function cacheFirst(req) {
   return res;
 }
 
+// Warm the cache with every file in a fresh card list, so references are
+// available offline even if never opened; prune files for deleted cards.
+async function warmCardCache(listResponse) {
+  try {
+    const { cards = [] } = await listResponse.json();
+    const cache = await caches.open(CACHE);
+    const wanted = new Set(cards.map((c) => c.url).filter(Boolean));
+
+    for (const key of await cache.keys()) {
+      const u = new URL(key.url);
+      if (u.hostname.endsWith('.public.blob.vercel-storage.com') && !wanted.has(key.url)) {
+        await cache.delete(key);
+      }
+    }
+    await Promise.all([...wanted].map(async (fileUrl) => {
+      if (await cache.match(fileUrl)) return;
+      try {
+        let res = await fetch(fileUrl).catch(() => fetch(fileUrl, { mode: 'no-cors' }));
+        if (res && (res.ok || res.type === 'opaque')) await cache.put(fileUrl, res);
+      } catch (_) { /* offline or blocked — will retry on next list fetch */ }
+    }));
+  } catch (_) { /* malformed list — skip warming */ }
+}
+
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return; // mutations always hit the network
@@ -69,9 +93,13 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // Quick-reference card list
+  // Quick-reference card list — also pre-cache every card file it names
   if (url.origin === self.location.origin && url.pathname.startsWith('/api/qref')) {
-    e.respondWith(networkFirst(req));
+    e.respondWith((async () => {
+      const res = await networkFirst(req);
+      if (res && res.ok) e.waitUntil(warmCardCache(res.clone()));
+      return res;
+    })());
     return;
   }
 

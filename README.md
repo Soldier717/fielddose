@@ -31,6 +31,15 @@ npx serve public -l 5056
 ## Updating
 Edit `public/index.html` and push — Vercel auto-deploys on every push.
 
+## Offline mode
+A service worker (`public/sw.js`) caches the app shell and pre-caches every
+uploaded reference card, so the tool works with no signal after one online
+visit. It is installable to a phone home screen (web manifest, standalone
+display). Content is network-first: devices pick up new deploys and new cards
+automatically whenever they're online. When changing any precached asset
+in place (e.g. swapping a logo), bump `CACHE` in `sw.js` so installed
+clients re-fetch it.
+
 ## Quick Reference cloud sync (uploaded documents)
 The left-drawer **References** (uploaded PDFs/images) sync across all devices via
 a small serverless API (`api/qref.js`) backed by **Vercel Blob**. Viewing is

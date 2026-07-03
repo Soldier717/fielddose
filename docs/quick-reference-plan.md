@@ -1,6 +1,11 @@
 # Plan — FieldDose Left Dashboard (Tools + Reference cards)
 
-> Status: **Plan only** — not yet built. Reflects decisions made 2026-06-23.
+> Status: **SUPERSEDED** (2026-07-02). The drawer, MAP Calculator, and reference
+> cards shipped, but persistence diverged from this plan: uploads are **cloud-
+> synced** via `api/qref.js` (Vercel Blob + `QREF_ADMIN_PASSWORD`), not
+> device-local IndexedDB, so every device sees the same cards and the
+> Export/Import backup phase is moot. The service worker (`public/sw.js`)
+> pre-caches all card files for offline use. Kept for design history.
 
 ## Goal
 A left-side, hamburger-triggered **dashboard drawer** listing named **cards** of

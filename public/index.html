@@ -874,10 +874,16 @@
 
   /* ====== RESPONSIVE ====== */
   @media (max-width: 880px) {
-    html, body { overflow: auto; height: auto; }
-    body.sidebar-open { overflow: hidden; }
+    /* html is the one scroll container on mobile; body must stay
+       overflow: visible or position: sticky pins to the wrong box. */
+    html { overflow-y: auto; height: auto; }
+    body { overflow: visible; height: auto; }
     .app { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
     .main { overflow: visible; }
+    /* Body is the scroll container on mobile — .main must grow with its
+       content (not clamp to 100vh) or sticky children stop sticking one
+       viewport down. */
+    .app.fielddose-standalone > .main { height: auto; min-height: 100vh; }
     .sidebar {
       position: fixed;
       top: 56px; left: -300px;
@@ -1226,8 +1232,11 @@
     border-top-color: var(--accent);
     background: var(--bg-elev-2);
   }
-  /* Pad bottom of Run a Code content so the fixed bar doesn't cover it */
-  .rc-tabbed .content.ct-wrap { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
+  /* Pad bottom of Run a Code content so the fixed tab bar doesn't cover
+     it — bar is ~64px + iOS home-indicator inset; extra headroom so the
+     last row is fully readable without holding the scroll. Only the dose
+     view carries rc-has-bar (the entry screen has no tab bar). */
+  .content.ct-wrap.rc-has-bar { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
 
   /* Drug card 3-row layout */
   .rc-drug-card { background: var(--bg-elev); border: 1px solid var(--border); border-left: 3px solid var(--accent-dim); border-radius: 4px; padding: 0; overflow: hidden; cursor: pointer; transition: all 0.15s; color: var(--text); font-family: inherit; text-align: left; display: flex; flex-direction: column; }
@@ -1688,33 +1697,40 @@
     color: white;
     border-bottom: none;
   }
-  /* Logo header: white backdrop so the navy/red FieldDose mark reads */
+  /* Compact sticky logo header — fixed height so the sticky patient bar
+     below can pin exactly beneath it (top: var(--fd-hdr-h)). */
+  body.on-coderun { --fd-hdr-h: 60px; }
   body.on-coderun .main .header.fd-header {
     background: var(--clin-blue);
     border-bottom: 3px solid var(--clin-red);
-    padding: 26px 40px 22px;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    height: var(--fd-hdr-h);
+    box-sizing: border-box;
+    padding: 7px 14px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    gap: 14px;
     text-align: center;
+  }
+  body.on-coderun .main .header.fd-header .fd-logo {
+    height: 100%;
+    width: auto;
+    max-width: 62vw;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
   }
   body.on-coderun .main .header.fd-header .fd-sub {
     color: rgba(255,255,255,0.78);
-  }
-  body.on-coderun .main .header.fd-header .fd-powered {
-    margin-top: 7px;
-    font-family: 'JetBrains Mono', monospace;
+    margin-top: 0;
     font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-  }
-  body.on-coderun .main .header.fd-header .fd-powered span {
-    color: var(--clin-yellow);
-    font-weight: 700;
   }
   @media (max-width: 640px) {
-    body.on-coderun .main .header.fd-header { padding: 14px 18px 12px; }
+    body.on-coderun { --fd-hdr-h: 52px; }
+    body.on-coderun .main .header.fd-header { padding: 6px 10px 6px 60px; }
+    body.on-coderun .main .header.fd-header .fd-sub { display: none; }
   }
   body.on-coderun .main .header .breadcrumb,
   body.on-coderun .main .header .page-meta {
@@ -1753,6 +1769,31 @@
   body.on-coderun .main .cr-entry-card.adult { border-color: var(--clin-blue); }
   body.on-coderun .main .cr-entry-card.adult .plus { background: var(--clin-blue); color: white; }
   body.on-coderun .main .cr-entry-card.adult:hover { background: linear-gradient(180deg, var(--clin-blue-light) 0%, var(--clin-surface) 100%); }
+  /* Saved charts list — clinical light theme */
+  body.on-coderun .main .cr-charts-title { color: var(--clin-blue); }
+  body.on-coderun .main .cr-charts-sub { color: var(--clin-text-dim); }
+  body.on-coderun .main .cr-charts-empty {
+    background: var(--clin-surface);
+    border-color: var(--clin-border);
+    color: var(--clin-text-dim);
+  }
+  body.on-coderun .main .cr-chart-row {
+    background: var(--clin-surface);
+    border-color: var(--clin-border);
+    box-shadow: var(--clin-shadow);
+  }
+  body.on-coderun .main .cr-chart-row:hover { border-color: var(--clin-blue); }
+  body.on-coderun .main .cr-chart-info .sum { color: var(--clin-text); }
+  body.on-coderun .main .cr-chart-info .meta { color: var(--clin-text-dim); }
+  body.on-coderun .main .cr-chart-share,
+  body.on-coderun .main .cr-chart-del {
+    background: var(--clin-surface);
+    border-color: var(--clin-border);
+    color: var(--clin-text-dim);
+  }
+  body.on-coderun .main .cr-chart-share:hover { color: var(--clin-blue); border-color: var(--clin-blue); }
+  body.on-coderun .main .cr-chart-del:hover { color: var(--clin-red); border-color: var(--clin-red); }
+
   body.on-coderun .main .cr-back {
     color: var(--clin-blue);
     border-color: var(--clin-border);
@@ -1794,16 +1835,20 @@
   }
   body.on-coderun .main .cr-manual-btn:hover { background: #aa0e21; }
 
-  /* Patient bar — V2 clinical look */
+  /* Patient bar — V2 clinical look. Sticky directly under the compact
+     header so weight context + New stay in view while content scrolls. */
   body.on-coderun .main .cr-patient-bar-v2 {
     background: var(--clin-blue-light);
     border: none;
     border-left: 4px solid var(--clin-blue);
     color: var(--clin-text);
     border-radius: 0;
-    padding: 14px 18px;
+    padding: 10px 18px;
     margin-bottom: 0;
     box-shadow: 0 1px 2px rgba(56,56,56,0.06);
+    position: sticky;
+    top: var(--fd-hdr-h);
+    z-index: 70;
   }
   body.on-coderun .main .cr-patient-bar-v2.peds {
     background: var(--clin-pink);
@@ -1977,17 +2022,6 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 12px;
-  }
-  .cpr-footer {
-    text-align: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--clin-text-muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-top: 10px;
-    padding-top: 8px;
-    border-top: 1px solid var(--clin-surface-alt);
   }
   .cr-pulse-mini {
     width: 9px; height: 9px;
@@ -5192,10 +5226,10 @@ function renderRunCode() {
   const a = ccGetAirway();
   const drugButtons = '';
 
-  return renderRunCodeHeader() + `
-    <div class="content ct-wrap rc-tabbed">
-      ${renderCRPatientBar()}
-
+  // Patient bar sits OUTSIDE .content so it can stick full-width directly
+  // under the sticky header; only the tab content below it scrolls.
+  return renderRunCodeHeader() + renderCRPatientBar() + `
+    <div class="content ct-wrap rc-tabbed rc-has-bar">
       <div id="rc-tab-content">${rcRenderTabContent(kg, elec, drugs, a, drugButtons)}</div>
     </div>
     ${rcRenderBottomBar()}
@@ -5376,7 +5410,6 @@ function renderCPRControlBar() {
         <button class="cpr-ratio-btn ${r==='continuous'?'active':''}" data-cpr-ratio="continuous">Continuous</button>
         <button class="cpr-action-btn epi" id="cpr-epi-btn">💉 Epinephrine</button>
       </div>
-      <div class="cpr-footer">Powered by FieldDose · 2602 Misfits</div>
     </div>
   `;
 }

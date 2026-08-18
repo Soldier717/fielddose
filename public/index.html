@@ -2011,27 +2011,6 @@
     gap: 8px;
     align-items: center;
   }
-  .cr-meds-action-btn {
-    background: var(--clin-surface);
-    border: 1px solid var(--clin-border);
-    width: 38px;
-    height: 38px;
-    border-radius: 6px;
-    color: var(--clin-blue);
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .cr-meds-action-btn:hover { background: var(--clin-blue-light); border-color: var(--clin-blue); }
-  .cr-meds-action-btn.primary {
-    background: var(--clin-blue);
-    color: white;
-    border-color: var(--clin-blue);
-  }
-  .cr-meds-action-btn.primary:hover { background: #aa0e21; }
-
   .cr-meds-subtabs {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -4998,7 +4977,7 @@ function renderRunCode() {
 function renderRunCodeHeader() {
   return `
     <div class="header fd-header">
-      <img src="/fielddose-logo.png" alt="FieldDose — Calculate. Confirm. Save Lives. Powered by GNFR." class="fd-logo">
+      <img src="/fielddose-logo.png" alt="FieldDose — Calculate. Confirm. Save Lives." class="fd-logo">
       <div class="page-meta fd-sub">Regional Common Treatment Guidelines</div>
     </div>
   `;
@@ -5825,10 +5804,6 @@ function rcRenderTabMeds(kg, elec) {
       <div class="cr-meds-header">
         <div class="cr-meds-icon">💊</div>
         <div class="cr-meds-title">Medications · ${ccFmt(kg, 1)} kg</div>
-        <div class="cr-meds-actions">
-          <button class="cr-meds-action-btn" id="cr-meds-filter" title="Filter">⚙</button>
-          <button class="cr-meds-action-btn primary" id="cr-meds-send" title="Send to log">▶</button>
-        </div>
       </div>
       <div class="cr-meds-subtabs">
         <button class="cr-meds-subtab active" data-meds-view="full">Full List</button>
@@ -5866,9 +5841,6 @@ function rcRenderTabDrip(kg) {
       <div class="cr-meds-header">
         <div class="cr-meds-icon">💧</div>
         <div class="cr-meds-title">Drips · ${ccFmt(kg, 1)} kg</div>
-        <div class="cr-meds-actions">
-          <button class="cr-meds-action-btn primary" id="cr-drip-help" title="Protocols">⚙</button>
-        </div>
       </div>
       <div class="cr-drug-table">
         <div class="cr-drug-row header">

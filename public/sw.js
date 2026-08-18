@@ -6,7 +6,7 @@
  *  - Blob uploads:         cache-first (reference cards viewable offline once loaded).
  *  - Fonts + static files: cache-first.
  */
-const CACHE = 'fielddose-v2';
+const CACHE = 'fielddose-v3';
 
 const PRECACHE = [
   '/',

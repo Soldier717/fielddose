@@ -50,10 +50,24 @@ charts = app.chartsLoadAll();
 assert.strictEqual(charts.length, 1, 'chart deleted');
 assert.notStrictEqual(charts[0].id, firstId);
 
-// 7. Charts older than 7 days fall off on load
+// 7. Worksheet text renders chronologically with the safety framing
+app.crSetBroselow(BROSELOW[6]); // Yellow · 13 kg
+app.ctLogEvent('Drug', 'Epinephrine 0.13 mg IV given');
+app.ctLogEvent('Shock', 'Shock delivered 52 J');
+const ws = app.chartWorksheetText(app.chartsLoadAll()[0]);
+assert.ok(ws.includes('NOT a patient care record'), 'worksheet carries disclaimer');
+assert.ok(ws.includes('Yellow · 13 kg'), 'worksheet has patient summary');
+assert.ok(
+  ws.indexOf('Epinephrine 0.13 mg') < ws.indexOf('Shock delivered 52 J'),
+  'worksheet log is chronological (oldest first)'
+);
+app.crNewPatient();
+app.chartDelete(app.chartsLoadAll()[0].id);
+
+// 8. Charts older than 7 days fall off on load
 const stale = charts[0];
 stale.createdAt = Date.now() - 8 * 24 * 60 * 60 * 1000;
 app.chartsSaveAll([stale]);
 assert.strictEqual(app.chartsLoadAll().length, 0, '8-day-old chart purged');
 
-console.log('OK — chart lifecycle: create, snapshot, survive reset, reopen, delete, 7-day expiry.');
+console.log('OK — chart lifecycle: create, snapshot, survive reset, reopen, delete, worksheet text, 7-day expiry.');

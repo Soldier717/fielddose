@@ -63,6 +63,7 @@ function loadApp() {
     'BROSELOW', 'ADULT_IBW',
     'ctState', 'ctLogEvent',
     'chartsLoadAll', 'chartsSaveAll', 'chartSaveActive', 'chartDelete', 'chartOpen',
+    'chartWorksheetText',
   ];
   vm.runInContext(
     src + `\n;globalThis.__app = { ${EXPORTS.map((n) => `${n}: typeof ${n} === 'undefined' ? undefined : ${n}`).join(', ')} };`,

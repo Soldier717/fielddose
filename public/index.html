@@ -1383,6 +1383,81 @@
     text-transform: uppercase;
   }
 
+  /* Saved patient charts — entry-screen list */
+  .cr-charts { margin-bottom: 26px; }
+  .cr-charts-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .cr-charts-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+  .cr-charts-empty {
+    font-size: 12px;
+    color: var(--text-dim);
+    background: var(--bg-elev);
+    border: 1px dashed var(--border-bright);
+    border-radius: 6px;
+    padding: 14px;
+    text-align: center;
+  }
+  .cr-chart-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-elev);
+    border: 1.5px solid var(--border-bright);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .cr-chart-row:hover { border-color: var(--accent); }
+  .cr-chart-chip {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 6px 8px;
+    min-width: 58px;
+    text-align: center;
+  }
+  .cr-chart-info .sum {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .cr-chart-info .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text-dim);
+    letter-spacing: 0.03em;
+  }
+  .cr-chart-del {
+    background: none;
+    border: 1px solid var(--border-bright);
+    border-radius: 5px;
+    color: var(--text-dim);
+    font-size: 15px;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .cr-chart-del:hover { color: var(--accent-bright); border-color: var(--accent-bright); }
+
   .cr-back {
     background: none;
     border: 1px solid var(--border-bright);
@@ -3545,6 +3620,7 @@ function ctFormatTime(ms) {
 function ctLogEvent(type, note) {
   const entry = { time: ctFormatTime(ctState.elapsedMs), type, note, ts: Date.now() };
   ctState.log.unshift(entry);
+  chartSaveActive();
   ctRenderLog();
   // If user is on the More tab, refresh inline log there too
   if (currentPage === 'coderun' && ctState.activeTab === 'more') {
@@ -3619,6 +3695,7 @@ function ctReset() {
 
 function ctClearLog() {
   ctState.log = [];
+  chartSaveActive();
   ctRenderLog();
   if (currentPage === 'coderun' && ctState.activeTab === 'more') {
     rcPartialRender();
@@ -4348,12 +4425,106 @@ const ADULT_IBW = [
 const cr = {
   view: 'entry',     // 'entry' | 'entry-adult' | 'entry-peds' | 'dose'
   patient: null,     // { type, weight, lbs?, height?, zone?, zoneLabel?, zoneColor?, zoneTextColor?, ageRange?, weightRange?, summary }
+  chartId: null,     // id of the saved chart backing the current session
   medsView: 'full',  // 'full' | 'protocol' — Meds tab sub-view
   protocolSel: null, // null (menu) | protocol id — By Protocol drill-in
   moreView: 'log',   // 'log' | 'vitals' | 'etco2' | 'hts' — More tab sub-view
   modal: null,       // null | { type: 'drug', drug } | { type: 'defib', selectedIdx }
   drugRoute: 'IV',   // 'IV' | 'IO' — current route toggle in drug modal
 };
+
+/* ============================================================
+   PATIENT CHARTS — on-device treatment tracking worksheets.
+   Every patient session auto-saves to localStorage so the PCR
+   can be written from the log, not memory. Device-local only;
+   nothing leaves the phone. Charts expire after 7 days.
+============================================================ */
+const CHARTS_KEY = 'fielddose-charts-v1';
+const CHART_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+const CHART_MAX = 50;
+
+function chartsLoadAll() {
+  let list;
+  try { list = JSON.parse(localStorage.getItem(CHARTS_KEY)) || []; }
+  catch (_) { return []; }
+  const cutoff = Date.now() - CHART_TTL_MS;
+  const kept = list.filter((c) => c && c.createdAt > cutoff);
+  if (kept.length !== list.length) chartsSaveAll(kept);
+  return kept;
+}
+
+function chartsSaveAll(list) {
+  try { localStorage.setItem(CHARTS_KEY, JSON.stringify(list.slice(0, CHART_MAX))); }
+  catch (_) { /* storage full or unavailable — charts become session-only */ }
+}
+
+// Snapshot the current session into its chart. Called on patient
+// selection and after every log event / pause, so a dead battery
+// costs nothing.
+function chartSaveActive() {
+  if (!cr.chartId || !cr.patient) return;
+  const list = chartsLoadAll();
+  const idx = list.findIndex((c) => c.id === cr.chartId);
+  const rec = {
+    id: cr.chartId,
+    createdAt: idx >= 0 ? list[idx].createdAt : Date.now(),
+    updatedAt: Date.now(),
+    patient: cr.patient,
+    log: ctState.log,
+    elapsedMs: ctState.elapsedMs,
+    cycleNum: ctState.cycleNum,
+    shockCount: ctState.shockCount,
+    cumulativeEpiMg: ctState.cumulativeEpiMg,
+    lastRhythm: ctState.lastRhythm,
+    antiDysrhythmicGiven: ctState.antiDysrhythmicGiven,
+    hts: [...crHTsAddressed]
+  };
+  if (idx >= 0) list[idx] = rec; else list.unshift(rec);
+  chartsSaveAll(list);
+}
+
+// New patient locked in → open a fresh chart for the session.
+function crChartStart() {
+  cr.chartId = 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  chartSaveActive();
+}
+
+function chartDelete(id) {
+  chartsSaveAll(chartsLoadAll().filter((c) => c.id !== id));
+  if (cr.chartId === id) cr.chartId = null;
+}
+
+// Reopen a saved chart: restore the whole session (paused) and land
+// on the Pt. Log so it reads back for report writing.
+function chartOpen(id) {
+  const chart = chartsLoadAll().find((c) => c.id === id);
+  if (!chart) { showToast('Chart no longer available', true); render(); return; }
+  cr.patient = chart.patient;
+  cr.chartId = chart.id;
+  cr.view = 'dose';
+  cr.medsView = 'full';
+  cr.protocolSel = null;
+  cr.moreView = 'log';
+  ccState.weight = String(chart.patient.weight);
+  ccState.unit = 'kg';
+  ccState.ageBand = rcDeriveBand(chart.patient.weight);
+  ctState.running = false;
+  ctState.log = chart.log || [];
+  ctState.elapsedMs = chart.elapsedMs || 0;
+  ctState.cycleNum = chart.cycleNum || 1;
+  ctState.shockCount = chart.shockCount || 0;
+  ctState.cumulativeEpiMg = chart.cumulativeEpiMg || 0;
+  ctState.lastRhythm = chart.lastRhythm || null;
+  ctState.antiDysrhythmicGiven = !!chart.antiDysrhythmicGiven;
+  ctState.activeTab = 'more';
+  crHTsAddressed.clear();
+  (chart.hts || []).forEach((h) => crHTsAddressed.add(h));
+  render();
+}
+
+function chartFmtWhen(ts) {
+  return new Date(ts).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+}
 
 // --- DRUG ROW PARSERS (V2 tabular layout) ---
 // Pull the concentration string out of a packageSpec like
@@ -4850,6 +5021,7 @@ function crSetAdultIBW(ibw) {
   cr.view = 'dose';
   ccState.weight = String(ibw.kg);
   ccState.unit = 'kg';
+  crChartStart();
   render();
 }
 
@@ -4866,6 +5038,7 @@ function crSetAdultCustom(kg) {
   cr.view = 'dose';
   ccState.weight = String(kg);
   ccState.unit = 'kg';
+  crChartStart();
   render();
 }
 
@@ -4884,6 +5057,7 @@ function crSetBroselow(zone) {
   cr.view = 'dose';
   ccState.weight = String(zone.weight);
   ccState.unit = 'kg';
+  crChartStart();
   render();
 }
 
@@ -4909,6 +5083,7 @@ function crSetPedsCustom(kg, ageYears) {
   cr.view = 'dose';
   ccState.weight = String(kg);
   ccState.unit = 'kg';
+  crChartStart();
   render();
 }
 
@@ -4917,6 +5092,9 @@ function crNewPatient() {
     if (!confirm('Stop active CPR and start a new patient?')) return;
     ctPause();
   }
+  // Detach the saved chart BEFORE resetting, so the reset below can't
+  // overwrite it with an empty session. The chart itself stays saved.
+  cr.chartId = null;
   // Full reset: timer, log, cumulative counters, rhythm state
   ctReset();
   ctClearLog();
@@ -4983,6 +5161,35 @@ function renderRunCodeHeader() {
   `;
 }
 
+function renderCREntryCharts() {
+  const charts = chartsLoadAll();
+  const rows = charts.length === 0
+    ? `<div class="cr-charts-empty">No saved charts — a chart is created automatically when you select a patient</div>`
+    : charts.map((c) => {
+        const peds = c.patient.type === 'peds';
+        const chipStyle = peds
+          ? `background:${c.patient.zoneColor || 'var(--success)'};color:${c.patient.zoneTextColor || '#fff'};`
+          : `background:var(--gold);color:#1a1208;`;
+        const events = (c.log || []).length;
+        return `
+        <div class="cr-chart-row" data-chart-open="${c.id}">
+          <div class="cr-chart-chip" style="${chipStyle}">${peds ? escapeHtml(c.patient.zoneLabel || 'Peds') : 'Adult'}</div>
+          <div class="cr-chart-info">
+            <div class="sum">${escapeHtml(c.patient.summary || '')}</div>
+            <div class="meta">${chartFmtWhen(c.createdAt)} · ${events} event${events === 1 ? '' : 's'} · ${ctFormatTime(c.elapsedMs || 0)}</div>
+          </div>
+          <button class="cr-chart-del" data-chart-del="${c.id}" title="Delete chart">🗑</button>
+        </div>`;
+      }).join('');
+
+  return `
+      <div class="cr-charts">
+        <div class="cr-charts-title">Patient Charts</div>
+        <div class="cr-charts-sub">Treatment tracking worksheets — not a patient care record. Saved on this device only · auto-deleted after 7 days.</div>
+        ${rows}
+      </div>`;
+}
+
 function renderCREntry() {
   return `
     <div class="cr-entry">
@@ -5000,6 +5207,7 @@ function renderCREntry() {
           <div class="label">Adult</div>
         </button>
       </div>
+      ${renderCREntryCharts()}
       <div class="cc-disclaimer" style="margin-top: 8px;">
         <strong>⚠ Training & Reference Tool</strong>
         Pick patient type. Weight is locked once selected — start a New Patient if anything changes. Always confirm against current GNFR protocols and medical control. Always cross-check drug, dose, and delivery method with your partner.
@@ -6208,6 +6416,19 @@ function bindRunCodeEvents() {
   const adultCustomInput = document.getElementById('cr-adult-custom');
   if (adultCustomInput) adultCustomInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') crSetAdultCustom(parseFloat(e.target.value));
+  });
+
+  // ENTRY FLOW — saved patient charts (reopen / delete)
+  document.querySelectorAll('[data-chart-open]').forEach(row => {
+    row.addEventListener('click', () => chartOpen(row.dataset.chartOpen));
+  });
+  document.querySelectorAll('[data-chart-del]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!confirm('Delete this patient chart?')) return;
+      chartDelete(btn.dataset.chartDel);
+      render();
+    });
   });
 
   // ENTRY FLOW — Pediatric Broselow zones + custom

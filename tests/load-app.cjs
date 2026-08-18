@@ -26,7 +26,14 @@ function loadApp() {
   const src = html.slice(start, end);
 
   const dom = magicStub();
-  const storage = () => ({ _m: {}, getItem() { return null; }, setItem() {}, removeItem() {} });
+  const storage = () => {
+    const m = {};
+    return {
+      getItem: (k) => (k in m ? m[k] : null),
+      setItem: (k, v) => { m[k] = String(v); },
+      removeItem: (k) => { delete m[k]; },
+    };
+  };
   const ctx = {
     document: dom,
     window: dom,
@@ -36,6 +43,7 @@ function loadApp() {
     sessionStorage: storage(),
     console,
     setTimeout: () => 0, clearTimeout: () => {}, setInterval: () => 0, clearInterval: () => {},
+    requestAnimationFrame: () => 0, cancelAnimationFrame: () => {},
     fetch: () => Promise.reject(new Error('network disabled in tests')),
     alert: () => {}, confirm: () => true,
     Audio: function () { return { play: () => Promise.resolve() }; },
@@ -53,6 +61,8 @@ function loadApp() {
     'rcGetExpectedVitals', 'rcPickPedsTier',
     'crSetAdultIBW', 'crSetAdultCustom', 'crSetBroselow', 'crSetPedsCustom', 'crNewPatient',
     'BROSELOW', 'ADULT_IBW',
+    'ctState', 'ctLogEvent',
+    'chartsLoadAll', 'chartsSaveAll', 'chartSaveActive', 'chartDelete', 'chartOpen',
   ];
   vm.runInContext(
     src + `\n;globalThis.__app = { ${EXPORTS.map((n) => `${n}: typeof ${n} === 'undefined' ? undefined : ${n}`).join(', ')} };`,

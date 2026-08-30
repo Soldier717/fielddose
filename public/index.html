@@ -4676,24 +4676,53 @@ async function fdPhotoGC() {
 }
 
 // Downscale + JPEG-compress a camera capture (~150-300 KB each).
-function fdCompressImage(file, maxDim = 1280, quality = 0.72) {
-  const url = URL.createObjectURL(file);
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      try {
-        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
-        const canvas = document.createElement('canvas');
-        canvas.width = Math.round(img.width * scale);
-        canvas.height = Math.round(img.height * scale);
-        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('encode failed'))), 'image/jpeg', quality);
-      } catch (err) { reject(err); }
-      finally { URL.revokeObjectURL(url); }
-    };
-    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('image load failed')); };
-    img.src = url;
+// Tries <img> decode, then createImageBitmap. Returns null (not a
+// throw) if the image can't be decoded — caller stores the original.
+async function fdCompressImage(file, maxDim = 1280, quality = 0.72) {
+  const draw = (src, w, h) => new Promise((resolve) => {
+    if (!w || !h) { resolve(null); return; }
+    const scale = Math.min(1, maxDim / Math.max(w, h));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(w * scale);
+    canvas.height = Math.round(h * scale);
+    const ctx = canvas.getContext('2d');
+    if (!ctx) { resolve(null); return; }
+    ctx.drawImage(src, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob((b) => resolve(b || null), 'image/jpeg', quality);
   });
+  try {
+    const img = await new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const i = new Image();
+      i.onload = () => { URL.revokeObjectURL(url); resolve(i); };
+      i.onerror = () => { URL.revokeObjectURL(url); reject(new Error('img decode')); };
+      i.src = url;
+    });
+    const out = await draw(img, img.naturalWidth || img.width, img.naturalHeight || img.height);
+    if (out) return out;
+  } catch (_) { /* fall through to createImageBitmap */ }
+  try {
+    if (typeof createImageBitmap === 'function') {
+      const bmp = await createImageBitmap(file);
+      const out = await draw(bmp, bmp.width, bmp.height);
+      if (bmp.close) bmp.close();
+      if (out) return out;
+    }
+  } catch (_) {}
+  return null;
+}
+
+// Photos are stored as raw bytes (ArrayBuffer), not Blobs — iOS Safari
+// has a history of failing Blob writes to IndexedDB.
+function fdRecToBlob(rec) {
+  if (rec.blob instanceof Blob) return rec.blob; // legacy records
+  return new Blob([rec.buf], { type: rec.type || 'image/jpeg' });
+}
+
+function fdErrText(err) {
+  if (!err) return 'unknown error';
+  const name = err.name && err.name !== 'Error' ? err.name + ': ' : '';
+  return name + (err.message || String(err));
 }
 
 let fdPhotoTargetEntryId = null;
@@ -4721,24 +4750,26 @@ async function fdPhotoChosen(ev) {
   fdPhotoTargetEntryId = null;
   if (!file || !entry) return;
   try {
-    const blob = await fdCompressImage(file);
+    // Compress when we can; store the original bytes when we can't.
+    const blob = (await fdCompressImage(file)) || file;
+    const buf = await blob.arrayBuffer();
     const id = 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-    await fdPhotoPut({ id, chartId: cr.chartId, entryId: entry.id, blob, createdAt: Date.now() });
+    await fdPhotoPut({ id, chartId: cr.chartId, entryId: entry.id, buf, type: blob.type || 'image/jpeg', createdAt: Date.now() });
     entry.photoIds = entry.photoIds || [];
     entry.photoIds.push(id);
     chartSaveActive();
     showToast('Photo attached');
     rcPartialRender();
   } catch (err) {
-    showToast('Photo failed — ' + (err && err.message ? err.message : err), true);
+    showToast('Photo failed — ' + fdErrText(err), true);
   }
 }
 
 // Full-screen viewer with per-photo delete.
 async function fdViewPhoto(photoId, entryId) {
   const rec = await fdPhotoGet(photoId).catch(() => null);
-  if (!rec || !rec.blob) { showToast('Photo unavailable', true); return; }
-  const url = URL.createObjectURL(rec.blob);
+  if (!rec || (!rec.buf && !rec.blob)) { showToast('Photo unavailable', true); return; }
+  const url = URL.createObjectURL(fdRecToBlob(rec));
   const bg = document.createElement('div');
   bg.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;';
   bg.innerHTML = `
@@ -4827,7 +4858,7 @@ async function chartShare(id) {
     for (const e of chart.log || []) {
       for (const pid of e.photoIds || []) {
         const rec = await fdPhotoGet(pid).catch(() => null);
-        if (rec && rec.blob) files.push(new File([rec.blob], `fielddose-photo-${files.length + 1}.jpg`, { type: 'image/jpeg' }));
+        if (rec && (rec.buf || rec.blob)) files.push(new File([fdRecToBlob(rec)], `fielddose-photo-${files.length + 1}.jpg`, { type: 'image/jpeg' }));
       }
     }
   }
@@ -6728,9 +6759,9 @@ function rcBindDynamicElements() {
       for (const pid of (entry && entry.photoIds) || []) {
         try {
           const rec = await fdPhotoGet(pid);
-          if (!rec || !rec.blob) continue;
+          if (!rec || (!rec.buf && !rec.blob)) continue;
           const img = document.createElement('img');
-          img.src = URL.createObjectURL(rec.blob);
+          img.src = URL.createObjectURL(fdRecToBlob(rec));
           img.addEventListener('click', () => fdViewPhoto(pid, entry.id));
           el.appendChild(img);
         } catch (_) { /* photo missing — GC'd or storage error */ }

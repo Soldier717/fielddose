@@ -64,7 +64,25 @@ assert.ok(
 app.crNewPatient();
 app.chartDelete(app.chartsLoadAll()[0].id);
 
-// 8. Charts older than 7 days fall off on load
+// 8. The device holds at most 10 charts — the 11th pushes the oldest off
+for (let i = 0; i < 11; i++) {
+  app.crSetBroselow(BROSELOW[i % BROSELOW.length]);
+  app.ctLogEvent('Note', `call ${i}`);
+  app.crNewPatient();
+}
+charts = app.chartsLoadAll();
+assert.strictEqual(charts.length, 10, 'store capped at 10 charts');
+assert.ok(
+  charts.every((c) => !(c.log || []).some((e) => e.note === 'call 0')),
+  'oldest chart fell off when the 11th was saved'
+);
+assert.ok(
+  charts[0].log.some((e) => e.note === 'call 10'),
+  'newest chart retained at the top'
+);
+charts.forEach((c) => app.chartDelete(c.id));
+
+// 9. Charts older than 7 days fall off on load
 const stale = charts[0];
 stale.createdAt = Date.now() - 8 * 24 * 60 * 60 * 1000;
 app.chartsSaveAll([stale]);

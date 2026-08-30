@@ -4526,7 +4526,8 @@ const cr = {
 ============================================================ */
 const CHARTS_KEY = 'fielddose-charts-v1';
 const CHART_TTL_MS = 7 * 24 * 60 * 60 * 1000;
-const CHART_MAX = 50;
+// Device holds the 10 most recent charts — #11 pushes the oldest off.
+const CHART_MAX = 10;
 
 function chartsLoadAll() {
   let list;
@@ -5313,7 +5314,7 @@ function renderCREntryCharts() {
   return `
       <div class="cr-charts">
         <div class="cr-charts-title">Patient Charts</div>
-        <div class="cr-charts-sub">Treatment tracking worksheets — not a patient care record. Saved on this device only · auto-deleted after 7 days.</div>
+        <div class="cr-charts-sub">Treatment tracking worksheets — not a patient care record. Saved on this device only · 10 most recent kept · auto-deleted after 7 days.</div>
         ${rows}
       </div>`;
 }

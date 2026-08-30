@@ -1698,8 +1698,15 @@
     border-bottom: none;
   }
   /* Compact sticky logo header — fixed height so the sticky patient bar
-     below can pin exactly beneath it (top: var(--fd-hdr-h)). */
-  body.on-coderun { --fd-hdr-h: 60px; }
+     below can pin exactly beneath it (top: var(--fd-hdr-h)). The whole
+     sticky stack (header → patient bar → card header → subtabs → column
+     row) relies on these fixed heights for its cumulative offsets. */
+  body.on-coderun {
+    --fd-hdr-h: 60px;
+    --fd-patbar-h: 52px;
+    --fd-cardhd-h: 56px;
+    --fd-subtab-h: 45px;
+  }
   body.on-coderun .main .header.fd-header {
     background: var(--clin-blue);
     border-bottom: 3px solid var(--clin-red);
@@ -1843,12 +1850,20 @@
     border-left: 4px solid var(--clin-blue);
     color: var(--clin-text);
     border-radius: 0;
-    padding: 10px 18px;
+    padding: 0 18px;
     margin-bottom: 0;
     box-shadow: 0 1px 2px rgba(56,56,56,0.06);
     position: sticky;
     top: var(--fd-hdr-h);
     z-index: 70;
+    height: var(--fd-patbar-h);
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+  }
+  body.on-coderun .main .cr-patient-bar-v2 .cr-pat-summary {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
   }
   body.on-coderun .main .cr-patient-bar-v2.peds {
     background: var(--clin-pink);
@@ -2095,10 +2110,15 @@
     background: var(--clin-surface);
     border: 1px solid var(--clin-border);
     border-radius: 8px;
-    overflow: hidden;
+    /* overflow must stay visible: hidden would break the sticky card
+       header / subtabs / column row inside (sticky pins to the nearest
+       clipping ancestor). Corners are rounded on the children instead. */
+    overflow: visible;
     margin-bottom: 12px;
     box-shadow: var(--clin-shadow);
   }
+  .cr-meds-card > :first-child { border-radius: 8px 8px 0 0; }
+  .cr-meds-card > :last-child { border-radius: 0 0 8px 8px; }
   .cr-meds-header {
     display: flex;
     align-items: center;
@@ -2106,6 +2126,17 @@
     padding: 12px 14px;
     background: var(--clin-blue-light);
     border-bottom: 1px solid var(--clin-border);
+    position: sticky;
+    top: calc(var(--fd-hdr-h) + var(--fd-patbar-h));
+    z-index: 58;
+    height: var(--fd-cardhd-h);
+    box-sizing: border-box;
+  }
+  .cr-meds-card .cr-meds-subtabs {
+    position: sticky;
+    top: calc(var(--fd-hdr-h) + var(--fd-patbar-h) + var(--fd-cardhd-h));
+    z-index: 57;
+    height: var(--fd-subtab-h);
   }
   .cr-meds-icon {
     width: 32px;
@@ -2201,9 +2232,14 @@
     text-transform: uppercase;
     padding: 12px 14px;
     cursor: default;
+    /* Pins under the sticky card header; cards with subtabs (Meds) add
+       the subtab height to the offset. */
     position: sticky;
-    top: 0;
-    z-index: 2;
+    top: calc(var(--fd-hdr-h) + var(--fd-patbar-h) + var(--fd-cardhd-h));
+    z-index: 56;
+  }
+  .cr-meds-card.has-subtabs .cr-drug-row.header {
+    top: calc(var(--fd-hdr-h) + var(--fd-patbar-h) + var(--fd-cardhd-h) + var(--fd-subtab-h));
   }
   .cr-drug-row.header > div { padding: 0; }
   .cr-drug-row:not(.header):nth-child(odd):not(.arrest) {
@@ -3013,6 +3049,10 @@
     grid-template-columns: repeat(4, 1fr);
     background: var(--clin-surface-alt);
     border-bottom: 1px solid var(--clin-border);
+    position: sticky;
+    top: calc(var(--fd-hdr-h) + var(--fd-patbar-h) + var(--fd-cardhd-h));
+    z-index: 57;
+    height: var(--fd-subtab-h);
   }
   .cr-more-subtab {
     background: transparent;
@@ -4101,10 +4141,10 @@ function ccGetDrugs() {
         detail: '1 g IV/IO over 15 min. Contraindicated in liver failure. Peds 15 mg/kg (max 500 mg).', route: 'IV / IO / PO', max: '1 g' },
       { rhythm: 'non-arrest', name: 'Lorazepam (Ativan)', class: 'Benzodiazepine', indication: 'Seizure / status epilepticus',
         weightDose: '2 mg',
-        packageSpec: '2 mg/mL (dilute 1:1)',
+        packageSpec: '2 mg/mL · dilute 1:1 w/ NS for IV',
         deliveryDose: 'IV/IO/IM',
         readyVol: '—',
-        detail: '2 mg IV/IO/IM; may repeat ×1 after 10–15 min (max total 8 mg).', route: 'IV / IO / IM', max: '8 mg total' },
+        detail: '2 mg IV/IO/IM; may repeat ×1 after 10–15 min (max total 8 mg). Dilute 1:1 with NS when given IV.', route: 'IV / IO / IM', max: '8 mg total' },
       { rhythm: 'non-arrest', name: 'Diazepam (Valium)', class: 'Benzodiazepine', indication: 'Seizure / status epilepticus',
         weightDose: '5 mg',
         packageSpec: '5 mg/mL',
@@ -4344,10 +4384,10 @@ function ccGetDrugs() {
         detail: '15 mg/kg IV/IO/PO (max 500 mg). PO indicated for fever > 100.4°F from infectious source.', route: 'IV / IO / PO', max: '500 mg' },
       { rhythm: 'non-arrest', name: 'Lorazepam (Ativan)', class: 'Benzodiazepine', indication: 'Seizure / status epilepticus',
         weightDose: `${ccFmt(Math.min(0.1*kg, 2), 1)} mg (0.1 mg/kg, max 2)`,
-        packageSpec: '2 mg/mL (dilute 1:1)',
+        packageSpec: '2 mg/mL · dilute 1:1 w/ NS for IV',
         deliveryDose: 'IV/IO/IM',
         readyVol: '—',
-        detail: '0.1 mg/kg IV/IO/IM (max 2 mg/dose).', route: 'IV / IO / IM', max: '2 mg / dose' },
+        detail: '0.1 mg/kg IV/IO/IM (max 2 mg/dose). Dilute 1:1 with NS when given IV.', route: 'IV / IO / IM', max: '2 mg / dose' },
       { rhythm: 'non-arrest', name: 'Diazepam (Valium)', class: 'Benzodiazepine', indication: 'Seizure / status epilepticus',
         weightDose: `${ccFmt(Math.min(0.2*kg, 5), 1)} mg (0.2 mg/kg, max 5)`,
         packageSpec: '5 mg/mL',
@@ -5822,7 +5862,7 @@ const CC_PROTOCOLS = [
   { cat: 'Neuro', list: [
     { id: 'seizure', name: 'Seizure', banner: 'Seizure / Status Epilepticus', sections: [
       { label: 'Check First', items: ['Blood glucose — if < 60, treat hypoglycemia'] },
-      { label: 'Anticonvulsant (choose one)', items: ['Midazolam 5 mg IV/IO or 10 mg IM/IN · repeat q5 min · Peds 0.2 mg/kg (max 5 mg IV / 10 mg IM-IN)','Lorazepam 2 mg IV/IO/IM · may repeat ×1 (max 8 mg) · Peds 0.1 mg/kg (max 2 mg)','Diazepam 5 mg IV/IO · repeat q5 min · Peds 0.2 mg/kg (max 5 mg)'] },
+      { label: 'Anticonvulsant (choose one)', items: ['Midazolam 5 mg IV/IO or 10 mg IM/IN · repeat q5 min · Peds 0.2 mg/kg (max 5 mg IV / 10 mg IM-IN)','Lorazepam 2 mg IV/IO/IM · dilute 1:1 w/ NS for IV · may repeat ×1 (max 8 mg) · Peds 0.1 mg/kg (max 2 mg)','Diazepam 5 mg IV/IO · repeat q5 min · Peds 0.2 mg/kg (max 5 mg)'] },
       { label: 'Refractory / Prolonged', items: ['Levetiracetam (Keppra) 2 g IV/IO infusion'] },
     ], pearls: [ 'Levetiracetam is second-line for prolonged or refractory seizures' ]},
     { id: 'stroke', name: 'Stroke', banner: 'Suspected Stroke', sections: [
@@ -6059,7 +6099,7 @@ function rcRenderTabMeds(kg, elec) {
   // By Protocol — structured treatment algorithms (select → drill in)
   if (view === 'protocol') {
     return `
-    <div class="cr-meds-card">
+    <div class="cr-meds-card has-subtabs">
       <div class="cr-meds-header">
         <div class="cr-meds-icon">📋</div>
         <div class="cr-meds-title">Protocols · ${ccFmt(kg, 1)} kg</div>
@@ -6098,7 +6138,7 @@ function rcRenderTabMeds(kg, elec) {
       }).join('');
 
   return `
-    <div class="cr-meds-card">
+    <div class="cr-meds-card has-subtabs">
       <div class="cr-meds-header">
         <div class="cr-meds-icon">💊</div>
         <div class="cr-meds-title">Medications · ${ccFmt(kg, 1)} kg</div>

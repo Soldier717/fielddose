@@ -3044,6 +3044,21 @@
   /* ============================================================
      V2 MORE TAB SUB-VIEWS — Pt. Log / Target Vitals / EtCO₂ / H's & T's
   ============================================================ */
+  .fd-mini-btn {
+    background: var(--clin-surface);
+    border: 1px solid var(--clin-border);
+    color: var(--clin-blue);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 5px 9px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .fd-mini-btn:active { background: var(--clin-blue-light); }
+  .fd-thumbs img { height: 34px; border-radius: 4px; border: 1px solid var(--clin-border); cursor: pointer; }
+
   .cr-more-subtabs {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -3702,8 +3717,9 @@ function ctFormatTime(ms) {
   return `${min}:${sec.toString().padStart(2, '0')}`;
 }
 
+let fdLogSeq = 0;
 function ctLogEvent(type, note) {
-  const entry = { time: ctFormatTime(ctState.elapsedMs), type, note, ts: Date.now() };
+  const entry = { id: Date.now().toString(36) + '-' + (++fdLogSeq), time: ctFormatTime(ctState.elapsedMs), type, note, ts: Date.now() };
   ctState.log.unshift(entry);
   chartSaveActive();
   ctRenderLog();
@@ -4578,6 +4594,7 @@ function crChartStart() {
 function chartDelete(id) {
   chartsSaveAll(chartsLoadAll().filter((c) => c.id !== id));
   if (cr.chartId === id) cr.chartId = null;
+  if (typeof indexedDB !== 'undefined') fdPhotoGC().catch(() => {});
 }
 
 // Reopen a saved chart: restore the whole session (paused) and land
@@ -4612,6 +4629,159 @@ function chartFmtWhen(ts) {
   return new Date(ts).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 }
 
+/* ============================================================
+   NARCOTIC PHOTO LOG — v1 controlled-substance accountability.
+   Photos attach to Drug/Waste log entries, live in IndexedDB on
+   the device only, and are garbage-collected when their chart
+   falls off (7-day / 10-chart policy applies to photos too).
+============================================================ */
+const FD_CS_RE = /fentanyl|morphine|midazolam|versed|ketamine|ketalar|diazepam|valium|lorazepam|ativan/i;
+
+function fdIsCSEntry(e) {
+  return (e.type === 'Drug' || e.type === 'Waste') && FD_CS_RE.test(e.note || '');
+}
+
+function fdPhotoDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open('fielddose-photos', 1);
+    req.onupgradeneeded = () => req.result.createObjectStore('photos', { keyPath: 'id' });
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+function fdPhotoOp(mode, fn) {
+  return fdPhotoDB().then((db) => new Promise((resolve, reject) => {
+    const tx = db.transaction('photos', mode);
+    const out = fn(tx.objectStore('photos'));
+    tx.oncomplete = () => resolve(out && out.result);
+    tx.onerror = () => reject(tx.error);
+  }));
+}
+
+const fdPhotoPut = (rec) => fdPhotoOp('readwrite', (s) => s.put(rec));
+const fdPhotoGet = (id) => fdPhotoOp('readonly', (s) => s.get(id));
+const fdPhotoDelete = (id) => fdPhotoOp('readwrite', (s) => s.delete(id));
+const fdPhotoAllIds = () => fdPhotoOp('readonly', (s) => s.getAllKeys());
+
+// Delete photos whose chart/entry no longer exists anywhere.
+async function fdPhotoGC() {
+  if (typeof indexedDB === 'undefined') return;
+  const valid = new Set();
+  const collect = (log) => (log || []).forEach((e) => (e.photoIds || []).forEach((id) => valid.add(id)));
+  chartsLoadAll().forEach((c) => collect(c.log));
+  collect(ctState.log);
+  const ids = (await fdPhotoAllIds()) || [];
+  for (const id of ids) if (!valid.has(id)) await fdPhotoDelete(id).catch(() => {});
+}
+
+// Downscale + JPEG-compress a camera capture (~150-300 KB each).
+function fdCompressImage(file, maxDim = 1280, quality = 0.72) {
+  const url = URL.createObjectURL(file);
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('encode failed'))), 'image/jpeg', quality);
+      } catch (err) { reject(err); }
+      finally { URL.revokeObjectURL(url); }
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('image load failed')); };
+    img.src = url;
+  });
+}
+
+let fdPhotoTargetEntryId = null;
+
+function fdAttachPhoto(entryId) {
+  let input = document.getElementById('fd-photo-input');
+  if (!input) {
+    input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.capture = 'environment';
+    input.id = 'fd-photo-input';
+    input.style.display = 'none';
+    document.body.appendChild(input);
+    input.addEventListener('change', fdPhotoChosen);
+  }
+  fdPhotoTargetEntryId = entryId;
+  input.value = '';
+  input.click();
+}
+
+async function fdPhotoChosen(ev) {
+  const file = ev.target.files && ev.target.files[0];
+  const entry = ctState.log.find((e) => e.id === fdPhotoTargetEntryId);
+  fdPhotoTargetEntryId = null;
+  if (!file || !entry) return;
+  try {
+    const blob = await fdCompressImage(file);
+    const id = 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+    await fdPhotoPut({ id, chartId: cr.chartId, entryId: entry.id, blob, createdAt: Date.now() });
+    entry.photoIds = entry.photoIds || [];
+    entry.photoIds.push(id);
+    chartSaveActive();
+    showToast('Photo attached');
+    rcPartialRender();
+  } catch (err) {
+    showToast('Photo failed — ' + (err && err.message ? err.message : err), true);
+  }
+}
+
+// Full-screen viewer with per-photo delete.
+async function fdViewPhoto(photoId, entryId) {
+  const rec = await fdPhotoGet(photoId).catch(() => null);
+  if (!rec || !rec.blob) { showToast('Photo unavailable', true); return; }
+  const url = URL.createObjectURL(rec.blob);
+  const bg = document.createElement('div');
+  bg.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;';
+  bg.innerHTML = `
+    <img src="${url}" style="max-width:100%;max-height:78vh;border-radius:8px;">
+    <div style="display:flex;gap:10px;">
+      <button id="fd-pv-close" style="background:#fff;color:#222;border:none;border-radius:6px;padding:10px 22px;font-weight:700;cursor:pointer;">Close</button>
+      <button id="fd-pv-del" style="background:transparent;color:#ff8a80;border:1px solid #ff8a80;border-radius:6px;padding:10px 22px;font-weight:700;cursor:pointer;">Delete photo</button>
+    </div>`;
+  document.body.appendChild(bg);
+  const close = () => { URL.revokeObjectURL(url); bg.remove(); };
+  bg.querySelector('#fd-pv-close').addEventListener('click', close);
+  bg.addEventListener('click', (e) => { if (e.target === bg) close(); });
+  bg.querySelector('#fd-pv-del').addEventListener('click', async () => {
+    if (!confirm('Delete this photo? This cannot be undone.')) return;
+    await fdPhotoDelete(photoId).catch(() => {});
+    const entry = ctState.log.find((e) => e.id === entryId);
+    if (entry && entry.photoIds) entry.photoIds = entry.photoIds.filter((p) => p !== photoId);
+    chartSaveActive();
+    close();
+    rcPartialRender();
+  });
+}
+
+// Waste flow: amount + witness prompt → Waste log entry → camera opens
+// for the waste photo (cancel is fine — the log entry stands).
+// Sweep orphaned photos a few seconds after boot (covers 7-day/10-chart
+// rolloff that happened since last open).
+if (typeof indexedDB !== 'undefined') {
+  setTimeout(() => { fdPhotoGC().catch(() => {}); }, 5000);
+}
+
+function fdLogWaste(entryId) {
+  const src = ctState.log.find((e) => e.id === entryId);
+  const nameMatch = src && (src.note || '').match(/^[^\d(—·]+/);
+  const drugName = nameMatch ? nameMatch[0].trim() : 'Narcotic';
+  const amt = prompt(`${drugName} — waste amount (e.g. 50 mcg or 1 mL):`);
+  if (!amt) return;
+  const wit = prompt('Witness (name or initials):') || '';
+  ctLogEvent('Waste', `${drugName} — wasted ${amt}${wit ? ' · witness: ' + wit : ''}`);
+  showToast('Waste logged — add a photo of the wasting');
+  fdAttachPhoto(ctState.log[0].id);
+}
+
 // Plain-text worksheet for hand-off (share sheet / email). Chronological
 // log with both elapsed and wall-clock times — the times the PCR needs.
 function chartWorksheetText(chart) {
@@ -4629,10 +4799,14 @@ function chartWorksheetText(chart) {
   lines.push('EVENT LOG  (elapsed · clock · event)');
   const chrono = [...(chart.log || [])].reverse();
   if (chrono.length === 0) lines.push('  (no events logged)');
+  let nPhotos = 0;
   chrono.forEach((e) => {
     const clock = e.ts ? new Date(e.ts).toLocaleTimeString([], { hour12: false }) : '--:--:--';
-    lines.push(`${String(e.time || '--:--').padEnd(6)} ${clock}  ${String(e.type || '').padEnd(7)} ${e.note || ''}`);
+    const pc = (e.photoIds || []).length;
+    nPhotos += pc;
+    lines.push(`${String(e.time || '--:--').padEnd(6)} ${clock}  ${String(e.type || '').padEnd(7)} ${e.note || ''}${pc ? ` [photo ×${pc}]` : ''}`);
   });
+  if (nPhotos) lines.push('', `${nPhotos} photo${nPhotos === 1 ? '' : 's'} attached (shared as image files where supported).`);
   lines.push('');
   lines.push('Generated by FieldDose (fielddose.com). Confirm all entries');
   lines.push('against the official patient care report.');
@@ -4647,8 +4821,20 @@ async function chartShare(id) {
   if (!chart) { showToast('Chart no longer available', true); return; }
   const text = chartWorksheetText(chart);
   const title = `FieldDose Worksheet — ${chart.patient.summary || 'Patient'}`;
+  // Gather attached narcotic photos as files (share sheet attaches them)
+  const files = [];
+  if (typeof indexedDB !== 'undefined' && typeof File !== 'undefined') {
+    for (const e of chart.log || []) {
+      for (const pid of e.photoIds || []) {
+        const rec = await fdPhotoGet(pid).catch(() => null);
+        if (rec && rec.blob) files.push(new File([rec.blob], `fielddose-photo-${files.length + 1}.jpg`, { type: 'image/jpeg' }));
+      }
+    }
+  }
   if (navigator.share) {
-    try { await navigator.share({ title, text }); return; }
+    const payload = files.length && navigator.canShare && navigator.canShare({ files })
+      ? { title, text, files } : { title, text };
+    try { await navigator.share(payload); return; }
     catch (err) { if (err && err.name === 'AbortError') return; /* else fall through */ }
   }
   location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`;
@@ -5559,12 +5745,22 @@ function renderMoreLog() {
     <div class="cr-log-section-head">Timeline</div>
     ${recent.length === 0
       ? `<div style="color:var(--clin-text-muted);font-size:13px;text-align:center;padding:20px 0;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;">No events yet — tap a drug to begin logging</div>`
-      : recent.map(e => `
+      : recent.map(e => {
+          const cs = fdIsCSEntry(e);
+          const nPhotos = (e.photoIds || []).length;
+          const controls = (cs || nPhotos) ? `
+            <div style="grid-column:1/-1;display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:2px 0 3px;">
+              ${cs ? `<button class="fd-mini-btn" data-log-photo="${e.id}">📷 Photo${nPhotos ? ' (' + nPhotos + ')' : ''}</button>` : ''}
+              ${cs && e.type === 'Drug' ? `<button class="fd-mini-btn" data-log-waste="${e.id}">💧 Waste</button>` : ''}
+              <span class="fd-thumbs" data-thumbs-for="${e.id}" style="display:flex;gap:4px;"></span>
+            </div>` : '';
+          return `
         <div style="display:grid;grid-template-columns:60px 90px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid var(--clin-surface-alt);font-size:12px;align-items:baseline;">
           <div style="font-family:'JetBrains Mono',monospace;color:var(--clin-blue);font-weight:700;">${escapeHtml(e.time || '')}</div>
           <div style="font-family:'JetBrains Mono',monospace;color:var(--clin-text-muted);text-transform:uppercase;letter-spacing:0.08em;font-size:11px;">${escapeHtml(e.type || '')}</div>
           <div style="color:var(--clin-text);">${escapeHtml(e.note || '')}</div>
-        </div>`).join('')
+          ${controls}
+        </div>`; }).join('')
     }
   `;
 }
@@ -6520,6 +6716,27 @@ function rcBindDynamicElements() {
     chartSaveActive();
     chartShare(cr.chartId);
   });
+
+  // Narcotic photo log — attach / waste buttons + async thumbnail fill
+  document.querySelectorAll('[data-log-photo]').forEach((b) =>
+    b.addEventListener('click', () => fdAttachPhoto(b.dataset.logPhoto)));
+  document.querySelectorAll('[data-log-waste]').forEach((b) =>
+    b.addEventListener('click', () => fdLogWaste(b.dataset.logWaste)));
+  if (typeof indexedDB !== 'undefined') {
+    document.querySelectorAll('[data-thumbs-for]').forEach(async (el) => {
+      const entry = ctState.log.find((x) => x.id === el.dataset.thumbsFor);
+      for (const pid of (entry && entry.photoIds) || []) {
+        try {
+          const rec = await fdPhotoGet(pid);
+          if (!rec || !rec.blob) continue;
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(rec.blob);
+          img.addEventListener('click', () => fdViewPhoto(pid, entry.id));
+          el.appendChild(img);
+        } catch (_) { /* photo missing — GC'd or storage error */ }
+      }
+    });
+  }
 
   // Re-render log into new container
   ctRenderLog();

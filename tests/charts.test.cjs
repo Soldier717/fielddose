@@ -64,7 +64,27 @@ assert.ok(
 app.crNewPatient();
 app.chartDelete(app.chartsLoadAll()[0].id);
 
-// 8. The device holds at most 10 charts — the 11th pushes the oldest off
+// 8. Narcotic photo log: entries carry unique ids, photoIds survive
+//    save/reopen, and the worksheet marks photographed entries
+app.crSetBroselow(BROSELOW[4]);
+app.ctLogEvent('Drug', 'Fentanyl 25 mcg IV given');
+app.ctLogEvent('Waste', 'Fentanyl — wasted 75 mcg · witness: JD');
+assert.ok(ctState.log[0].id && ctState.log[1].id, 'log entries have ids');
+assert.notStrictEqual(ctState.log[0].id, ctState.log[1].id, 'entry ids unique');
+ctState.log[1].photoIds = ['p-test-1'];
+ctState.log[0].photoIds = ['p-test-2', 'p-test-3'];
+app.chartSaveActive();
+const csId = cr.chartId;
+app.crNewPatient();
+app.chartOpen(csId);
+assert.deepStrictEqual(ctState.log[0].photoIds, ['p-test-2', 'p-test-3'], 'photoIds survive save/reopen');
+const csWs = app.chartWorksheetText(app.chartsLoadAll().find((c) => c.id === csId));
+assert.ok(csWs.includes('[photo ×1]') && csWs.includes('[photo ×2]'), 'worksheet marks photographed entries');
+assert.ok(csWs.includes('3 photos attached'), 'worksheet counts photos');
+app.crNewPatient();
+app.chartDelete(csId);
+
+// 9. The device holds at most 10 charts — the 11th pushes the oldest off
 for (let i = 0; i < 11; i++) {
   app.crSetBroselow(BROSELOW[i % BROSELOW.length]);
   app.ctLogEvent('Note', `call ${i}`);
@@ -82,7 +102,7 @@ assert.ok(
 );
 charts.forEach((c) => app.chartDelete(c.id));
 
-// 9. Charts older than 7 days fall off on load
+// 10. Charts older than 7 days fall off on load
 const stale = charts[0];
 stale.createdAt = Date.now() - 8 * 24 * 60 * 60 * 1000;
 app.chartsSaveAll([stale]);

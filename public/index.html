@@ -3044,6 +3044,56 @@
   /* ============================================================
      V2 MORE TAB SUB-VIEWS — Pt. Log / Target Vitals / EtCO₂ / H's & T's
   ============================================================ */
+  /* Contacts / medical direction — header phone button + bottom sheet */
+  .fd-call-fab {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    width: 40px; height: 40px;
+    background: #fff; border: none; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.28);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .fd-call-fab svg { width: 21px; height: 21px; stroke: #16a34a; stroke-width: 2.2; fill: none; }
+  .fd-call-fab:active { transform: translateY(-50%) scale(0.94); }
+  .fd-ct-bg {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 520;
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .fd-ct-sheet {
+    background: var(--clin-bg); color: var(--clin-text);
+    width: 100%; max-width: 560px; max-height: 82vh;
+    border-radius: 14px 14px 0 0; display: flex; flex-direction: column; overflow: hidden;
+  }
+  .fd-ct-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 16px;
+    font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; font-size: 14px;
+    background: var(--clin-blue-light); border-bottom: 1px solid var(--clin-border);
+  }
+  .fd-ct-list { overflow-y: auto; padding: 6px 16px calc(24px + env(safe-area-inset-bottom)); }
+  .fd-ct-group {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clin-text-dim); margin: 16px 0 6px;
+  }
+  .fd-ct-row {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--clin-surface); border: 1px solid var(--clin-border);
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 6px;
+  }
+  .fd-ct-info { flex: 1; min-width: 0; }
+  .fd-ct-info .nm { font-weight: 600; font-size: 14px; }
+  .fd-ct-info .mt { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--clin-text-dim); margin-top: 2px; }
+  .fd-ct-call {
+    width: 42px; height: 42px; border-radius: 50%; background: #16a34a;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 18px; flex-shrink: 0;
+  }
+  .fd-ct-del {
+    width: 36px; height: 36px; border-radius: 6px; background: none;
+    border: 1px solid var(--clin-red); color: var(--clin-red); cursor: pointer; font-size: 14px;
+  }
+
   .fd-mini-btn {
     background: var(--clin-surface);
     border: 1px solid var(--clin-border);
@@ -4801,6 +4851,106 @@ if (typeof indexedDB !== 'undefined') {
   setTimeout(() => { fdPhotoGC().catch(() => {}); }, 5000);
 }
 
+/* ============================================================
+   CONTACTS · MEDICAL DIRECTION — tap-to-call sheet. Seeded with the
+   GNFR quick-reference list; editable on-device (add/remove), which
+   is also how other agencies adapt it until agency packs exist.
+============================================================ */
+const FD_CONTACTS_KEY = 'fielddose-contacts-v1';
+const FD_CONTACTS_SEED = [
+  { group: 'EMS Leadership · Medical Direction', name: 'EMS Chief Dennis Disarro', sub: 'Lead contact · cell', num: '239-961-2882' },
+  { group: 'EMS Leadership · Medical Direction', name: 'Scott Dunavant, MD', sub: 'Associate Medical Director · cell', num: '859-806-7593' },
+  { group: 'Hospital ED Red Phones', name: 'Gulf Coast Medical Center', sub: 'D5', num: '239-343-0434' },
+  { group: 'Hospital ED Red Phones', name: 'HealthPark Medical Center', sub: 'D7', num: '239-343-5334' },
+  { group: 'Hospital ED Red Phones', name: "Golisano Children's Hospital", sub: 'D2', num: '239-343-6260' },
+  { group: 'Hospital ED Red Phones', name: 'NCH North', sub: 'D14', num: '239-624-9199' },
+  { group: 'Hospital ED Red Phones', name: 'NCH Bonita', sub: 'D32', num: '239-624-6924' },
+  { group: 'Hospital ED Red Phones', name: 'NCH Northeast', sub: 'D34', num: '239-624-8728' },
+  { group: 'Hospital ED Red Phones', name: 'Physicians Regional Medical Center', sub: 'D13', num: '239-304-4737' },
+  { group: 'Hospital ED Red Phones', name: 'Physicians Regional Medical Center', sub: 'D15', num: '239-354-6191' },
+  { group: 'Specialty / Emergency', name: 'Poison Control Center', sub: '24/7', num: '800-222-1222' },
+  { group: 'Specialty / Emergency', name: 'CHEMTREC', sub: 'Hazmat emergency', num: '800-424-9300' },
+  { group: 'Specialty / Emergency', name: "Diver's Alert Network (DAN)", sub: 'Dive emergency', num: '919-684-9111' },
+];
+
+function fdContactsLoad() {
+  try {
+    const list = JSON.parse(localStorage.getItem(FD_CONTACTS_KEY));
+    if (Array.isArray(list) && list.length) return list;
+  } catch (_) {}
+  // Unedited devices follow the seed, so future seed updates reach them.
+  return FD_CONTACTS_SEED.map((c) => ({ ...c }));
+}
+function fdContactsSave(list) {
+  try { localStorage.setItem(FD_CONTACTS_KEY, JSON.stringify(list)); } catch (_) {}
+}
+
+function fdShowContacts() {
+  const bg = document.createElement('div');
+  bg.className = 'fd-ct-bg';
+  bg.innerHTML = `
+    <div class="fd-ct-sheet">
+      <div class="fd-ct-head">
+        <span>📞 Contacts</span>
+        <span style="display:flex;gap:8px;">
+          <button class="fd-mini-btn" id="fd-ct-edit">✎ Edit</button>
+          <button class="fd-mini-btn" id="fd-ct-close">✕ Close</button>
+        </span>
+      </div>
+      <div class="fd-ct-list" id="fd-ct-list"></div>
+    </div>`;
+  document.body.appendChild(bg);
+  let editing = false;
+
+  const renderList = () => {
+    const list = fdContactsLoad();
+    const groups = [];
+    list.forEach((c) => { const g = c.group || 'Other'; if (!groups.includes(g)) groups.push(g); });
+    const el = bg.querySelector('#fd-ct-list');
+    el.innerHTML = groups.map((g) => `
+      <div class="fd-ct-group">${escapeHtml(g)}</div>
+      ${list.map((c, i) => (c.group || 'Other') !== g ? '' : `
+        <div class="fd-ct-row">
+          <div class="fd-ct-info">
+            <div class="nm">${escapeHtml(c.name)}</div>
+            <div class="mt">${c.sub ? escapeHtml(c.sub) + ' · ' : ''}${escapeHtml(c.num || '')}</div>
+          </div>
+          ${editing
+            ? `<button class="fd-ct-del" data-ct-del="${i}" aria-label="Remove ${escapeAttr(c.name)}">✕</button>`
+            : `<a class="fd-ct-call" href="tel:${(c.num || '').replace(/[^\d+]/g, '')}" aria-label="Call ${escapeAttr(c.name)}">📞</a>`}
+        </div>`).join('')}`).join('')
+      + (editing ? `<button class="fd-mini-btn" id="fd-ct-add" style="margin:14px auto 4px;display:block;">＋ Add contact</button>` : '');
+
+    el.querySelectorAll('[data-ct-del]').forEach((b) => b.addEventListener('click', () => {
+      const cur = fdContactsLoad();
+      const c = cur[+b.dataset.ctDel];
+      if (!c || !confirm(`Remove ${c.name}?`)) return;
+      cur.splice(+b.dataset.ctDel, 1);
+      fdContactsSave(cur);
+      renderList();
+    }));
+    const add = el.querySelector('#fd-ct-add');
+    if (add) add.addEventListener('click', () => {
+      const name = prompt('Contact name:'); if (!name) return;
+      const num = prompt('Phone number:'); if (!num) return;
+      const sub = prompt('Label (role / hospital code — optional):') || '';
+      const cur = fdContactsLoad();
+      cur.push({ group: 'Other', name, sub, num });
+      fdContactsSave(cur);
+      renderList();
+    });
+  };
+
+  renderList();
+  bg.querySelector('#fd-ct-close').addEventListener('click', () => bg.remove());
+  bg.addEventListener('click', (e) => { if (e.target === bg) bg.remove(); });
+  bg.querySelector('#fd-ct-edit').addEventListener('click', (e) => {
+    editing = !editing;
+    e.target.textContent = editing ? '✓ Done' : '✎ Edit';
+    renderList();
+  });
+}
+
 function fdLogWaste(entryId) {
   const src = ctState.log.find((e) => e.id === entryId);
   const nameMatch = src && (src.note || '').match(/^[^\d(—·]+/);
@@ -5502,6 +5652,9 @@ function renderRunCodeHeader() {
     <div class="header fd-header">
       <img src="/fielddose-logo.png" alt="FieldDose — Calculate. Confirm. Save Lives." class="fd-logo">
       <div class="page-meta fd-sub">Regional Common Treatment Guidelines</div>
+      <button class="fd-call-fab" id="fd-call-btn" title="Contacts · Medical Direction" aria-label="Contacts and medical direction phone numbers">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </button>
     </div>
   `;
 }
@@ -6779,6 +6932,10 @@ function rcBindDynamicElements() {
 }
 
 function bindRunCodeEvents() {
+  // Header phone button → contacts / medical direction sheet
+  const callBtn = document.getElementById('fd-call-btn');
+  if (callBtn) callBtn.addEventListener('click', fdShowContacts);
+
   // ENTRY FLOW — Adult/Peds picker
   const goPeds = document.getElementById('cr-go-peds');
   if (goPeds) goPeds.addEventListener('click', () => { cr.view = 'entry-peds'; render(); });

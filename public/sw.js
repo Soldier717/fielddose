@@ -6,7 +6,7 @@
  *  - Blob uploads:         cache-first (reference cards viewable offline once loaded).
  *  - Fonts + static files: cache-first.
  */
-const CACHE = 'fielddose-v3';
+const CACHE = 'fielddose-v4';
 
 const PRECACHE = [
   '/',
@@ -87,9 +87,12 @@ self.addEventListener('fetch', (e) => {
 
   const url = new URL(req.url);
 
-  // App navigation → the single-page shell
+  // App navigation. Only the root maps to the cached shell key — other
+  // pages (e.g. /scan-test.html) cache under their own URL, so they can
+  // never overwrite the offline app shell.
   if (req.mode === 'navigate') {
-    e.respondWith(networkFirst(req, '/'));
+    const isRoot = url.pathname === '/' || url.pathname === '/index.html';
+    e.respondWith(networkFirst(req, isRoot ? '/' : req));
     return;
   }
 

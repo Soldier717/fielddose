@@ -2272,7 +2272,7 @@
     font-size: 18px;
     letter-spacing: 0;
     line-height: 1.25;
-    overflow-wrap: break-word; /* absolute last resort — sizes below avoid it */
+    overflow-wrap: normal; /* never split a name — the fitter sizes it in */
   }
   /* Names with a long single word (Diphenhydramine, Hydroxocobalamin…)
      step down a size so they render intact — never split, no hyphens. */
@@ -2291,7 +2291,9 @@
     font-family: 'Inter', sans-serif;
     font-variant-numeric: tabular-nums;
     line-height: 1.3;
-    overflow-wrap: break-word;
+    /* Wrap at spaces only — "(1:1,000", "gtts/min", "17.5" must never
+       split; the fitter shrinks the font when a token won't fit. */
+    overflow-wrap: normal;
   }
   .cr-drug-cell.conc {
     font-size: 17px;
@@ -2305,13 +2307,24 @@
     border-radius: 4px;
     text-align: center;
   }
-  /* Administration instructions in the Vol. column read at body size —
-     the 700/21px treatment is reserved for actual volumes. */
+  /* The pink chip means "a volume to draw up" — nothing else gets it.
+     Administration instructions read as plain body text, and drip
+     rates keep the chip at a size that fits their longer strings. */
   .cr-drug-cell.vol.long {
     font-size: 14px;
     font-weight: 600;
     line-height: 1.35;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    text-align: left;
   }
+  .cr-drug-cell.vol.rate {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .cr-drug-cell.vol .none { color: var(--clin-text-muted); font-weight: 400; }
   .cr-drug-cell.rt {
     display: flex;
     align-items: center;
@@ -2364,7 +2377,12 @@
     .cr-drug-cell .ind { font-size: 15px; }
     .cr-drug-cell.conc { font-size: 16px; }
     .cr-drug-cell.vol { font-size: 20px; padding: 6px 6px; }
+    .cr-drug-cell.vol.rate { font-size: 14px; }
     .cr-drug-cell.rt { font-size: 15px; }
+    /* The chevron is decorative; on phones its width is better spent
+       letting routes sit on one line. */
+    .cr-drug-cell.rt .arrow { display: none; }
+    .cr-drug-cell.rt { justify-content: center; }
     .cr-drug-row.header { font-size: 13px; }
   }
 
@@ -5128,28 +5146,22 @@ function rcNameIsTight(name) {
   return (name || '').split(/[\s\/(]+/).some((w) => w.length > 12);
 }
 
-// Measure each rendered name's longest word against its actual column
-// width; reduce the font just enough that the word fits unbroken.
+// Fit names / concentrations / volumes so no word ever splits
+// mid-token. These cells forbid intra-word breaks (overflow-wrap:
+// normal), so an oversized word shows up as real overflow — we ask
+// the layout engine directly (scrollWidth) and step the font down
+// until it fits. No canvas math, no metric disagreements.
 function rcFitDrugNames() {
-  const cells = document.querySelectorAll('.cr-drug-cell .name');
-  if (!cells.length) return;
-  const canvas = rcFitDrugNames._c || (rcFitDrugNames._c = document.createElement('canvas'));
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
+  const cells = document.querySelectorAll('.cr-drug-cell .name, .cr-drug-cell.conc, .cr-drug-cell.vol');
   cells.forEach((el) => {
-    el.style.fontSize = ''; // re-measure from the stylesheet size
-    const w = el.clientWidth;
-    if (!w) return;
-    const cs = getComputedStyle(el);
-    let size = parseFloat(cs.fontSize);
-    const words = (el.textContent || '').split(/\s+/).filter(Boolean);
-    if (!words.length) return;
-    const widest = () => {
-      ctx.font = `${cs.fontWeight} ${size}px ${cs.fontFamily}`;
-      return Math.max(...words.map((word) => ctx.measureText(word).width));
-    };
-    while (widest() > w && size > 11) size -= 0.5;
-    if (size !== parseFloat(cs.fontSize)) el.style.fontSize = size + 'px';
+    el.style.fontSize = ''; // start from the stylesheet size
+    if (!el.clientWidth) return;
+    let size = parseFloat(getComputedStyle(el).fontSize);
+    let guard = 24;
+    while (el.scrollWidth > el.clientWidth + 1 && size > 11 && guard-- > 0) {
+      size -= 0.5;
+      el.style.fontSize = size + 'px';
+    }
   });
 }
 if (typeof document !== 'undefined' && document.fonts && document.fonts.ready && document.fonts.ready.then) {
@@ -5158,10 +5170,16 @@ if (typeof document !== 'undefined' && document.fonts && document.fonts.ready &&
 }
 
 // A Vol. cell is a true volume ("17.5 mL", "6 / 3 mL", "2 tabs") or an
-// administration instruction ("Inject lateral thigh · Hold 10 sec",
-// "IV/IO/IM"). Instructions render smaller — bold 20px is for numbers.
+// administration instruction ("Inject lateral thigh · Hold 10 sec").
+// Instructions render as plain body text — chip + bold is for numbers.
 function rcVolIsInstruction(v) {
   return !/^[\d.\s\/–-]+(mL|g|mg|mcg|tab|spray|neb|puff)s?$/i.test((v || '').trim());
+}
+
+// A Vol. value that is nothing but routes ("IV/IO/IM") duplicates the
+// Route column — show a muted dash instead of saying it twice.
+function rcVolIsRouteOnly(v) {
+  return /^(IV|IO|IM|IN|PO|SL|PR|NEB|ETT?)(\s*\/\s*(IV|IO|IM|IN|PO|SL|PR|NEB|ETT?))*$/i.test((v || '').trim());
 }
 
 // Whether to render a drug row in red (arrest pathway)
@@ -6580,13 +6598,16 @@ function rcRenderTabMeds(kg, elec) {
         const arrest = rcIsArrestDrug(d);
         const future = crIsFutureUse(d.name);
         const volTxt = rcParseVol(d.deliveryDose || d.readyVol || d.weightDose);
+        const volCell = rcVolIsRouteOnly(volTxt)
+          ? `<div class="cr-drug-cell vol long"><span class="none">—</span></div>`
+          : `<div class="cr-drug-cell vol${rcVolIsInstruction(volTxt) ? ' long' : ''}">${escapeHtml(volTxt)}</div>`;
         const inner = `
             <div class="cr-drug-cell drug">
               <div class="name${rcNameIsTight(d.name) ? ' tight' : ''}">${escapeHtml(d.name)}</div>
               <div class="ind">${escapeHtml(d.indication || '')}</div>
             </div>
-            <div class="cr-drug-cell conc">${escapeHtml(rcParseConc(d.packageSpec)).replace(/\//g, '/<wbr>')}</div>
-            <div class="cr-drug-cell vol${rcVolIsInstruction(volTxt) ? ' long' : ''}">${escapeHtml(volTxt).replace(/\//g, '/<wbr>')}</div>
+            <div class="cr-drug-cell conc">${escapeHtml(rcParseConc(d.packageSpec))}</div>
+            ${volCell}
             <div class="cr-drug-cell rt">
               ${future
                 ? '<span class="future-tag">FUTURE USE</span>'
@@ -6628,8 +6649,8 @@ function rcRenderTabDrip(kg) {
         <div class="name${rcNameIsTight(d.name) ? ' tight' : ''}">${escapeHtml(d.name)}</div>
         <div class="ind">${escapeHtml(d.indication)}</div>
       </div>
-      <div class="cr-drug-cell conc">${escapeHtml(d.conc).replace(/\//g, '/<wbr>')}</div>
-      <div class="cr-drug-cell vol${rcVolIsInstruction(d.rate) ? ' long' : ''}">${escapeHtml(d.rate)}</div>
+      <div class="cr-drug-cell conc">${escapeHtml(d.conc)}</div>
+      <div class="cr-drug-cell vol rate">${escapeHtml(d.rate)}</div>
       <div class="cr-drug-cell rt"><span class="route-label">IV/<wbr>IO</span><span class="arrow">›</span></div>
     </button>
   `).join('');

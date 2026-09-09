@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://fielddose.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0d0e10;
@@ -1217,10 +1217,10 @@
     border: none;
     cursor: pointer;
     color: var(--text-dim);
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     border-top: 3px solid transparent;
     transition: all 0.15s;
@@ -2150,10 +2150,11 @@
     font-size: 18px;
   }
   .cr-meds-title {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
     font-size: 17px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
     color: var(--clin-text);
     flex: 1;
   }
@@ -2173,10 +2174,10 @@
     border: none;
     border-bottom: 3px solid transparent;
     padding: 12px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 0.06em;
+    font-size: 14px;
+    letter-spacing: 0.03em;
     color: var(--clin-text-muted);
     cursor: pointer;
     text-transform: uppercase;
@@ -2207,8 +2208,17 @@
   .cr-drug-table { background: var(--clin-surface); }
   .cr-drug-row {
     display: grid;
-    grid-template-columns: 2.2fr 1fr 0.8fr 0.7fr;
+    /* Vol. gets a hard floor so a number and its unit never split
+       mid-token; every other track may shrink and wrap. */
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr) minmax(76px, 1fr) minmax(0, 0.9fr);
     align-items: center;
+  }
+  /* Grid tracks must be allowed to shrink below content min-width, or
+     long tokens (routes, concentrations) blow the row past the screen
+     edge on small phones. Cells wrap instead. */
+  .cr-drug-row > * { min-width: 0; }
+  .cr-drug-cell.rt .route-label { overflow-wrap: anywhere; }
+  .cr-drug-row {
     border-bottom: 1px solid var(--clin-surface-alt);
     padding: 10px 14px;
     background: var(--clin-surface);
@@ -2225,11 +2235,11 @@
   .cr-drug-row.header {
     background: #383838;
     color: white;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    text-transform: none;
     padding: 12px 14px;
     cursor: default;
     /* Pins under the sticky card header; cards with subtabs (Meds) add
@@ -2253,40 +2263,62 @@
   .cr-drug-row.arrest .name { color: var(--clin-red); }
   .cr-drug-row.arrest:hover { background: var(--clin-blue-light); }
   .cr-drug-row:not(.header):not(.arrest):hover { background: var(--clin-blue-light); }
+  /* Typography per design review: Inter throughout the table, tabular
+     numerals for aligned digits, full wrap — never truncate. Emphasis
+     order: volume (700) > drug name (600) > conc/route (500). */
   .cr-drug-cell .name {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.02em;
+    font-size: 18px;
+    letter-spacing: 0;
     line-height: 1.25;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
   .cr-drug-cell .ind {
-    font-style: italic;
-    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
     color: var(--clin-text-dim);
     margin-top: 2px;
-    line-height: 1.25;
+    line-height: 1.3;
+    overflow-wrap: break-word;
   }
   .cr-drug-cell.conc, .cr-drug-cell.vol {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-variant-numeric: tabular-nums;
     line-height: 1.3;
+    overflow-wrap: break-word;
+  }
+  .cr-drug-cell.conc {
+    font-size: 17px;
+    font-weight: 500;
   }
   .cr-drug-cell.vol {
+    font-size: 21px;
+    font-weight: 700;
     background: rgba(247,221,225,0.55);
     padding: 6px 8px;
     border-radius: 4px;
     text-align: center;
   }
+  /* Administration instructions in the Vol. column read at body size —
+     the 700/21px treatment is reserved for actual volumes. */
+  .cr-drug-cell.vol.long {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
   .cr-drug-cell.rt {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
     gap: 4px;
   }
   .cr-drug-cell.rt .route-label {
@@ -2323,11 +2355,15 @@
   }
 
   @media (max-width: 720px) {
-    .cr-drug-row { grid-template-columns: 1.8fr 0.9fr 0.7fr 0.6fr; padding: 10px 10px; gap: 6px; }
-    .cr-drug-cell .name { font-size: 13px; }
-    .cr-drug-cell .ind { font-size: 11px; }
-    .cr-drug-cell.conc, .cr-drug-cell.vol { font-size: 11px; }
-    .cr-drug-cell.rt { font-size: 11px; }
+    /* Spec sizes hold on phones (lower end of each range); columns
+       rebalance and text wraps rather than truncating. */
+    .cr-drug-row { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr) minmax(64px, 0.95fr) minmax(0, 0.75fr); padding: 10px 10px; gap: 6px; }
+    .cr-drug-cell .name { font-size: 18px; }
+    .cr-drug-cell .ind { font-size: 15px; }
+    .cr-drug-cell.conc { font-size: 16px; }
+    .cr-drug-cell.vol { font-size: 20px; padding: 6px 6px; }
+    .cr-drug-cell.rt { font-size: 15px; }
+    .cr-drug-row.header { font-size: 13px; }
   }
 
   /* ============================================================
@@ -3124,10 +3160,10 @@
     border: none;
     border-bottom: 3px solid transparent;
     padding: 12px 6px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.04em;
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
     color: var(--clin-text-muted);
     cursor: pointer;
     text-transform: uppercase;
@@ -3160,10 +3196,10 @@
 
   /* Pt. Log section labels (Quick log / Timeline) */
   .cr-log-section-head {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
     font-size: 13px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--clin-blue);
     margin: 16px 0 8px;
@@ -5041,9 +5077,8 @@ function rcParseConc(spec) {
   // Tabs / sprays — "81 mg/tab" or "0.4 mg/spray"
   const unit = spec.match(/[\d.]+\s*(?:mcg|mg|g)\s*\/\s*(?:tab|spray|neb|puff)/i);
   if (unit) return unit[0].replace(/\s+/g, ' ');
-  // Fallback: first segment before " · "
-  const first = spec.split(/·/)[0].trim();
-  return first.length > 18 ? first.substring(0, 16) + '…' : first;
+  // Fallback: first segment before " · " — in full; the cell wraps.
+  return spec.split(/·/)[0].trim();
 }
 
 // Pull the volume to push from a deliveryDose string.
@@ -5067,7 +5102,7 @@ function rcParseVol(dose) {
   // Grams (e.g. glucose tube)
   const g = dose.match(/([\d.]+)\s*g\b/i);
   if (g) return `${g[1]} g`;
-  return dose.length > 14 ? dose.substring(0, 12) + '…' : dose;
+  return dose; // full instruction — the cell wraps, never truncates
 }
 
 // Normalize the route string for the Rt column.
@@ -5079,11 +5114,17 @@ function rcParseRoute(route) {
   if (!route) return '—';
   if (/neb/i.test(route)) return 'NEB';
   if (/oral|po/i.test(route)) return 'PO';
-  // Split on / and pick up to 2
+  // All routes, in full — dropping the 3rd route hid real options (IM).
   const parts = route.split(/[\/,]/).map(p => p.trim()).filter(Boolean);
   if (parts.length === 0) return '—';
-  if (parts.length === 1) return parts[0].toUpperCase();
-  return parts.slice(0, 2).join('/').toUpperCase().replace(/\s+/g, '');
+  return parts.join('/').toUpperCase().replace(/\s+/g, '');
+}
+
+// A Vol. cell is a true volume ("17.5 mL", "6 / 3 mL", "2 tabs") or an
+// administration instruction ("Inject lateral thigh · Hold 10 sec",
+// "IV/IO/IM"). Instructions render smaller — bold 20px is for numbers.
+function rcVolIsInstruction(v) {
+  return !/^[\d.\s\/–-]+(mL|g|mg|mcg|tab|spray|neb|puff)s?$/i.test((v || '').trim());
 }
 
 // Whether to render a drug row in red (arrest pathway)
@@ -6501,17 +6542,18 @@ function rcRenderTabMeds(kg, elec) {
     : drugs.map(d => {
         const arrest = rcIsArrestDrug(d);
         const future = crIsFutureUse(d.name);
+        const volTxt = rcParseVol(d.deliveryDose || d.readyVol || d.weightDose);
         const inner = `
             <div class="cr-drug-cell drug">
               <div class="name">${escapeHtml(d.name)}</div>
               <div class="ind">${escapeHtml(d.indication || '')}</div>
             </div>
-            <div class="cr-drug-cell conc">${escapeHtml(rcParseConc(d.packageSpec))}</div>
-            <div class="cr-drug-cell vol">${escapeHtml(rcParseVol(d.deliveryDose || d.readyVol || d.weightDose))}</div>
+            <div class="cr-drug-cell conc">${escapeHtml(rcParseConc(d.packageSpec)).replace(/\//g, '/<wbr>')}</div>
+            <div class="cr-drug-cell vol${rcVolIsInstruction(volTxt) ? ' long' : ''}">${escapeHtml(volTxt).replace(/\//g, '/<wbr>')}</div>
             <div class="cr-drug-cell rt">
               ${future
                 ? '<span class="future-tag">FUTURE USE</span>'
-                : `<span class="route-label">${escapeHtml(rcParseRoute(d.route))}</span><span class="arrow">›</span>`}
+                : `<span class="route-label">${escapeHtml(rcParseRoute(d.route)).replace(/\//g, '/<wbr>')}</span><span class="arrow">›</span>`}
             </div>`;
         return future
           ? `<div class="cr-drug-row future">${inner}</div>`
@@ -6533,7 +6575,7 @@ function rcRenderTabMeds(kg, elec) {
           <div>Drug</div>
           <div>Conc.</div>
           <div>Vol.</div>
-          <div>Rt.</div>
+          <div>Route</div>
         </div>
         ${rows}
       </div>
@@ -6549,9 +6591,9 @@ function rcRenderTabDrip(kg) {
         <div class="name">${escapeHtml(d.name)}</div>
         <div class="ind">${escapeHtml(d.indication)}</div>
       </div>
-      <div class="cr-drug-cell conc">${escapeHtml(d.conc)}</div>
-      <div class="cr-drug-cell vol">${escapeHtml(d.rate)}</div>
-      <div class="cr-drug-cell rt"><span class="route-label">IV/IO</span><span class="arrow">›</span></div>
+      <div class="cr-drug-cell conc">${escapeHtml(d.conc).replace(/\//g, '/<wbr>')}</div>
+      <div class="cr-drug-cell vol${rcVolIsInstruction(d.rate) ? ' long' : ''}">${escapeHtml(d.rate)}</div>
+      <div class="cr-drug-cell rt"><span class="route-label">IV/<wbr>IO</span><span class="arrow">›</span></div>
     </button>
   `).join('');
 
@@ -6566,7 +6608,7 @@ function rcRenderTabDrip(kg) {
           <div>Drug</div>
           <div>Conc.</div>
           <div>Rate</div>
-          <div>Rt.</div>
+          <div>Route</div>
         </div>
         ${rows}
       </div>

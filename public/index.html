@@ -2272,10 +2272,11 @@
     font-size: 18px;
     letter-spacing: 0;
     line-height: 1.25;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    -webkit-hyphens: auto;
+    overflow-wrap: break-word; /* absolute last resort — sizes below avoid it */
   }
+  /* Names with a long single word (Diphenhydramine, Hydroxocobalamin…)
+     step down a size so they render intact — never split, no hyphens. */
+  .cr-drug-cell .name.tight { font-size: 16px; letter-spacing: -0.01em; }
   .cr-drug-cell .ind {
     font-family: 'Inter', sans-serif;
     font-style: normal;
@@ -2357,8 +2358,9 @@
   @media (max-width: 720px) {
     /* Spec sizes hold on phones (lower end of each range); columns
        rebalance and text wraps rather than truncating. */
-    .cr-drug-row { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr) minmax(64px, 0.95fr) minmax(0, 0.75fr); padding: 10px 10px; gap: 6px; }
+    .cr-drug-row { grid-template-columns: minmax(0, 2fr) minmax(0, 0.95fr) minmax(64px, 0.9fr) minmax(0, 0.7fr); padding: 10px 10px; gap: 6px; }
     .cr-drug-cell .name { font-size: 18px; }
+    .cr-drug-cell .name.tight { font-size: 15px; }
     .cr-drug-cell .ind { font-size: 15px; }
     .cr-drug-cell.conc { font-size: 16px; }
     .cr-drug-cell.vol { font-size: 20px; padding: 6px 6px; }
@@ -5120,6 +5122,41 @@ function rcParseRoute(route) {
   return parts.join('/').toUpperCase().replace(/\s+/g, '');
 }
 
+// Long single-word names start a step smaller so they rarely need the
+// measured shrink below.
+function rcNameIsTight(name) {
+  return (name || '').split(/[\s\/(]+/).some((w) => w.length > 12);
+}
+
+// Measure each rendered name's longest word against its actual column
+// width; reduce the font just enough that the word fits unbroken.
+function rcFitDrugNames() {
+  const cells = document.querySelectorAll('.cr-drug-cell .name');
+  if (!cells.length) return;
+  const canvas = rcFitDrugNames._c || (rcFitDrugNames._c = document.createElement('canvas'));
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  cells.forEach((el) => {
+    el.style.fontSize = ''; // re-measure from the stylesheet size
+    const w = el.clientWidth;
+    if (!w) return;
+    const cs = getComputedStyle(el);
+    let size = parseFloat(cs.fontSize);
+    const words = (el.textContent || '').split(/\s+/).filter(Boolean);
+    if (!words.length) return;
+    const widest = () => {
+      ctx.font = `${cs.fontWeight} ${size}px ${cs.fontFamily}`;
+      return Math.max(...words.map((word) => ctx.measureText(word).width));
+    };
+    while (widest() > w && size > 11) size -= 0.5;
+    if (size !== parseFloat(cs.fontSize)) el.style.fontSize = size + 'px';
+  });
+}
+if (typeof document !== 'undefined' && document.fonts && document.fonts.ready && document.fonts.ready.then) {
+  // Re-fit once the webfont arrives — metrics differ from the fallback.
+  document.fonts.ready.then(() => { try { rcFitDrugNames(); } catch (_) {} });
+}
+
 // A Vol. cell is a true volume ("17.5 mL", "6 / 3 mL", "2 tabs") or an
 // administration instruction ("Inject lateral thigh · Hold 10 sec",
 // "IV/IO/IM"). Instructions render smaller — bold 20px is for numbers.
@@ -6545,7 +6582,7 @@ function rcRenderTabMeds(kg, elec) {
         const volTxt = rcParseVol(d.deliveryDose || d.readyVol || d.weightDose);
         const inner = `
             <div class="cr-drug-cell drug">
-              <div class="name">${escapeHtml(d.name)}</div>
+              <div class="name${rcNameIsTight(d.name) ? ' tight' : ''}">${escapeHtml(d.name)}</div>
               <div class="ind">${escapeHtml(d.indication || '')}</div>
             </div>
             <div class="cr-drug-cell conc">${escapeHtml(rcParseConc(d.packageSpec)).replace(/\//g, '/<wbr>')}</div>
@@ -6588,7 +6625,7 @@ function rcRenderTabDrip(kg) {
   const rows = drips.map(d => `
     <button class="cr-drug-row ${d.isArrest ? 'arrest' : ''}" data-drip-name="${escapeAttr(d.name)}">
       <div class="cr-drug-cell drug">
-        <div class="name">${escapeHtml(d.name)}</div>
+        <div class="name${rcNameIsTight(d.name) ? ' tight' : ''}">${escapeHtml(d.name)}</div>
         <div class="ind">${escapeHtml(d.indication)}</div>
       </div>
       <div class="cr-drug-cell conc">${escapeHtml(d.conc).replace(/\//g, '/<wbr>')}</div>
@@ -6834,6 +6871,10 @@ function rcBindDynamicElements() {
   document.querySelectorAll('[data-drug-name]').forEach(btn => {
     btn.addEventListener('click', () => crShowDrugModal(btn.dataset.drugName));
   });
+
+  // Shrink-to-fit drug names: never split a name, never hyphenate —
+  // step the font down until the longest word fits its column.
+  requestAnimationFrame(rcFitDrugNames);
 
   // V2 Meds sub-tabs (Full List / By Protocol)
   document.querySelectorAll('[data-meds-view]').forEach(b => {

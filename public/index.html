@@ -7381,6 +7381,14 @@ function bindRunCodeEvents() {
       render: renderGcsTool,
       bind: bindGcsTool,
     },
+    {
+      id: 'qsofa',
+      name: 'Sepsis Screen (qSOFA)',
+      meta: 'RR · SBP · mentation',
+      icon: '<svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>',
+      render: renderQsofaTool,
+      bind: bindQsofaTool,
+    },
   ];
 
   const $ = (id) => document.getElementById(id);
@@ -7866,6 +7874,93 @@ function bindRunCodeEvents() {
       }));
     }
     paint();
+  }
+
+  // ---- Sepsis screen (qSOFA) tool ----
+  // 1 point each: RR >= 22, SBP <= 100, altered mentation. >= 2 = high risk.
+  function renderQsofaTool() {
+    return `
+      <div class="qref-disclaimer" style="margin-top:0;margin-bottom:16px;">
+        For patients with <b>suspected or confirmed infection</b>. One point
+        per criterion met.
+      </div>
+      <div class="qref-tool-inputs">
+        <div class="qref-field">
+          <label for="qref-qs-rr">Resp Rate</label>
+          <input id="qref-qs-rr" type="number" inputmode="numeric" min="0" max="99" placeholder="—">
+          <div class="qref-unit" id="qref-qs-rr-tag">criterion: ≥ 22 /min</div>
+        </div>
+        <div class="qref-field">
+          <label for="qref-qs-sbp">Systolic BP</label>
+          <input id="qref-qs-sbp" type="number" inputmode="numeric" min="0" max="400" placeholder="—">
+          <div class="qref-unit" id="qref-qs-sbp-tag">criterion: ≤ 100 mmHg</div>
+        </div>
+      </div>
+      <div class="qref-gcs-group" style="margin-top:16px;">
+        <div class="glabel"><span>Mentation</span><span class="picked" id="qref-qs-ams-tag">—</span></div>
+        <div class="qref-gcs-mode" style="margin-bottom:0;">
+          <button id="qref-qs-alert">Alert (GCS 15)</button>
+          <button id="qref-qs-ams">Altered (GCS &lt; 15)</button>
+        </div>
+      </div>
+      <div class="qref-result">
+        <div class="qref-result-label">qSOFA Score</div>
+        <div class="qref-result-value dim" id="qref-qs-out">—</div>
+        <div id="qref-qs-chip"></div>
+      </div>
+      <div class="qref-disclaimer">
+        qSOFA ≥ 2 with suspected infection: high risk for sepsis &mdash; treat
+        and notify per sepsis alert protocol. A score &lt; 2 does not rule
+        sepsis out; reassess. Always confirm against current local protocols
+        and medical control. Training &amp; reference only.
+      </div>`;
+  }
+
+  function bindQsofaTool() {
+    const rrEl = $('qref-qs-rr'), sbpEl = $('qref-qs-sbp');
+    const alertBtn = $('qref-qs-alert'), amsBtn = $('qref-qs-ams');
+    let ams = null; // null = unanswered, false = alert, true = altered
+
+    function recompute() {
+      const rr = parseFloat(rrEl.value);
+      const sbp = parseFloat(sbpEl.value);
+      const rrOk = isFinite(rr) && rr > 0;
+      const sbpOk = isFinite(sbp) && sbp > 0;
+      const rrPt = rrOk && rr >= 22;
+      const sbpPt = sbpOk && sbp <= 100;
+
+      $('qref-qs-rr-tag').innerHTML = rrOk
+        ? (rrPt ? '<b style="color:var(--clin-red);">≥ 22 — +1</b>' : 'below 22 — 0')
+        : 'criterion: ≥ 22 /min';
+      $('qref-qs-sbp-tag').innerHTML = sbpOk
+        ? (sbpPt ? '<b style="color:var(--clin-red);">≤ 100 — +1</b>' : 'above 100 — 0')
+        : 'criterion: ≤ 100 mmHg';
+      $('qref-qs-ams-tag').textContent = ams == null ? '—' : (ams ? '+1' : '0');
+      alertBtn.classList.toggle('active', ams === false);
+      amsBtn.classList.toggle('active', ams === true);
+
+      const out = $('qref-qs-out'), chip = $('qref-qs-chip');
+      if (!rrOk || !sbpOk || ams == null) {
+        out.textContent = '—';
+        out.classList.add('dim');
+        chip.innerHTML = '';
+        return;
+      }
+      const score = (rrPt ? 1 : 0) + (sbpPt ? 1 : 0) + (ams ? 1 : 0);
+      out.classList.remove('dim');
+      out.innerHTML = score + ' <small>/ 3</small>';
+      chip.innerHTML = score >= 2
+        ? '<span class="qref-chip low">≥ 2 · HIGH RISK — sepsis alert per protocol</span>'
+        : score === 1
+          ? '<span class="qref-chip mid">1 · below threshold — reassess</span>'
+          : '<span class="qref-chip ok">0 · below threshold</span>';
+    }
+
+    rrEl.addEventListener('input', recompute);
+    sbpEl.addEventListener('input', recompute);
+    alertBtn.addEventListener('click', () => { ams = ams === false ? null : false; recompute(); });
+    amsBtn.addEventListener('click', () => { ams = ams === true ? null : true; recompute(); });
+    rrEl.focus();
   }
 
   // Park the button on the same row as the "Regional Common Treatment

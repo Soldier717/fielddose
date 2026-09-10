@@ -7389,6 +7389,14 @@ function bindRunCodeEvents() {
       render: renderQsofaTool,
       bind: bindQsofaTool,
     },
+    {
+      id: 'stroke',
+      name: 'Stroke Screen (FAST-VAN)',
+      meta: 'FAST · LVO · hemorrhagic flags',
+      icon: '<svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+      render: renderStrokeTool,
+      bind: bindStrokeTool,
+    },
   ];
 
   const $ = (id) => document.getElementById(id);
@@ -7961,6 +7969,126 @@ function bindRunCodeEvents() {
     alertBtn.addEventListener('click', () => { ams = ams === false ? null : false; recompute(); });
     amsBtn.addEventListener('click', () => { ams = ams === true ? null : true; recompute(); });
     rrEl.focus();
+  }
+
+  // ---- Stroke screen (FAST-VAN + hemorrhagic flags) tool ----
+  const STROKE_ITEMS = {
+    fast: [
+      ['face', 'Facial droop'],
+      ['arm', 'Arm weakness / drift'],
+      ['speech', 'Speech disturbance'],
+    ],
+    van: [
+      ['vision', 'Visual disturbance / field cut'],
+      ['aphasia', 'Aphasia — can’t speak or understand'],
+      ['neglect', 'Neglect / forced gaze deviation'],
+    ],
+    hemo: [
+      ['thunder', 'Sudden "worst headache of life"'],
+      ['vomit', 'Vomiting'],
+      ['seizure', 'Seizure at onset'],
+      ['loc', 'Decreasing LOC / GCS dropping'],
+      ['antico', 'On anticoagulants / blood thinners'],
+      ['pupils', 'Unequal pupils'],
+    ],
+  };
+
+  function renderStrokeTool() {
+    const group = (key, title, sub) => `
+      <div class="qref-gcs-group">
+        <div class="glabel"><span>${title}${sub ? ` <span style="text-transform:none;font-weight:500;">· ${sub}</span>` : ''}</span><span class="picked" id="qref-st-${key}-tag">0</span></div>
+        <div class="qref-gcs-opts">
+          ${STROKE_ITEMS[key].map(([id, label]) => `
+            <button class="qref-gcs-opt" data-stroke="${id}"><span class="sc">＋</span><span>${label}</span></button>`).join('')}
+        </div>
+      </div>`;
+    return `
+      <div class="qref-tool-inputs">
+        <div class="qref-field">
+          <label for="qref-st-lkw">Last Known Well</label>
+          <input id="qref-st-lkw" type="time" style="font-size:22px;">
+          <div class="qref-unit" id="qref-st-lkw-tag">elapsed: —</div>
+        </div>
+        <div class="qref-field">
+          <label for="qref-st-bgl">Blood Glucose</label>
+          <input id="qref-st-bgl" type="number" inputmode="numeric" min="0" max="999" placeholder="—">
+          <div class="qref-unit" id="qref-st-bgl-tag">rule out mimic: &lt; 60</div>
+        </div>
+      </div>
+      <div style="height:16px;"></div>
+      ${group('fast', 'FAST', 'stroke screen')}
+      ${group('van', 'VAN', 'LVO screen · with arm weakness')}
+      ${group('hemo', 'Hemorrhagic Features', 'checklist')}
+      <div class="qref-result">
+        <div class="qref-result-label">Stroke Screen</div>
+        <div class="qref-result-value dim" id="qref-st-out" style="font-size:34px;">—</div>
+        <div id="qref-st-chips" style="display:flex;flex-direction:column;gap:6px;align-items:center;"></div>
+      </div>
+      <div class="qref-disclaimer">
+        VAN is assessed in the presence of arm weakness; VAN-positive suggests
+        large vessel occlusion &mdash; consider comprehensive stroke center per
+        destination protocol. Treat glucose &lt; 60 before declaring stroke.
+        Document exact Last Known Well time. Always confirm against current
+        local protocols and medical control. Training &amp; reference only.
+      </div>`;
+  }
+
+  function bindStrokeTool() {
+    const on = {}; // id -> bool
+    const lkwEl = $('qref-st-lkw'), bglEl = $('qref-st-bgl');
+
+    function recompute() {
+      const cnt = (keys) => keys.reduce((s, [id]) => s + (on[id] ? 1 : 0), 0);
+      const fastN = cnt(STROKE_ITEMS.fast);
+      const vanN = cnt(STROKE_ITEMS.van);
+      const hemoN = cnt(STROKE_ITEMS.hemo);
+      $('qref-st-fast-tag').textContent = fastN + '/3';
+      $('qref-st-van-tag').textContent = vanN + '/3';
+      $('qref-st-hemo-tag').textContent = String(hemoN);
+
+      // Elapsed since last known well (assumes within the last 24 h)
+      let lkwTxt = 'elapsed: —';
+      if (lkwEl.value) {
+        const [h, m] = lkwEl.value.split(':').map(Number);
+        const now = new Date();
+        let t = new Date(now); t.setHours(h, m, 0, 0);
+        if (t > now) t.setDate(t.getDate() - 1);
+        const mins = Math.round((now - t) / 60000);
+        lkwTxt = 'elapsed: ' + Math.floor(mins / 60) + 'h ' + (mins % 60) + 'm';
+      }
+      $('qref-st-lkw-tag').textContent = lkwTxt;
+
+      const bgl = parseFloat(bglEl.value);
+      const bglLow = isFinite(bgl) && bgl > 0 && bgl < 60;
+      $('qref-st-bgl-tag').innerHTML = isFinite(bgl) && bgl > 0
+        ? (bglLow ? '<b style="color:var(--clin-red);">&lt; 60 — treat first</b>' : 'mg/dL')
+        : 'rule out mimic: &lt; 60';
+
+      const fastPos = fastN > 0;
+      const vanPos = on.arm && vanN > 0;
+      const out = $('qref-st-out'), chips = $('qref-st-chips');
+      const chipList = [];
+      if (bglLow) chipList.push('<span class="qref-chip mid">BGL &lt; 60 — treat hypoglycemia · stroke mimic</span>');
+      if (vanPos) chipList.push('<span class="qref-chip low">VAN + — suspect LVO · comprehensive stroke center per protocol</span>');
+      else if (fastPos) chipList.push('<span class="qref-chip low">FAST + — stroke alert per protocol</span>');
+      if (hemoN > 0) chipList.push(`<span class="qref-chip mid">${hemoN} hemorrhagic feature${hemoN === 1 ? '' : 's'} — airway · BP · report anticoagulants</span>`);
+      if (!fastPos && !vanPos && hemoN === 0 && !bglLow) chipList.push('<span class="qref-chip ok">screen negative — reassess · check BGL</span>');
+
+      out.classList.toggle('dim', !fastPos && !vanPos);
+      out.textContent = vanPos ? 'VAN +' : fastPos ? 'FAST +' : '—';
+      chips.innerHTML = chipList.join('');
+    }
+
+    document.querySelectorAll('[data-stroke]').forEach((b) => b.addEventListener('click', () => {
+      const id = b.dataset.stroke;
+      on[id] = !on[id];
+      b.classList.toggle('sel', on[id]);
+      b.querySelector('.sc').textContent = on[id] ? '✓' : '＋';
+      recompute();
+    }));
+    lkwEl.addEventListener('input', recompute);
+    bglEl.addEventListener('input', recompute);
+    recompute();
   }
 
   // Park the button on the same row as the "Regional Common Treatment

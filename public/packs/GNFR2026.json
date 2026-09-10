@@ -1,0 +1,21 @@
+{
+  "agency": { "id": "gnfr", "name": "Greater Naples Fire Rescue", "shortName": "GNFR" },
+  "version": "2026-09-10",
+  "defib": { "adultLadder": [120, 150, 200] },
+  "drugOverrides": [],
+  "contacts": [
+    { "group": "EMS Leadership · Medical Direction", "name": "EMS Chief Dennis Disarro", "sub": "Lead contact · cell", "num": "239-961-2882" },
+    { "group": "EMS Leadership · Medical Direction", "name": "Scott Dunavant, MD", "sub": "Associate Medical Director · cell", "num": "859-806-7593" },
+    { "group": "Hospital ED Red Phones", "name": "Gulf Coast Medical Center", "sub": "D5", "num": "239-343-0434" },
+    { "group": "Hospital ED Red Phones", "name": "HealthPark Medical Center", "sub": "D7", "num": "239-343-5334" },
+    { "group": "Hospital ED Red Phones", "name": "Golisano Children's Hospital", "sub": "D2", "num": "239-343-6260" },
+    { "group": "Hospital ED Red Phones", "name": "NCH North", "sub": "D14", "num": "239-624-9199" },
+    { "group": "Hospital ED Red Phones", "name": "NCH Bonita", "sub": "D32", "num": "239-624-6924" },
+    { "group": "Hospital ED Red Phones", "name": "NCH Northeast", "sub": "D34", "num": "239-624-8728" },
+    { "group": "Hospital ED Red Phones", "name": "Physicians Regional Medical Center", "sub": "D13", "num": "239-304-4737" },
+    { "group": "Hospital ED Red Phones", "name": "Physicians Regional Medical Center", "sub": "D15", "num": "239-354-6191" },
+    { "group": "Specialty / Emergency", "name": "Poison Control Center", "sub": "24/7", "num": "800-222-1222" },
+    { "group": "Specialty / Emergency", "name": "CHEMTREC", "sub": "Hazmat emergency", "num": "800-424-9300" },
+    { "group": "Specialty / Emergency", "name": "Diver's Alert Network (DAN)", "sub": "Dive emergency", "num": "919-684-9111" }
+  ]
+}

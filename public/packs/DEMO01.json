@@ -1,0 +1,10 @@
+{
+  "agency": { "id": "demo", "name": "Demo Fire Rescue (sample)", "shortName": "DEMO" },
+  "version": "2026-09-10",
+  "defib": { "adultLadder": [200, 300, 360] },
+  "drugOverrides": [],
+  "contacts": [
+    { "group": "Medical Direction", "name": "Demo Medical Control", "sub": "sample entry", "num": "555-0100" },
+    { "group": "Specialty / Emergency", "name": "Poison Control Center", "sub": "24/7", "num": "800-222-1222" }
+  ]
+}

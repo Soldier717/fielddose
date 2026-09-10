@@ -6,7 +6,7 @@
  *  - Blob uploads:         cache-first (reference cards viewable offline once loaded).
  *  - Fonts + static files: cache-first.
  */
-const CACHE = 'fielddose-v4';
+const CACHE = 'fielddose-v5';
 
 const PRECACHE = [
   '/',
@@ -93,6 +93,13 @@ self.addEventListener('fetch', (e) => {
   if (req.mode === 'navigate') {
     const isRoot = url.pathname === '/' || url.pathname === '/index.html';
     e.respondWith(networkFirst(req, isRoot ? '/' : req));
+    return;
+  }
+
+  // Agency packs must always prefer the network (protocol updates),
+  // falling back to the cached copy offline.
+  if (url.origin === self.location.origin && url.pathname.startsWith('/packs/')) {
+    e.respondWith(networkFirst(req));
     return;
   }
 

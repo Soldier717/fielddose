@@ -1409,6 +1409,18 @@
     margin-bottom: 12px;
     letter-spacing: 0.04em;
   }
+  .fd-agency-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: var(--clin-surface, var(--bg-elev));
+    border: 1px solid var(--clin-border, var(--border-bright));
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .fd-agency-name { font-size: 13px; color: var(--clin-text-dim, var(--text-dim)); }
+  .fd-agency-name b { color: var(--clin-text, var(--text)); }
+
   .cr-charts-empty {
     font-size: 12px;
     color: var(--text-dim);
@@ -4069,12 +4081,14 @@ function ccGetElectrical() {
   const kg = ccGetWeightKg();
   const band = ccState.ageBand;
   if (band === 'adult') {
-    // GNFR escalating protocol: 120 → 150 → 200 J
-    const shockSeq = [120, 150, 200];
+    // Adult escalating ladder — agency pack override or SWFL default
+    const shockSeq = fdAdultShockSeq();
     const nextShockJ = shockSeq[Math.min(ctState.shockCount, shockSeq.length - 1)];
     const shockLabel = ctState.shockCount === 0 ? '1st shock' : ctState.shockCount === 1 ? '2nd shock' : ctState.shockCount === 2 ? '3rd shock' : `${ctState.shockCount + 1}th shock`;
+    const ord = (i) => i === 1 ? '1st' : i === 2 ? '2nd' : i === 3 ? '3rd' : i + 'th';
+    const seqTxt = shockSeq.map((j, i) => `${j} J (${ord(i + 1)}${i === shockSeq.length - 1 ? '+' : ''})`).join(' → ');
     return {
-      defib: { primary: `${nextShockJ} J`, secondary: `${shockLabel} · biphasic`, detail: 'Pad placement: Anterior/Posterior. GNFR escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF.' },
+      defib: { primary: `${nextShockJ} J`, secondary: `${shockLabel} · biphasic`, detail: `Pad placement: Anterior/Posterior. Escalating: ${seqTxt}. Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF.` },
       cardiovert: { primary: '70 J → 120 J → 150 J', secondary: 'escalating · sync', detail: 'Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses.' },
       pace: { primary: '80 BPM', secondary: 'increase mA until capture', detail: 'Start 80 BPM. Increase mA by 10 until electrical + mechanical capture. Typical 50–100 mA.' }
     };
@@ -4098,7 +4112,96 @@ function ccGetElectrical() {
   }
 }
 
+/* ============================================================
+   AGENCY PACKS — per-agency protocol overlays over the SWFL
+   regional baseline. A pack is a static JSON at /packs/<CODE>.json;
+   the join code enrolls the device once, the pack caches on-device
+   (offline-first), and a background refresh picks up updates.
+   No pack = regional defaults, exactly as before.
+============================================================ */
+const FD_PACK_KEY = 'fielddose-agency-pack-v1';
+
+function fdPackGet() {
+  try {
+    const p = JSON.parse(localStorage.getItem(FD_PACK_KEY));
+    return p && p.pack && p.pack.agency && p.pack.agency.name ? p : null;
+  } catch (_) { return null; }
+}
+function fdPack() { const p = fdPackGet(); return p ? p.pack : null; }
+function fdPackStore(code, pack) {
+  try { localStorage.setItem(FD_PACK_KEY, JSON.stringify({ code, pack, fetchedAt: Date.now() })); } catch (_) {}
+}
+
+async function fdPackFetch(code) {
+  const clean = String(code || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+  if (!clean) throw new Error('empty code');
+  const res = await fetch('/packs/' + clean + '.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error('not found');
+  const pack = await res.json();
+  if (!pack || !pack.agency || !pack.agency.name) throw new Error('invalid pack');
+  return { code: clean, pack };
+}
+
+async function fdEnrollAgency() {
+  const code = prompt('Enter your agency code:');
+  if (!code) return;
+  try {
+    const got = await fdPackFetch(code);
+    fdPackStore(got.code, got.pack);
+    showToast('Enrolled: ' + got.pack.agency.name);
+    render();
+  } catch (_) {
+    showToast('Code not recognized — check with your training officer', true);
+  }
+}
+
+function fdUnenrollAgency() {
+  const p = fdPack();
+  if (!p) return;
+  if (!confirm('Leave ' + p.agency.name + ' and return to regional defaults?')) return;
+  try { localStorage.removeItem(FD_PACK_KEY); } catch (_) {}
+  render();
+}
+
+// When online, quietly pick up pack updates published since last open.
+async function fdPackRefresh() {
+  const cur = fdPackGet();
+  if (!cur) return;
+  try {
+    const got = await fdPackFetch(cur.code);
+    if (JSON.stringify(got.pack) !== JSON.stringify(cur.pack)) {
+      fdPackStore(cur.code, got.pack);
+      showToast(got.pack.agency.name + ' protocols updated');
+      render();
+    }
+  } catch (_) { /* offline or unreachable — cached pack stands */ }
+}
+setTimeout(() => { try { fdPackRefresh(); } catch (_) {} }, 3500);
+
+// Adult defib energy ladder — pack override or the SWFL default.
+function fdAdultShockSeq() {
+  const p = fdPack();
+  const l = p && p.defib && Array.isArray(p.defib.adultLadder)
+    ? p.defib.adultLadder.filter((n) => typeof n === 'number' && n > 0) : null;
+  return l && l.length ? l : [120, 150, 200];
+}
+
+// Shallow per-drug field overrides, matched by row name.
+function fdApplyDrugOverrides(drugs) {
+  const p = fdPack();
+  const ov = p && Array.isArray(p.drugOverrides) ? p.drugOverrides : null;
+  if (!ov || !ov.length) return drugs;
+  return drugs.map((d) => {
+    const o = ov.find((x) => x && x.name === d.name && x.set);
+    return o ? Object.assign({}, d, o.set) : d;
+  });
+}
+
 function ccGetDrugs() {
+  return fdApplyDrugOverrides(ccGetDrugsBase());
+}
+
+function ccGetDrugsBase() {
   const kg = ccGetWeightKg();
   const band = ccState.ageBand;
   if (band === 'adult') {
@@ -5029,7 +5132,10 @@ function fdContactsLoad() {
     const list = JSON.parse(localStorage.getItem(FD_CONTACTS_KEY));
     if (Array.isArray(list) && list.length) return list;
   } catch (_) {}
-  // Unedited devices follow the seed, so future seed updates reach them.
+  // Unedited devices follow the agency pack's contact list when enrolled,
+  // else the built-in seed — so published updates reach them.
+  const p = fdPack();
+  if (p && Array.isArray(p.contacts) && p.contacts.length) return p.contacts.map((c) => ({ ...c }));
   return FD_CONTACTS_SEED.map((c) => ({ ...c }));
 }
 function fdContactsSave(list) {
@@ -5575,13 +5681,11 @@ function renderDefibModal(m) {
   const band = ccState.ageBand;
   let ladder;
   if (band === 'adult') {
-    // GNFR escalating: 120 → 150 → 200 → 200 (cap)
-    ladder = [
-      { label: '1st', joules: '120 J' },
-      { label: '2nd', joules: '150 J' },
-      { label: '3rd', joules: '200 J' },
-      { label: '4th+', joules: '200 J' },
-    ];
+    // Escalating ladder from the agency pack (or SWFL default), capped at last
+    const seq = fdAdultShockSeq();
+    const ord = (i) => i === 1 ? '1st' : i === 2 ? '2nd' : i === 3 ? '3rd' : i + 'th';
+    ladder = seq.map((j, i) => ({ label: ord(i + 1), joules: `${j} J` }));
+    ladder.push({ label: ord(seq.length + 1) + '+', joules: `${seq[seq.length - 1]} J` });
   } else {
     // Pediatric / neonatal: 2 J/kg → 4 J/kg → 4 J/kg → 4–10 J/kg
     const j1 = (2 * kg).toFixed(0);
@@ -5860,7 +5964,7 @@ function renderRunCodeHeader() {
   return `
     <div class="header fd-header">
       <img src="/fielddose-logo.png" alt="FieldDose — Calculate. Confirm. Save Lives." class="fd-logo">
-      <div class="page-meta fd-sub">Regional Common Treatment Guidelines</div>
+      <div class="page-meta fd-sub">${(() => { const p = fdPack(); return p ? escapeHtml(p.agency.shortName || p.agency.name) + ' · ' : ''; })()}Regional Common Treatment Guidelines</div>
       <button class="fd-call-fab" id="fd-call-btn" title="Contacts · Medical Direction" aria-label="Contacts and medical direction phone numbers">
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </button>
@@ -5916,6 +6020,19 @@ function renderCREntry() {
         </button>
       </div>
       ${renderCREntryCharts()}
+      ${(() => {
+        const p = fdPack();
+        return `
+      <div class="fd-agency-row">
+        <div class="fd-agency-name">
+          ${p ? `<b>${escapeHtml(p.agency.name)}</b> · agency protocols active` : 'Regional defaults · no agency enrolled'}
+        </div>
+        <div style="display:flex;gap:6px;">
+          <button class="fd-mini-btn" id="fd-agency-btn">${p ? 'Change' : 'Enter agency code'}</button>
+          ${p ? '<button class="fd-mini-btn" id="fd-agency-leave">Leave</button>' : ''}
+        </div>
+      </div>`;
+      })()}
       <div class="cc-disclaimer" style="margin-top: 8px;">
         <strong>⚠ Training & Reference Tool</strong>
         Pick patient type. Weight is locked once selected — start a New Patient if anything changes. Always confirm against current GNFR protocols and medical control. Always cross-check drug, dose, and delivery method with your partner.
@@ -7178,6 +7295,12 @@ function bindRunCodeEvents() {
   if (adultCustomInput) adultCustomInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') crSetAdultCustom(parseFloat(e.target.value));
   });
+
+  // ENTRY FLOW — agency enrollment
+  const agencyBtn = document.getElementById('fd-agency-btn');
+  if (agencyBtn) agencyBtn.addEventListener('click', fdEnrollAgency);
+  const agencyLeave = document.getElementById('fd-agency-leave');
+  if (agencyLeave) agencyLeave.addEventListener('click', fdUnenrollAgency);
 
   // ENTRY FLOW — saved patient charts (reopen / delete)
   document.querySelectorAll('[data-chart-open]').forEach(row => {

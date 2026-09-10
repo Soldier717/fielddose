@@ -4518,26 +4518,29 @@ function ccGetDrugs() {
         deliveryDose: `${ccFmt(1*kg/50, 2)} mL slow IV/IO/IM/IN q10 min PRN`,
         readyVol: `${ccFmt(1*kg/50, 2)} mL of 50 mcg/mL`,
         detail: '1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+      // Ketamine peds: contraindicated ≤ 3 months. Broselow 3/4/5 kg zones
+      // are the "< 3 months" zones, so under 6 kg the rows show the
+      // contraindication instead of computing a dose.
       { rhythm: 'non-arrest', name: 'Ketamine — Pain', class: 'Dissociative analgesic', indication: 'Sub-dissociative pain',
-        weightDose: `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`,
+        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`,
         packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
-        deliveryDose: `Draw ${ccFmt(0.2*kg/100, 2)} mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL IV/IO`,
+        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `Draw ${ccFmt(0.2*kg/100, 2)} mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL IV/IO`,
         readyVol: '—',
-        routeDoses: rcRouteDoses([
+        routeDoses: kg < 6 ? undefined : rcRouteDoses([
           ['IV/IO', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `Draw ${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL (50 mg/mL)`],
           ['IM/IN', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
-        weightDose: `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
+        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
         packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
-        deliveryDose: `Draw ${ccFmt(1*kg/100, 2)} mL + ${ccFmt(1*kg/100, 2)} mL NS → push ${ccFmt(1*kg/50, 2)} mL IV/IO`,
+        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `Draw ${ccFmt(1*kg/100, 2)} mL + ${ccFmt(1*kg/100, 2)} mL NS → push ${ccFmt(1*kg/50, 2)} mL IV/IO`,
         readyVol: '—',
-        routeDoses: rcRouteDoses([
+        routeDoses: kg < 6 ? undefined : rcRouteDoses([
           ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `Draw ${ccFmt(1*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(1*kg/100, 2)} mL NS → push ${ccFmt(1*kg/50, 2)} mL (50 mg/mL)`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Morphine', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`,
         packageSpec: '4 mg/mL',

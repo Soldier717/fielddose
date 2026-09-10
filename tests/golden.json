@@ -694,29 +694,11 @@
      "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
      "indication": "Sub-dissociative pain",
-     "weightDose": "1.0 mg (0.2 mg/kg)",
+     "weightDose": "CONTRAINDICATED ≤ 3 mo",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.01 mL + 0.01 mL NS → push 0.02 mL IV/IO",
+     "deliveryDose": "Contraindicated ≤ 3 months of age",
      "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "1.0 mg (0.2 mg/kg)",
-       "vol": "Draw 0.01 mL of 100 mg/mL + 0.01 mL NS → push 0.02 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "1.0 mg (0.2 mg/kg)",
-       "vol": "Draw 0.01 mL of 100 mg/mL + 0.01 mL NS → push 0.02 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "1.0 mg (0.2 mg/kg)",
-       "vol": "0.01 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "1.0 mg (0.2 mg/kg)",
-       "vol": "0.01 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -725,29 +707,11 @@
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "5 mg IV/IO · 10 mg IM/IN",
+     "weightDose": "CONTRAINDICATED ≤ 3 mo",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.05 mL + 0.05 mL NS → push 0.10 mL IV/IO",
+     "deliveryDose": "Contraindicated ≤ 3 months of age",
      "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "5 mg (1 mg/kg)",
-       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.10 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "5 mg (1 mg/kg)",
-       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.10 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "10 mg (2 mg/kg)",
-       "vol": "0.10 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "10 mg (2 mg/kg)",
-       "vol": "0.10 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -1374,7 +1338,7 @@
        "vol": "0.01 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -1405,7 +1369,7 @@
        "vol": "0.13 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2032,7 +1996,7 @@
        "vol": "0.02 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2063,7 +2027,7 @@
        "vol": "0.17 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2690,7 +2654,7 @@
        "vol": "0.02 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2721,7 +2685,7 @@
        "vol": "0.21 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -3348,7 +3312,7 @@
        "vol": "0.03 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -3379,7 +3343,7 @@
        "vol": "0.26 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4006,7 +3970,7 @@
        "vol": "0.03 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4037,7 +4001,7 @@
        "vol": "0.33 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4664,7 +4628,7 @@
        "vol": "0.04 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4695,7 +4659,7 @@
        "vol": "0.42 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5322,7 +5286,7 @@
        "vol": "0.05 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5353,7 +5317,7 @@
        "vol": "0.53 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5980,7 +5944,7 @@
        "vol": "0.07 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -6011,7 +5975,7 @@
        "vol": "0.66 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -7587,7 +7551,7 @@
        "vol": "0.02 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -7618,7 +7582,7 @@
        "vol": "0.20 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8245,7 +8209,7 @@
        "vol": "0.05 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8276,7 +8240,7 @@
        "vol": "0.50 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },

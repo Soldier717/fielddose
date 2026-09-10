@@ -4219,29 +4219,59 @@ function ccGetDrugs() {
         deliveryDose: 'Infuse 250 mL bag IV/IO · titrate to BGL > 80',
         readyVol: '250 mL of D10 (25 g)',
         detail: 'Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.', route: 'IV / IO', max: 'Per protocol' },
-      { rhythm: 'non-arrest', name: 'Midazolam (Versed)', class: 'Benzodiazepine', indication: 'Seizure · sedation · severe anxiety',
+      { rhythm: 'non-arrest', name: 'Midazolam — Seizure', class: 'Benzodiazepine', indication: 'Seizure · sedation · sympathomimetic tox',
         weightDose: '5 mg IV/IO · 10 mg IM/IN',
         packageSpec: '5 mg/mL',
-        deliveryDose: 'Seizure 5 mg IV/IO or 10 mg IM/IN · Anxiety 2 mg',
+        deliveryDose: '1 mL IV/IO of 5 mg/mL',
         readyVol: '—',
-        detail: 'Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min. Severe anxiety: 2 mg. Sympathomimetic tox: 5 mg IV or 10 mg IM/IN q5 min.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        routeDoses: rcRouteDoses([
+          ['IV/IO', '5 mg', '1 mL of 5 mg/mL'],
+          ['IM/IN', '10 mg', '2 mL of 5 mg/mL'],
+        ]),
+        detail: 'Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Midazolam — Anxiety', class: 'Benzodiazepine', indication: 'Severe anxiety',
+        weightDose: '2 mg',
+        packageSpec: '5 mg/mL',
+        deliveryDose: '0.4 mL of 5 mg/mL',
+        readyVol: '0.4 mL of 5 mg/mL',
+        detail: 'Severe anxiety 2 mg.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Fentanyl (Sublimaze)', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(1*kg, 0)} mcg (1 mcg/kg)`,
         packageSpec: '50 mcg/mL',
-        deliveryDose: 'Slow IV/IO/IM/IN q10 min PRN',
-        readyVol: `${ccFmt(1*kg, 0)} mcg`,
+        deliveryDose: `${ccFmt(1*kg/50, 1)} mL slow IV/IO/IM/IN q10 min PRN`,
+        readyVol: `${ccFmt(1*kg/50, 1)} mL of 50 mcg/mL`,
         detail: '1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
-      { rhythm: 'non-arrest', name: 'Ketamine (Ketalar)', class: 'Dissociative analgesic', indication: 'Pain · sedation · hyperactive delirium',
-        weightDose: `${ccFmt(0.2*kg, 0)} mg (pain) · ${ccFmt(Math.min(4*kg, 500), 0)} mg IM (delirium)`,
-        packageSpec: '100 mg/mL (dilute 1:1) / 50 mg/mL',
-        deliveryDose: 'IV/IO/IM/IN',
+      { rhythm: 'non-arrest', name: 'Ketamine — Pain', class: 'Dissociative analgesic', indication: 'Sub-dissociative pain',
+        weightDose: `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`,
+        packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
+        deliveryDose: `${ccFmt(0.2*kg/50, 2)} mL IV/IO of 50 mg/mL (diluted 1:1)`,
         readyVol: '—',
-        detail: 'Sub-dissociative pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN; hyperactive delirium 4 mg/kg IM (max 500 mg).', route: 'IV / IO / IM / IN', max: '500 mg (delirium)' },
+        routeDoses: rcRouteDoses([
+          ['IV/IO', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/50, 2)} mL of 50 mg/mL (diluted 1:1)`],
+          ['IM/IN', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
+        ]),
+        detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
+        weightDose: `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
+        packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
+        deliveryDose: `${ccFmt(1*kg/50, 1)} mL IV/IO of 50 mg/mL (diluted 1:1)`,
+        readyVol: '—',
+        routeDoses: rcRouteDoses([
+          ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `${ccFmt(1*kg/50, 1)} mL of 50 mg/mL (diluted 1:1)`],
+          ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 1)} mL of 100 mg/mL (undiluted)`],
+        ]),
+        detail: 'Procedural sedation: 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Ketamine — Delirium', class: 'Dissociative analgesic', indication: 'Hyperactive delirium',
+        weightDose: `${ccFmt(Math.min(4*kg, 500), 0)} mg (4 mg/kg, max 500)`,
+        packageSpec: '100 mg/mL',
+        deliveryDose: `${ccFmt(Math.min(4*kg, 500)/100, 1)} mL IM of 100 mg/mL`,
+        readyVol: '—',
+        detail: 'Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.', route: 'IM', max: '500 mg' },
       { rhythm: 'non-arrest', name: 'Morphine', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`,
         packageSpec: '4 mg/mL',
-        deliveryDose: 'Slow IV/IO/IM/IN q20 min PRN',
-        readyVol: '—',
+        deliveryDose: `${ccFmt(0.2*kg/4, 1)} mL slow IV/IO/IM/IN q20 min PRN`,
+        readyVol: `${ccFmt(0.2*kg/4, 1)} mL of 4 mg/mL`,
         detail: '0.2 mg/kg IV/IO/IM/IN q20 min PRN.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Hydromorphone (Dilaudid)', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: '1 mg',
@@ -4273,12 +4303,18 @@ function ccGetDrugs() {
         deliveryDose: 'IV/IO',
         readyVol: '1 mL',
         detail: '5 mg IV/IO; repeat q5 min PRN.', route: 'IV / IO', max: 'Per protocol' },
-      { rhythm: 'non-arrest', name: 'Droperidol', class: 'Antiemetic / antipsychotic', indication: 'Nausea · hyperactive delirium',
-        weightDose: 'Nausea 1.25 mg · Delirium 5 mg',
+      { rhythm: 'non-arrest', name: 'Droperidol — Nausea', class: 'Antiemetic / antipsychotic', indication: 'Nausea / vomiting',
+        weightDose: '1.25 mg',
         packageSpec: '2.5 mg/mL',
-        deliveryDose: 'IV/IO/IM',
-        readyVol: '—',
-        detail: 'Nausea/vomiting 1.25 mg; hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.', route: 'IV / IO / IM', max: 'Per protocol' },
+        deliveryDose: 'Push 0.5 mL IV/IO/IM',
+        readyVol: '0.5 mL of 2.5 mg/mL',
+        detail: 'Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.', route: 'IV / IO / IM', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Droperidol — Delirium', class: 'Antiemetic / antipsychotic', indication: 'Hyperactive delirium',
+        weightDose: '5 mg',
+        packageSpec: '2.5 mg/mL',
+        deliveryDose: 'Push 2 mL IV/IO/IM',
+        readyVol: '2 mL of 2.5 mg/mL',
+        detail: 'Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.', route: 'IV / IO / IM', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Promethazine (Phenergan)', class: 'Antiemetic / antihistamine', indication: 'Nausea / vomiting',
         weightDose: '25 mg',
         packageSpec: '25 mg/mL',
@@ -4465,32 +4501,50 @@ function ccGetDrugs() {
       { rhythm: 'non-arrest', name: 'Midazolam (Versed)', class: 'Benzodiazepine', indication: 'Seizure · sedation',
         weightDose: `${ccFmt(Math.min(0.2*kg, 5), 1)} mg IV (max 5) · ${ccFmt(Math.min(0.2*kg, 10), 1)} mg IM/IN (max 10)`,
         packageSpec: '5 mg/mL',
-        deliveryDose: 'IV/IO/IM/IN q5 min',
+        deliveryDose: `${ccFmt(Math.min(0.2*kg, 5)/5, 2)} mL IV/IO of 5 mg/mL`,
         readyVol: '—',
-        detail: '0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.', route: 'IV / IO / IM / IN', max: '5 mg IV / 10 mg IM-IN' },
+        routeDoses: rcRouteDoses([
+          ['IV/IO', `${ccFmt(Math.min(0.2*kg, 5), 1)} mg (0.2 mg/kg, max 5)`, `${ccFmt(Math.min(0.2*kg, 5)/5, 2)} mL of 5 mg/mL`],
+          ['IM/IN', `${ccFmt(Math.min(0.2*kg, 10), 1)} mg (0.2 mg/kg, max 10)`, `${ccFmt(Math.min(0.2*kg, 10)/5, 2)} mL of 5 mg/mL`],
+        ]),
+        detail: '0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.', route: 'IV / IO / IM / IN', max: '5 mg IV / 10 mg IM-IN' },
       { rhythm: 'non-arrest', name: 'Fentanyl (Sublimaze)', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(1*kg, 0)} mcg (1 mcg/kg)`,
         packageSpec: '50 mcg/mL',
-        deliveryDose: 'Slow IV/IO/IM/IN q10 min PRN',
-        readyVol: `${ccFmt(1*kg, 0)} mcg`,
+        deliveryDose: `${ccFmt(1*kg/50, 2)} mL slow IV/IO/IM/IN q10 min PRN`,
+        readyVol: `${ccFmt(1*kg/50, 2)} mL of 50 mcg/mL`,
         detail: '1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
-      { rhythm: 'non-arrest', name: 'Ketamine (Ketalar)', class: 'Dissociative analgesic', indication: 'Pain · sedation',
-        weightDose: `${ccFmt(0.2*kg, 0)} mg (pain) · ${ccFmt(1*kg, 0)} mg (sedation)`,
-        packageSpec: '100 mg/mL (dilute 1:1) / 50 mg/mL',
-        deliveryDose: 'IV/IO/IM/IN',
+      { rhythm: 'non-arrest', name: 'Ketamine — Pain', class: 'Dissociative analgesic', indication: 'Sub-dissociative pain',
+        weightDose: `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`,
+        packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
+        deliveryDose: `${ccFmt(0.2*kg/50, 2)} mL IV/IO of 50 mg/mL (diluted 1:1)`,
         readyVol: '—',
-        detail: 'Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        routeDoses: rcRouteDoses([
+          ['IV/IO', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/50, 2)} mL of 50 mg/mL (diluted 1:1)`],
+          ['IM/IN', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
+        ]),
+        detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
+        weightDose: `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
+        packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
+        deliveryDose: `${ccFmt(1*kg/50, 2)} mL IV/IO of 50 mg/mL (diluted 1:1)`,
+        readyVol: '—',
+        routeDoses: rcRouteDoses([
+          ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `${ccFmt(1*kg/50, 2)} mL of 50 mg/mL (diluted 1:1)`],
+          ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
+        ]),
+        detail: 'Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Morphine', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`,
         packageSpec: '4 mg/mL',
-        deliveryDose: 'Slow IV/IO/IM/IN q20 min PRN',
-        readyVol: '—',
+        deliveryDose: `${ccFmt(0.1*kg/4, 2)} mL slow IV/IO/IM/IN q20 min PRN`,
+        readyVol: `${ccFmt(0.1*kg/4, 2)} mL of 4 mg/mL`,
         detail: '0.1 mg/kg IV/IO/IM/IN q20 min PRN.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Hydromorphone (Dilaudid)', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(0.005*kg, 2)} mg (5 mcg/kg)`,
         packageSpec: '1 mg/mL',
-        deliveryDose: 'IV/IO/IM/IN q20 min PRN',
-        readyVol: '—',
+        deliveryDose: `${ccFmt(0.005*kg/1, 2)} mL IV/IO/IM/IN q20 min PRN`,
+        readyVol: `${ccFmt(0.005*kg, 2)} mL of 1 mg/mL`,
         detail: '5 mcg/kg IV/IO/IM/IN q20 min PRN.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketorolac (Toradol)', class: 'NSAID', indication: 'Pain management',
         weightDose: `${ccFmt(Math.min(0.5*kg, 15), 1)} mg (0.5 mg/kg, max 15)`,
@@ -4741,7 +4795,7 @@ function chartFmtWhen(ts) {
    the device only, and are garbage-collected when their chart
    falls off (7-day / 10-chart policy applies to photos too).
 ============================================================ */
-const FD_CS_RE = /fentanyl|morphine|midazolam|versed|ketamine|ketalar|diazepam|valium|lorazepam|ativan/i;
+const FD_CS_RE = /fentanyl|morphine|hydromorphone|dilaudid|midazolam|versed|ketamine|ketalar|diazepam|valium|lorazepam|ativan/i;
 
 function fdIsCSEntry(e) {
   return (e.type === 'Drug' || e.type === 'Waste') && FD_CS_RE.test(e.note || '');
@@ -5169,6 +5223,16 @@ if (typeof document !== 'undefined' && document.fonts && document.fonts.ready &&
   document.fonts.ready.then(() => { try { rcFitDrugNames(); } catch (_) {} });
 }
 
+// Route-dependent dosing: builds a per-route lookup from
+// [routes, doseLabel, volLabel] rows — the drug card's route toggle
+// swaps dose AND volume together (e.g. Ketamine sedation 1 mg/kg
+// IV/IO vs 2 mg/kg IM/IN).
+function rcRouteDoses(defs) {
+  const m = {};
+  defs.forEach(([routes, dose, vol]) => routes.split('/').forEach((r) => { m[r.trim()] = { dose, vol }; }));
+  return m;
+}
+
 // A Vol. cell is a true volume ("17.5 mL", "6 / 3 mL", "2 tabs") or an
 // administration instruction ("Inject lateral thigh · Hold 10 sec").
 // Instructions render as plain body text — chip + bold is for numbers.
@@ -5408,7 +5472,7 @@ function renderDrugModal(m) {
       <div class="cr-modal-body">
         <div class="cr-modal-row">
           <div class="cr-modal-label">Dose:</div>
-          <div class="cr-modal-value">${escapeHtml(d.weightDose || '—')}</div>
+          <div class="cr-modal-value">${escapeHtml((d.routeDoses && d.routeDoses[cr.drugRoute] && d.routeDoses[cr.drugRoute].dose) || d.weightDose || '—')}</div>
         </div>
         <div class="cr-modal-row">
           <div class="cr-modal-label">Route:</div>
@@ -5423,7 +5487,7 @@ function renderDrugModal(m) {
         </div>
         <div class="cr-modal-row">
           <div class="cr-modal-label">Delivery:</div>
-          <div class="cr-modal-value white">${escapeHtml(d.deliveryDose || d.readyVol || '—')}</div>
+          <div class="cr-modal-value white">${escapeHtml((d.routeDoses && d.routeDoses[cr.drugRoute] && d.routeDoses[cr.drugRoute].vol) || d.deliveryDose || d.readyVol || '—')}</div>
         </div>
         ${d.max && d.max !== 'Per protocol' ? `
         <div class="cr-modal-row">
@@ -5562,11 +5626,15 @@ function handleDrugModalAction(action) {
   const d = cr.modal && cr.modal.drug;
   if (!d) { crCloseModal(); return; }
   const route = cr.drugRoute || 'IV';
+  // Route-dependent drugs log the dose/volume for the ROUTE CHOSEN
+  const rd = d.routeDoses ? d.routeDoses[route] : null;
+  const doseTxt = (rd && rd.dose) || d.weightDose || '';
+  const volTxt = (rd && rd.vol) || d.deliveryDose || d.readyVol || '';
   if (action === 'requested') {
-    ctLogEvent('Request', `${d.name} ${d.weightDose || ''} ${route} — requested`);
+    ctLogEvent('Request', `${d.name} ${doseTxt} ${route} — requested`);
     ctShowCueBanner(`${d.name} requested`, 'normal', 1500);
   } else if (action === 'given') {
-    ctLogEvent('Drug', `${d.name} ${d.weightDose || ''} ${route} (${d.deliveryDose || d.readyVol || ''})`);
+    ctLogEvent('Drug', `${d.name} ${doseTxt} ${route} (${volTxt})`);
     ctShowCueBanner(`${d.name} given`, d.primary ? 'epi' : 'normal', 1800);
     // Cumulative Epi tracking (arrest Epi only)
     const isArrestEpi = (d.name === 'Epinephrine' || d.name === 'Epinephrine 1:10,000') && d.rhythm === 'all';

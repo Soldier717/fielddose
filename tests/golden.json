@@ -652,9 +652,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "1.0 mg IV (max 5) · 1.0 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "0.20 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "1.0 mg (0.2 mg/kg, max 5)",
+       "vol": "0.20 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "1.0 mg (0.2 mg/kg, max 5)",
+       "vol": "0.20 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "1.0 mg (0.2 mg/kg, max 10)",
+       "vol": "0.20 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "1.0 mg (0.2 mg/kg, max 10)",
+       "vol": "0.20 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -665,22 +683,71 @@
      "indication": "Pain management",
      "weightDose": "5 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "5 mcg",
+     "deliveryDose": "0.10 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.10 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "1 mg (pain) · 5 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "1.0 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.02 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "1.0 mg (0.2 mg/kg)",
+       "vol": "0.02 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "1.0 mg (0.2 mg/kg)",
+       "vol": "0.02 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "1.0 mg (0.2 mg/kg)",
+       "vol": "0.01 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "1.0 mg (0.2 mg/kg)",
+       "vol": "0.01 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "5 mg IV/IO · 10 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.10 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "5 mg (1 mg/kg)",
+       "vol": "0.10 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "5 mg (1 mg/kg)",
+       "vol": "0.10 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "10 mg (2 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "10 mg (2 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -691,8 +758,8 @@
      "indication": "Pain management",
      "weightDose": "0.5 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.13 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.13 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -704,8 +771,8 @@
      "indication": "Pain management",
      "weightDose": "0.03 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.03 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.03 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -1229,9 +1296,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "1.3 mg IV (max 5) · 1.3 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "0.26 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "1.3 mg (0.2 mg/kg, max 5)",
+       "vol": "0.26 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "1.3 mg (0.2 mg/kg, max 5)",
+       "vol": "0.26 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "1.3 mg (0.2 mg/kg, max 10)",
+       "vol": "0.26 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "1.3 mg (0.2 mg/kg, max 10)",
+       "vol": "0.26 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -1242,22 +1327,71 @@
      "indication": "Pain management",
      "weightDose": "7 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "7 mcg",
+     "deliveryDose": "0.13 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.13 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "1 mg (pain) · 7 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "1.3 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.03 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "1.3 mg (0.2 mg/kg)",
+       "vol": "0.03 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "1.3 mg (0.2 mg/kg)",
+       "vol": "0.03 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "1.3 mg (0.2 mg/kg)",
+       "vol": "0.01 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "1.3 mg (0.2 mg/kg)",
+       "vol": "0.01 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "7 mg IV/IO · 13 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.13 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "7 mg (1 mg/kg)",
+       "vol": "0.13 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "7 mg (1 mg/kg)",
+       "vol": "0.13 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "13 mg (2 mg/kg)",
+       "vol": "0.13 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "13 mg (2 mg/kg)",
+       "vol": "0.13 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -1268,8 +1402,8 @@
      "indication": "Pain management",
      "weightDose": "0.7 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.16 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.16 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -1281,8 +1415,8 @@
      "indication": "Pain management",
      "weightDose": "0.03 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.03 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.03 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -1806,9 +1940,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "1.7 mg IV (max 5) · 1.7 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "0.34 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "1.7 mg (0.2 mg/kg, max 5)",
+       "vol": "0.34 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "1.7 mg (0.2 mg/kg, max 5)",
+       "vol": "0.34 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "1.7 mg (0.2 mg/kg, max 10)",
+       "vol": "0.34 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "1.7 mg (0.2 mg/kg, max 10)",
+       "vol": "0.34 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -1819,22 +1971,71 @@
      "indication": "Pain management",
      "weightDose": "9 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "9 mcg",
+     "deliveryDose": "0.17 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.17 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "2 mg (pain) · 9 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "1.7 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.03 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "1.7 mg (0.2 mg/kg)",
+       "vol": "0.03 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "1.7 mg (0.2 mg/kg)",
+       "vol": "0.03 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "1.7 mg (0.2 mg/kg)",
+       "vol": "0.02 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "1.7 mg (0.2 mg/kg)",
+       "vol": "0.02 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "9 mg IV/IO · 17 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.17 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "9 mg (1 mg/kg)",
+       "vol": "0.17 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "9 mg (1 mg/kg)",
+       "vol": "0.17 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "17 mg (2 mg/kg)",
+       "vol": "0.17 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "17 mg (2 mg/kg)",
+       "vol": "0.17 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -1845,8 +2046,8 @@
      "indication": "Pain management",
      "weightDose": "0.9 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.21 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.21 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -1858,8 +2059,8 @@
      "indication": "Pain management",
      "weightDose": "0.04 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.04 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.04 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -2383,9 +2584,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "2.1 mg IV (max 5) · 2.1 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "0.42 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "2.1 mg (0.2 mg/kg, max 5)",
+       "vol": "0.42 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "2.1 mg (0.2 mg/kg, max 5)",
+       "vol": "0.42 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "2.1 mg (0.2 mg/kg, max 10)",
+       "vol": "0.42 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "2.1 mg (0.2 mg/kg, max 10)",
+       "vol": "0.42 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -2396,22 +2615,71 @@
      "indication": "Pain management",
      "weightDose": "11 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "11 mcg",
+     "deliveryDose": "0.21 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.21 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "2 mg (pain) · 11 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "2.1 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.04 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "2.1 mg (0.2 mg/kg)",
+       "vol": "0.04 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "2.1 mg (0.2 mg/kg)",
+       "vol": "0.04 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "2.1 mg (0.2 mg/kg)",
+       "vol": "0.02 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "2.1 mg (0.2 mg/kg)",
+       "vol": "0.02 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "11 mg IV/IO · 21 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.21 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "11 mg (1 mg/kg)",
+       "vol": "0.21 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "11 mg (1 mg/kg)",
+       "vol": "0.21 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "21 mg (2 mg/kg)",
+       "vol": "0.21 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "21 mg (2 mg/kg)",
+       "vol": "0.21 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2422,8 +2690,8 @@
      "indication": "Pain management",
      "weightDose": "1.1 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.26 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.26 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -2435,8 +2703,8 @@
      "indication": "Pain management",
      "weightDose": "0.05 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.05 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.05 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -2960,9 +3228,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "2.6 mg IV (max 5) · 2.6 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "0.52 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "2.6 mg (0.2 mg/kg, max 5)",
+       "vol": "0.52 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "2.6 mg (0.2 mg/kg, max 5)",
+       "vol": "0.52 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "2.6 mg (0.2 mg/kg, max 10)",
+       "vol": "0.52 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "2.6 mg (0.2 mg/kg, max 10)",
+       "vol": "0.52 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -2973,22 +3259,71 @@
      "indication": "Pain management",
      "weightDose": "13 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "13 mcg",
+     "deliveryDose": "0.26 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.26 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "3 mg (pain) · 13 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "2.6 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.05 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "2.6 mg (0.2 mg/kg)",
+       "vol": "0.05 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "2.6 mg (0.2 mg/kg)",
+       "vol": "0.05 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "2.6 mg (0.2 mg/kg)",
+       "vol": "0.03 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "2.6 mg (0.2 mg/kg)",
+       "vol": "0.03 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "13 mg IV/IO · 26 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.26 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "13 mg (1 mg/kg)",
+       "vol": "0.26 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "13 mg (1 mg/kg)",
+       "vol": "0.26 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "26 mg (2 mg/kg)",
+       "vol": "0.26 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "26 mg (2 mg/kg)",
+       "vol": "0.26 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2999,8 +3334,8 @@
      "indication": "Pain management",
      "weightDose": "1.3 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.33 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.33 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -3012,8 +3347,8 @@
      "indication": "Pain management",
      "weightDose": "0.07 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.07 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.07 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -3537,9 +3872,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "3.3 mg IV (max 5) · 3.3 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "0.66 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "3.3 mg (0.2 mg/kg, max 5)",
+       "vol": "0.66 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "3.3 mg (0.2 mg/kg, max 5)",
+       "vol": "0.66 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "3.3 mg (0.2 mg/kg, max 10)",
+       "vol": "0.66 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "3.3 mg (0.2 mg/kg, max 10)",
+       "vol": "0.66 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -3550,22 +3903,71 @@
      "indication": "Pain management",
      "weightDose": "17 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "17 mcg",
+     "deliveryDose": "0.33 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.33 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "3 mg (pain) · 17 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "3.3 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.07 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "3.3 mg (0.2 mg/kg)",
+       "vol": "0.07 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "3.3 mg (0.2 mg/kg)",
+       "vol": "0.07 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "3.3 mg (0.2 mg/kg)",
+       "vol": "0.03 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "3.3 mg (0.2 mg/kg)",
+       "vol": "0.03 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "17 mg IV/IO · 33 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.33 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "17 mg (1 mg/kg)",
+       "vol": "0.33 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "17 mg (1 mg/kg)",
+       "vol": "0.33 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "33 mg (2 mg/kg)",
+       "vol": "0.33 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "33 mg (2 mg/kg)",
+       "vol": "0.33 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -3576,8 +3978,8 @@
      "indication": "Pain management",
      "weightDose": "1.7 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.41 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.41 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -3589,8 +3991,8 @@
      "indication": "Pain management",
      "weightDose": "0.08 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.08 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.08 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -4114,9 +4516,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "4.2 mg IV (max 5) · 4.2 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "0.84 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4.2 mg (0.2 mg/kg, max 5)",
+       "vol": "0.84 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "4.2 mg (0.2 mg/kg, max 5)",
+       "vol": "0.84 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "4.2 mg (0.2 mg/kg, max 10)",
+       "vol": "0.84 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "4.2 mg (0.2 mg/kg, max 10)",
+       "vol": "0.84 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -4127,22 +4547,71 @@
      "indication": "Pain management",
      "weightDose": "21 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "21 mcg",
+     "deliveryDose": "0.42 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.42 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "4 mg (pain) · 21 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "4.2 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.08 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4.2 mg (0.2 mg/kg)",
+       "vol": "0.08 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "4.2 mg (0.2 mg/kg)",
+       "vol": "0.08 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "4.2 mg (0.2 mg/kg)",
+       "vol": "0.04 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "4.2 mg (0.2 mg/kg)",
+       "vol": "0.04 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "21 mg IV/IO · 42 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.42 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "21 mg (1 mg/kg)",
+       "vol": "0.42 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "21 mg (1 mg/kg)",
+       "vol": "0.42 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "42 mg (2 mg/kg)",
+       "vol": "0.42 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "42 mg (2 mg/kg)",
+       "vol": "0.42 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4153,8 +4622,8 @@
      "indication": "Pain management",
      "weightDose": "2.1 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.53 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.53 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -4166,8 +4635,8 @@
      "indication": "Pain management",
      "weightDose": "0.10 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.10 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.10 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -4691,9 +5160,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "5.0 mg IV (max 5) · 5.3 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "1.00 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5.0 mg (0.2 mg/kg, max 5)",
+       "vol": "1.00 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5.0 mg (0.2 mg/kg, max 5)",
+       "vol": "1.00 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "5.3 mg (0.2 mg/kg, max 10)",
+       "vol": "1.06 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "5.3 mg (0.2 mg/kg, max 10)",
+       "vol": "1.06 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -4704,22 +5191,71 @@
      "indication": "Pain management",
      "weightDose": "27 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "27 mcg",
+     "deliveryDose": "0.53 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.53 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "5 mg (pain) · 27 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "5.3 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.11 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5.3 mg (0.2 mg/kg)",
+       "vol": "0.11 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "5.3 mg (0.2 mg/kg)",
+       "vol": "0.11 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "5.3 mg (0.2 mg/kg)",
+       "vol": "0.05 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "5.3 mg (0.2 mg/kg)",
+       "vol": "0.05 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "27 mg IV/IO · 53 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.53 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "27 mg (1 mg/kg)",
+       "vol": "0.53 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "27 mg (1 mg/kg)",
+       "vol": "0.53 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "53 mg (2 mg/kg)",
+       "vol": "0.53 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "53 mg (2 mg/kg)",
+       "vol": "0.53 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4730,8 +5266,8 @@
      "indication": "Pain management",
      "weightDose": "2.7 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.66 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.66 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -4743,8 +5279,8 @@
      "indication": "Pain management",
      "weightDose": "0.13 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.13 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.13 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -5268,9 +5804,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "5.0 mg IV (max 5) · 6.6 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "1.00 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5.0 mg (0.2 mg/kg, max 5)",
+       "vol": "1.00 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5.0 mg (0.2 mg/kg, max 5)",
+       "vol": "1.00 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "6.6 mg (0.2 mg/kg, max 10)",
+       "vol": "1.32 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "6.6 mg (0.2 mg/kg, max 10)",
+       "vol": "1.32 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -5281,22 +5835,71 @@
      "indication": "Pain management",
      "weightDose": "33 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "33 mcg",
+     "deliveryDose": "0.66 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.66 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "7 mg (pain) · 33 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "6.6 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.13 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "6.6 mg (0.2 mg/kg)",
+       "vol": "0.13 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "6.6 mg (0.2 mg/kg)",
+       "vol": "0.13 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "6.6 mg (0.2 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "6.6 mg (0.2 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "33 mg IV/IO · 66 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.66 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "33 mg (1 mg/kg)",
+       "vol": "0.66 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "33 mg (1 mg/kg)",
+       "vol": "0.66 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "66 mg (2 mg/kg)",
+       "vol": "0.66 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "66 mg (2 mg/kg)",
+       "vol": "0.66 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5307,8 +5910,8 @@
      "indication": "Pain management",
      "weightDose": "3.3 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.83 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.83 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -5320,8 +5923,8 @@
      "indication": "Pain management",
      "weightDose": "0.17 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.17 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.17 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -5866,14 +6469,45 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Midazolam (Versed)",
+     "name": "Midazolam — Seizure",
      "class": "Benzodiazepine",
-     "indication": "Seizure · sedation · severe anxiety",
+     "indication": "Seizure · sedation · sympathomimetic tox",
      "weightDose": "5 mg IV/IO · 10 mg IM/IN",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "Seizure 5 mg IV/IO or 10 mg IM/IN · Anxiety 2 mg",
+     "deliveryDose": "1 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min. Severe anxiety: 2 mg. Sympathomimetic tox: 5 mg IV or 10 mg IM/IN q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      }
+     },
+     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Midazolam — Anxiety",
+     "class": "Benzodiazepine",
+     "indication": "Severe anxiety",
+     "weightDose": "2 mg",
+     "packageSpec": "5 mg/mL",
+     "deliveryDose": "0.4 mL of 5 mg/mL",
+     "readyVol": "0.4 mL of 5 mg/mL",
+     "detail": "Severe anxiety 2 mg.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5884,24 +6518,86 @@
      "indication": "Pain management",
      "weightDose": "45 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "45 mcg",
+     "deliveryDose": "0.9 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.9 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation · hyperactive delirium",
-     "weightDose": "9 mg (pain) · 180 mg IM (delirium)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "9 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.18 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Sub-dissociative pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN; hyperactive delirium 4 mg/kg IM (max 500 mg).",
+     "routeDoses": {
+      "IV": {
+       "dose": "9 mg (0.2 mg/kg)",
+       "vol": "0.18 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "9 mg (0.2 mg/kg)",
+       "vol": "0.18 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "9 mg (0.2 mg/kg)",
+       "vol": "0.09 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "9 mg (0.2 mg/kg)",
+       "vol": "0.09 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
      "route": "IV / IO / IM / IN",
-     "max": "500 mg (delirium)"
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "45 mg IV/IO · 90 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.9 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "45 mg (1 mg/kg)",
+       "vol": "0.9 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "45 mg (1 mg/kg)",
+       "vol": "0.9 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "90 mg (2 mg/kg)",
+       "vol": "0.9 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "90 mg (2 mg/kg)",
+       "vol": "0.9 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation: 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "180 mg (4 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "1.8 mL IM of 100 mg/mL",
+     "readyVol": "—",
+     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "route": "IM",
+     "max": "500 mg"
     },
     {
      "rhythm": "non-arrest",
@@ -5910,8 +6606,8 @@
      "indication": "Pain management",
      "weightDose": "9 mg (0.2 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "2.3 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "2.3 mL of 4 mg/mL",
      "detail": "0.2 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -5983,14 +6679,27 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Droperidol",
+     "name": "Droperidol — Nausea",
      "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea · hyperactive delirium",
-     "weightDose": "Nausea 1.25 mg · Delirium 5 mg",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
      "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "IV/IO/IM",
-     "readyVol": "—",
-     "detail": "Nausea/vomiting 1.25 mg; hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
      "route": "IV / IO / IM",
      "max": "Per protocol"
     },
@@ -6674,9 +7383,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "2.0 mg IV (max 5) · 2.0 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "0.40 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "2.0 mg (0.2 mg/kg, max 5)",
+       "vol": "0.40 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "2.0 mg (0.2 mg/kg, max 5)",
+       "vol": "0.40 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "2.0 mg (0.2 mg/kg, max 10)",
+       "vol": "0.40 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "2.0 mg (0.2 mg/kg, max 10)",
+       "vol": "0.40 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -6687,22 +7414,71 @@
      "indication": "Pain management",
      "weightDose": "10 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "10 mcg",
+     "deliveryDose": "0.20 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.20 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "2 mg (pain) · 10 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "2.0 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.04 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "2.0 mg (0.2 mg/kg)",
+       "vol": "0.04 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "2.0 mg (0.2 mg/kg)",
+       "vol": "0.04 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "2.0 mg (0.2 mg/kg)",
+       "vol": "0.02 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "2.0 mg (0.2 mg/kg)",
+       "vol": "0.02 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "10 mg IV/IO · 20 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.20 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "10 mg (1 mg/kg)",
+       "vol": "0.20 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "10 mg (1 mg/kg)",
+       "vol": "0.20 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "20 mg (2 mg/kg)",
+       "vol": "0.20 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "20 mg (2 mg/kg)",
+       "vol": "0.20 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -6713,8 +7489,8 @@
      "indication": "Pain management",
      "weightDose": "1.0 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.25 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.25 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -6726,8 +7502,8 @@
      "indication": "Pain management",
      "weightDose": "0.05 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.05 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.05 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -7251,9 +8027,27 @@
      "indication": "Seizure · sedation",
      "weightDose": "5.0 mg IV (max 5) · 5.0 mg IM/IN (max 10)",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q5 min",
+     "deliveryDose": "1.00 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5.0 mg (0.2 mg/kg, max 5)",
+       "vol": "1.00 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5.0 mg (0.2 mg/kg, max 5)",
+       "vol": "1.00 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "5.0 mg (0.2 mg/kg, max 10)",
+       "vol": "1.00 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "5.0 mg (0.2 mg/kg, max 10)",
+       "vol": "1.00 mL of 5 mg/mL"
+      }
+     },
+     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -7264,22 +8058,71 @@
      "indication": "Pain management",
      "weightDose": "25 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "25 mcg",
+     "deliveryDose": "0.50 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "0.50 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation",
-     "weightDose": "5 mg (pain) · 25 mg (sedation)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "5.0 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.10 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN. Peds hyperactive delirium: contact medical control.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5.0 mg (0.2 mg/kg)",
+       "vol": "0.10 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "5.0 mg (0.2 mg/kg)",
+       "vol": "0.10 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "5.0 mg (0.2 mg/kg)",
+       "vol": "0.05 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "5.0 mg (0.2 mg/kg)",
+       "vol": "0.05 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "25 mg IV/IO · 50 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.50 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "25 mg (1 mg/kg)",
+       "vol": "0.50 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "25 mg (1 mg/kg)",
+       "vol": "0.50 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "50 mg (2 mg/kg)",
+       "vol": "0.50 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "50 mg (2 mg/kg)",
+       "vol": "0.50 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -7290,8 +8133,8 @@
      "indication": "Pain management",
      "weightDose": "2.5 mg (0.1 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.63 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.63 mL of 4 mg/mL",
      "detail": "0.1 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -7303,8 +8146,8 @@
      "indication": "Pain management",
      "weightDose": "0.13 mg (5 mcg/kg)",
      "packageSpec": "1 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "0.13 mL IV/IO/IM/IN q20 min PRN",
+     "readyVol": "0.13 mL of 1 mg/mL",
      "detail": "5 mcg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -7849,14 +8692,45 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Midazolam (Versed)",
+     "name": "Midazolam — Seizure",
      "class": "Benzodiazepine",
-     "indication": "Seizure · sedation · severe anxiety",
+     "indication": "Seizure · sedation · sympathomimetic tox",
      "weightDose": "5 mg IV/IO · 10 mg IM/IN",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "Seizure 5 mg IV/IO or 10 mg IM/IN · Anxiety 2 mg",
+     "deliveryDose": "1 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min. Severe anxiety: 2 mg. Sympathomimetic tox: 5 mg IV or 10 mg IM/IN q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      }
+     },
+     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Midazolam — Anxiety",
+     "class": "Benzodiazepine",
+     "indication": "Severe anxiety",
+     "weightDose": "2 mg",
+     "packageSpec": "5 mg/mL",
+     "deliveryDose": "0.4 mL of 5 mg/mL",
+     "readyVol": "0.4 mL of 5 mg/mL",
+     "detail": "Severe anxiety 2 mg.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -7867,24 +8741,86 @@
      "indication": "Pain management",
      "weightDose": "50 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "50 mcg",
+     "deliveryDose": "1.0 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "1.0 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation · hyperactive delirium",
-     "weightDose": "10 mg (pain) · 200 mg IM (delirium)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "10 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.20 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Sub-dissociative pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN; hyperactive delirium 4 mg/kg IM (max 500 mg).",
+     "routeDoses": {
+      "IV": {
+       "dose": "10 mg (0.2 mg/kg)",
+       "vol": "0.20 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "10 mg (0.2 mg/kg)",
+       "vol": "0.20 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "10 mg (0.2 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "10 mg (0.2 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
      "route": "IV / IO / IM / IN",
-     "max": "500 mg (delirium)"
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "50 mg IV/IO · 100 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "1.0 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "50 mg (1 mg/kg)",
+       "vol": "1.0 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "50 mg (1 mg/kg)",
+       "vol": "1.0 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "100 mg (2 mg/kg)",
+       "vol": "1.0 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "100 mg (2 mg/kg)",
+       "vol": "1.0 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation: 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "200 mg (4 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "2.0 mL IM of 100 mg/mL",
+     "readyVol": "—",
+     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "route": "IM",
+     "max": "500 mg"
     },
     {
      "rhythm": "non-arrest",
@@ -7893,8 +8829,8 @@
      "indication": "Pain management",
      "weightDose": "10 mg (0.2 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "2.5 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "2.5 mL of 4 mg/mL",
      "detail": "0.2 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -7966,14 +8902,27 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Droperidol",
+     "name": "Droperidol — Nausea",
      "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea · hyperactive delirium",
-     "weightDose": "Nausea 1.25 mg · Delirium 5 mg",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
      "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "IV/IO/IM",
-     "readyVol": "—",
-     "detail": "Nausea/vomiting 1.25 mg; hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
      "route": "IV / IO / IM",
      "max": "Per protocol"
     },
@@ -8504,14 +9453,45 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Midazolam (Versed)",
+     "name": "Midazolam — Seizure",
      "class": "Benzodiazepine",
-     "indication": "Seizure · sedation · severe anxiety",
+     "indication": "Seizure · sedation · sympathomimetic tox",
      "weightDose": "5 mg IV/IO · 10 mg IM/IN",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "Seizure 5 mg IV/IO or 10 mg IM/IN · Anxiety 2 mg",
+     "deliveryDose": "1 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min. Severe anxiety: 2 mg. Sympathomimetic tox: 5 mg IV or 10 mg IM/IN q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      }
+     },
+     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Midazolam — Anxiety",
+     "class": "Benzodiazepine",
+     "indication": "Severe anxiety",
+     "weightDose": "2 mg",
+     "packageSpec": "5 mg/mL",
+     "deliveryDose": "0.4 mL of 5 mg/mL",
+     "readyVol": "0.4 mL of 5 mg/mL",
+     "detail": "Severe anxiety 2 mg.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8522,24 +9502,86 @@
      "indication": "Pain management",
      "weightDose": "60 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "60 mcg",
+     "deliveryDose": "1.2 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "1.2 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation · hyperactive delirium",
-     "weightDose": "12 mg (pain) · 240 mg IM (delirium)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "12 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.24 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Sub-dissociative pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN; hyperactive delirium 4 mg/kg IM (max 500 mg).",
+     "routeDoses": {
+      "IV": {
+       "dose": "12 mg (0.2 mg/kg)",
+       "vol": "0.24 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "12 mg (0.2 mg/kg)",
+       "vol": "0.24 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "12 mg (0.2 mg/kg)",
+       "vol": "0.12 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "12 mg (0.2 mg/kg)",
+       "vol": "0.12 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
      "route": "IV / IO / IM / IN",
-     "max": "500 mg (delirium)"
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "60 mg IV/IO · 120 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "1.2 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "60 mg (1 mg/kg)",
+       "vol": "1.2 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "60 mg (1 mg/kg)",
+       "vol": "1.2 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "120 mg (2 mg/kg)",
+       "vol": "1.2 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "120 mg (2 mg/kg)",
+       "vol": "1.2 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation: 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "240 mg (4 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "2.4 mL IM of 100 mg/mL",
+     "readyVol": "—",
+     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "route": "IM",
+     "max": "500 mg"
     },
     {
      "rhythm": "non-arrest",
@@ -8548,8 +9590,8 @@
      "indication": "Pain management",
      "weightDose": "12 mg (0.2 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "3.0 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "3.0 mL of 4 mg/mL",
      "detail": "0.2 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -8621,14 +9663,27 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Droperidol",
+     "name": "Droperidol — Nausea",
      "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea · hyperactive delirium",
-     "weightDose": "Nausea 1.25 mg · Delirium 5 mg",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
      "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "IV/IO/IM",
-     "readyVol": "—",
-     "detail": "Nausea/vomiting 1.25 mg; hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
      "route": "IV / IO / IM",
      "max": "Per protocol"
     },
@@ -9159,14 +10214,45 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Midazolam (Versed)",
+     "name": "Midazolam — Seizure",
      "class": "Benzodiazepine",
-     "indication": "Seizure · sedation · severe anxiety",
+     "indication": "Seizure · sedation · sympathomimetic tox",
      "weightDose": "5 mg IV/IO · 10 mg IM/IN",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "Seizure 5 mg IV/IO or 10 mg IM/IN · Anxiety 2 mg",
+     "deliveryDose": "1 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min. Severe anxiety: 2 mg. Sympathomimetic tox: 5 mg IV or 10 mg IM/IN q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      }
+     },
+     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Midazolam — Anxiety",
+     "class": "Benzodiazepine",
+     "indication": "Severe anxiety",
+     "weightDose": "2 mg",
+     "packageSpec": "5 mg/mL",
+     "deliveryDose": "0.4 mL of 5 mg/mL",
+     "readyVol": "0.4 mL of 5 mg/mL",
+     "detail": "Severe anxiety 2 mg.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -9177,24 +10263,86 @@
      "indication": "Pain management",
      "weightDose": "70 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "70 mcg",
+     "deliveryDose": "1.4 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "1.4 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation · hyperactive delirium",
-     "weightDose": "14 mg (pain) · 280 mg IM (delirium)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "14 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.28 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Sub-dissociative pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN; hyperactive delirium 4 mg/kg IM (max 500 mg).",
+     "routeDoses": {
+      "IV": {
+       "dose": "14 mg (0.2 mg/kg)",
+       "vol": "0.28 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "14 mg (0.2 mg/kg)",
+       "vol": "0.28 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "14 mg (0.2 mg/kg)",
+       "vol": "0.14 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "14 mg (0.2 mg/kg)",
+       "vol": "0.14 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
      "route": "IV / IO / IM / IN",
-     "max": "500 mg (delirium)"
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "70 mg IV/IO · 140 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "1.4 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "70 mg (1 mg/kg)",
+       "vol": "1.4 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "70 mg (1 mg/kg)",
+       "vol": "1.4 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "140 mg (2 mg/kg)",
+       "vol": "1.4 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "140 mg (2 mg/kg)",
+       "vol": "1.4 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation: 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "280 mg (4 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "2.8 mL IM of 100 mg/mL",
+     "readyVol": "—",
+     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "route": "IM",
+     "max": "500 mg"
     },
     {
      "rhythm": "non-arrest",
@@ -9203,8 +10351,8 @@
      "indication": "Pain management",
      "weightDose": "14 mg (0.2 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "3.5 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "3.5 mL of 4 mg/mL",
      "detail": "0.2 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -9276,14 +10424,27 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Droperidol",
+     "name": "Droperidol — Nausea",
      "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea · hyperactive delirium",
-     "weightDose": "Nausea 1.25 mg · Delirium 5 mg",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
      "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "IV/IO/IM",
-     "readyVol": "—",
-     "detail": "Nausea/vomiting 1.25 mg; hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
      "route": "IV / IO / IM",
      "max": "Per protocol"
     },
@@ -9814,14 +10975,45 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Midazolam (Versed)",
+     "name": "Midazolam — Seizure",
      "class": "Benzodiazepine",
-     "indication": "Seizure · sedation · severe anxiety",
+     "indication": "Seizure · sedation · sympathomimetic tox",
      "weightDose": "5 mg IV/IO · 10 mg IM/IN",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "Seizure 5 mg IV/IO or 10 mg IM/IN · Anxiety 2 mg",
+     "deliveryDose": "1 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min. Severe anxiety: 2 mg. Sympathomimetic tox: 5 mg IV or 10 mg IM/IN q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      }
+     },
+     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Midazolam — Anxiety",
+     "class": "Benzodiazepine",
+     "indication": "Severe anxiety",
+     "weightDose": "2 mg",
+     "packageSpec": "5 mg/mL",
+     "deliveryDose": "0.4 mL of 5 mg/mL",
+     "readyVol": "0.4 mL of 5 mg/mL",
+     "detail": "Severe anxiety 2 mg.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -9832,24 +11024,86 @@
      "indication": "Pain management",
      "weightDose": "75 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "75 mcg",
+     "deliveryDose": "1.5 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "1.5 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation · hyperactive delirium",
-     "weightDose": "15 mg (pain) · 300 mg IM (delirium)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "15 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.30 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Sub-dissociative pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN; hyperactive delirium 4 mg/kg IM (max 500 mg).",
+     "routeDoses": {
+      "IV": {
+       "dose": "15 mg (0.2 mg/kg)",
+       "vol": "0.30 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "15 mg (0.2 mg/kg)",
+       "vol": "0.30 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "15 mg (0.2 mg/kg)",
+       "vol": "0.15 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "15 mg (0.2 mg/kg)",
+       "vol": "0.15 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
      "route": "IV / IO / IM / IN",
-     "max": "500 mg (delirium)"
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "75 mg IV/IO · 150 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "1.5 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "75 mg (1 mg/kg)",
+       "vol": "1.5 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "75 mg (1 mg/kg)",
+       "vol": "1.5 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "150 mg (2 mg/kg)",
+       "vol": "1.5 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "150 mg (2 mg/kg)",
+       "vol": "1.5 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation: 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "300 mg (4 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "3.0 mL IM of 100 mg/mL",
+     "readyVol": "—",
+     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "route": "IM",
+     "max": "500 mg"
     },
     {
      "rhythm": "non-arrest",
@@ -9858,8 +11112,8 @@
      "indication": "Pain management",
      "weightDose": "15 mg (0.2 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "3.8 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "3.8 mL of 4 mg/mL",
      "detail": "0.2 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -9931,14 +11185,27 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Droperidol",
+     "name": "Droperidol — Nausea",
      "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea · hyperactive delirium",
-     "weightDose": "Nausea 1.25 mg · Delirium 5 mg",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
      "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "IV/IO/IM",
-     "readyVol": "—",
-     "detail": "Nausea/vomiting 1.25 mg; hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
      "route": "IV / IO / IM",
      "max": "Per protocol"
     },
@@ -10469,14 +11736,45 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Midazolam (Versed)",
+     "name": "Midazolam — Seizure",
      "class": "Benzodiazepine",
-     "indication": "Seizure · sedation · severe anxiety",
+     "indication": "Seizure · sedation · sympathomimetic tox",
      "weightDose": "5 mg IV/IO · 10 mg IM/IN",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "Seizure 5 mg IV/IO or 10 mg IM/IN · Anxiety 2 mg",
+     "deliveryDose": "1 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min. Severe anxiety: 2 mg. Sympathomimetic tox: 5 mg IV or 10 mg IM/IN q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      }
+     },
+     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Midazolam — Anxiety",
+     "class": "Benzodiazepine",
+     "indication": "Severe anxiety",
+     "weightDose": "2 mg",
+     "packageSpec": "5 mg/mL",
+     "deliveryDose": "0.4 mL of 5 mg/mL",
+     "readyVol": "0.4 mL of 5 mg/mL",
+     "detail": "Severe anxiety 2 mg.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -10487,24 +11785,86 @@
      "indication": "Pain management",
      "weightDose": "80 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "80 mcg",
+     "deliveryDose": "1.6 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "1.6 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation · hyperactive delirium",
-     "weightDose": "16 mg (pain) · 320 mg IM (delirium)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "16 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.32 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Sub-dissociative pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN; hyperactive delirium 4 mg/kg IM (max 500 mg).",
+     "routeDoses": {
+      "IV": {
+       "dose": "16 mg (0.2 mg/kg)",
+       "vol": "0.32 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "16 mg (0.2 mg/kg)",
+       "vol": "0.32 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "16 mg (0.2 mg/kg)",
+       "vol": "0.16 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "16 mg (0.2 mg/kg)",
+       "vol": "0.16 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
      "route": "IV / IO / IM / IN",
-     "max": "500 mg (delirium)"
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "80 mg IV/IO · 160 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "1.6 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "80 mg (1 mg/kg)",
+       "vol": "1.6 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "80 mg (1 mg/kg)",
+       "vol": "1.6 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "160 mg (2 mg/kg)",
+       "vol": "1.6 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "160 mg (2 mg/kg)",
+       "vol": "1.6 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation: 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "320 mg (4 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "3.2 mL IM of 100 mg/mL",
+     "readyVol": "—",
+     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "route": "IM",
+     "max": "500 mg"
     },
     {
      "rhythm": "non-arrest",
@@ -10513,8 +11873,8 @@
      "indication": "Pain management",
      "weightDose": "16 mg (0.2 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "4.0 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "4.0 mL of 4 mg/mL",
      "detail": "0.2 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -10586,14 +11946,27 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Droperidol",
+     "name": "Droperidol — Nausea",
      "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea · hyperactive delirium",
-     "weightDose": "Nausea 1.25 mg · Delirium 5 mg",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
      "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "IV/IO/IM",
-     "readyVol": "—",
-     "detail": "Nausea/vomiting 1.25 mg; hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
      "route": "IV / IO / IM",
      "max": "Per protocol"
     },
@@ -11124,14 +12497,45 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Midazolam (Versed)",
+     "name": "Midazolam — Seizure",
      "class": "Benzodiazepine",
-     "indication": "Seizure · sedation · severe anxiety",
+     "indication": "Seizure · sedation · sympathomimetic tox",
      "weightDose": "5 mg IV/IO · 10 mg IM/IN",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "Seizure 5 mg IV/IO or 10 mg IM/IN · Anxiety 2 mg",
+     "deliveryDose": "1 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min. Severe anxiety: 2 mg. Sympathomimetic tox: 5 mg IV or 10 mg IM/IN q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      }
+     },
+     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Midazolam — Anxiety",
+     "class": "Benzodiazepine",
+     "indication": "Severe anxiety",
+     "weightDose": "2 mg",
+     "packageSpec": "5 mg/mL",
+     "deliveryDose": "0.4 mL of 5 mg/mL",
+     "readyVol": "0.4 mL of 5 mg/mL",
+     "detail": "Severe anxiety 2 mg.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -11142,24 +12546,86 @@
      "indication": "Pain management",
      "weightDose": "90 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "90 mcg",
+     "deliveryDose": "1.8 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "1.8 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation · hyperactive delirium",
-     "weightDose": "18 mg (pain) · 360 mg IM (delirium)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "18 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.36 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Sub-dissociative pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN; hyperactive delirium 4 mg/kg IM (max 500 mg).",
+     "routeDoses": {
+      "IV": {
+       "dose": "18 mg (0.2 mg/kg)",
+       "vol": "0.36 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "18 mg (0.2 mg/kg)",
+       "vol": "0.36 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "18 mg (0.2 mg/kg)",
+       "vol": "0.18 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "18 mg (0.2 mg/kg)",
+       "vol": "0.18 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
      "route": "IV / IO / IM / IN",
-     "max": "500 mg (delirium)"
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "90 mg IV/IO · 180 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "1.8 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "90 mg (1 mg/kg)",
+       "vol": "1.8 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "90 mg (1 mg/kg)",
+       "vol": "1.8 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "180 mg (2 mg/kg)",
+       "vol": "1.8 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "180 mg (2 mg/kg)",
+       "vol": "1.8 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation: 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "360 mg (4 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "3.6 mL IM of 100 mg/mL",
+     "readyVol": "—",
+     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "route": "IM",
+     "max": "500 mg"
     },
     {
      "rhythm": "non-arrest",
@@ -11168,8 +12634,8 @@
      "indication": "Pain management",
      "weightDose": "18 mg (0.2 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "4.5 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "4.5 mL of 4 mg/mL",
      "detail": "0.2 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -11241,14 +12707,27 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Droperidol",
+     "name": "Droperidol — Nausea",
      "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea · hyperactive delirium",
-     "weightDose": "Nausea 1.25 mg · Delirium 5 mg",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
      "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "IV/IO/IM",
-     "readyVol": "—",
-     "detail": "Nausea/vomiting 1.25 mg; hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
      "route": "IV / IO / IM",
      "max": "Per protocol"
     },
@@ -11779,14 +13258,45 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Midazolam (Versed)",
+     "name": "Midazolam — Seizure",
      "class": "Benzodiazepine",
-     "indication": "Seizure · sedation · severe anxiety",
+     "indication": "Seizure · sedation · sympathomimetic tox",
      "weightDose": "5 mg IV/IO · 10 mg IM/IN",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "Seizure 5 mg IV/IO or 10 mg IM/IN · Anxiety 2 mg",
+     "deliveryDose": "1 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min. Severe anxiety: 2 mg. Sympathomimetic tox: 5 mg IV or 10 mg IM/IN q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      }
+     },
+     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Midazolam — Anxiety",
+     "class": "Benzodiazepine",
+     "indication": "Severe anxiety",
+     "weightDose": "2 mg",
+     "packageSpec": "5 mg/mL",
+     "deliveryDose": "0.4 mL of 5 mg/mL",
+     "readyVol": "0.4 mL of 5 mg/mL",
+     "detail": "Severe anxiety 2 mg.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -11797,24 +13307,86 @@
      "indication": "Pain management",
      "weightDose": "100 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "100 mcg",
+     "deliveryDose": "2.0 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "2.0 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation · hyperactive delirium",
-     "weightDose": "20 mg (pain) · 400 mg IM (delirium)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "20 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.40 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Sub-dissociative pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN; hyperactive delirium 4 mg/kg IM (max 500 mg).",
+     "routeDoses": {
+      "IV": {
+       "dose": "20 mg (0.2 mg/kg)",
+       "vol": "0.40 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "20 mg (0.2 mg/kg)",
+       "vol": "0.40 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "20 mg (0.2 mg/kg)",
+       "vol": "0.20 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "20 mg (0.2 mg/kg)",
+       "vol": "0.20 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
      "route": "IV / IO / IM / IN",
-     "max": "500 mg (delirium)"
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "100 mg IV/IO · 200 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "2.0 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "100 mg (1 mg/kg)",
+       "vol": "2.0 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "100 mg (1 mg/kg)",
+       "vol": "2.0 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "200 mg (2 mg/kg)",
+       "vol": "2.0 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "200 mg (2 mg/kg)",
+       "vol": "2.0 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation: 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "400 mg (4 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "4.0 mL IM of 100 mg/mL",
+     "readyVol": "—",
+     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "route": "IM",
+     "max": "500 mg"
     },
     {
      "rhythm": "non-arrest",
@@ -11823,8 +13395,8 @@
      "indication": "Pain management",
      "weightDose": "20 mg (0.2 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "5.0 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "5.0 mL of 4 mg/mL",
      "detail": "0.2 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -11896,14 +13468,27 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Droperidol",
+     "name": "Droperidol — Nausea",
      "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea · hyperactive delirium",
-     "weightDose": "Nausea 1.25 mg · Delirium 5 mg",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
      "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "IV/IO/IM",
-     "readyVol": "—",
-     "detail": "Nausea/vomiting 1.25 mg; hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
      "route": "IV / IO / IM",
      "max": "Per protocol"
     },
@@ -12434,14 +14019,45 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Midazolam (Versed)",
+     "name": "Midazolam — Seizure",
      "class": "Benzodiazepine",
-     "indication": "Seizure · sedation · severe anxiety",
+     "indication": "Seizure · sedation · sympathomimetic tox",
      "weightDose": "5 mg IV/IO · 10 mg IM/IN",
      "packageSpec": "5 mg/mL",
-     "deliveryDose": "Seizure 5 mg IV/IO or 10 mg IM/IN · Anxiety 2 mg",
+     "deliveryDose": "1 mL IV/IO of 5 mg/mL",
      "readyVol": "—",
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min. Severe anxiety: 2 mg. Sympathomimetic tox: 5 mg IV or 10 mg IM/IN q5 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IO": {
+       "dose": "5 mg",
+       "vol": "1 mL of 5 mg/mL"
+      },
+      "IM": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      },
+      "IN": {
+       "dose": "10 mg",
+       "vol": "2 mL of 5 mg/mL"
+      }
+     },
+     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Midazolam — Anxiety",
+     "class": "Benzodiazepine",
+     "indication": "Severe anxiety",
+     "weightDose": "2 mg",
+     "packageSpec": "5 mg/mL",
+     "deliveryDose": "0.4 mL of 5 mg/mL",
+     "readyVol": "0.4 mL of 5 mg/mL",
+     "detail": "Severe anxiety 2 mg.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12452,24 +14068,86 @@
      "indication": "Pain management",
      "weightDose": "100 mcg (1 mcg/kg)",
      "packageSpec": "50 mcg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q10 min PRN",
-     "readyVol": "100 mcg",
+     "deliveryDose": "2.0 mL slow IV/IO/IM/IN q10 min PRN",
+     "readyVol": "2.0 mL of 50 mcg/mL",
      "detail": "1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine (Ketalar)",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Pain · sedation · hyperactive delirium",
-     "weightDose": "20 mg (pain) · 400 mg IM (delirium)",
-     "packageSpec": "100 mg/mL (dilute 1:1) / 50 mg/mL",
-     "deliveryDose": "IV/IO/IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "20 mg (0.2 mg/kg)",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "0.40 mL IV/IO of 50 mg/mL (diluted 1:1)",
      "readyVol": "—",
-     "detail": "Sub-dissociative pain 0.2 mg/kg; procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN; hyperactive delirium 4 mg/kg IM (max 500 mg).",
+     "routeDoses": {
+      "IV": {
+       "dose": "20 mg (0.2 mg/kg)",
+       "vol": "0.40 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "20 mg (0.2 mg/kg)",
+       "vol": "0.40 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "20 mg (0.2 mg/kg)",
+       "vol": "0.20 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "20 mg (0.2 mg/kg)",
+       "vol": "0.20 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. Dilute 1:1 with NS for IV/IO push.",
      "route": "IV / IO / IM / IN",
-     "max": "500 mg (delirium)"
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "100 mg IV/IO · 200 mg IM/IN",
+     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "deliveryDose": "2.0 mL IV/IO of 50 mg/mL (diluted 1:1)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "100 mg (1 mg/kg)",
+       "vol": "2.0 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IO": {
+       "dose": "100 mg (1 mg/kg)",
+       "vol": "2.0 mL of 50 mg/mL (diluted 1:1)"
+      },
+      "IM": {
+       "dose": "200 mg (2 mg/kg)",
+       "vol": "2.0 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "200 mg (2 mg/kg)",
+       "vol": "2.0 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Procedural sedation: 1 mg/kg IV/IO (diluted 1:1) or 2 mg/kg IM/IN — dose changes with route.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "400 mg (4 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "4.0 mL IM of 100 mg/mL",
+     "readyVol": "—",
+     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "route": "IM",
+     "max": "500 mg"
     },
     {
      "rhythm": "non-arrest",
@@ -12478,8 +14156,8 @@
      "indication": "Pain management",
      "weightDose": "20 mg (0.2 mg/kg)",
      "packageSpec": "4 mg/mL",
-     "deliveryDose": "Slow IV/IO/IM/IN q20 min PRN",
-     "readyVol": "—",
+     "deliveryDose": "5.0 mL slow IV/IO/IM/IN q20 min PRN",
+     "readyVol": "5.0 mL of 4 mg/mL",
      "detail": "0.2 mg/kg IV/IO/IM/IN q20 min PRN.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -12551,14 +14229,27 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Droperidol",
+     "name": "Droperidol — Nausea",
      "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea · hyperactive delirium",
-     "weightDose": "Nausea 1.25 mg · Delirium 5 mg",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
      "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "IV/IO/IM",
-     "readyVol": "—",
-     "detail": "Nausea/vomiting 1.25 mg; hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
      "route": "IV / IO / IM",
      "max": "Per protocol"
     },

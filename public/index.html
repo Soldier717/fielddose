@@ -4244,20 +4244,20 @@ function ccGetDrugs() {
       { rhythm: 'non-arrest', name: 'Ketamine — Pain', class: 'Dissociative analgesic', indication: 'Sub-dissociative pain',
         weightDose: `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`,
         packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
-        deliveryDose: `Push ${ccFmt(0.2*kg/50, 2)} mL IV/IO — draw ${ccFmt(0.2*kg/100, 2)} mL + ${ccFmt(0.2*kg/100, 2)} mL NS`,
+        deliveryDose: `Draw ${ccFmt(0.2*kg/100, 2)} mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL IV/IO`,
         readyVol: '—',
         routeDoses: rcRouteDoses([
-          ['IV/IO', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `Push ${ccFmt(0.2*kg/50, 2)} mL (50 mg/mL) — draw ${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(0.2*kg/100, 2)} mL NS`],
+          ['IV/IO', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `Draw ${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL (50 mg/mL)`],
           ['IM/IN', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
         detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
         weightDose: `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
         packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
-        deliveryDose: `Push ${ccFmt(1*kg/50, 1)} mL IV/IO — draw ${ccFmt(1*kg/100, 1)} mL + ${ccFmt(1*kg/100, 1)} mL NS`,
+        deliveryDose: `Draw ${ccFmt(1*kg/100, 1)} mL + ${ccFmt(1*kg/100, 1)} mL NS → push ${ccFmt(1*kg/50, 1)} mL IV/IO`,
         readyVol: '—',
         routeDoses: rcRouteDoses([
-          ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `Push ${ccFmt(1*kg/50, 1)} mL (50 mg/mL) — draw ${ccFmt(1*kg/100, 1)} mL of 100 mg/mL + ${ccFmt(1*kg/100, 1)} mL NS`],
+          ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `Draw ${ccFmt(1*kg/100, 1)} mL of 100 mg/mL + ${ccFmt(1*kg/100, 1)} mL NS → push ${ccFmt(1*kg/50, 1)} mL (50 mg/mL)`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 1)} mL of 100 mg/mL (undiluted)`],
         ]),
         detail: 'Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
@@ -4294,10 +4294,10 @@ function ccGetDrugs() {
       { rhythm: 'non-arrest', name: 'Lorazepam (Ativan)', class: 'Benzodiazepine', indication: 'Seizure / status epilepticus',
         weightDose: '2 mg',
         packageSpec: '2 mg/mL · dilute 1:1 w/ NS for IV',
-        deliveryDose: 'Push 2 mL IV/IO — draw 1 mL + 1 mL NS',
+        deliveryDose: 'Draw 1 mL + 1 mL NS → push 2 mL IV/IO',
         readyVol: '—',
         routeDoses: rcRouteDoses([
-          ['IV/IO', '2 mg', 'Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS'],
+          ['IV/IO', '2 mg', 'Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)'],
           ['IM', '2 mg', '1 mL of 2 mg/mL (undiluted)'],
         ]),
         detail: '2 mg IV/IO/IM; may repeat ×1 after 10–15 min (max total 8 mg). IV/IO: draw the dose, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM', max: '8 mg total' },
@@ -4521,20 +4521,20 @@ function ccGetDrugs() {
       { rhythm: 'non-arrest', name: 'Ketamine — Pain', class: 'Dissociative analgesic', indication: 'Sub-dissociative pain',
         weightDose: `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`,
         packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
-        deliveryDose: `Push ${ccFmt(0.2*kg/50, 2)} mL IV/IO — draw ${ccFmt(0.2*kg/100, 2)} mL + ${ccFmt(0.2*kg/100, 2)} mL NS`,
+        deliveryDose: `Draw ${ccFmt(0.2*kg/100, 2)} mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL IV/IO`,
         readyVol: '—',
         routeDoses: rcRouteDoses([
-          ['IV/IO', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `Push ${ccFmt(0.2*kg/50, 2)} mL (50 mg/mL) — draw ${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(0.2*kg/100, 2)} mL NS`],
+          ['IV/IO', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `Draw ${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL (50 mg/mL)`],
           ['IM/IN', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
         detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
         weightDose: `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
         packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
-        deliveryDose: `Push ${ccFmt(1*kg/50, 2)} mL IV/IO — draw ${ccFmt(1*kg/100, 2)} mL + ${ccFmt(1*kg/100, 2)} mL NS`,
+        deliveryDose: `Draw ${ccFmt(1*kg/100, 2)} mL + ${ccFmt(1*kg/100, 2)} mL NS → push ${ccFmt(1*kg/50, 2)} mL IV/IO`,
         readyVol: '—',
         routeDoses: rcRouteDoses([
-          ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `Push ${ccFmt(1*kg/50, 2)} mL (50 mg/mL) — draw ${ccFmt(1*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(1*kg/100, 2)} mL NS`],
+          ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `Draw ${ccFmt(1*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(1*kg/100, 2)} mL NS → push ${ccFmt(1*kg/50, 2)} mL (50 mg/mL)`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
         detail: 'Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
@@ -4565,10 +4565,10 @@ function ccGetDrugs() {
       { rhythm: 'non-arrest', name: 'Lorazepam (Ativan)', class: 'Benzodiazepine', indication: 'Seizure / status epilepticus',
         weightDose: `${ccFmt(Math.min(0.1*kg, 2), 1)} mg (0.1 mg/kg, max 2)`,
         packageSpec: '2 mg/mL · dilute 1:1 w/ NS for IV',
-        deliveryDose: `Push ${ccFmt(Math.min(0.1*kg, 2), 2)} mL IV/IO — draw ${ccFmt(Math.min(0.1*kg, 2)/2, 2)} mL + ${ccFmt(Math.min(0.1*kg, 2)/2, 2)} mL NS`,
+        deliveryDose: `Draw ${ccFmt(Math.min(0.1*kg, 2)/2, 2)} mL + ${ccFmt(Math.min(0.1*kg, 2)/2, 2)} mL NS → push ${ccFmt(Math.min(0.1*kg, 2), 2)} mL IV/IO`,
         readyVol: '—',
         routeDoses: rcRouteDoses([
-          ['IV/IO', `${ccFmt(Math.min(0.1*kg, 2), 1)} mg (0.1 mg/kg, max 2)`, `Push ${ccFmt(Math.min(0.1*kg, 2), 2)} mL (1 mg/mL) — draw ${ccFmt(Math.min(0.1*kg, 2)/2, 2)} mL of 2 mg/mL + ${ccFmt(Math.min(0.1*kg, 2)/2, 2)} mL NS`],
+          ['IV/IO', `${ccFmt(Math.min(0.1*kg, 2), 1)} mg (0.1 mg/kg, max 2)`, `Draw ${ccFmt(Math.min(0.1*kg, 2)/2, 2)} mL of 2 mg/mL + ${ccFmt(Math.min(0.1*kg, 2)/2, 2)} mL NS → push ${ccFmt(Math.min(0.1*kg, 2), 2)} mL (1 mg/mL)`],
           ['IM', `${ccFmt(Math.min(0.1*kg, 2), 1)} mg (0.1 mg/kg, max 2)`, `${ccFmt(Math.min(0.1*kg, 2)/2, 2)} mL of 2 mg/mL (undiluted)`],
         ]),
         detail: '0.1 mg/kg IV/IO/IM (max 2 mg/dose). IV/IO: draw the dose, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM', max: '2 mg / dose' },
@@ -5170,6 +5170,10 @@ function rcParseConc(spec) {
 //   "0.5 mL IM lateral thigh"                     → "0.5 mL"
 function rcParseVol(dose) {
   if (!dose) return '—';
+  // "… push X mL" — the administered volume wins the chip even when
+  // the string reads in workflow order (draw → dilute → push)
+  const push = dose.match(/push\s*([\d.]+(?:\s*[–-]\s*[\d.]+)?)\s*mL/i);
+  if (push) return `${push[1].replace(/\s+/g, '')} mL`;
   // Multi-dose "1st / 2nd" pattern in mL
   if (/1st|first/i.test(dose)) {
     const mm = dose.match(/(\d[\d.]*)\s*mL[^·]*[·][^·]*?(\d[\d.]*)\s*mL/i);

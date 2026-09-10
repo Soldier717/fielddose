@@ -696,16 +696,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "1.0 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.02 mL IV/IO — draw 0.01 mL + 0.01 mL NS",
+     "deliveryDose": "Draw 0.01 mL + 0.01 mL NS → push 0.02 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "1.0 mg (0.2 mg/kg)",
-       "vol": "Push 0.02 mL (50 mg/mL) — draw 0.01 mL of 100 mg/mL + 0.01 mL NS"
+       "vol": "Draw 0.01 mL of 100 mg/mL + 0.01 mL NS → push 0.02 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "1.0 mg (0.2 mg/kg)",
-       "vol": "Push 0.02 mL (50 mg/mL) — draw 0.01 mL of 100 mg/mL + 0.01 mL NS"
+       "vol": "Draw 0.01 mL of 100 mg/mL + 0.01 mL NS → push 0.02 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "1.0 mg (0.2 mg/kg)",
@@ -727,16 +727,16 @@
      "indication": "Procedural sedation",
      "weightDose": "5 mg IV/IO · 10 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.10 mL IV/IO — draw 0.05 mL + 0.05 mL NS",
+     "deliveryDose": "Draw 0.05 mL + 0.05 mL NS → push 0.10 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "5 mg (1 mg/kg)",
-       "vol": "Push 0.10 mL (50 mg/mL) — draw 0.05 mL of 100 mg/mL + 0.05 mL NS"
+       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.10 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "5 mg (1 mg/kg)",
-       "vol": "Push 0.10 mL (50 mg/mL) — draw 0.05 mL of 100 mg/mL + 0.05 mL NS"
+       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.10 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "10 mg (2 mg/kg)",
@@ -810,16 +810,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "0.5 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 0.50 mL IV/IO — draw 0.25 mL + 0.25 mL NS",
+     "deliveryDose": "Draw 0.25 mL + 0.25 mL NS → push 0.50 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "0.5 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 0.50 mL (1 mg/mL) — draw 0.25 mL of 2 mg/mL + 0.25 mL NS"
+       "vol": "Draw 0.25 mL of 2 mg/mL + 0.25 mL NS → push 0.50 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "0.5 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 0.50 mL (1 mg/mL) — draw 0.25 mL of 2 mg/mL + 0.25 mL NS"
+       "vol": "Draw 0.25 mL of 2 mg/mL + 0.25 mL NS → push 0.50 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "0.5 mg (0.1 mg/kg, max 2)",
@@ -1354,16 +1354,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "1.3 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.03 mL IV/IO — draw 0.01 mL + 0.01 mL NS",
+     "deliveryDose": "Draw 0.01 mL + 0.01 mL NS → push 0.03 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "1.3 mg (0.2 mg/kg)",
-       "vol": "Push 0.03 mL (50 mg/mL) — draw 0.01 mL of 100 mg/mL + 0.01 mL NS"
+       "vol": "Draw 0.01 mL of 100 mg/mL + 0.01 mL NS → push 0.03 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "1.3 mg (0.2 mg/kg)",
-       "vol": "Push 0.03 mL (50 mg/mL) — draw 0.01 mL of 100 mg/mL + 0.01 mL NS"
+       "vol": "Draw 0.01 mL of 100 mg/mL + 0.01 mL NS → push 0.03 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "1.3 mg (0.2 mg/kg)",
@@ -1385,16 +1385,16 @@
      "indication": "Procedural sedation",
      "weightDose": "7 mg IV/IO · 13 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.13 mL IV/IO — draw 0.07 mL + 0.07 mL NS",
+     "deliveryDose": "Draw 0.07 mL + 0.07 mL NS → push 0.13 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "7 mg (1 mg/kg)",
-       "vol": "Push 0.13 mL (50 mg/mL) — draw 0.07 mL of 100 mg/mL + 0.07 mL NS"
+       "vol": "Draw 0.07 mL of 100 mg/mL + 0.07 mL NS → push 0.13 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "7 mg (1 mg/kg)",
-       "vol": "Push 0.13 mL (50 mg/mL) — draw 0.07 mL of 100 mg/mL + 0.07 mL NS"
+       "vol": "Draw 0.07 mL of 100 mg/mL + 0.07 mL NS → push 0.13 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "13 mg (2 mg/kg)",
@@ -1468,16 +1468,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "0.7 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 0.65 mL IV/IO — draw 0.33 mL + 0.33 mL NS",
+     "deliveryDose": "Draw 0.33 mL + 0.33 mL NS → push 0.65 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "0.7 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 0.65 mL (1 mg/mL) — draw 0.33 mL of 2 mg/mL + 0.33 mL NS"
+       "vol": "Draw 0.33 mL of 2 mg/mL + 0.33 mL NS → push 0.65 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "0.7 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 0.65 mL (1 mg/mL) — draw 0.33 mL of 2 mg/mL + 0.33 mL NS"
+       "vol": "Draw 0.33 mL of 2 mg/mL + 0.33 mL NS → push 0.65 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "0.7 mg (0.1 mg/kg, max 2)",
@@ -2012,16 +2012,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "1.7 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.03 mL IV/IO — draw 0.02 mL + 0.02 mL NS",
+     "deliveryDose": "Draw 0.02 mL + 0.02 mL NS → push 0.03 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "1.7 mg (0.2 mg/kg)",
-       "vol": "Push 0.03 mL (50 mg/mL) — draw 0.02 mL of 100 mg/mL + 0.02 mL NS"
+       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.03 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "1.7 mg (0.2 mg/kg)",
-       "vol": "Push 0.03 mL (50 mg/mL) — draw 0.02 mL of 100 mg/mL + 0.02 mL NS"
+       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.03 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "1.7 mg (0.2 mg/kg)",
@@ -2043,16 +2043,16 @@
      "indication": "Procedural sedation",
      "weightDose": "9 mg IV/IO · 17 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.17 mL IV/IO — draw 0.09 mL + 0.09 mL NS",
+     "deliveryDose": "Draw 0.09 mL + 0.09 mL NS → push 0.17 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "9 mg (1 mg/kg)",
-       "vol": "Push 0.17 mL (50 mg/mL) — draw 0.09 mL of 100 mg/mL + 0.09 mL NS"
+       "vol": "Draw 0.09 mL of 100 mg/mL + 0.09 mL NS → push 0.17 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "9 mg (1 mg/kg)",
-       "vol": "Push 0.17 mL (50 mg/mL) — draw 0.09 mL of 100 mg/mL + 0.09 mL NS"
+       "vol": "Draw 0.09 mL of 100 mg/mL + 0.09 mL NS → push 0.17 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "17 mg (2 mg/kg)",
@@ -2126,16 +2126,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "0.9 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 0.85 mL IV/IO — draw 0.43 mL + 0.43 mL NS",
+     "deliveryDose": "Draw 0.43 mL + 0.43 mL NS → push 0.85 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "0.9 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 0.85 mL (1 mg/mL) — draw 0.43 mL of 2 mg/mL + 0.43 mL NS"
+       "vol": "Draw 0.43 mL of 2 mg/mL + 0.43 mL NS → push 0.85 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "0.9 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 0.85 mL (1 mg/mL) — draw 0.43 mL of 2 mg/mL + 0.43 mL NS"
+       "vol": "Draw 0.43 mL of 2 mg/mL + 0.43 mL NS → push 0.85 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "0.9 mg (0.1 mg/kg, max 2)",
@@ -2670,16 +2670,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "2.1 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.04 mL IV/IO — draw 0.02 mL + 0.02 mL NS",
+     "deliveryDose": "Draw 0.02 mL + 0.02 mL NS → push 0.04 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2.1 mg (0.2 mg/kg)",
-       "vol": "Push 0.04 mL (50 mg/mL) — draw 0.02 mL of 100 mg/mL + 0.02 mL NS"
+       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.04 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "2.1 mg (0.2 mg/kg)",
-       "vol": "Push 0.04 mL (50 mg/mL) — draw 0.02 mL of 100 mg/mL + 0.02 mL NS"
+       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.04 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "2.1 mg (0.2 mg/kg)",
@@ -2701,16 +2701,16 @@
      "indication": "Procedural sedation",
      "weightDose": "11 mg IV/IO · 21 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.21 mL IV/IO — draw 0.10 mL + 0.10 mL NS",
+     "deliveryDose": "Draw 0.10 mL + 0.10 mL NS → push 0.21 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "11 mg (1 mg/kg)",
-       "vol": "Push 0.21 mL (50 mg/mL) — draw 0.10 mL of 100 mg/mL + 0.10 mL NS"
+       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.21 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "11 mg (1 mg/kg)",
-       "vol": "Push 0.21 mL (50 mg/mL) — draw 0.10 mL of 100 mg/mL + 0.10 mL NS"
+       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.21 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "21 mg (2 mg/kg)",
@@ -2784,16 +2784,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "1.1 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 1.05 mL IV/IO — draw 0.53 mL + 0.53 mL NS",
+     "deliveryDose": "Draw 0.53 mL + 0.53 mL NS → push 1.05 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "1.1 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 1.05 mL (1 mg/mL) — draw 0.53 mL of 2 mg/mL + 0.53 mL NS"
+       "vol": "Draw 0.53 mL of 2 mg/mL + 0.53 mL NS → push 1.05 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "1.1 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 1.05 mL (1 mg/mL) — draw 0.53 mL of 2 mg/mL + 0.53 mL NS"
+       "vol": "Draw 0.53 mL of 2 mg/mL + 0.53 mL NS → push 1.05 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "1.1 mg (0.1 mg/kg, max 2)",
@@ -3328,16 +3328,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "2.6 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.05 mL IV/IO — draw 0.03 mL + 0.03 mL NS",
+     "deliveryDose": "Draw 0.03 mL + 0.03 mL NS → push 0.05 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2.6 mg (0.2 mg/kg)",
-       "vol": "Push 0.05 mL (50 mg/mL) — draw 0.03 mL of 100 mg/mL + 0.03 mL NS"
+       "vol": "Draw 0.03 mL of 100 mg/mL + 0.03 mL NS → push 0.05 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "2.6 mg (0.2 mg/kg)",
-       "vol": "Push 0.05 mL (50 mg/mL) — draw 0.03 mL of 100 mg/mL + 0.03 mL NS"
+       "vol": "Draw 0.03 mL of 100 mg/mL + 0.03 mL NS → push 0.05 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "2.6 mg (0.2 mg/kg)",
@@ -3359,16 +3359,16 @@
      "indication": "Procedural sedation",
      "weightDose": "13 mg IV/IO · 26 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.26 mL IV/IO — draw 0.13 mL + 0.13 mL NS",
+     "deliveryDose": "Draw 0.13 mL + 0.13 mL NS → push 0.26 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "13 mg (1 mg/kg)",
-       "vol": "Push 0.26 mL (50 mg/mL) — draw 0.13 mL of 100 mg/mL + 0.13 mL NS"
+       "vol": "Draw 0.13 mL of 100 mg/mL + 0.13 mL NS → push 0.26 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "13 mg (1 mg/kg)",
-       "vol": "Push 0.26 mL (50 mg/mL) — draw 0.13 mL of 100 mg/mL + 0.13 mL NS"
+       "vol": "Draw 0.13 mL of 100 mg/mL + 0.13 mL NS → push 0.26 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "26 mg (2 mg/kg)",
@@ -3442,16 +3442,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "1.3 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 1.30 mL IV/IO — draw 0.65 mL + 0.65 mL NS",
+     "deliveryDose": "Draw 0.65 mL + 0.65 mL NS → push 1.30 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "1.3 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 1.30 mL (1 mg/mL) — draw 0.65 mL of 2 mg/mL + 0.65 mL NS"
+       "vol": "Draw 0.65 mL of 2 mg/mL + 0.65 mL NS → push 1.30 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "1.3 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 1.30 mL (1 mg/mL) — draw 0.65 mL of 2 mg/mL + 0.65 mL NS"
+       "vol": "Draw 0.65 mL of 2 mg/mL + 0.65 mL NS → push 1.30 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "1.3 mg (0.1 mg/kg, max 2)",
@@ -3986,16 +3986,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "3.3 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.07 mL IV/IO — draw 0.03 mL + 0.03 mL NS",
+     "deliveryDose": "Draw 0.03 mL + 0.03 mL NS → push 0.07 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "3.3 mg (0.2 mg/kg)",
-       "vol": "Push 0.07 mL (50 mg/mL) — draw 0.03 mL of 100 mg/mL + 0.03 mL NS"
+       "vol": "Draw 0.03 mL of 100 mg/mL + 0.03 mL NS → push 0.07 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "3.3 mg (0.2 mg/kg)",
-       "vol": "Push 0.07 mL (50 mg/mL) — draw 0.03 mL of 100 mg/mL + 0.03 mL NS"
+       "vol": "Draw 0.03 mL of 100 mg/mL + 0.03 mL NS → push 0.07 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "3.3 mg (0.2 mg/kg)",
@@ -4017,16 +4017,16 @@
      "indication": "Procedural sedation",
      "weightDose": "17 mg IV/IO · 33 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.33 mL IV/IO — draw 0.17 mL + 0.17 mL NS",
+     "deliveryDose": "Draw 0.17 mL + 0.17 mL NS → push 0.33 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "17 mg (1 mg/kg)",
-       "vol": "Push 0.33 mL (50 mg/mL) — draw 0.17 mL of 100 mg/mL + 0.17 mL NS"
+       "vol": "Draw 0.17 mL of 100 mg/mL + 0.17 mL NS → push 0.33 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "17 mg (1 mg/kg)",
-       "vol": "Push 0.33 mL (50 mg/mL) — draw 0.17 mL of 100 mg/mL + 0.17 mL NS"
+       "vol": "Draw 0.17 mL of 100 mg/mL + 0.17 mL NS → push 0.33 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "33 mg (2 mg/kg)",
@@ -4100,16 +4100,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "1.7 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 1.65 mL IV/IO — draw 0.83 mL + 0.83 mL NS",
+     "deliveryDose": "Draw 0.83 mL + 0.83 mL NS → push 1.65 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "1.7 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 1.65 mL (1 mg/mL) — draw 0.83 mL of 2 mg/mL + 0.83 mL NS"
+       "vol": "Draw 0.83 mL of 2 mg/mL + 0.83 mL NS → push 1.65 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "1.7 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 1.65 mL (1 mg/mL) — draw 0.83 mL of 2 mg/mL + 0.83 mL NS"
+       "vol": "Draw 0.83 mL of 2 mg/mL + 0.83 mL NS → push 1.65 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "1.7 mg (0.1 mg/kg, max 2)",
@@ -4644,16 +4644,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "4.2 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.08 mL IV/IO — draw 0.04 mL + 0.04 mL NS",
+     "deliveryDose": "Draw 0.04 mL + 0.04 mL NS → push 0.08 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "4.2 mg (0.2 mg/kg)",
-       "vol": "Push 0.08 mL (50 mg/mL) — draw 0.04 mL of 100 mg/mL + 0.04 mL NS"
+       "vol": "Draw 0.04 mL of 100 mg/mL + 0.04 mL NS → push 0.08 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "4.2 mg (0.2 mg/kg)",
-       "vol": "Push 0.08 mL (50 mg/mL) — draw 0.04 mL of 100 mg/mL + 0.04 mL NS"
+       "vol": "Draw 0.04 mL of 100 mg/mL + 0.04 mL NS → push 0.08 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "4.2 mg (0.2 mg/kg)",
@@ -4675,16 +4675,16 @@
      "indication": "Procedural sedation",
      "weightDose": "21 mg IV/IO · 42 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.42 mL IV/IO — draw 0.21 mL + 0.21 mL NS",
+     "deliveryDose": "Draw 0.21 mL + 0.21 mL NS → push 0.42 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "21 mg (1 mg/kg)",
-       "vol": "Push 0.42 mL (50 mg/mL) — draw 0.21 mL of 100 mg/mL + 0.21 mL NS"
+       "vol": "Draw 0.21 mL of 100 mg/mL + 0.21 mL NS → push 0.42 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "21 mg (1 mg/kg)",
-       "vol": "Push 0.42 mL (50 mg/mL) — draw 0.21 mL of 100 mg/mL + 0.21 mL NS"
+       "vol": "Draw 0.21 mL of 100 mg/mL + 0.21 mL NS → push 0.42 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "42 mg (2 mg/kg)",
@@ -4758,16 +4758,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2.0 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2.00 mL IV/IO — draw 1.00 mL + 1.00 mL NS",
+     "deliveryDose": "Draw 1.00 mL + 1.00 mL NS → push 2.00 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 2.00 mL (1 mg/mL) — draw 1.00 mL of 2 mg/mL + 1.00 mL NS"
+       "vol": "Draw 1.00 mL of 2 mg/mL + 1.00 mL NS → push 2.00 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 2.00 mL (1 mg/mL) — draw 1.00 mL of 2 mg/mL + 1.00 mL NS"
+       "vol": "Draw 1.00 mL of 2 mg/mL + 1.00 mL NS → push 2.00 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
@@ -5302,16 +5302,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "5.3 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.11 mL IV/IO — draw 0.05 mL + 0.05 mL NS",
+     "deliveryDose": "Draw 0.05 mL + 0.05 mL NS → push 0.11 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "5.3 mg (0.2 mg/kg)",
-       "vol": "Push 0.11 mL (50 mg/mL) — draw 0.05 mL of 100 mg/mL + 0.05 mL NS"
+       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.11 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "5.3 mg (0.2 mg/kg)",
-       "vol": "Push 0.11 mL (50 mg/mL) — draw 0.05 mL of 100 mg/mL + 0.05 mL NS"
+       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.11 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "5.3 mg (0.2 mg/kg)",
@@ -5333,16 +5333,16 @@
      "indication": "Procedural sedation",
      "weightDose": "27 mg IV/IO · 53 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.53 mL IV/IO — draw 0.27 mL + 0.27 mL NS",
+     "deliveryDose": "Draw 0.27 mL + 0.27 mL NS → push 0.53 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "27 mg (1 mg/kg)",
-       "vol": "Push 0.53 mL (50 mg/mL) — draw 0.27 mL of 100 mg/mL + 0.27 mL NS"
+       "vol": "Draw 0.27 mL of 100 mg/mL + 0.27 mL NS → push 0.53 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "27 mg (1 mg/kg)",
-       "vol": "Push 0.53 mL (50 mg/mL) — draw 0.27 mL of 100 mg/mL + 0.27 mL NS"
+       "vol": "Draw 0.27 mL of 100 mg/mL + 0.27 mL NS → push 0.53 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "53 mg (2 mg/kg)",
@@ -5416,16 +5416,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2.0 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2.00 mL IV/IO — draw 1.00 mL + 1.00 mL NS",
+     "deliveryDose": "Draw 1.00 mL + 1.00 mL NS → push 2.00 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 2.00 mL (1 mg/mL) — draw 1.00 mL of 2 mg/mL + 1.00 mL NS"
+       "vol": "Draw 1.00 mL of 2 mg/mL + 1.00 mL NS → push 2.00 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 2.00 mL (1 mg/mL) — draw 1.00 mL of 2 mg/mL + 1.00 mL NS"
+       "vol": "Draw 1.00 mL of 2 mg/mL + 1.00 mL NS → push 2.00 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
@@ -5960,16 +5960,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "6.6 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.13 mL IV/IO — draw 0.07 mL + 0.07 mL NS",
+     "deliveryDose": "Draw 0.07 mL + 0.07 mL NS → push 0.13 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "6.6 mg (0.2 mg/kg)",
-       "vol": "Push 0.13 mL (50 mg/mL) — draw 0.07 mL of 100 mg/mL + 0.07 mL NS"
+       "vol": "Draw 0.07 mL of 100 mg/mL + 0.07 mL NS → push 0.13 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "6.6 mg (0.2 mg/kg)",
-       "vol": "Push 0.13 mL (50 mg/mL) — draw 0.07 mL of 100 mg/mL + 0.07 mL NS"
+       "vol": "Draw 0.07 mL of 100 mg/mL + 0.07 mL NS → push 0.13 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "6.6 mg (0.2 mg/kg)",
@@ -5991,16 +5991,16 @@
      "indication": "Procedural sedation",
      "weightDose": "33 mg IV/IO · 66 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.66 mL IV/IO — draw 0.33 mL + 0.33 mL NS",
+     "deliveryDose": "Draw 0.33 mL + 0.33 mL NS → push 0.66 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "33 mg (1 mg/kg)",
-       "vol": "Push 0.66 mL (50 mg/mL) — draw 0.33 mL of 100 mg/mL + 0.33 mL NS"
+       "vol": "Draw 0.33 mL of 100 mg/mL + 0.33 mL NS → push 0.66 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "33 mg (1 mg/kg)",
-       "vol": "Push 0.66 mL (50 mg/mL) — draw 0.33 mL of 100 mg/mL + 0.33 mL NS"
+       "vol": "Draw 0.33 mL of 100 mg/mL + 0.33 mL NS → push 0.66 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "66 mg (2 mg/kg)",
@@ -6074,16 +6074,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2.0 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2.00 mL IV/IO — draw 1.00 mL + 1.00 mL NS",
+     "deliveryDose": "Draw 1.00 mL + 1.00 mL NS → push 2.00 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 2.00 mL (1 mg/mL) — draw 1.00 mL of 2 mg/mL + 1.00 mL NS"
+       "vol": "Draw 1.00 mL of 2 mg/mL + 1.00 mL NS → push 2.00 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 2.00 mL (1 mg/mL) — draw 1.00 mL of 2 mg/mL + 1.00 mL NS"
+       "vol": "Draw 1.00 mL of 2 mg/mL + 1.00 mL NS → push 2.00 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
@@ -6657,16 +6657,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "9 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.18 mL IV/IO — draw 0.09 mL + 0.09 mL NS",
+     "deliveryDose": "Draw 0.09 mL + 0.09 mL NS → push 0.18 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "9 mg (0.2 mg/kg)",
-       "vol": "Push 0.18 mL (50 mg/mL) — draw 0.09 mL of 100 mg/mL + 0.09 mL NS"
+       "vol": "Draw 0.09 mL of 100 mg/mL + 0.09 mL NS → push 0.18 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "9 mg (0.2 mg/kg)",
-       "vol": "Push 0.18 mL (50 mg/mL) — draw 0.09 mL of 100 mg/mL + 0.09 mL NS"
+       "vol": "Draw 0.09 mL of 100 mg/mL + 0.09 mL NS → push 0.18 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "9 mg (0.2 mg/kg)",
@@ -6688,16 +6688,16 @@
      "indication": "Procedural sedation",
      "weightDose": "45 mg IV/IO · 90 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.9 mL IV/IO — draw 0.5 mL + 0.5 mL NS",
+     "deliveryDose": "Draw 0.5 mL + 0.5 mL NS → push 0.9 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "45 mg (1 mg/kg)",
-       "vol": "Push 0.9 mL (50 mg/mL) — draw 0.5 mL of 100 mg/mL + 0.5 mL NS"
+       "vol": "Draw 0.5 mL of 100 mg/mL + 0.5 mL NS → push 0.9 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "45 mg (1 mg/kg)",
-       "vol": "Push 0.9 mL (50 mg/mL) — draw 0.5 mL of 100 mg/mL + 0.5 mL NS"
+       "vol": "Draw 0.5 mL of 100 mg/mL + 0.5 mL NS → push 0.9 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "90 mg (2 mg/kg)",
@@ -6784,16 +6784,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2 mg",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2 mL IV/IO — draw 1 mL + 1 mL NS",
+     "deliveryDose": "Draw 1 mL + 1 mL NS → push 2 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2 mg",
@@ -7567,16 +7567,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "2.0 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.04 mL IV/IO — draw 0.02 mL + 0.02 mL NS",
+     "deliveryDose": "Draw 0.02 mL + 0.02 mL NS → push 0.04 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2.0 mg (0.2 mg/kg)",
-       "vol": "Push 0.04 mL (50 mg/mL) — draw 0.02 mL of 100 mg/mL + 0.02 mL NS"
+       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.04 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "2.0 mg (0.2 mg/kg)",
-       "vol": "Push 0.04 mL (50 mg/mL) — draw 0.02 mL of 100 mg/mL + 0.02 mL NS"
+       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.04 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "2.0 mg (0.2 mg/kg)",
@@ -7598,16 +7598,16 @@
      "indication": "Procedural sedation",
      "weightDose": "10 mg IV/IO · 20 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.20 mL IV/IO — draw 0.10 mL + 0.10 mL NS",
+     "deliveryDose": "Draw 0.10 mL + 0.10 mL NS → push 0.20 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "10 mg (1 mg/kg)",
-       "vol": "Push 0.20 mL (50 mg/mL) — draw 0.10 mL of 100 mg/mL + 0.10 mL NS"
+       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.20 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "10 mg (1 mg/kg)",
-       "vol": "Push 0.20 mL (50 mg/mL) — draw 0.10 mL of 100 mg/mL + 0.10 mL NS"
+       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.20 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "20 mg (2 mg/kg)",
@@ -7681,16 +7681,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "1.0 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 1.00 mL IV/IO — draw 0.50 mL + 0.50 mL NS",
+     "deliveryDose": "Draw 0.50 mL + 0.50 mL NS → push 1.00 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "1.0 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 1.00 mL (1 mg/mL) — draw 0.50 mL of 2 mg/mL + 0.50 mL NS"
+       "vol": "Draw 0.50 mL of 2 mg/mL + 0.50 mL NS → push 1.00 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "1.0 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 1.00 mL (1 mg/mL) — draw 0.50 mL of 2 mg/mL + 0.50 mL NS"
+       "vol": "Draw 0.50 mL of 2 mg/mL + 0.50 mL NS → push 1.00 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "1.0 mg (0.1 mg/kg, max 2)",
@@ -8225,16 +8225,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "5.0 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.10 mL IV/IO — draw 0.05 mL + 0.05 mL NS",
+     "deliveryDose": "Draw 0.05 mL + 0.05 mL NS → push 0.10 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "5.0 mg (0.2 mg/kg)",
-       "vol": "Push 0.10 mL (50 mg/mL) — draw 0.05 mL of 100 mg/mL + 0.05 mL NS"
+       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.10 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "5.0 mg (0.2 mg/kg)",
-       "vol": "Push 0.10 mL (50 mg/mL) — draw 0.05 mL of 100 mg/mL + 0.05 mL NS"
+       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.10 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "5.0 mg (0.2 mg/kg)",
@@ -8256,16 +8256,16 @@
      "indication": "Procedural sedation",
      "weightDose": "25 mg IV/IO · 50 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.50 mL IV/IO — draw 0.25 mL + 0.25 mL NS",
+     "deliveryDose": "Draw 0.25 mL + 0.25 mL NS → push 0.50 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "25 mg (1 mg/kg)",
-       "vol": "Push 0.50 mL (50 mg/mL) — draw 0.25 mL of 100 mg/mL + 0.25 mL NS"
+       "vol": "Draw 0.25 mL of 100 mg/mL + 0.25 mL NS → push 0.50 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "25 mg (1 mg/kg)",
-       "vol": "Push 0.50 mL (50 mg/mL) — draw 0.25 mL of 100 mg/mL + 0.25 mL NS"
+       "vol": "Draw 0.25 mL of 100 mg/mL + 0.25 mL NS → push 0.50 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "50 mg (2 mg/kg)",
@@ -8339,16 +8339,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2.0 mg (0.1 mg/kg, max 2)",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2.00 mL IV/IO — draw 1.00 mL + 1.00 mL NS",
+     "deliveryDose": "Draw 1.00 mL + 1.00 mL NS → push 2.00 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 2.00 mL (1 mg/mL) — draw 1.00 mL of 2 mg/mL + 1.00 mL NS"
+       "vol": "Draw 1.00 mL of 2 mg/mL + 1.00 mL NS → push 2.00 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
-       "vol": "Push 2.00 mL (1 mg/mL) — draw 1.00 mL of 2 mg/mL + 1.00 mL NS"
+       "vol": "Draw 1.00 mL of 2 mg/mL + 1.00 mL NS → push 2.00 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2.0 mg (0.1 mg/kg, max 2)",
@@ -8922,16 +8922,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "10 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.20 mL IV/IO — draw 0.10 mL + 0.10 mL NS",
+     "deliveryDose": "Draw 0.10 mL + 0.10 mL NS → push 0.20 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "10 mg (0.2 mg/kg)",
-       "vol": "Push 0.20 mL (50 mg/mL) — draw 0.10 mL of 100 mg/mL + 0.10 mL NS"
+       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.20 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "10 mg (0.2 mg/kg)",
-       "vol": "Push 0.20 mL (50 mg/mL) — draw 0.10 mL of 100 mg/mL + 0.10 mL NS"
+       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.20 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "10 mg (0.2 mg/kg)",
@@ -8953,16 +8953,16 @@
      "indication": "Procedural sedation",
      "weightDose": "50 mg IV/IO · 100 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 1.0 mL IV/IO — draw 0.5 mL + 0.5 mL NS",
+     "deliveryDose": "Draw 0.5 mL + 0.5 mL NS → push 1.0 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "50 mg (1 mg/kg)",
-       "vol": "Push 1.0 mL (50 mg/mL) — draw 0.5 mL of 100 mg/mL + 0.5 mL NS"
+       "vol": "Draw 0.5 mL of 100 mg/mL + 0.5 mL NS → push 1.0 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "50 mg (1 mg/kg)",
-       "vol": "Push 1.0 mL (50 mg/mL) — draw 0.5 mL of 100 mg/mL + 0.5 mL NS"
+       "vol": "Draw 0.5 mL of 100 mg/mL + 0.5 mL NS → push 1.0 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "100 mg (2 mg/kg)",
@@ -9049,16 +9049,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2 mg",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2 mL IV/IO — draw 1 mL + 1 mL NS",
+     "deliveryDose": "Draw 1 mL + 1 mL NS → push 2 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2 mg",
@@ -9697,16 +9697,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "12 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.24 mL IV/IO — draw 0.12 mL + 0.12 mL NS",
+     "deliveryDose": "Draw 0.12 mL + 0.12 mL NS → push 0.24 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "12 mg (0.2 mg/kg)",
-       "vol": "Push 0.24 mL (50 mg/mL) — draw 0.12 mL of 100 mg/mL + 0.12 mL NS"
+       "vol": "Draw 0.12 mL of 100 mg/mL + 0.12 mL NS → push 0.24 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "12 mg (0.2 mg/kg)",
-       "vol": "Push 0.24 mL (50 mg/mL) — draw 0.12 mL of 100 mg/mL + 0.12 mL NS"
+       "vol": "Draw 0.12 mL of 100 mg/mL + 0.12 mL NS → push 0.24 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "12 mg (0.2 mg/kg)",
@@ -9728,16 +9728,16 @@
      "indication": "Procedural sedation",
      "weightDose": "60 mg IV/IO · 120 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 1.2 mL IV/IO — draw 0.6 mL + 0.6 mL NS",
+     "deliveryDose": "Draw 0.6 mL + 0.6 mL NS → push 1.2 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "60 mg (1 mg/kg)",
-       "vol": "Push 1.2 mL (50 mg/mL) — draw 0.6 mL of 100 mg/mL + 0.6 mL NS"
+       "vol": "Draw 0.6 mL of 100 mg/mL + 0.6 mL NS → push 1.2 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "60 mg (1 mg/kg)",
-       "vol": "Push 1.2 mL (50 mg/mL) — draw 0.6 mL of 100 mg/mL + 0.6 mL NS"
+       "vol": "Draw 0.6 mL of 100 mg/mL + 0.6 mL NS → push 1.2 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "120 mg (2 mg/kg)",
@@ -9824,16 +9824,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2 mg",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2 mL IV/IO — draw 1 mL + 1 mL NS",
+     "deliveryDose": "Draw 1 mL + 1 mL NS → push 2 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2 mg",
@@ -10472,16 +10472,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "14 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.28 mL IV/IO — draw 0.14 mL + 0.14 mL NS",
+     "deliveryDose": "Draw 0.14 mL + 0.14 mL NS → push 0.28 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "14 mg (0.2 mg/kg)",
-       "vol": "Push 0.28 mL (50 mg/mL) — draw 0.14 mL of 100 mg/mL + 0.14 mL NS"
+       "vol": "Draw 0.14 mL of 100 mg/mL + 0.14 mL NS → push 0.28 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "14 mg (0.2 mg/kg)",
-       "vol": "Push 0.28 mL (50 mg/mL) — draw 0.14 mL of 100 mg/mL + 0.14 mL NS"
+       "vol": "Draw 0.14 mL of 100 mg/mL + 0.14 mL NS → push 0.28 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "14 mg (0.2 mg/kg)",
@@ -10503,16 +10503,16 @@
      "indication": "Procedural sedation",
      "weightDose": "70 mg IV/IO · 140 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 1.4 mL IV/IO — draw 0.7 mL + 0.7 mL NS",
+     "deliveryDose": "Draw 0.7 mL + 0.7 mL NS → push 1.4 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "70 mg (1 mg/kg)",
-       "vol": "Push 1.4 mL (50 mg/mL) — draw 0.7 mL of 100 mg/mL + 0.7 mL NS"
+       "vol": "Draw 0.7 mL of 100 mg/mL + 0.7 mL NS → push 1.4 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "70 mg (1 mg/kg)",
-       "vol": "Push 1.4 mL (50 mg/mL) — draw 0.7 mL of 100 mg/mL + 0.7 mL NS"
+       "vol": "Draw 0.7 mL of 100 mg/mL + 0.7 mL NS → push 1.4 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "140 mg (2 mg/kg)",
@@ -10599,16 +10599,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2 mg",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2 mL IV/IO — draw 1 mL + 1 mL NS",
+     "deliveryDose": "Draw 1 mL + 1 mL NS → push 2 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2 mg",
@@ -11247,16 +11247,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "15 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.30 mL IV/IO — draw 0.15 mL + 0.15 mL NS",
+     "deliveryDose": "Draw 0.15 mL + 0.15 mL NS → push 0.30 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "15 mg (0.2 mg/kg)",
-       "vol": "Push 0.30 mL (50 mg/mL) — draw 0.15 mL of 100 mg/mL + 0.15 mL NS"
+       "vol": "Draw 0.15 mL of 100 mg/mL + 0.15 mL NS → push 0.30 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "15 mg (0.2 mg/kg)",
-       "vol": "Push 0.30 mL (50 mg/mL) — draw 0.15 mL of 100 mg/mL + 0.15 mL NS"
+       "vol": "Draw 0.15 mL of 100 mg/mL + 0.15 mL NS → push 0.30 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "15 mg (0.2 mg/kg)",
@@ -11278,16 +11278,16 @@
      "indication": "Procedural sedation",
      "weightDose": "75 mg IV/IO · 150 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 1.5 mL IV/IO — draw 0.8 mL + 0.8 mL NS",
+     "deliveryDose": "Draw 0.8 mL + 0.8 mL NS → push 1.5 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "75 mg (1 mg/kg)",
-       "vol": "Push 1.5 mL (50 mg/mL) — draw 0.8 mL of 100 mg/mL + 0.8 mL NS"
+       "vol": "Draw 0.8 mL of 100 mg/mL + 0.8 mL NS → push 1.5 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "75 mg (1 mg/kg)",
-       "vol": "Push 1.5 mL (50 mg/mL) — draw 0.8 mL of 100 mg/mL + 0.8 mL NS"
+       "vol": "Draw 0.8 mL of 100 mg/mL + 0.8 mL NS → push 1.5 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "150 mg (2 mg/kg)",
@@ -11374,16 +11374,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2 mg",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2 mL IV/IO — draw 1 mL + 1 mL NS",
+     "deliveryDose": "Draw 1 mL + 1 mL NS → push 2 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2 mg",
@@ -12022,16 +12022,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "16 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.32 mL IV/IO — draw 0.16 mL + 0.16 mL NS",
+     "deliveryDose": "Draw 0.16 mL + 0.16 mL NS → push 0.32 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "16 mg (0.2 mg/kg)",
-       "vol": "Push 0.32 mL (50 mg/mL) — draw 0.16 mL of 100 mg/mL + 0.16 mL NS"
+       "vol": "Draw 0.16 mL of 100 mg/mL + 0.16 mL NS → push 0.32 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "16 mg (0.2 mg/kg)",
-       "vol": "Push 0.32 mL (50 mg/mL) — draw 0.16 mL of 100 mg/mL + 0.16 mL NS"
+       "vol": "Draw 0.16 mL of 100 mg/mL + 0.16 mL NS → push 0.32 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "16 mg (0.2 mg/kg)",
@@ -12053,16 +12053,16 @@
      "indication": "Procedural sedation",
      "weightDose": "80 mg IV/IO · 160 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 1.6 mL IV/IO — draw 0.8 mL + 0.8 mL NS",
+     "deliveryDose": "Draw 0.8 mL + 0.8 mL NS → push 1.6 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "80 mg (1 mg/kg)",
-       "vol": "Push 1.6 mL (50 mg/mL) — draw 0.8 mL of 100 mg/mL + 0.8 mL NS"
+       "vol": "Draw 0.8 mL of 100 mg/mL + 0.8 mL NS → push 1.6 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "80 mg (1 mg/kg)",
-       "vol": "Push 1.6 mL (50 mg/mL) — draw 0.8 mL of 100 mg/mL + 0.8 mL NS"
+       "vol": "Draw 0.8 mL of 100 mg/mL + 0.8 mL NS → push 1.6 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "160 mg (2 mg/kg)",
@@ -12149,16 +12149,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2 mg",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2 mL IV/IO — draw 1 mL + 1 mL NS",
+     "deliveryDose": "Draw 1 mL + 1 mL NS → push 2 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2 mg",
@@ -12797,16 +12797,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "18 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.36 mL IV/IO — draw 0.18 mL + 0.18 mL NS",
+     "deliveryDose": "Draw 0.18 mL + 0.18 mL NS → push 0.36 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "18 mg (0.2 mg/kg)",
-       "vol": "Push 0.36 mL (50 mg/mL) — draw 0.18 mL of 100 mg/mL + 0.18 mL NS"
+       "vol": "Draw 0.18 mL of 100 mg/mL + 0.18 mL NS → push 0.36 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "18 mg (0.2 mg/kg)",
-       "vol": "Push 0.36 mL (50 mg/mL) — draw 0.18 mL of 100 mg/mL + 0.18 mL NS"
+       "vol": "Draw 0.18 mL of 100 mg/mL + 0.18 mL NS → push 0.36 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "18 mg (0.2 mg/kg)",
@@ -12828,16 +12828,16 @@
      "indication": "Procedural sedation",
      "weightDose": "90 mg IV/IO · 180 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 1.8 mL IV/IO — draw 0.9 mL + 0.9 mL NS",
+     "deliveryDose": "Draw 0.9 mL + 0.9 mL NS → push 1.8 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "90 mg (1 mg/kg)",
-       "vol": "Push 1.8 mL (50 mg/mL) — draw 0.9 mL of 100 mg/mL + 0.9 mL NS"
+       "vol": "Draw 0.9 mL of 100 mg/mL + 0.9 mL NS → push 1.8 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "90 mg (1 mg/kg)",
-       "vol": "Push 1.8 mL (50 mg/mL) — draw 0.9 mL of 100 mg/mL + 0.9 mL NS"
+       "vol": "Draw 0.9 mL of 100 mg/mL + 0.9 mL NS → push 1.8 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "180 mg (2 mg/kg)",
@@ -12924,16 +12924,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2 mg",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2 mL IV/IO — draw 1 mL + 1 mL NS",
+     "deliveryDose": "Draw 1 mL + 1 mL NS → push 2 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2 mg",
@@ -13572,16 +13572,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "20 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.40 mL IV/IO — draw 0.20 mL + 0.20 mL NS",
+     "deliveryDose": "Draw 0.20 mL + 0.20 mL NS → push 0.40 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "20 mg (0.2 mg/kg)",
-       "vol": "Push 0.40 mL (50 mg/mL) — draw 0.20 mL of 100 mg/mL + 0.20 mL NS"
+       "vol": "Draw 0.20 mL of 100 mg/mL + 0.20 mL NS → push 0.40 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "20 mg (0.2 mg/kg)",
-       "vol": "Push 0.40 mL (50 mg/mL) — draw 0.20 mL of 100 mg/mL + 0.20 mL NS"
+       "vol": "Draw 0.20 mL of 100 mg/mL + 0.20 mL NS → push 0.40 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "20 mg (0.2 mg/kg)",
@@ -13603,16 +13603,16 @@
      "indication": "Procedural sedation",
      "weightDose": "100 mg IV/IO · 200 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 2.0 mL IV/IO — draw 1.0 mL + 1.0 mL NS",
+     "deliveryDose": "Draw 1.0 mL + 1.0 mL NS → push 2.0 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "100 mg (1 mg/kg)",
-       "vol": "Push 2.0 mL (50 mg/mL) — draw 1.0 mL of 100 mg/mL + 1.0 mL NS"
+       "vol": "Draw 1.0 mL of 100 mg/mL + 1.0 mL NS → push 2.0 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "100 mg (1 mg/kg)",
-       "vol": "Push 2.0 mL (50 mg/mL) — draw 1.0 mL of 100 mg/mL + 1.0 mL NS"
+       "vol": "Draw 1.0 mL of 100 mg/mL + 1.0 mL NS → push 2.0 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "200 mg (2 mg/kg)",
@@ -13699,16 +13699,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2 mg",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2 mL IV/IO — draw 1 mL + 1 mL NS",
+     "deliveryDose": "Draw 1 mL + 1 mL NS → push 2 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2 mg",
@@ -14347,16 +14347,16 @@
      "indication": "Sub-dissociative pain",
      "weightDose": "20 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 0.40 mL IV/IO — draw 0.20 mL + 0.20 mL NS",
+     "deliveryDose": "Draw 0.20 mL + 0.20 mL NS → push 0.40 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "20 mg (0.2 mg/kg)",
-       "vol": "Push 0.40 mL (50 mg/mL) — draw 0.20 mL of 100 mg/mL + 0.20 mL NS"
+       "vol": "Draw 0.20 mL of 100 mg/mL + 0.20 mL NS → push 0.40 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "20 mg (0.2 mg/kg)",
-       "vol": "Push 0.40 mL (50 mg/mL) — draw 0.20 mL of 100 mg/mL + 0.20 mL NS"
+       "vol": "Draw 0.20 mL of 100 mg/mL + 0.20 mL NS → push 0.40 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "20 mg (0.2 mg/kg)",
@@ -14378,16 +14378,16 @@
      "indication": "Procedural sedation",
      "weightDose": "100 mg IV/IO · 200 mg IM/IN",
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Push 2.0 mL IV/IO — draw 1.0 mL + 1.0 mL NS",
+     "deliveryDose": "Draw 1.0 mL + 1.0 mL NS → push 2.0 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "100 mg (1 mg/kg)",
-       "vol": "Push 2.0 mL (50 mg/mL) — draw 1.0 mL of 100 mg/mL + 1.0 mL NS"
+       "vol": "Draw 1.0 mL of 100 mg/mL + 1.0 mL NS → push 2.0 mL (50 mg/mL)"
       },
       "IO": {
        "dose": "100 mg (1 mg/kg)",
-       "vol": "Push 2.0 mL (50 mg/mL) — draw 1.0 mL of 100 mg/mL + 1.0 mL NS"
+       "vol": "Draw 1.0 mL of 100 mg/mL + 1.0 mL NS → push 2.0 mL (50 mg/mL)"
       },
       "IM": {
        "dose": "200 mg (2 mg/kg)",
@@ -14474,16 +14474,16 @@
      "indication": "Seizure / status epilepticus",
      "weightDose": "2 mg",
      "packageSpec": "2 mg/mL · dilute 1:1 w/ NS for IV",
-     "deliveryDose": "Push 2 mL IV/IO — draw 1 mL + 1 mL NS",
+     "deliveryDose": "Draw 1 mL + 1 mL NS → push 2 mL IV/IO",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IO": {
        "dose": "2 mg",
-       "vol": "Push 2 mL (1 mg/mL) — draw 1 mL of 2 mg/mL + 1 mL NS"
+       "vol": "Draw 1 mL of 2 mg/mL + 1 mL NS → push 2 mL (1 mg/mL)"
       },
       "IM": {
        "dose": "2 mg",

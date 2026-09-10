@@ -3381,6 +3381,36 @@
   .qref-chip.ok  { background: #e3f4e8; color: #1d7a39; }
   .qref-chip.low { background: var(--clin-blue-light); color: var(--clin-red); }
 
+  /* tool: GCS calculator */
+  .qref-gcs-mode { display: flex; gap: 8px; margin-bottom: 18px; }
+  .qref-gcs-mode button {
+    flex: 1; padding: 9px 10px; font-size: 13px; font-weight: 700;
+    border: 1px solid var(--clin-border); border-radius: 8px;
+    background: var(--clin-surface); color: var(--clin-text-dim); cursor: pointer;
+  }
+  .qref-gcs-mode button.active { background: var(--clin-blue); border-color: var(--clin-blue); color: #fff; }
+  .qref-gcs-group { margin-bottom: 16px; }
+  .qref-gcs-group .glabel {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--clin-text-dim); margin-bottom: 6px;
+  }
+  .qref-gcs-group .glabel .picked { color: var(--clin-blue); font-family: 'JetBrains Mono', monospace; }
+  .qref-gcs-opts { display: flex; flex-direction: column; gap: 6px; }
+  .qref-gcs-opt {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; font-size: 14px; text-align: left;
+    border: 1px solid var(--clin-border); border-radius: 8px;
+    background: var(--clin-surface); color: var(--clin-text); cursor: pointer;
+  }
+  .qref-gcs-opt .sc {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 15px;
+    color: var(--clin-text-muted); min-width: 16px; text-align: center;
+  }
+  .qref-gcs-opt.sel { border-color: var(--clin-blue); background: var(--clin-blue-light); font-weight: 600; }
+  .qref-gcs-opt.sel .sc { color: var(--clin-blue); }
+  .qref-chip.mid { background: #fbedd7; color: #8a5a10; }
+
   .qref-formula { margin-top: 16px; text-align: center; font-size: 13px; color: var(--clin-text-dim); }
   .qref-formula code { background: var(--clin-surface-alt); padding: 2px 7px; border-radius: 5px; }
   .qref-disclaimer {
@@ -7343,6 +7373,14 @@ function bindRunCodeEvents() {
       render: renderMapTool,
       bind: bindMapTool,
     },
+    {
+      id: 'gcs',
+      name: 'GCS Calculator',
+      meta: 'Glasgow Coma Scale · adult & infant',
+      icon: '<svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+      render: renderGcsTool,
+      bind: bindGcsTool,
+    },
   ];
 
   const $ = (id) => document.getElementById(id);
@@ -7746,6 +7784,88 @@ function bindRunCodeEvents() {
     sbpEl.addEventListener('input', recompute);
     dbpEl.addEventListener('input', recompute);
     sbpEl.focus();
+  }
+
+  // ---- GCS calculator tool ----
+  const GCS_SCALES = {
+    adult: {
+      eye:    [[4, 'Spontaneous'], [3, 'To voice'], [2, 'To pain'], [1, 'None']],
+      verbal: [[5, 'Oriented'], [4, 'Confused'], [3, 'Inappropriate words'], [2, 'Incomprehensible sounds'], [1, 'None']],
+      motor:  [[6, 'Obeys commands'], [5, 'Localizes pain'], [4, 'Withdraws from pain'], [3, 'Abnormal flexion'], [2, 'Extension'], [1, 'None']],
+    },
+    infant: {
+      eye:    [[4, 'Spontaneous'], [3, 'To voice'], [2, 'To pain'], [1, 'None']],
+      verbal: [[5, 'Coos / babbles'], [4, 'Irritable cry'], [3, 'Cries to pain'], [2, 'Moans to pain'], [1, 'None']],
+      motor:  [[6, 'Spontaneous movement'], [5, 'Withdraws to touch'], [4, 'Withdraws to pain'], [3, 'Abnormal flexion'], [2, 'Extension'], [1, 'None']],
+    },
+  };
+
+  function renderGcsTool() {
+    return '<div id="qref-gcs-root"></div>';
+  }
+
+  function bindGcsTool() {
+    const state = { mode: 'adult', eye: null, verbal: null, motor: null };
+    const root = $('qref-gcs-root');
+    if (!root) return;
+
+    const groupHTML = (key, title) => {
+      const opts = GCS_SCALES[state.mode][key];
+      return `
+        <div class="qref-gcs-group">
+          <div class="glabel"><span>${title}</span><span class="picked">${state[key] != null ? key[0].toUpperCase() + state[key] : '—'}</span></div>
+          <div class="qref-gcs-opts">
+            ${opts.map(([sc, label]) => `
+              <button class="qref-gcs-opt ${state[key] === sc ? 'sel' : ''}" data-gcs="${key}:${sc}">
+                <span class="sc">${sc}</span><span>${label}</span>
+              </button>`).join('')}
+          </div>
+        </div>`;
+    };
+
+    function paint() {
+      const total = (state.eye != null && state.verbal != null && state.motor != null)
+        ? state.eye + state.verbal + state.motor : null;
+      let chip = '';
+      if (total != null) {
+        chip = total >= 13 ? '<span class="qref-chip ok">13–15 · mild</span>'
+             : total >= 9 ? '<span class="qref-chip mid">9–12 · moderate</span>'
+             : '<span class="qref-chip low">≤ 8 · severe — consider airway management</span>';
+      }
+      root.innerHTML = `
+        <div class="qref-gcs-mode">
+          <button data-gcs-mode="adult" class="${state.mode === 'adult' ? 'active' : ''}">Adult / Child</button>
+          <button data-gcs-mode="infant" class="${state.mode === 'infant' ? 'active' : ''}">Infant (preverbal)</button>
+        </div>
+        ${groupHTML('eye', 'Eye Opening')}
+        ${groupHTML('verbal', 'Verbal Response')}
+        ${groupHTML('motor', 'Motor Response')}
+        <div class="qref-result">
+          <div class="qref-result-label">Glasgow Coma Scale</div>
+          <div class="qref-result-value ${total == null ? 'dim' : ''}">${total == null ? '—' : total + ' <small>/ 15</small>'}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--clin-text-dim);margin-top:2px;">
+            E${state.eye ?? '–'} · V${state.verbal ?? '–'} · M${state.motor ?? '–'}
+          </div>
+          <div>${chip}</div>
+        </div>
+        <div class="qref-disclaimer">
+          Score each category on best response. GCS ≤ 8 &mdash; consider airway
+          management. Always confirm against current local protocols and medical
+          control. Training &amp; reference only.
+        </div>`;
+
+      root.querySelectorAll('[data-gcs]').forEach((b) => b.addEventListener('click', () => {
+        const [key, sc] = b.dataset.gcs.split(':');
+        state[key] = state[key] === +sc ? null : +sc; // tap again to clear
+        paint();
+      }));
+      root.querySelectorAll('[data-gcs-mode]').forEach((b) => b.addEventListener('click', () => {
+        if (state.mode === b.dataset.gcsMode) return;
+        state.mode = b.dataset.gcsMode;
+        paint();
+      }));
+    }
+    paint();
   }
 
   // Park the button on the same row as the "Regional Common Treatment

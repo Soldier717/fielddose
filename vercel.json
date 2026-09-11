@@ -1,6 +1,19 @@
 {
   "version": 2,
+  "redirects": [
+    {
+      "source": "/:path+",
+      "has": [{ "type": "host", "value": "fielddose.com" }],
+      "destination": "https://www.fielddose.com/:path+",
+      "permanent": false
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "fielddose.com" }],
+      "destination": "/public/landing.html"
+    },
     { "source": "/", "destination": "/public/index.html" }
   ]
 }

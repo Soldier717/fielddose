@@ -1409,6 +1409,84 @@
     margin-bottom: 12px;
     letter-spacing: 0.04em;
   }
+  /* Narcotics — daily transfer */
+  .fd-narc-btn {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    width: 100%;
+    background: var(--clin-surface); border: 1px solid var(--clin-border);
+    border-left: 4px solid #8a5a10;
+    border-radius: 8px; padding: 12px; margin-bottom: 18px;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+    color: var(--clin-text); cursor: pointer; text-align: left;
+  }
+  .fd-narc-btn small { display: block; font-weight: 400; color: var(--clin-text-dim); font-size: 12px; }
+  .fd-narc-bg {
+    position: fixed; inset: 0; background: var(--clin-bg); z-index: 540;
+    display: flex; flex-direction: column;
+  }
+  .fd-narc-head {
+    background: #8a5a10; color: #fff;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px; flex-shrink: 0;
+    font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: 0.05em;
+    text-transform: uppercase; font-size: 15px;
+  }
+  .fd-narc-head button {
+    background: rgba(255,255,255,0.18); border: none; color: #fff;
+    border-radius: 7px; padding: 7px 14px; font-weight: 700; font-size: 13px; cursor: pointer;
+  }
+  .fd-narc-body { flex: 1; overflow-y: auto; padding: 16px 16px calc(40px + env(safe-area-inset-bottom)); }
+  .fd-narc-sec {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--clin-text-dim);
+    margin: 18px 0 8px;
+  }
+  .fd-narc-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .fd-narc-field label {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--clin-text-dim); margin-bottom: 4px;
+  }
+  .fd-narc-field input {
+    width: 100%; box-sizing: border-box;
+    font-size: 15px; padding: 10px;
+    border: 1px solid var(--clin-border); border-radius: 8px;
+    background: var(--clin-surface); color: var(--clin-text);
+  }
+  .fd-narc-field input:focus { outline: none; border-color: #8a5a10; }
+  .fd-narc-item {
+    background: var(--clin-surface); border: 1px solid var(--clin-border);
+    border-radius: 8px; padding: 10px; margin-bottom: 8px;
+    display: grid; grid-template-columns: 1.6fr 0.55fr 1fr 1fr auto; gap: 8px; align-items: end;
+  }
+  .fd-narc-item.expired { border-color: var(--clin-red); }
+  .fd-narc-item.expiring { border-color: #d4a341; }
+  .fd-narc-exp-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; margin-top: 3px; }
+  .fd-narc-exp-tag.warn { color: #8a5a10; font-weight: 700; }
+  .fd-narc-exp-tag.bad { color: var(--clin-red); font-weight: 700; }
+  .fd-narc-del {
+    width: 34px; height: 38px; border-radius: 6px; background: none;
+    border: 1px solid var(--clin-border); color: var(--clin-red); cursor: pointer;
+  }
+  .fd-narc-complete {
+    display: block; width: 100%;
+    background: #8a5a10; color: #fff; border: none; border-radius: 10px;
+    padding: 15px; margin-top: 18px;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 17px;
+    letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+  }
+  .fd-narc-hist {
+    background: var(--clin-surface); border: 1px solid var(--clin-border);
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    cursor: pointer; font-size: 13px;
+  }
+  .fd-narc-hist .who { font-weight: 600; }
+  .fd-narc-hist .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--clin-text-dim); }
+  @media (max-width: 560px) {
+    .fd-narc-item { grid-template-columns: 0.5fr 0.9fr 1.5fr auto; }
+    .fd-narc-item .fd-n-drugwrap { grid-column: 1 / -1; }
+  }
+
   .fd-arrest-btn {
     display: block; width: 100%;
     background: linear-gradient(180deg, #C21A28, #A5131F);
@@ -5237,6 +5315,204 @@ function fdShowContacts() {
   });
 }
 
+/* ============================================================
+   NARCOTICS — DAILY TRANSFER (chain of custody), local-first v1.
+   The device holds the current box inventory (drug/qty/lot/exp) and
+   a transfer ledger. Completing a transfer snapshots the inventory
+   with both parties + auto timestamps and becomes the next shift's
+   prefill. Records share out as text. Central ledger (server) later;
+   every record carries origin: 'device' until then.
+============================================================ */
+const FD_NARC_KEY = 'fielddose-narc-v1';
+
+function fdNarcLoad() {
+  try {
+    const s = JSON.parse(localStorage.getItem(FD_NARC_KEY));
+    if (s && Array.isArray(s.items) && Array.isArray(s.transfers)) return s;
+  } catch (_) {}
+  return { unit: '', seal: '', items: [], transfers: [] };
+}
+function fdNarcSave(s) {
+  try { localStorage.setItem(FD_NARC_KEY, JSON.stringify(s)); } catch (_) {}
+}
+
+function fdNarcExpState(exp) {
+  if (!exp) return '';
+  // Parse locally — new Date('YYYY-MM') is UTC and shifts a day in
+  // negative-offset timezones, mislabeling end-of-month as expired.
+  const m = String(exp).match(/^(\d{4})-(\d{2})(?:-(\d{2}))?$/);
+  if (!m) return '';
+  const end = m[3]
+    ? new Date(+m[1], +m[2] - 1, +m[3], 23, 59, 59)
+    : new Date(+m[1], +m[2], 0, 23, 59, 59); // last day of the month
+  const days = Math.floor((end - new Date()) / 86400000);
+  if (days < 0) return 'expired';
+  if (days <= 30) return 'expiring';
+  return '';
+}
+
+function fdNarcRecordText(r) {
+  const lines = [];
+  lines.push('FIELDDOSE — NARCOTIC TRANSFER RECORD');
+  lines.push('Chain of custody · recorded on device');
+  lines.push('');
+  lines.push(`Unit / Box:     ${r.unit || '—'}`);
+  lines.push(`Seal / Tag #:   ${r.seal || '—'}`);
+  lines.push(`Completed:      ${new Date(r.ts).toLocaleString()}`);
+  lines.push(`Relinquished by: ${r.from}`);
+  lines.push(`Assumed by:      ${r.to}`);
+  lines.push('');
+  lines.push('DRUG · QTY · LOT # · EXPIRATION');
+  r.items.forEach((it) => {
+    lines.push(`${it.drug} · qty ${it.qty} · lot ${it.lot || '—'} · exp ${it.exp || '—'}`);
+  });
+  if (r.note) { lines.push(''); lines.push('Notes: ' + r.note); }
+  lines.push('');
+  lines.push(`Record ${r.id} · FieldDose local record — confirm against the`);
+  lines.push('agency controlled-substance log.');
+  return lines.join('\n');
+}
+
+async function fdNarcShare(r) {
+  const text = fdNarcRecordText(r);
+  const title = `Narcotic Transfer — ${r.unit || 'unit'} ${new Date(r.ts).toLocaleDateString()}`;
+  if (navigator.share) {
+    try { await navigator.share({ title, text }); return; }
+    catch (err) { if (err && err.name === 'AbortError') return; }
+  }
+  location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`;
+}
+
+function fdShowNarcTransfer() {
+  const s = fdNarcLoad();
+  const bg = document.createElement('div');
+  bg.className = 'fd-narc-bg';
+  document.body.appendChild(bg);
+
+  // Pull current field values into state before any repaint
+  const collect = () => {
+    const v = (id) => { const el = bg.querySelector('#' + id); return el ? el.value.trim() : ''; };
+    s.unit = v('fdn-unit'); s.seal = v('fdn-seal');
+    bg.querySelectorAll('[data-narc-i]').forEach((row) => {
+      const i = +row.dataset.narcI;
+      if (!s.items[i]) return;
+      s.items[i].drug = row.querySelector('.fd-n-drug').value.trim();
+      s.items[i].qty = row.querySelector('.fd-n-qty').value;
+      s.items[i].lot = row.querySelector('.fd-n-lot').value.trim();
+      s.items[i].exp = row.querySelector('.fd-n-exp').value;
+    });
+  };
+
+  const paint = () => {
+    bg.innerHTML = `
+      <div class="fd-narc-head"><span>🔒 Daily Narcotic Transfer</span><button id="fdn-close">✕ Close</button></div>
+      <div class="fd-narc-body">
+        <div class="fd-narc-sec">Box</div>
+        <div class="fd-narc-grid2">
+          <div class="fd-narc-field"><label for="fdn-unit">Unit / Box ID</label><input id="fdn-unit" value="${escapeAttr(s.unit)}" placeholder="e.g. MED 71 · Box 2"></div>
+          <div class="fd-narc-field"><label for="fdn-seal">Seal / Tag #</label><input id="fdn-seal" value="${escapeAttr(s.seal)}" placeholder="tamper seal number"></div>
+        </div>
+
+        <div class="fd-narc-sec">Narcotic Inventory</div>
+        ${s.items.length === 0 ? '<div style="font-size:13px;color:var(--clin-text-dim);margin-bottom:8px;">No narcotics listed yet — add each drug in the box.</div>' : ''}
+        ${s.items.map((it, i) => {
+          const st = fdNarcExpState(it.exp);
+          return `
+          <div class="fd-narc-item ${st}" data-narc-i="${i}">
+            <div class="fd-narc-field fd-n-drugwrap">
+              <label>Drug · concentration</label>
+              <input class="fd-n-drug" value="${escapeAttr(it.drug || '')}" placeholder="Fentanyl 100 mcg / 2 mL">
+            </div>
+            <div class="fd-narc-field"><label>Qty</label><input class="fd-n-qty" type="number" min="0" max="99" inputmode="numeric" value="${escapeAttr(it.qty != null ? String(it.qty) : '')}"></div>
+            <div class="fd-narc-field"><label>Lot #</label><input class="fd-n-lot" value="${escapeAttr(it.lot || '')}"></div>
+            <div class="fd-narc-field">
+              <label>Expiration</label>
+              <input class="fd-n-exp" type="month" value="${escapeAttr(it.exp || '')}">
+              ${st ? `<div class="fd-narc-exp-tag ${st === 'expired' ? 'bad' : 'warn'}">${st === 'expired' ? 'EXPIRED — remove from service' : 'expires ≤ 30 days'}</div>` : ''}
+            </div>
+            <button class="fd-narc-del" data-narc-del="${i}" aria-label="Remove drug">✕</button>
+          </div>`;
+        }).join('')}
+        <button class="fd-mini-btn" id="fdn-add" style="display:block;margin:4px 0 0;">＋ Add narcotic</button>
+
+        <div class="fd-narc-sec">Transfer of Custody</div>
+        <div class="fd-narc-grid2">
+          <div class="fd-narc-field"><label for="fdn-from">Relinquished by (possessing)</label><input id="fdn-from" placeholder="name / ID"></div>
+          <div class="fd-narc-field"><label for="fdn-to">Assumed by (receiving)</label><input id="fdn-to" placeholder="name / ID"></div>
+        </div>
+        <div class="fd-narc-field" style="margin-top:10px;"><label for="fdn-note">Discrepancies / notes (optional)</label><input id="fdn-note" placeholder="none"></div>
+        <button class="fd-narc-complete" id="fdn-complete">Complete Transfer</button>
+        <div style="font-size:11.5px;color:var(--clin-text-dim);margin-top:8px;line-height:1.5;">
+          Date and time are stamped automatically at completion. Both parties
+          confirm the count together. This device record supports — does not
+          replace — the agency controlled-substance log.
+        </div>
+
+        <div class="fd-narc-sec">Transfer History (this device)</div>
+        ${s.transfers.length === 0 ? '<div style="font-size:13px;color:var(--clin-text-dim);">No transfers recorded yet.</div>' : ''}
+        ${s.transfers.slice(0, 20).map((r) => `
+          <div class="fd-narc-hist" data-narc-view="${r.id}">
+            <div><div class="who">${escapeHtml(r.from)} → ${escapeHtml(r.to)}</div>
+            <div class="when">${new Date(r.ts).toLocaleString()} · ${escapeHtml(r.unit || '—')} · ${r.items.length} item${r.items.length === 1 ? '' : 's'}</div></div>
+            <button class="fd-mini-btn" data-narc-share="${r.id}">📤</button>
+          </div>`).join('')}
+      </div>`;
+
+    bg.querySelector('#fdn-close').addEventListener('click', () => { collect(); fdNarcSave(s); bg.remove(); });
+    bg.querySelector('#fdn-add').addEventListener('click', () => {
+      collect();
+      s.items.push({ drug: '', qty: '', lot: '', exp: '' });
+      fdNarcSave(s); paint();
+    });
+    bg.querySelectorAll('[data-narc-del]').forEach((b) => b.addEventListener('click', () => {
+      collect();
+      const it = s.items[+b.dataset.narcDel];
+      if (it && (it.drug || it.lot) && !confirm(`Remove ${it.drug || 'this drug'} from the inventory?`)) return;
+      s.items.splice(+b.dataset.narcDel, 1);
+      fdNarcSave(s); paint();
+    }));
+    bg.querySelectorAll('.fd-n-exp').forEach((el) => el.addEventListener('change', () => { collect(); fdNarcSave(s); paint(); }));
+    bg.querySelector('#fdn-complete').addEventListener('click', () => {
+      collect();
+      const from = bg.querySelector('#fdn-from').value.trim();
+      const to = bg.querySelector('#fdn-to').value.trim();
+      const note = bg.querySelector('#fdn-note').value.trim();
+      const items = s.items.filter((it) => it.drug);
+      if (!s.unit) { showToast('Enter the Unit / Box ID', true); return; }
+      if (!items.length) { showToast('Add at least one narcotic', true); return; }
+      if (items.some((it) => it.qty === '' || it.qty == null)) { showToast('Every drug needs a quantity', true); return; }
+      if (!from || !to) { showToast('Both parties are required', true); return; }
+      if (from.toLowerCase() === to.toLowerCase()) { showToast('Relinquishing and assuming parties must differ', true); return; }
+      const summary = items.map((it) => `${it.drug} ×${it.qty}`).join(', ');
+      if (!confirm(`Complete transfer?\n\n${s.unit}${s.seal ? ' · seal ' + s.seal : ''}\n${summary}\n\n${from} → ${to}\n\nBoth parties confirm the count is correct.`)) return;
+      const rec = {
+        id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        ts: Date.now(),
+        unit: s.unit, seal: s.seal,
+        items: items.map((it) => ({ ...it })),
+        from, to, note,
+        origin: 'device',
+      };
+      s.transfers.unshift(rec);
+      s.transfers = s.transfers.slice(0, 100);
+      s.items = items; // cleaned list becomes next shift's prefill
+      fdNarcSave(s);
+      showToast('Transfer recorded — ' + new Date(rec.ts).toLocaleTimeString());
+      paint();
+    });
+    bg.querySelectorAll('[data-narc-share]').forEach((b) => b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const r = s.transfers.find((x) => x.id === b.dataset.narcShare);
+      if (r) fdNarcShare(r);
+    }));
+    bg.querySelectorAll('[data-narc-view]').forEach((row) => row.addEventListener('click', () => {
+      const r = s.transfers.find((x) => x.id === row.dataset.narcView);
+      if (r) alert(fdNarcRecordText(r));
+    }));
+  };
+  paint();
+}
+
 function fdLogWaste(entryId) {
   const src = ctState.log.find((e) => e.id === entryId);
   const nameMatch = src && (src.note || '').match(/^[^\d(—·]+/);
@@ -6050,6 +6326,10 @@ function renderCREntry() {
         </button>
       </div>
       ${renderCREntryCharts()}
+      <button class="fd-narc-btn" id="fd-narc-btn">
+        <span>🔒 Narcotics — Daily Transfer<small>Chain-of-custody sign-over · inventory · expirations</small></span>
+        <span style="font-size:18px;color:var(--clin-text-muted);">›</span>
+      </button>
       ${(() => {
         const p = fdPack();
         return `
@@ -7325,6 +7605,10 @@ function bindRunCodeEvents() {
   if (adultCustomInput) adultCustomInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') crSetAdultCustom(parseFloat(e.target.value));
   });
+
+  // ENTRY FLOW — Narcotics daily transfer
+  const narcBtn = document.getElementById('fd-narc-btn');
+  if (narcBtn) narcBtn.addEventListener('click', fdShowNarcTransfer);
 
   // ENTRY FLOW — Cardiac Arrest fast path (pick weight → arrest algorithm)
   const arrestBtn = document.getElementById('fd-arrest-btn');

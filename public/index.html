@@ -1467,6 +1467,13 @@
     width: 34px; height: 38px; border-radius: 6px; background: none;
     border: 1px solid var(--clin-border); color: var(--clin-red); cursor: pointer;
   }
+  .fd-narc-sig {
+    width: 100%; height: 110px; display: block;
+    background: var(--clin-surface);
+    border: 1px dashed var(--clin-border); border-radius: 8px;
+    touch-action: none; margin-top: 4px;
+    cursor: crosshair;
+  }
   .fd-narc-complete {
     display: block; width: 100%;
     background: #8a5a10; color: #fff; border: none; border-radius: 10px;
@@ -5356,11 +5363,16 @@ function fdNarcRecordText(r) {
   lines.push('FIELDDOSE — NARCOTIC TRANSFER RECORD');
   lines.push('Chain of custody · recorded on device');
   lines.push('');
-  lines.push(`Unit / Box:     ${r.unit || '—'}`);
-  lines.push(`Seal / Tag #:   ${r.seal || '—'}`);
-  lines.push(`Completed:      ${new Date(r.ts).toLocaleString()}`);
-  lines.push(`Relinquished by: ${r.from}`);
-  lines.push(`Assumed by:      ${r.to}`);
+  lines.push(`Unit / Box:      ${r.unit || '—'}`);
+  if (r.oldSeal || r.sealCheck) {
+    lines.push(`Seal removed:    ${r.oldSeal || '—'} ${r.sealCheck === 'ok' ? '(verified intact & matched)' : r.sealCheck === 'mismatch' ? '** MISMATCH / BROKEN — see notes **' : ''}`);
+  }
+  lines.push(`New seal applied: ${r.newSeal || r.seal || '—'}`);
+  lines.push(`Completed:       ${new Date(r.ts).toLocaleString()}`);
+  lines.push('');
+  lines.push(`Assumed by:      ${r.assumed ? r.assumed.name : r.to}${r.assumed && r.assumed.sig ? ' (signed)' : ''}`);
+  lines.push('                 — verified drugs against list, applied new seal');
+  lines.push(`Relinquished by: ${r.witness ? r.witness.name : r.from}${r.witness && r.witness.sig ? ' (signed, witness)' : ''}`);
   lines.push('');
   lines.push('DRUG · QTY · LOT # · EXPIRATION');
   r.items.forEach((it) => {
@@ -5368,9 +5380,41 @@ function fdNarcRecordText(r) {
   });
   if (r.note) { lines.push(''); lines.push('Notes: ' + r.note); }
   lines.push('');
-  lines.push(`Record ${r.id} · FieldDose local record — confirm against the`);
-  lines.push('agency controlled-substance log.');
+  lines.push(`Record ${r.id} · signatures captured on device · FieldDose local`);
+  lines.push('record — confirm against the agency controlled-substance log.');
   return lines.join('\n');
+}
+
+// Finger-signature pad on a canvas (pointer events cover touch + mouse).
+function fdSigPad(canvas) {
+  const ctx = canvas.getContext('2d');
+  ctx.lineWidth = 2.4; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.strokeStyle = '#1d2531';
+  let drawing = false, drawn = false, last = null;
+  const pos = (e) => {
+    const r = canvas.getBoundingClientRect();
+    return { x: (e.clientX - r.left) * (canvas.width / r.width), y: (e.clientY - r.top) * (canvas.height / r.height) };
+  };
+  canvas.addEventListener('pointerdown', (e) => { drawing = true; last = pos(e); canvas.setPointerCapture(e.pointerId); e.preventDefault(); });
+  canvas.addEventListener('pointermove', (e) => {
+    if (!drawing) return;
+    const p = pos(e);
+    ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+    last = p; drawn = true; e.preventDefault();
+  });
+  canvas.addEventListener('pointerup', () => { drawing = false; });
+  canvas.addEventListener('pointercancel', () => { drawing = false; });
+  return {
+    isDrawn: () => drawn,
+    clear() { ctx.clearRect(0, 0, canvas.width, canvas.height); drawn = false; },
+    data: () => (drawn ? canvas.toDataURL('image/png') : null),
+    restore(dataUrl) {
+      if (!dataUrl) return;
+      const img = new Image();
+      img.onload = () => { ctx.drawImage(img, 0, 0, canvas.width, canvas.height); drawn = true; };
+      img.src = dataUrl;
+    },
+  };
 }
 
 async function fdNarcShare(r) {
@@ -5389,10 +5433,22 @@ function fdShowNarcTransfer() {
   bg.className = 'fd-narc-bg';
   document.body.appendChild(bg);
 
+  // Session-only state: the in-progress sign-over (seal check, new seal,
+  // parties, signatures). s.seal stays the seal APPLIED at the last
+  // completed transfer — the seal this shift expects to find on the box.
+  const sess = { sealCheck: null, sigA: null, sigW: null };
+  let padA = null, padW = null;
+
   // Pull current field values into state before any repaint
   const collect = () => {
     const v = (id) => { const el = bg.querySelector('#' + id); return el ? el.value.trim() : ''; };
-    s.unit = v('fdn-unit'); s.seal = v('fdn-seal');
+    s.unit = v('fdn-unit');
+    sess.newSeal = v('fdn-newseal');
+    sess.assumedName = v('fdn-to');
+    sess.witnessName = v('fdn-from');
+    sess.note = v('fdn-note');
+    if (padA) sess.sigA = padA.data();
+    if (padW) sess.sigW = padW.data();
     bg.querySelectorAll('[data-narc-i]').forEach((row) => {
       const i = +row.dataset.narcI;
       if (!s.items[i]) return;
@@ -5407,13 +5463,19 @@ function fdShowNarcTransfer() {
     bg.innerHTML = `
       <div class="fd-narc-head"><span>🔒 Daily Narcotic Transfer</span><button id="fdn-close">✕ Close</button></div>
       <div class="fd-narc-body">
-        <div class="fd-narc-sec">Box</div>
-        <div class="fd-narc-grid2">
-          <div class="fd-narc-field"><label for="fdn-unit">Unit / Box ID</label><input id="fdn-unit" value="${escapeAttr(s.unit)}" placeholder="e.g. MED 71 · Box 2"></div>
-          <div class="fd-narc-field"><label for="fdn-seal">Seal / Tag #</label><input id="fdn-seal" value="${escapeAttr(s.seal)}" placeholder="tamper seal number"></div>
-        </div>
+        <div class="fd-narc-sec">Step 1 · Verify &amp; open the box <span style="text-transform:none;font-weight:500;">(assuming person)</span></div>
+        <div class="fd-narc-field" style="margin-bottom:10px;"><label for="fdn-unit">Unit / Box ID</label><input id="fdn-unit" value="${escapeAttr(s.unit)}" placeholder="e.g. MED 71 · Box 2"></div>
+        ${s.seal ? `
+        <div class="fd-narc-field">
+          <label>Seal on box — expected # <b style="color:var(--clin-text);">${escapeHtml(s.seal)}</b> (applied at last transfer)</label>
+          <div style="display:flex;gap:8px;margin-top:2px;">
+            <button class="fd-mini-btn ${sess.sealCheck === 'ok' ? '' : ''}" id="fdn-seal-ok" style="flex:1;${sess.sealCheck === 'ok' ? 'background:#e3f4e8;color:#1d7a39;border-color:#1d7a39;' : ''}">✓ Intact &amp; matches</button>
+            <button class="fd-mini-btn" id="fdn-seal-bad" style="flex:1;${sess.sealCheck === 'mismatch' ? 'background:var(--clin-blue-light);color:var(--clin-red);border-color:var(--clin-red);' : ''}">⚠ Broken / mismatch</button>
+          </div>
+        </div>` : `
+        <div style="font-size:12px;color:var(--clin-text-dim);margin-bottom:4px;">First transfer on this device — no prior seal on record. The seal chain starts with the new seal below.</div>`}
 
-        <div class="fd-narc-sec">Narcotic Inventory</div>
+        <div class="fd-narc-sec">Step 2 · Check drugs against the list</div>
         ${s.items.length === 0 ? '<div style="font-size:13px;color:var(--clin-text-dim);margin-bottom:8px;">No narcotics listed yet — add each drug in the box.</div>' : ''}
         ${s.items.map((it, i) => {
           const st = fdNarcExpState(it.exp);
@@ -5435,24 +5497,30 @@ function fdShowNarcTransfer() {
         }).join('')}
         <button class="fd-mini-btn" id="fdn-add" style="display:block;margin:4px 0 0;">＋ Add narcotic</button>
 
-        <div class="fd-narc-sec">Transfer of Custody</div>
-        <div class="fd-narc-grid2">
-          <div class="fd-narc-field"><label for="fdn-from">Relinquished by (possessing)</label><input id="fdn-from" placeholder="name / ID"></div>
-          <div class="fd-narc-field"><label for="fdn-to">Assumed by (receiving)</label><input id="fdn-to" placeholder="name / ID"></div>
-        </div>
-        <div class="fd-narc-field" style="margin-top:10px;"><label for="fdn-note">Discrepancies / notes (optional)</label><input id="fdn-note" placeholder="none"></div>
+        <div class="fd-narc-sec">Step 3 · Apply the new seal</div>
+        <div class="fd-narc-field"><label for="fdn-newseal">New seal / tag #</label><input id="fdn-newseal" value="${escapeAttr(sess.newSeal || '')}" placeholder="new tamper seal number"></div>
+
+        <div class="fd-narc-sec">Step 4 · Sign</div>
+        <div class="fd-narc-field"><label for="fdn-to">Assumed by — verified drugs against list, applied new seal</label><input id="fdn-to" value="${escapeAttr(sess.assumedName || '')}" placeholder="name / ID"></div>
+        <canvas class="fd-narc-sig" id="fdn-sig-a" width="600" height="160" aria-label="Assuming person signature"></canvas>
+        <button class="fd-mini-btn" id="fdn-sig-a-clear" style="margin:4px 0 14px;">Clear signature</button>
+
+        <div class="fd-narc-field"><label for="fdn-from">Relinquished by — witness</label><input id="fdn-from" value="${escapeAttr(sess.witnessName || '')}" placeholder="name / ID"></div>
+        <canvas class="fd-narc-sig" id="fdn-sig-w" width="600" height="160" aria-label="Witness signature"></canvas>
+        <button class="fd-mini-btn" id="fdn-sig-w-clear" style="margin:4px 0 0;">Clear signature</button>
+
+        <div class="fd-narc-field" style="margin-top:14px;"><label for="fdn-note">Discrepancies / notes${sess.sealCheck === 'mismatch' ? ' — REQUIRED for seal mismatch' : ' (optional)'}</label><input id="fdn-note" value="${escapeAttr(sess.note || '')}" placeholder="${sess.sealCheck === 'mismatch' ? 'describe the seal discrepancy' : 'none'}"></div>
         <button class="fd-narc-complete" id="fdn-complete">Complete Transfer</button>
         <div style="font-size:11.5px;color:var(--clin-text-dim);margin-top:8px;line-height:1.5;">
-          Date and time are stamped automatically at completion. Both parties
-          confirm the count together. This device record supports — does not
-          replace — the agency controlled-substance log.
+          Date and time are stamped automatically at completion. This device
+          record supports — does not replace — the agency controlled-substance log.
         </div>
 
         <div class="fd-narc-sec">Transfer History (this device)</div>
         ${s.transfers.length === 0 ? '<div style="font-size:13px;color:var(--clin-text-dim);">No transfers recorded yet.</div>' : ''}
         ${s.transfers.slice(0, 20).map((r) => `
           <div class="fd-narc-hist" data-narc-view="${r.id}">
-            <div><div class="who">${escapeHtml(r.from)} → ${escapeHtml(r.to)}</div>
+            <div><div class="who">${escapeHtml((r.witness && r.witness.name) || r.from || '?')} → ${escapeHtml((r.assumed && r.assumed.name) || r.to || '?')}</div>
             <div class="when">${new Date(r.ts).toLocaleString()} · ${escapeHtml(r.unit || '—')} · ${r.items.length} item${r.items.length === 1 ? '' : 's'}</div></div>
             <button class="fd-mini-btn" data-narc-share="${r.id}">📤</button>
           </div>`).join('')}
@@ -5472,31 +5540,54 @@ function fdShowNarcTransfer() {
       fdNarcSave(s); paint();
     }));
     bg.querySelectorAll('.fd-n-exp').forEach((el) => el.addEventListener('change', () => { collect(); fdNarcSave(s); paint(); }));
+
+    // Seal verification (assuming person)
+    const sealOk = bg.querySelector('#fdn-seal-ok');
+    const sealBad = bg.querySelector('#fdn-seal-bad');
+    if (sealOk) sealOk.addEventListener('click', () => { collect(); sess.sealCheck = 'ok'; paint(); });
+    if (sealBad) sealBad.addEventListener('click', () => { collect(); sess.sealCheck = 'mismatch'; paint(); });
+
+    // Signature pads — survive inventory-edit repaints via sess
+    padA = fdSigPad(bg.querySelector('#fdn-sig-a'));
+    padW = fdSigPad(bg.querySelector('#fdn-sig-w'));
+    padA.restore(sess.sigA);
+    padW.restore(sess.sigW);
+    bg.querySelector('#fdn-sig-a-clear').addEventListener('click', () => { padA.clear(); sess.sigA = null; });
+    bg.querySelector('#fdn-sig-w-clear').addEventListener('click', () => { padW.clear(); sess.sigW = null; });
+
     bg.querySelector('#fdn-complete').addEventListener('click', () => {
       collect();
-      const from = bg.querySelector('#fdn-from').value.trim();
-      const to = bg.querySelector('#fdn-to').value.trim();
-      const note = bg.querySelector('#fdn-note').value.trim();
       const items = s.items.filter((it) => it.drug);
       if (!s.unit) { showToast('Enter the Unit / Box ID', true); return; }
+      if (s.seal && !sess.sealCheck) { showToast('Verify the old seal first (Step 1)', true); return; }
+      if (sess.sealCheck === 'mismatch' && !sess.note) { showToast('Seal mismatch — describe it in the notes', true); return; }
       if (!items.length) { showToast('Add at least one narcotic', true); return; }
       if (items.some((it) => it.qty === '' || it.qty == null)) { showToast('Every drug needs a quantity', true); return; }
-      if (!from || !to) { showToast('Both parties are required', true); return; }
-      if (from.toLowerCase() === to.toLowerCase()) { showToast('Relinquishing and assuming parties must differ', true); return; }
+      if (!sess.newSeal) { showToast('Enter the new seal number (Step 3)', true); return; }
+      if (!sess.assumedName || !sess.witnessName) { showToast('Both parties must be named', true); return; }
+      if (sess.assumedName.toLowerCase() === sess.witnessName.toLowerCase()) { showToast('Assuming person and witness must differ', true); return; }
+      if (!sess.sigA || !sess.sigW) { showToast('Both signatures are required', true); return; }
       const summary = items.map((it) => `${it.drug} ×${it.qty}`).join(', ');
-      if (!confirm(`Complete transfer?\n\n${s.unit}${s.seal ? ' · seal ' + s.seal : ''}\n${summary}\n\n${from} → ${to}\n\nBoth parties confirm the count is correct.`)) return;
+      if (!confirm(`Complete transfer?\n\n${s.unit}\n${s.seal ? 'Seal removed: ' + s.seal + (sess.sealCheck === 'ok' ? ' (verified)' : ' (MISMATCH)') + '\n' : ''}New seal: ${sess.newSeal}\n${summary}\n\nAssumed by ${sess.assumedName} · witnessed by ${sess.witnessName}`)) return;
       const rec = {
         id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         ts: Date.now(),
-        unit: s.unit, seal: s.seal,
+        unit: s.unit,
+        oldSeal: s.seal || '',
+        sealCheck: s.seal ? sess.sealCheck : null,
+        newSeal: sess.newSeal,
         items: items.map((it) => ({ ...it })),
-        from, to, note,
+        assumed: { name: sess.assumedName, sig: sess.sigA },
+        witness: { name: sess.witnessName, sig: sess.sigW },
+        note: sess.note,
         origin: 'device',
       };
       s.transfers.unshift(rec);
-      s.transfers = s.transfers.slice(0, 100);
-      s.items = items; // cleaned list becomes next shift's prefill
+      s.transfers = s.transfers.slice(0, 50);
+      s.items = items;          // verified list becomes next shift's prefill
+      s.seal = sess.newSeal;    // the seal the NEXT transfer expects to find
       fdNarcSave(s);
+      sess.sealCheck = null; sess.newSeal = ''; sess.assumedName = ''; sess.witnessName = ''; sess.note = ''; sess.sigA = null; sess.sigW = null;
       showToast('Transfer recorded — ' + new Date(rec.ts).toLocaleTimeString());
       paint();
     });

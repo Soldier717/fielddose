@@ -1409,6 +1409,22 @@
     margin-bottom: 12px;
     letter-spacing: 0.04em;
   }
+  .fd-arrest-btn {
+    display: block; width: 100%;
+    background: linear-gradient(180deg, #C21A28, #A5131F);
+    color: #fff; border: none; border-radius: 10px;
+    padding: 16px 14px; margin-bottom: 22px;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 22px;
+    letter-spacing: 0.08em; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(165,19,31,0.35);
+  }
+  .fd-arrest-btn span {
+    display: block; font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: 12px; letter-spacing: 0.02em; text-transform: none;
+    color: rgba(255,255,255,0.85); margin-top: 3px;
+  }
+  .fd-arrest-btn:active { transform: scale(0.99); }
+
   .fd-agency-row {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
     background: var(--clin-surface, var(--bg-elev));
@@ -3573,9 +3589,12 @@ const ctState = {
   epiIntervalMs: 3 * 60 * 1000,
   log: [],
   bpm: 110,
-  metronomeOn: true,
-  ventCueOn: true,
-  voiceOn: true,
+  // Metronome / vent / voice audio REMOVED for now (Sep 2026): voice cue
+  // issues in the field, and the sounds compete with the ALS monitor's own
+  // metronome. Visual timer + short cue tones remain. Code kept for later.
+  metronomeOn: false,
+  ventCueOn: false,
+  voiceOn: false,
   toneOn: true,
   epiReminderOn: true,
   advancedAirway: true,
@@ -3602,9 +3621,10 @@ function ctLoadSettings() {
     const s = JSON.parse(localStorage.getItem(CT_STORAGE_KEY));
     if (s) {
       ctState.bpm = s.bpm ?? 110;
-      ctState.metronomeOn = s.metronomeOn ?? true;
-      ctState.ventCueOn = s.ventCueOn ?? true;
-      ctState.voiceOn = s.voiceOn ?? true;
+      // audio features hard-disabled — override any stored preference
+      ctState.metronomeOn = false;
+      ctState.ventCueOn = false;
+      ctState.voiceOn = false;
       ctState.toneOn = s.toneOn ?? true;
       ctState.epiReminderOn = s.epiReminderOn ?? true;
       ctState.advancedAirway = s.advancedAirway ?? true;
@@ -4893,6 +4913,15 @@ function chartSaveActive() {
 function crChartStart() {
   cr.chartId = 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
   chartSaveActive();
+  // Cardiac Arrest fast path: weight was picked via the arrest button —
+  // land directly on the arrest algorithm instead of the med list.
+  if (cr.arrestPending) {
+    cr.arrestPending = false;
+    ctState.activeTab = 'meds';
+    cr.medsView = 'protocol';
+    cr.protocolSel = 'vfvt';
+    ctLogEvent('Note', 'Cardiac arrest workflow started');
+  }
 }
 
 function chartDelete(id) {
@@ -6005,6 +6034,7 @@ function renderCREntryCharts() {
 function renderCREntry() {
   return `
     <div class="cr-entry">
+      <button class="fd-arrest-btn" id="fd-arrest-btn">⚡ CARDIAC ARREST<span>weight → straight to the algorithm</span></button>
       <div class="cr-entry-title">New Patient</div>
       <div class="cr-entry-sub">Select patient type to begin</div>
       <div class="cr-entry-cards">
@@ -6132,7 +6162,7 @@ function renderCPRControlBar() {
       </div>
       <div class="cpr-row-mid">
         <div class="cpr-bpm-cell">
-          <span class="ico">🔊</span>
+          <span class="ico">⏱</span>
           <span class="cr-pulse-mini" id="cr-pulse-mini"></span>
           <span class="val" id="cpr-bpm-val">${ctState.bpm}</span>
           <span class="lbl">Cycle <span id="cpr-cycle-num">${ctState.cycleNum}</span></span>
@@ -7294,6 +7324,15 @@ function bindRunCodeEvents() {
   const adultCustomInput = document.getElementById('cr-adult-custom');
   if (adultCustomInput) adultCustomInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') crSetAdultCustom(parseFloat(e.target.value));
+  });
+
+  // ENTRY FLOW — Cardiac Arrest fast path (pick weight → arrest algorithm)
+  const arrestBtn = document.getElementById('fd-arrest-btn');
+  if (arrestBtn) arrestBtn.addEventListener('click', () => {
+    cr.arrestPending = true;
+    cr.view = 'entry-adult';
+    render();
+    showToast('Pick weight — jumping to the arrest algorithm');
   });
 
   // ENTRY FLOW — agency enrollment

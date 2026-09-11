@@ -1,7 +1,19 @@
 {
   "agency": { "id": "gnfr", "name": "Greater Naples Fire Rescue", "shortName": "GNFR" },
-  "version": "2026-09-10",
+  "version": "2026-09-11",
   "defib": { "adultLadder": [120, 150, 200] },
+  "narcotics": {
+    "transferMode": "keys",
+    "sop": "SOP #1051 (approved 8/7/2025)",
+    "escalation": "ANY issues during turnover: immediately contact the Battalion Chief (BC) or Division Chief of EMS.",
+    "oncomingHint": "If the oncoming Lieutenant is a paramedic, that officer signs. If the Lieutenant is an EMT, the most senior paramedic (Driver-Engineer or Paramedic Firefighter) signs.",
+    "limits": [
+      { "match": "dilaudid|hydromorphone", "label": "Dilaudid", "minMg": 2, "maxMg": 10 },
+      { "match": "versed|midazolam", "label": "Versed", "minMg": 10, "maxMg": 25 },
+      { "match": "ketamine|ketalar", "label": "Ketamine", "minMg": 500, "maxMg": 1500 },
+      { "match": "ativan|lorazepam", "label": "Ativan", "minMg": 2, "maxMg": 10 }
+    ]
+  },
   "drugOverrides": [],
   "contacts": [
     { "group": "EMS Leadership · Medical Direction", "name": "EMS Chief Dennis Disarro", "sub": "Lead contact · cell", "num": "239-961-2882" },

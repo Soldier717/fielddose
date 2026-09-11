@@ -1456,7 +1456,7 @@
   .fd-narc-item {
     background: var(--clin-surface); border: 1px solid var(--clin-border);
     border-radius: 8px; padding: 10px; margin-bottom: 8px;
-    display: grid; grid-template-columns: 1.6fr 0.55fr 1fr 1fr auto; gap: 8px; align-items: end;
+    display: grid; grid-template-columns: 1.6fr 0.5fr 0.7fr 0.9fr 1fr auto; gap: 8px; align-items: end;
   }
   .fd-narc-item.expired { border-color: var(--clin-red); }
   .fd-narc-item.expiring { border-color: #d4a341; }
@@ -1490,7 +1490,7 @@
   .fd-narc-hist .who { font-weight: 600; }
   .fd-narc-hist .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--clin-text-dim); }
   @media (max-width: 560px) {
-    .fd-narc-item { grid-template-columns: 0.5fr 0.9fr 1.5fr auto; }
+    .fd-narc-item { grid-template-columns: 0.5fr 0.7fr 0.9fr 1.4fr auto; }
     .fd-narc-item .fd-n-drugwrap { grid-column: 1 / -1; }
   }
 
@@ -5343,6 +5343,34 @@ function fdNarcSave(s) {
   try { localStorage.setItem(FD_NARC_KEY, JSON.stringify(s)); } catch (_) {}
 }
 
+// Agency narcotics policy from the pack: transfer mode ('keys' per
+// GNFR SOP 1051 key turnover, or 'seal' for tamper-seal agencies),
+// required min/max totals in mg, escalation contact language.
+function fdNarcCfg() {
+  const p = fdPack();
+  return (p && p.narcotics) || {};
+}
+
+// SOP "required quantities": per-drug min/max totals in mg.
+function fdNarcLimitStatus(items) {
+  const cfg = fdNarcCfg();
+  const out = [];
+  (cfg.limits || []).forEach((L) => {
+    let re; try { re = new RegExp(L.match, 'i'); } catch (_) { return; }
+    const matched = items.filter((it) => re.test(it.drug || ''));
+    const allEntered = matched.length > 0 && matched.every((it) => it.mg !== '' && it.mg != null && isFinite(parseFloat(it.mg)));
+    const total = matched.reduce((sum, it) => sum + (parseFloat(it.mg) || 0), 0);
+    out.push({
+      label: L.label, min: L.minMg, max: L.maxMg, total,
+      status: matched.length === 0 ? 'missing'
+        : !allEntered ? 'unknown'
+        : total < L.minMg ? 'low'
+        : total > L.maxMg ? 'high' : 'ok',
+    });
+  });
+  return out;
+}
+
 function fdNarcExpState(exp) {
   if (!exp) return '';
   // Parse locally — new Date('YYYY-MM') is UTC and shifts a day in
@@ -5364,20 +5392,36 @@ function fdNarcRecordText(r) {
   lines.push('Chain of custody · recorded on device');
   lines.push('');
   lines.push(`Unit / Box:      ${r.unit || '—'}`);
-  if (r.oldSeal || r.sealCheck) {
-    lines.push(`Seal removed:    ${r.oldSeal || '—'} ${r.sealCheck === 'ok' ? '(verified intact & matched)' : r.sealCheck === 'mismatch' ? '** MISMATCH / BROKEN — see notes **' : ''}`);
+  if (r.mode === 'keys') {
+    lines.push('Custody method:  controlled-substance KEY turnover — keys');
+    lines.push('                 turned over to the oncoming paramedic');
+  } else {
+    if (r.oldSeal || r.sealCheck) {
+      lines.push(`Seal removed:    ${r.oldSeal || '—'} ${r.sealCheck === 'ok' ? '(verified intact & matched)' : r.sealCheck === 'mismatch' ? '** MISMATCH / BROKEN — see notes **' : ''}`);
+    }
+    lines.push(`New seal applied: ${r.newSeal || r.seal || '—'}`);
   }
-  lines.push(`New seal applied: ${r.newSeal || r.seal || '—'}`);
   lines.push(`Completed:       ${new Date(r.ts).toLocaleString()}`);
   lines.push('');
-  lines.push(`Assumed by:      ${r.assumed ? r.assumed.name : r.to}${r.assumed && r.assumed.sig ? ' (signed)' : ''}`);
-  lines.push('                 — verified drugs against list, applied new seal');
-  lines.push(`Relinquished by: ${r.witness ? r.witness.name : r.from}${r.witness && r.witness.sig ? ' (signed, witness)' : ''}`);
+  if (r.attest) {
+    lines.push('Visual inspection by both parties: all controlled substances');
+    lines.push('present, intact, within expiration date, in required quantities.');
+    lines.push('');
+  }
+  lines.push(`${r.mode === 'keys' ? 'Oncoming paramedic:' : 'Assumed by:      '} ${r.assumed ? r.assumed.name : r.to}${r.assumed && r.assumed.sig ? ' (signed)' : ''}`);
+  lines.push(`${r.mode === 'keys' ? 'Offgoing paramedic:' : 'Relinquished by: '} ${r.witness ? r.witness.name : r.from}${r.witness && r.witness.sig ? ' (signed)' : ''}`);
   lines.push('');
-  lines.push('DRUG · QTY · LOT # · EXPIRATION');
+  lines.push('DRUG · QTY · TOTAL MG · LOT # · EXPIRATION');
   r.items.forEach((it) => {
-    lines.push(`${it.drug} · qty ${it.qty} · lot ${it.lot || '—'} · exp ${it.exp || '—'}`);
+    lines.push(`${it.drug} · qty ${it.qty} · ${it.mg ? it.mg + ' mg' : '— mg'} · lot ${it.lot || '—'} · exp ${it.exp || '—'}`);
   });
+  if (r.limits && r.limits.length) {
+    lines.push('');
+    lines.push('REQUIRED QUANTITIES (SOP)');
+    r.limits.forEach((x) => {
+      lines.push(`${x.label}: ${x.status === 'unknown' || x.status === 'missing' ? '—' : x.total + ' mg'} (required ${x.min}–${x.max} mg) · ${x.status.toUpperCase()}`);
+    });
+  }
   if (r.note) { lines.push(''); lines.push('Notes: ' + r.note); }
   lines.push('');
   lines.push(`Record ${r.id} · signatures captured on device · FieldDose local`);
@@ -5436,7 +5480,7 @@ function fdShowNarcTransfer() {
   // Session-only state: the in-progress sign-over (seal check, new seal,
   // parties, signatures). s.seal stays the seal APPLIED at the last
   // completed transfer — the seal this shift expects to find on the box.
-  const sess = { sealCheck: null, sigA: null, sigW: null };
+  const sess = { sealCheck: null, keysOk: false, attest: false, sigA: null, sigW: null };
   let padA = null, padW = null;
 
   // Pull current field values into state before any repaint
@@ -5454,28 +5498,34 @@ function fdShowNarcTransfer() {
       if (!s.items[i]) return;
       s.items[i].drug = row.querySelector('.fd-n-drug').value.trim();
       s.items[i].qty = row.querySelector('.fd-n-qty').value;
+      s.items[i].mg = row.querySelector('.fd-n-mg').value;
       s.items[i].lot = row.querySelector('.fd-n-lot').value.trim();
       s.items[i].exp = row.querySelector('.fd-n-exp').value;
     });
   };
 
   const paint = () => {
+    const cfg = fdNarcCfg();
+    const keysMode = cfg.transferMode === 'keys';
+    let stepN = 0;
+    const step = (t, sub) => `<div class="fd-narc-sec">Step ${++stepN} · ${t}${sub ? ` <span style="text-transform:none;font-weight:500;">${sub}</span>` : ''}</div>`;
     bg.innerHTML = `
       <div class="fd-narc-head"><span>🔒 Daily Narcotic Transfer</span><button id="fdn-close">✕ Close</button></div>
       <div class="fd-narc-body">
-        <div class="fd-narc-sec">Step 1 · Verify &amp; open the box <span style="text-transform:none;font-weight:500;">(assuming person)</span></div>
+        ${cfg.sop ? `<div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--clin-text-dim);margin-bottom:6px;">Per ${escapeHtml(cfg.sop)}</div>` : ''}
+        ${step('Open the box', keysMode ? '(offgoing + oncoming paramedics together)' : '(assuming person)')}
         <div class="fd-narc-field" style="margin-bottom:10px;"><label for="fdn-unit">Unit / Box ID</label><input id="fdn-unit" value="${escapeAttr(s.unit)}" placeholder="e.g. MED 71 · Box 2"></div>
-        ${s.seal ? `
+        ${keysMode ? '' : s.seal ? `
         <div class="fd-narc-field">
           <label>Seal on box — expected # <b style="color:var(--clin-text);">${escapeHtml(s.seal)}</b> (applied at last transfer)</label>
           <div style="display:flex;gap:8px;margin-top:2px;">
-            <button class="fd-mini-btn ${sess.sealCheck === 'ok' ? '' : ''}" id="fdn-seal-ok" style="flex:1;${sess.sealCheck === 'ok' ? 'background:#e3f4e8;color:#1d7a39;border-color:#1d7a39;' : ''}">✓ Intact &amp; matches</button>
+            <button class="fd-mini-btn" id="fdn-seal-ok" style="flex:1;${sess.sealCheck === 'ok' ? 'background:#e3f4e8;color:#1d7a39;border-color:#1d7a39;' : ''}">✓ Intact &amp; matches</button>
             <button class="fd-mini-btn" id="fdn-seal-bad" style="flex:1;${sess.sealCheck === 'mismatch' ? 'background:var(--clin-blue-light);color:var(--clin-red);border-color:var(--clin-red);' : ''}">⚠ Broken / mismatch</button>
           </div>
         </div>` : `
         <div style="font-size:12px;color:var(--clin-text-dim);margin-bottom:4px;">First transfer on this device — no prior seal on record. The seal chain starts with the new seal below.</div>`}
 
-        <div class="fd-narc-sec">Step 2 · Check drugs against the list</div>
+        ${step('Visual inspection of all controlled substances')}
         ${s.items.length === 0 ? '<div style="font-size:13px;color:var(--clin-text-dim);margin-bottom:8px;">No narcotics listed yet — add each drug in the box.</div>' : ''}
         ${s.items.map((it, i) => {
           const st = fdNarcExpState(it.exp);
@@ -5486,6 +5536,7 @@ function fdShowNarcTransfer() {
               <input class="fd-n-drug" value="${escapeAttr(it.drug || '')}" placeholder="Fentanyl 100 mcg / 2 mL">
             </div>
             <div class="fd-narc-field"><label>Qty</label><input class="fd-n-qty" type="number" min="0" max="99" inputmode="numeric" value="${escapeAttr(it.qty != null ? String(it.qty) : '')}"></div>
+            <div class="fd-narc-field"><label>Total mg</label><input class="fd-n-mg" type="number" min="0" step="0.5" inputmode="decimal" value="${escapeAttr(it.mg != null ? String(it.mg) : '')}"></div>
             <div class="fd-narc-field"><label>Lot #</label><input class="fd-n-lot" value="${escapeAttr(it.lot || '')}"></div>
             <div class="fd-narc-field">
               <label>Expiration</label>
@@ -5497,15 +5548,40 @@ function fdShowNarcTransfer() {
         }).join('')}
         <button class="fd-mini-btn" id="fdn-add" style="display:block;margin:4px 0 0;">＋ Add narcotic</button>
 
-        <div class="fd-narc-sec">Step 3 · Apply the new seal</div>
-        <div class="fd-narc-field"><label for="fdn-newseal">New seal / tag #</label><input id="fdn-newseal" value="${escapeAttr(sess.newSeal || '')}" placeholder="new tamper seal number"></div>
+        ${(() => {
+          const lim = fdNarcLimitStatus(s.items);
+          if (!lim.length) return '';
+          const color = (st) => st === 'ok' ? '#1d7a39' : st === 'unknown' ? 'var(--clin-text-dim)' : 'var(--clin-red)';
+          const word = (st) => st === 'ok' ? 'OK' : st === 'low' ? 'BELOW MIN' : st === 'high' ? 'ABOVE MAX' : st === 'missing' ? 'NOT IN BOX' : 'enter total mg';
+          const anyBad = lim.some((x) => x.status === 'low' || x.status === 'high' || x.status === 'missing');
+          return `
+        <div class="fd-narc-sec">Required Quantities <span style="text-transform:none;font-weight:500;">(SOP minimum / maximum)</span></div>
+        ${lim.map((x) => `
+          <div style="display:flex;justify-content:space-between;align-items:center;background:var(--clin-surface);border:1px solid var(--clin-border);border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:13px;">
+            <span><b>${escapeHtml(x.label)}</b> <span style="color:var(--clin-text-dim);">· ${x.min}–${x.max} mg required</span></span>
+            <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:${color(x.status)};">${x.status === 'unknown' || x.status === 'missing' ? '' : x.total + ' mg · '}${word(x.status)}</span>
+          </div>`).join('')}
+        ${anyBad && fdNarcCfg().escalation ? `<div style="background:var(--clin-blue-light);border:1px solid var(--clin-red);border-radius:8px;padding:10px 12px;font-size:12.5px;font-weight:600;color:var(--clin-red);margin-top:4px;">${escapeHtml(fdNarcCfg().escalation)}</div>` : ''}`;
+        })()}
 
-        <div class="fd-narc-sec">Step 4 · Sign</div>
-        <div class="fd-narc-field"><label for="fdn-to">Assumed by — verified drugs against list, applied new seal</label><input id="fdn-to" value="${escapeAttr(sess.assumedName || '')}" placeholder="name / ID"></div>
+        ${keysMode ? `
+        ${step('Key turnover')}
+        <button class="fd-mini-btn" id="fdn-keys" style="display:block;width:100%;padding:11px;${sess.keysOk ? 'background:#e3f4e8;color:#1d7a39;border-color:#1d7a39;' : ''}">🔑 Controlled substance keys turned over to the oncoming paramedic</button>
+        ` : `
+        ${step('Apply the new seal')}
+        <div class="fd-narc-field"><label for="fdn-newseal">New seal / tag #</label><input id="fdn-newseal" value="${escapeAttr(sess.newSeal || '')}" placeholder="new tamper seal number"></div>
+        `}
+
+        ${step('Sign', keysMode ? '(two different paramedics)' : '')}
+        <button class="fd-mini-btn" id="fdn-attest" style="display:block;width:100%;padding:11px;text-align:left;text-transform:none;letter-spacing:0;font-size:12.5px;line-height:1.45;margin-bottom:12px;${sess.attest ? 'background:#e3f4e8;color:#1d7a39;border-color:#1d7a39;' : ''}">
+          ${sess.attest ? '✓' : '☐'} Both parties visually inspected all controlled substances and confirm they are <b>present, intact, within expiration date, and in required quantities</b>.
+        </button>
+        <div class="fd-narc-field"><label for="fdn-to">${keysMode ? 'Oncoming paramedic — signs' : 'Assumed by — verified drugs against list, applied new seal'}</label><input id="fdn-to" value="${escapeAttr(sess.assumedName || '')}" placeholder="printed name / ID"></div>
+        ${keysMode && fdNarcCfg().oncomingHint ? `<div style="font-size:11px;color:var(--clin-text-dim);margin:4px 0 6px;line-height:1.45;">${escapeHtml(fdNarcCfg().oncomingHint)}</div>` : ''}
         <canvas class="fd-narc-sig" id="fdn-sig-a" width="600" height="160" aria-label="Assuming person signature"></canvas>
         <button class="fd-mini-btn" id="fdn-sig-a-clear" style="margin:4px 0 14px;">Clear signature</button>
 
-        <div class="fd-narc-field"><label for="fdn-from">Relinquished by — witness</label><input id="fdn-from" value="${escapeAttr(sess.witnessName || '')}" placeholder="name / ID"></div>
+        <div class="fd-narc-field"><label for="fdn-from">${keysMode ? 'Offgoing paramedic — signs' : 'Relinquished by — witness'}</label><input id="fdn-from" value="${escapeAttr(sess.witnessName || '')}" placeholder="printed name / ID"></div>
         <canvas class="fd-narc-sig" id="fdn-sig-w" width="600" height="160" aria-label="Witness signature"></canvas>
         <button class="fd-mini-btn" id="fdn-sig-w-clear" style="margin:4px 0 0;">Clear signature</button>
 
@@ -5541,11 +5617,20 @@ function fdShowNarcTransfer() {
     }));
     bg.querySelectorAll('.fd-n-exp').forEach((el) => el.addEventListener('change', () => { collect(); fdNarcSave(s); paint(); }));
 
-    // Seal verification (assuming person)
+    // Seal verification (seal-mode agencies)
     const sealOk = bg.querySelector('#fdn-seal-ok');
     const sealBad = bg.querySelector('#fdn-seal-bad');
     if (sealOk) sealOk.addEventListener('click', () => { collect(); sess.sealCheck = 'ok'; paint(); });
     if (sealBad) sealBad.addEventListener('click', () => { collect(); sess.sealCheck = 'mismatch'; paint(); });
+
+    // Key turnover + SOP visual-inspection attestation
+    const keysBtn = bg.querySelector('#fdn-keys');
+    if (keysBtn) keysBtn.addEventListener('click', () => { collect(); sess.keysOk = !sess.keysOk; paint(); });
+    const attestBtn = bg.querySelector('#fdn-attest');
+    if (attestBtn) attestBtn.addEventListener('click', () => { collect(); sess.attest = !sess.attest; paint(); });
+
+    // Mg totals feed the required-quantities panel live
+    bg.querySelectorAll('.fd-n-mg').forEach((el) => el.addEventListener('change', () => { collect(); fdNarcSave(s); paint(); }));
 
     // Signature pads — survive inventory-edit repaints via sess
     padA = fdSigPad(bg.querySelector('#fdn-sig-a'));
@@ -5557,25 +5642,37 @@ function fdShowNarcTransfer() {
 
     bg.querySelector('#fdn-complete').addEventListener('click', () => {
       collect();
+      const cfg2 = fdNarcCfg();
+      const kMode = cfg2.transferMode === 'keys';
       const items = s.items.filter((it) => it.drug);
+      const lim = fdNarcLimitStatus(items);
+      const limBad = lim.some((x) => x.status === 'low' || x.status === 'high');
       if (!s.unit) { showToast('Enter the Unit / Box ID', true); return; }
-      if (s.seal && !sess.sealCheck) { showToast('Verify the old seal first (Step 1)', true); return; }
-      if (sess.sealCheck === 'mismatch' && !sess.note) { showToast('Seal mismatch — describe it in the notes', true); return; }
+      if (!kMode && s.seal && !sess.sealCheck) { showToast('Verify the old seal first (Step 1)', true); return; }
+      if (!kMode && sess.sealCheck === 'mismatch' && !sess.note) { showToast('Seal mismatch — describe it in the notes', true); return; }
       if (!items.length) { showToast('Add at least one narcotic', true); return; }
       if (items.some((it) => it.qty === '' || it.qty == null)) { showToast('Every drug needs a quantity', true); return; }
-      if (!sess.newSeal) { showToast('Enter the new seal number (Step 3)', true); return; }
-      if (!sess.assumedName || !sess.witnessName) { showToast('Both parties must be named', true); return; }
-      if (sess.assumedName.toLowerCase() === sess.witnessName.toLowerCase()) { showToast('Assuming person and witness must differ', true); return; }
+      if (!kMode && !sess.newSeal) { showToast('Enter the new seal number', true); return; }
+      if (kMode && !sess.keysOk) { showToast('Confirm the key turnover', true); return; }
+      if (!sess.attest) { showToast('Both parties must confirm the visual inspection', true); return; }
+      if (limBad && !sess.note) { showToast('Quantity outside SOP min/max — note it and contact the BC / Division Chief of EMS', true); return; }
+      if (!sess.assumedName || !sess.witnessName) { showToast('Both paramedics must be named', true); return; }
+      if (sess.assumedName.toLowerCase() === sess.witnessName.toLowerCase()) { showToast('Two different paramedics must sign', true); return; }
       if (!sess.sigA || !sess.sigW) { showToast('Both signatures are required', true); return; }
-      const summary = items.map((it) => `${it.drug} ×${it.qty}`).join(', ');
-      if (!confirm(`Complete transfer?\n\n${s.unit}\n${s.seal ? 'Seal removed: ' + s.seal + (sess.sealCheck === 'ok' ? ' (verified)' : ' (MISMATCH)') + '\n' : ''}New seal: ${sess.newSeal}\n${summary}\n\nAssumed by ${sess.assumedName} · witnessed by ${sess.witnessName}`)) return;
+      const summary = items.map((it) => `${it.drug} ×${it.qty}${it.mg ? ' (' + it.mg + ' mg)' : ''}`).join(', ');
+      const sealTxt = kMode ? 'Key turnover confirmed' : `${s.seal ? 'Seal removed: ' + s.seal + (sess.sealCheck === 'ok' ? ' (verified)' : ' (MISMATCH)') + '\n' : ''}New seal: ${sess.newSeal}`;
+      if (!confirm(`Complete transfer?\n\n${s.unit}\n${sealTxt}\n${summary}\n\n${kMode ? 'Oncoming' : 'Assumed by'}: ${sess.assumedName}\n${kMode ? 'Offgoing' : 'Witness'}: ${sess.witnessName}`)) return;
       const rec = {
         id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         ts: Date.now(),
         unit: s.unit,
-        oldSeal: s.seal || '',
-        sealCheck: s.seal ? sess.sealCheck : null,
-        newSeal: sess.newSeal,
+        mode: kMode ? 'keys' : 'seal',
+        oldSeal: kMode ? '' : (s.seal || ''),
+        sealCheck: kMode ? null : (s.seal ? sess.sealCheck : null),
+        newSeal: kMode ? '' : sess.newSeal,
+        keysOk: kMode ? true : undefined,
+        attest: true,
+        limits: lim,
         items: items.map((it) => ({ ...it })),
         assumed: { name: sess.assumedName, sig: sess.sigA },
         witness: { name: sess.witnessName, sig: sess.sigW },
@@ -5584,10 +5681,11 @@ function fdShowNarcTransfer() {
       };
       s.transfers.unshift(rec);
       s.transfers = s.transfers.slice(0, 50);
-      s.items = items;          // verified list becomes next shift's prefill
-      s.seal = sess.newSeal;    // the seal the NEXT transfer expects to find
+      s.items = items;                          // verified list becomes next shift's prefill
+      if (!kMode) s.seal = sess.newSeal;        // seal-mode chain advances
       fdNarcSave(s);
-      sess.sealCheck = null; sess.newSeal = ''; sess.assumedName = ''; sess.witnessName = ''; sess.note = ''; sess.sigA = null; sess.sigW = null;
+      sess.sealCheck = null; sess.newSeal = ''; sess.keysOk = false; sess.attest = false;
+      sess.assumedName = ''; sess.witnessName = ''; sess.note = ''; sess.sigA = null; sess.sigW = null;
       showToast('Transfer recorded — ' + new Date(rec.ts).toLocaleTimeString());
       paint();
     });
@@ -5608,10 +5706,11 @@ function fdLogWaste(entryId) {
   const src = ctState.log.find((e) => e.id === entryId);
   const nameMatch = src && (src.note || '').match(/^[^\d(—·]+/);
   const drugName = nameMatch ? nameMatch[0].trim() : 'Narcotic';
+  const inc = prompt('Incident number:') || '';
   const amt = prompt(`${drugName} — waste amount (e.g. 50 mcg or 1 mL):`);
   if (!amt) return;
-  const wit = prompt('Witness (name or initials):') || '';
-  ctLogEvent('Waste', `${drugName} — wasted ${amt}${wit ? ' · witness: ' + wit : ''}`);
+  const wit = prompt('Witness (printed name):') || '';
+  ctLogEvent('Waste', `${drugName} — wasted ${amt}${inc ? ' · incident #' + inc : ''}${wit ? ' · witness: ' + wit : ''}`);
   showToast('Waste logged — add a photo of the wasting');
   fdAttachPhoto(ctState.log[0].id);
 }

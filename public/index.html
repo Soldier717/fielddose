@@ -3988,7 +3988,7 @@ function ctRenderLog() {
   if (ctState.log.length === 0) { logEl.innerHTML = '<div class="ct-log-empty">No events logged yet</div>'; return; }
   logEl.innerHTML = ctState.log.map(e => `
     <div class="ct-log-entry">
-      <div class="time">${e.time}</div>
+      <div class="time">${e.ts ? fdClock(e.ts) : e.time}</div>
       <div class="type">${e.type}</div>
       <div class="note">${e.note}</div>
     </div>
@@ -4289,6 +4289,28 @@ function fdAdultShockSeq() {
   const l = p && p.defib && Array.isArray(p.defib.adultLadder)
     ? p.defib.adultLadder.filter((n) => typeof n === 'number' && n > 0) : null;
   return l && l.length ? l : [120, 150, 200];
+}
+
+// Timestamp formatting — pinned to the agency pack's timezone (GNFR:
+// America/New_York, i.e. Eastern wall-clock, EST/EDT as the calendar
+// dictates) so records stamp agency time even if a device's clock
+// settings are wrong. No pack timezone → device local time.
+function fdTz() {
+  const p = fdPack();
+  return (p && p.timezone) || undefined;
+}
+function fdClock(ts) {
+  try { return new Date(ts).toLocaleTimeString('en-US', { hour12: false, timeZone: fdTz() }); }
+  catch (_) { return new Date(ts).toLocaleTimeString([], { hour12: false }); }
+}
+function fdDateTime(ts) {
+  try { return new Date(ts).toLocaleString('en-US', { timeZone: fdTz() }); }
+  catch (_) { return new Date(ts).toLocaleString(); }
+}
+function fdTzLabel() {
+  const tz = fdTz();
+  if (!tz) return '';
+  return tz === 'America/New_York' ? 'Eastern time (ET)' : tz;
 }
 
 // Shallow per-drug field overrides, matched by row name.
@@ -5044,7 +5066,8 @@ function chartOpen(id) {
 }
 
 function chartFmtWhen(ts) {
-  return new Date(ts).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  try { return new Date(ts).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: fdTz() }); }
+  catch (_) { return new Date(ts).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); }
 }
 
 /* ============================================================
@@ -5401,7 +5424,7 @@ function fdNarcRecordText(r) {
     }
     lines.push(`New seal applied: ${r.newSeal || r.seal || '—'}`);
   }
-  lines.push(`Completed:       ${new Date(r.ts).toLocaleString()}`);
+  lines.push(`Completed:       ${fdDateTime(r.ts)}${fdTzLabel() ? ' · ' + fdTzLabel() : ''}`);
   lines.push('');
   if (r.attest) {
     lines.push('Visual inspection by both parties: all controlled substances');
@@ -5597,7 +5620,7 @@ function fdShowNarcTransfer() {
         ${s.transfers.slice(0, 20).map((r) => `
           <div class="fd-narc-hist" data-narc-view="${r.id}">
             <div><div class="who">${escapeHtml((r.witness && r.witness.name) || r.from || '?')} → ${escapeHtml((r.assumed && r.assumed.name) || r.to || '?')}</div>
-            <div class="when">${new Date(r.ts).toLocaleString()} · ${escapeHtml(r.unit || '—')} · ${r.items.length} item${r.items.length === 1 ? '' : 's'}</div></div>
+            <div class="when">${fdDateTime(r.ts)} · ${escapeHtml(r.unit || '—')} · ${r.items.length} item${r.items.length === 1 ? '' : 's'}</div></div>
             <button class="fd-mini-btn" data-narc-share="${r.id}">📤</button>
           </div>`).join('')}
       </div>`;
@@ -5686,7 +5709,7 @@ function fdShowNarcTransfer() {
       fdNarcSave(s);
       sess.sealCheck = null; sess.newSeal = ''; sess.keysOk = false; sess.attest = false;
       sess.assumedName = ''; sess.witnessName = ''; sess.note = ''; sess.sigA = null; sess.sigW = null;
-      showToast('Transfer recorded — ' + new Date(rec.ts).toLocaleTimeString());
+      showToast('Transfer recorded — ' + fdClock(rec.ts));
       paint();
     });
     bg.querySelectorAll('[data-narc-share]').forEach((b) => b.addEventListener('click', (e) => {
@@ -5723,7 +5746,7 @@ function chartWorksheetText(chart) {
   lines.push('Treatment tracking worksheet — NOT a patient care record.');
   lines.push('');
   lines.push(`Patient:   ${chart.patient.summary || ''}`);
-  lines.push(`Created:   ${new Date(chart.createdAt).toLocaleString()}`);
+  lines.push(`Created:   ${fdDateTime(chart.createdAt)}${fdTzLabel() ? ' · times in ' + fdTzLabel() : ''}`);
   lines.push(`Code time: ${ctFormatTime(chart.elapsedMs || 0)} · Cycle ${chart.cycleNum || 1}`);
   lines.push(`Shocks:    ${chart.shockCount || 0}`);
   lines.push(`Epi total: ${(chart.cumulativeEpiMg || 0).toFixed(1)} mg`);
@@ -5734,7 +5757,7 @@ function chartWorksheetText(chart) {
   if (chrono.length === 0) lines.push('  (no events logged)');
   let nPhotos = 0;
   chrono.forEach((e) => {
-    const clock = e.ts ? new Date(e.ts).toLocaleTimeString([], { hour12: false }) : '--:--:--';
+    const clock = e.ts ? fdClock(e.ts) : '--:--:--';
     const pc = (e.photoIds || []).length;
     nPhotos += pc;
     lines.push(`${String(e.time || '--:--').padEnd(6)} ${clock}  ${String(e.type || '').padEnd(7)} ${e.note || ''}${pc ? ` [photo ×${pc}]` : ''}`);
@@ -6765,8 +6788,11 @@ function renderMoreLog() {
               <span class="fd-thumbs" data-thumbs-for="${e.id}" style="display:flex;gap:4px;"></span>
             </div>` : '';
           return `
-        <div style="display:grid;grid-template-columns:60px 90px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid var(--clin-surface-alt);font-size:12px;align-items:baseline;">
-          <div style="font-family:'JetBrains Mono',monospace;color:var(--clin-blue);font-weight:700;">${escapeHtml(e.time || '')}</div>
+        <div style="display:grid;grid-template-columns:64px 86px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid var(--clin-surface-alt);font-size:12px;align-items:baseline;">
+          <div style="font-family:'JetBrains Mono',monospace;color:var(--clin-blue);font-weight:700;font-size:11.5px;">
+            ${e.ts ? fdClock(e.ts) : escapeHtml(e.time || '')}
+            ${e.ts && e.time && e.time !== '0:00' ? `<div style="font-weight:400;color:var(--clin-text-muted);font-size:9.5px;">+${escapeHtml(e.time)}</div>` : ''}
+          </div>
           <div style="font-family:'JetBrains Mono',monospace;color:var(--clin-text-muted);text-transform:uppercase;letter-spacing:0.08em;font-size:11px;">${escapeHtml(e.type || '')}</div>
           <div style="color:var(--clin-text);">${escapeHtml(e.note || '')}</div>
           ${controls}

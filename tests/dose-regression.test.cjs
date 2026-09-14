@@ -67,7 +67,8 @@ function anchorChecks(snap) {
 
   const adultEpi = drug('adult-ibw-70kg', 'Epinephrine 1:10,000');
   if (!adultEpi) errors.push('anchor: adult epi 1:10,000 missing');
-  else if (adultEpi.weightDose !== '1 mg') errors.push(`anchor: adult arrest epi should be 1 mg, got "${adultEpi.weightDose}"`);
+  // 8/2026 SWFL revision: adult arrest epi is 0.5–1 mg IV/IO (max cumulative 3 mg)
+  else if (adultEpi.weightDose !== '0.5–1 mg') errors.push(`anchor: adult arrest epi should be 0.5–1 mg (8/2026 rev), got "${adultEpi.weightDose}"`);
 
   const pedsEpi = (snap.patients['peds-10kg-1yr'].drugs || []).find(
     (d) => /^Epinephrine/.test(d.name || '') && /cardiac arrest/i.test(d.indication || '')

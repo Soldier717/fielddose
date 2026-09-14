@@ -546,24 +546,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "3.0 mg (max 10)",
+     "weightDose": "3.0 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "0.30 mL IV/IO/IM/PO",
+     "deliveryDose": "0.30 mL IV/IO — PO preferred if no IV needed",
      "readyVol": "0.30 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "2.5 mg (< 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 2.5 mL AT",
+     "readyVol": "2.5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "0.8 mg",
+     "weightDose": "0.5 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "0.38 mL slow IV/IO/IM",
-     "readyVol": "0.38 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "0.25 mL slow IV/IO/IM",
+     "readyVol": "0.25 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -605,6 +618,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "150 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -698,7 +737,7 @@
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
      "deliveryDose": "Contraindicated ≤ 3 months of age",
      "readyVol": "—",
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -711,7 +750,7 @@
      "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
      "deliveryDose": "Contraindicated ≤ 3 months of age",
      "readyVol": "—",
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -1168,24 +1207,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "3.9 mg (max 10)",
+     "weightDose": "3.9 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "0.39 mL IV/IO/IM/PO",
+     "deliveryDose": "0.39 mL IV/IO — PO preferred if no IV needed",
      "readyVol": "0.39 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "2.5 mg (< 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 2.5 mL AT",
+     "readyVol": "2.5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "1.0 mg",
+     "weightDose": "0.7 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "0.49 mL slow IV/IO/IM",
-     "readyVol": "0.49 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "0.33 mL slow IV/IO/IM",
+     "readyVol": "0.33 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -1227,6 +1279,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "195 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -1338,7 +1416,7 @@
        "vol": "0.01 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -1369,7 +1447,7 @@
        "vol": "0.13 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -1826,24 +1904,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "5.1 mg (max 10)",
+     "weightDose": "5.1 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "0.51 mL IV/IO/IM/PO",
+     "deliveryDose": "0.51 mL IV/IO — PO preferred if no IV needed",
      "readyVol": "0.51 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "2.5 mg (< 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 2.5 mL AT",
+     "readyVol": "2.5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "1.3 mg",
+     "weightDose": "0.9 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "0.64 mL slow IV/IO/IM",
-     "readyVol": "0.64 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "0.43 mL slow IV/IO/IM",
+     "readyVol": "0.43 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -1885,6 +1976,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "255 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -1996,7 +2113,7 @@
        "vol": "0.02 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2027,7 +2144,7 @@
        "vol": "0.17 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2484,24 +2601,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "6.3 mg (max 10)",
+     "weightDose": "6.3 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "0.63 mL IV/IO/IM/PO",
+     "deliveryDose": "0.63 mL IV/IO — PO preferred if no IV needed",
      "readyVol": "0.63 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "5 mg (≥ 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 5 mL AT",
+     "readyVol": "5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "1.6 mg",
+     "weightDose": "1.1 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "0.79 mL slow IV/IO/IM",
-     "readyVol": "0.79 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "0.53 mL slow IV/IO/IM",
+     "readyVol": "0.53 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -2543,6 +2673,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "315 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -2654,7 +2810,7 @@
        "vol": "0.02 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2685,7 +2841,7 @@
        "vol": "0.21 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -3142,24 +3298,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "7.8 mg (max 10)",
+     "weightDose": "7.8 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "0.78 mL IV/IO/IM/PO",
+     "deliveryDose": "0.78 mL IV/IO — PO preferred if no IV needed",
      "readyVol": "0.78 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "5 mg (≥ 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 5 mL AT",
+     "readyVol": "5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "1.9 mg",
+     "weightDose": "1.3 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "0.97 mL slow IV/IO/IM",
-     "readyVol": "0.97 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "0.65 mL slow IV/IO/IM",
+     "readyVol": "0.65 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -3201,6 +3370,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "390 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -3312,7 +3507,7 @@
        "vol": "0.03 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -3343,7 +3538,7 @@
        "vol": "0.26 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -3800,24 +3995,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "9.9 mg (max 10)",
+     "weightDose": "9.9 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "0.99 mL IV/IO/IM/PO",
+     "deliveryDose": "0.99 mL IV/IO — PO preferred if no IV needed",
      "readyVol": "0.99 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "5 mg (≥ 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 5 mL AT",
+     "readyVol": "5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "2.5 mg",
+     "weightDose": "1.7 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "1.24 mL slow IV/IO/IM",
-     "readyVol": "1.24 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "0.83 mL slow IV/IO/IM",
+     "readyVol": "0.83 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -3859,6 +4067,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "495 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -3970,7 +4204,7 @@
        "vol": "0.03 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4001,7 +4235,7 @@
        "vol": "0.33 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4458,24 +4692,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "10.0 mg (max 10)",
+     "weightDose": "12.6 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
-     "readyVol": "1.00 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "deliveryDose": "1.26 mL IV/IO — PO preferred if no IV needed",
+     "readyVol": "1.26 mL of 10 mg/mL",
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "5 mg (≥ 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 5 mL AT",
+     "readyVol": "5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "3.1 mg",
+     "weightDose": "2.1 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "1.57 mL slow IV/IO/IM",
-     "readyVol": "1.57 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "1.05 mL slow IV/IO/IM",
+     "readyVol": "1.05 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -4517,6 +4764,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "630 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -4628,7 +4901,7 @@
        "vol": "0.04 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4659,7 +4932,7 @@
        "vol": "0.42 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5116,24 +5389,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "10.0 mg (max 10)",
+     "weightDose": "15.9 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
-     "readyVol": "1.00 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "deliveryDose": "1.59 mL IV/IO — PO preferred if no IV needed",
+     "readyVol": "1.59 mL of 10 mg/mL",
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "5 mg (≥ 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 5 mL AT",
+     "readyVol": "5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "4.0 mg",
+     "weightDose": "2.7 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "1.99 mL slow IV/IO/IM",
-     "readyVol": "1.99 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "1.33 mL slow IV/IO/IM",
+     "readyVol": "1.33 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -5175,6 +5461,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "795 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -5286,7 +5598,7 @@
        "vol": "0.05 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5317,7 +5629,7 @@
        "vol": "0.53 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5774,24 +6086,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "10.0 mg (max 10)",
+     "weightDose": "16.0 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
-     "readyVol": "1.00 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "deliveryDose": "1.60 mL IV/IO — PO preferred if no IV needed",
+     "readyVol": "1.60 mL of 10 mg/mL",
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "5 mg (≥ 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 5 mL AT",
+     "readyVol": "5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "4.0 mg",
+     "weightDose": "3.3 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "2.00 mL slow IV/IO/IM",
-     "readyVol": "2.00 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "1.65 mL slow IV/IO/IM",
+     "readyVol": "1.65 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -5833,6 +6158,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "990 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -5944,7 +6295,7 @@
        "vol": "0.07 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5975,7 +6326,7 @@
        "vol": "0.66 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -6249,11 +6600,11 @@
      "name": "Epinephrine 1:10,000",
      "class": "Vasopressor — CARDIAC ARREST",
      "indication": "Cardiac arrest (all rhythms) — IV/IO ONLY",
-     "weightDose": "1 mg",
+     "weightDose": "0.5–1 mg",
      "packageSpec": "0.1 mg/mL (1:10,000) · 10 mL prefilled syringe",
-     "deliveryDose": "Push 10 mL IV/IO",
-     "readyVol": "10 mL of 0.1 mg/mL (1:10,000)",
-     "detail": "1 mg IV/IO every 3–5 min. Max cumulative 3 mg. ET: 2–2.5 mg of 1:1,000. NOT for IM use.",
+     "deliveryDose": "Push 5–10 mL IV/IO",
+     "readyVol": "5–10 mL of 0.1 mg/mL (1:10,000)",
+     "detail": "0.5–1 mg IV/IO every 3–5 min. Max cumulative 3 mg. IV/IO only — NOT for IM use.",
      "route": "IV / IO",
      "max": "3 mg cumulative"
     },
@@ -6431,13 +6782,13 @@
      "rhythm": "non-arrest",
      "name": "Dexamethasone",
      "class": "Steroid",
-     "indication": "Croup · Asthma · Allergic reaction",
-     "weightDose": "10.0 mg (max 10)",
+     "indication": "Asthma · Allergic reaction",
+     "weightDose": "10 mg",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
+     "deliveryDose": "Push 1 mL IV/IO",
      "readyVol": "1 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
+     "detail": "Adult 10 mg IV/IO. Peds: 0.6 mg/kg (max 16 mg), PO preferred.",
+     "route": "IV / IO",
      "max": "10 mg"
     },
     {
@@ -6510,10 +6861,10 @@
      "name": "Naloxone (Narcan)",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
-     "weightDose": "0.4–2 mg",
+     "weightDose": "0.4 mg · repeat PRN",
      "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "0.4–2 mL IV/IM · IN: 1 spray per nostril",
-     "readyVol": "0.4–2 mL of 1 mg/mL",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "readyVol": "0.4 mL of 1 mg/mL",
      "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -6527,9 +6878,35 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
-     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Peds: 15 mg/kg max 1 g.",
-     "route": "IV / IO",
+     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
+     "route": "IV / IO / NEB / IN",
      "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "2 g",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "2 g IV/IO over 15 min for open fractures. Peds: 30 mg/kg (max 2 g) over 15 min. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -6549,11 +6926,11 @@
      "name": "D10W",
      "class": "Carbohydrate",
      "indication": "Unconscious hypoglycemia (BGL <60)",
-     "weightDose": "25 g (full bag)",
+     "weightDose": "12.5–25 g",
      "packageSpec": "D10 (0.1 g/mL) · 250 mL bag",
-     "deliveryDose": "Infuse 250 mL bag IV/IO · titrate to BGL > 80",
-     "readyVol": "250 mL of D10 (25 g)",
-     "detail": "Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.",
+     "deliveryDose": "Infuse 125–250 mL IV/IO · titrate to mentation",
+     "readyVol": "125–250 mL of D10",
+     "detail": "125–250 mL (12.5–25 g) IV/IO, titrated to return of normal mental status. If BGL drops again within 10 min, consider sulfonylurea OD. Peds: 5 mL/kg titrated. NEVER D50 in peds.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -6597,7 +6974,7 @@
      "packageSpec": "5 mg/mL",
      "deliveryDose": "0.4 mL of 5 mg/mL",
      "readyVol": "0.4 mL of 5 mg/mL",
-     "detail": "Severe anxiety 2 mg.",
+     "detail": "Severe anxiety 2 mg IV/IO/IM/IN; repeat every 10 min PRN. Pediatric severe anxiety: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -6641,7 +7018,7 @@
        "vol": "0.09 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -6672,7 +7049,7 @@
        "vol": "0.9 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -6890,12 +7267,12 @@
     "defib": {
      "primary": "120 J",
      "secondary": "1st shock · biphasic",
-     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF."
+     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF/VT."
     },
     "cardiovert": {
-     "primary": "70 J → 120 J → 150 J",
-     "secondary": "escalating · sync",
-     "detail": "Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses."
+     "primary": "100–200 J",
+     "secondary": "by rhythm · sync",
+     "detail": "Narrow & regular 100 J · Narrow & irregular 200 J · Wide & regular 200 J · Wide & irregular: defibrillate 200 J (unsynchronized). Sedate if conscious and time permits."
     },
     "pace": {
      "primary": "80 BPM",
@@ -7381,24 +7758,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "6.0 mg (max 10)",
+     "weightDose": "6.0 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "0.60 mL IV/IO/IM/PO",
+     "deliveryDose": "0.60 mL IV/IO — PO preferred if no IV needed",
      "readyVol": "0.60 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "5 mg (≥ 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 5 mL AT",
+     "readyVol": "5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "1.5 mg",
+     "weightDose": "1.0 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "0.75 mL slow IV/IO/IM",
-     "readyVol": "0.75 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "0.50 mL slow IV/IO/IM",
+     "readyVol": "0.50 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -7440,6 +7830,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "300 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -7551,7 +7967,7 @@
        "vol": "0.02 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -7582,7 +7998,7 @@
        "vol": "0.20 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8039,24 +8455,37 @@
      "name": "Dexamethasone",
      "class": "Steroid",
      "indication": "Croup · Asthma",
-     "weightDose": "10.0 mg (max 10)",
+     "weightDose": "15.0 mg (0.6 mg/kg, max 16)",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
-     "readyVol": "1.00 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
-     "max": "10 mg"
+     "deliveryDose": "1.50 mL IV/IO — PO preferred if no IV needed",
+     "readyVol": "1.50 mL of 10 mg/mL",
+     "detail": "0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.",
+     "route": "IV / IO / PO",
+     "max": "16 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Epinephrine — Croup (Neb)",
+     "class": "Alpha & beta agonist",
+     "indication": "Croup · stridor at rest",
+     "weightDose": "5 mg (≥ 1 yr)",
+     "packageSpec": "1 mg/mL (1:1,000) · nebulized",
+     "deliveryDose": "Nebulize 5 mL AT",
+     "readyVol": "5 mL of 1 mg/mL",
+     "detail": "Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.",
+     "route": "NEB",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
      "name": "Ondansetron",
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
-     "weightDose": "3.8 mg",
+     "weightDose": "2.5 mg (0.1 mg/kg)",
      "packageSpec": "4 mg / 2 mL vial",
-     "deliveryDose": "1.88 mL slow IV/IO/IM",
-     "readyVol": "1.88 mL of 2 mg/mL",
-     "detail": "0.15 mg/kg, max 4 mg. ODT available 4 mg PO.",
+     "deliveryDose": "1.25 mL slow IV/IO/IM",
+     "readyVol": "1.25 mL of 2 mg/mL",
+     "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
     },
@@ -8098,6 +8527,32 @@
      "detail": "15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.",
      "route": "IV / IO",
      "max": "1 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "750 mg (30 mg/kg, max 2 g)",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -8209,7 +8664,7 @@
        "vol": "0.05 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8240,7 +8695,7 @@
        "vol": "0.50 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8514,11 +8969,11 @@
      "name": "Epinephrine 1:10,000",
      "class": "Vasopressor — CARDIAC ARREST",
      "indication": "Cardiac arrest (all rhythms) — IV/IO ONLY",
-     "weightDose": "1 mg",
+     "weightDose": "0.5–1 mg",
      "packageSpec": "0.1 mg/mL (1:10,000) · 10 mL prefilled syringe",
-     "deliveryDose": "Push 10 mL IV/IO",
-     "readyVol": "10 mL of 0.1 mg/mL (1:10,000)",
-     "detail": "1 mg IV/IO every 3–5 min. Max cumulative 3 mg. ET: 2–2.5 mg of 1:1,000. NOT for IM use.",
+     "deliveryDose": "Push 5–10 mL IV/IO",
+     "readyVol": "5–10 mL of 0.1 mg/mL (1:10,000)",
+     "detail": "0.5–1 mg IV/IO every 3–5 min. Max cumulative 3 mg. IV/IO only — NOT for IM use.",
      "route": "IV / IO",
      "max": "3 mg cumulative"
     },
@@ -8696,13 +9151,13 @@
      "rhythm": "non-arrest",
      "name": "Dexamethasone",
      "class": "Steroid",
-     "indication": "Croup · Asthma · Allergic reaction",
-     "weightDose": "10.0 mg (max 10)",
+     "indication": "Asthma · Allergic reaction",
+     "weightDose": "10 mg",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
+     "deliveryDose": "Push 1 mL IV/IO",
      "readyVol": "1 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
+     "detail": "Adult 10 mg IV/IO. Peds: 0.6 mg/kg (max 16 mg), PO preferred.",
+     "route": "IV / IO",
      "max": "10 mg"
     },
     {
@@ -8775,10 +9230,10 @@
      "name": "Naloxone (Narcan)",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
-     "weightDose": "0.4–2 mg",
+     "weightDose": "0.4 mg · repeat PRN",
      "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "0.4–2 mL IV/IM · IN: 1 spray per nostril",
-     "readyVol": "0.4–2 mL of 1 mg/mL",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "readyVol": "0.4 mL of 1 mg/mL",
      "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -8792,9 +9247,35 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
-     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Peds: 15 mg/kg max 1 g.",
-     "route": "IV / IO",
+     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
+     "route": "IV / IO / NEB / IN",
      "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "2 g",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "2 g IV/IO over 15 min for open fractures. Peds: 30 mg/kg (max 2 g) over 15 min. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -8814,11 +9295,11 @@
      "name": "D10W",
      "class": "Carbohydrate",
      "indication": "Unconscious hypoglycemia (BGL <60)",
-     "weightDose": "25 g (full bag)",
+     "weightDose": "12.5–25 g",
      "packageSpec": "D10 (0.1 g/mL) · 250 mL bag",
-     "deliveryDose": "Infuse 250 mL bag IV/IO · titrate to BGL > 80",
-     "readyVol": "250 mL of D10 (25 g)",
-     "detail": "Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.",
+     "deliveryDose": "Infuse 125–250 mL IV/IO · titrate to mentation",
+     "readyVol": "125–250 mL of D10",
+     "detail": "125–250 mL (12.5–25 g) IV/IO, titrated to return of normal mental status. If BGL drops again within 10 min, consider sulfonylurea OD. Peds: 5 mL/kg titrated. NEVER D50 in peds.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -8862,7 +9343,7 @@
      "packageSpec": "5 mg/mL",
      "deliveryDose": "0.4 mL of 5 mg/mL",
      "readyVol": "0.4 mL of 5 mg/mL",
-     "detail": "Severe anxiety 2 mg.",
+     "detail": "Severe anxiety 2 mg IV/IO/IM/IN; repeat every 10 min PRN. Pediatric severe anxiety: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8906,7 +9387,7 @@
        "vol": "0.10 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8937,7 +9418,7 @@
        "vol": "1.0 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -9155,12 +9636,12 @@
     "defib": {
      "primary": "120 J",
      "secondary": "1st shock · biphasic",
-     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF."
+     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF/VT."
     },
     "cardiovert": {
-     "primary": "70 J → 120 J → 150 J",
-     "secondary": "escalating · sync",
-     "detail": "Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses."
+     "primary": "100–200 J",
+     "secondary": "by rhythm · sync",
+     "detail": "Narrow & regular 100 J · Narrow & irregular 200 J · Wide & regular 200 J · Wide & irregular: defibrillate 200 J (unsynchronized). Sedate if conscious and time permits."
     },
     "pace": {
      "primary": "80 BPM",
@@ -9289,11 +9770,11 @@
      "name": "Epinephrine 1:10,000",
      "class": "Vasopressor — CARDIAC ARREST",
      "indication": "Cardiac arrest (all rhythms) — IV/IO ONLY",
-     "weightDose": "1 mg",
+     "weightDose": "0.5–1 mg",
      "packageSpec": "0.1 mg/mL (1:10,000) · 10 mL prefilled syringe",
-     "deliveryDose": "Push 10 mL IV/IO",
-     "readyVol": "10 mL of 0.1 mg/mL (1:10,000)",
-     "detail": "1 mg IV/IO every 3–5 min. Max cumulative 3 mg. ET: 2–2.5 mg of 1:1,000. NOT for IM use.",
+     "deliveryDose": "Push 5–10 mL IV/IO",
+     "readyVol": "5–10 mL of 0.1 mg/mL (1:10,000)",
+     "detail": "0.5–1 mg IV/IO every 3–5 min. Max cumulative 3 mg. IV/IO only — NOT for IM use.",
      "route": "IV / IO",
      "max": "3 mg cumulative"
     },
@@ -9471,13 +9952,13 @@
      "rhythm": "non-arrest",
      "name": "Dexamethasone",
      "class": "Steroid",
-     "indication": "Croup · Asthma · Allergic reaction",
-     "weightDose": "10.0 mg (max 10)",
+     "indication": "Asthma · Allergic reaction",
+     "weightDose": "10 mg",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
+     "deliveryDose": "Push 1 mL IV/IO",
      "readyVol": "1 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
+     "detail": "Adult 10 mg IV/IO. Peds: 0.6 mg/kg (max 16 mg), PO preferred.",
+     "route": "IV / IO",
      "max": "10 mg"
     },
     {
@@ -9550,10 +10031,10 @@
      "name": "Naloxone (Narcan)",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
-     "weightDose": "0.4–2 mg",
+     "weightDose": "0.4 mg · repeat PRN",
      "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "0.4–2 mL IV/IM · IN: 1 spray per nostril",
-     "readyVol": "0.4–2 mL of 1 mg/mL",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "readyVol": "0.4 mL of 1 mg/mL",
      "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -9567,9 +10048,35 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
-     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Peds: 15 mg/kg max 1 g.",
-     "route": "IV / IO",
+     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
+     "route": "IV / IO / NEB / IN",
      "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "2 g",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "2 g IV/IO over 15 min for open fractures. Peds: 30 mg/kg (max 2 g) over 15 min. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -9589,11 +10096,11 @@
      "name": "D10W",
      "class": "Carbohydrate",
      "indication": "Unconscious hypoglycemia (BGL <60)",
-     "weightDose": "25 g (full bag)",
+     "weightDose": "12.5–25 g",
      "packageSpec": "D10 (0.1 g/mL) · 250 mL bag",
-     "deliveryDose": "Infuse 250 mL bag IV/IO · titrate to BGL > 80",
-     "readyVol": "250 mL of D10 (25 g)",
-     "detail": "Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.",
+     "deliveryDose": "Infuse 125–250 mL IV/IO · titrate to mentation",
+     "readyVol": "125–250 mL of D10",
+     "detail": "125–250 mL (12.5–25 g) IV/IO, titrated to return of normal mental status. If BGL drops again within 10 min, consider sulfonylurea OD. Peds: 5 mL/kg titrated. NEVER D50 in peds.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -9637,7 +10144,7 @@
      "packageSpec": "5 mg/mL",
      "deliveryDose": "0.4 mL of 5 mg/mL",
      "readyVol": "0.4 mL of 5 mg/mL",
-     "detail": "Severe anxiety 2 mg.",
+     "detail": "Severe anxiety 2 mg IV/IO/IM/IN; repeat every 10 min PRN. Pediatric severe anxiety: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -9681,7 +10188,7 @@
        "vol": "0.12 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -9712,7 +10219,7 @@
        "vol": "1.2 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -9930,12 +10437,12 @@
     "defib": {
      "primary": "120 J",
      "secondary": "1st shock · biphasic",
-     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF."
+     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF/VT."
     },
     "cardiovert": {
-     "primary": "70 J → 120 J → 150 J",
-     "secondary": "escalating · sync",
-     "detail": "Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses."
+     "primary": "100–200 J",
+     "secondary": "by rhythm · sync",
+     "detail": "Narrow & regular 100 J · Narrow & irregular 200 J · Wide & regular 200 J · Wide & irregular: defibrillate 200 J (unsynchronized). Sedate if conscious and time permits."
     },
     "pace": {
      "primary": "80 BPM",
@@ -10064,11 +10571,11 @@
      "name": "Epinephrine 1:10,000",
      "class": "Vasopressor — CARDIAC ARREST",
      "indication": "Cardiac arrest (all rhythms) — IV/IO ONLY",
-     "weightDose": "1 mg",
+     "weightDose": "0.5–1 mg",
      "packageSpec": "0.1 mg/mL (1:10,000) · 10 mL prefilled syringe",
-     "deliveryDose": "Push 10 mL IV/IO",
-     "readyVol": "10 mL of 0.1 mg/mL (1:10,000)",
-     "detail": "1 mg IV/IO every 3–5 min. Max cumulative 3 mg. ET: 2–2.5 mg of 1:1,000. NOT for IM use.",
+     "deliveryDose": "Push 5–10 mL IV/IO",
+     "readyVol": "5–10 mL of 0.1 mg/mL (1:10,000)",
+     "detail": "0.5–1 mg IV/IO every 3–5 min. Max cumulative 3 mg. IV/IO only — NOT for IM use.",
      "route": "IV / IO",
      "max": "3 mg cumulative"
     },
@@ -10246,13 +10753,13 @@
      "rhythm": "non-arrest",
      "name": "Dexamethasone",
      "class": "Steroid",
-     "indication": "Croup · Asthma · Allergic reaction",
-     "weightDose": "10.0 mg (max 10)",
+     "indication": "Asthma · Allergic reaction",
+     "weightDose": "10 mg",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
+     "deliveryDose": "Push 1 mL IV/IO",
      "readyVol": "1 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
+     "detail": "Adult 10 mg IV/IO. Peds: 0.6 mg/kg (max 16 mg), PO preferred.",
+     "route": "IV / IO",
      "max": "10 mg"
     },
     {
@@ -10325,10 +10832,10 @@
      "name": "Naloxone (Narcan)",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
-     "weightDose": "0.4–2 mg",
+     "weightDose": "0.4 mg · repeat PRN",
      "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "0.4–2 mL IV/IM · IN: 1 spray per nostril",
-     "readyVol": "0.4–2 mL of 1 mg/mL",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "readyVol": "0.4 mL of 1 mg/mL",
      "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -10342,9 +10849,35 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
-     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Peds: 15 mg/kg max 1 g.",
-     "route": "IV / IO",
+     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
+     "route": "IV / IO / NEB / IN",
      "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "2 g",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "2 g IV/IO over 15 min for open fractures. Peds: 30 mg/kg (max 2 g) over 15 min. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -10364,11 +10897,11 @@
      "name": "D10W",
      "class": "Carbohydrate",
      "indication": "Unconscious hypoglycemia (BGL <60)",
-     "weightDose": "25 g (full bag)",
+     "weightDose": "12.5–25 g",
      "packageSpec": "D10 (0.1 g/mL) · 250 mL bag",
-     "deliveryDose": "Infuse 250 mL bag IV/IO · titrate to BGL > 80",
-     "readyVol": "250 mL of D10 (25 g)",
-     "detail": "Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.",
+     "deliveryDose": "Infuse 125–250 mL IV/IO · titrate to mentation",
+     "readyVol": "125–250 mL of D10",
+     "detail": "125–250 mL (12.5–25 g) IV/IO, titrated to return of normal mental status. If BGL drops again within 10 min, consider sulfonylurea OD. Peds: 5 mL/kg titrated. NEVER D50 in peds.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -10412,7 +10945,7 @@
      "packageSpec": "5 mg/mL",
      "deliveryDose": "0.4 mL of 5 mg/mL",
      "readyVol": "0.4 mL of 5 mg/mL",
-     "detail": "Severe anxiety 2 mg.",
+     "detail": "Severe anxiety 2 mg IV/IO/IM/IN; repeat every 10 min PRN. Pediatric severe anxiety: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -10456,7 +10989,7 @@
        "vol": "0.14 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -10487,7 +11020,7 @@
        "vol": "1.4 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -10705,12 +11238,12 @@
     "defib": {
      "primary": "120 J",
      "secondary": "1st shock · biphasic",
-     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF."
+     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF/VT."
     },
     "cardiovert": {
-     "primary": "70 J → 120 J → 150 J",
-     "secondary": "escalating · sync",
-     "detail": "Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses."
+     "primary": "100–200 J",
+     "secondary": "by rhythm · sync",
+     "detail": "Narrow & regular 100 J · Narrow & irregular 200 J · Wide & regular 200 J · Wide & irregular: defibrillate 200 J (unsynchronized). Sedate if conscious and time permits."
     },
     "pace": {
      "primary": "80 BPM",
@@ -10839,11 +11372,11 @@
      "name": "Epinephrine 1:10,000",
      "class": "Vasopressor — CARDIAC ARREST",
      "indication": "Cardiac arrest (all rhythms) — IV/IO ONLY",
-     "weightDose": "1 mg",
+     "weightDose": "0.5–1 mg",
      "packageSpec": "0.1 mg/mL (1:10,000) · 10 mL prefilled syringe",
-     "deliveryDose": "Push 10 mL IV/IO",
-     "readyVol": "10 mL of 0.1 mg/mL (1:10,000)",
-     "detail": "1 mg IV/IO every 3–5 min. Max cumulative 3 mg. ET: 2–2.5 mg of 1:1,000. NOT for IM use.",
+     "deliveryDose": "Push 5–10 mL IV/IO",
+     "readyVol": "5–10 mL of 0.1 mg/mL (1:10,000)",
+     "detail": "0.5–1 mg IV/IO every 3–5 min. Max cumulative 3 mg. IV/IO only — NOT for IM use.",
      "route": "IV / IO",
      "max": "3 mg cumulative"
     },
@@ -11021,13 +11554,13 @@
      "rhythm": "non-arrest",
      "name": "Dexamethasone",
      "class": "Steroid",
-     "indication": "Croup · Asthma · Allergic reaction",
-     "weightDose": "10.0 mg (max 10)",
+     "indication": "Asthma · Allergic reaction",
+     "weightDose": "10 mg",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
+     "deliveryDose": "Push 1 mL IV/IO",
      "readyVol": "1 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
+     "detail": "Adult 10 mg IV/IO. Peds: 0.6 mg/kg (max 16 mg), PO preferred.",
+     "route": "IV / IO",
      "max": "10 mg"
     },
     {
@@ -11100,10 +11633,10 @@
      "name": "Naloxone (Narcan)",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
-     "weightDose": "0.4–2 mg",
+     "weightDose": "0.4 mg · repeat PRN",
      "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "0.4–2 mL IV/IM · IN: 1 spray per nostril",
-     "readyVol": "0.4–2 mL of 1 mg/mL",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "readyVol": "0.4 mL of 1 mg/mL",
      "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -11117,9 +11650,35 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
-     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Peds: 15 mg/kg max 1 g.",
-     "route": "IV / IO",
+     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
+     "route": "IV / IO / NEB / IN",
      "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "2 g",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "2 g IV/IO over 15 min for open fractures. Peds: 30 mg/kg (max 2 g) over 15 min. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -11139,11 +11698,11 @@
      "name": "D10W",
      "class": "Carbohydrate",
      "indication": "Unconscious hypoglycemia (BGL <60)",
-     "weightDose": "25 g (full bag)",
+     "weightDose": "12.5–25 g",
      "packageSpec": "D10 (0.1 g/mL) · 250 mL bag",
-     "deliveryDose": "Infuse 250 mL bag IV/IO · titrate to BGL > 80",
-     "readyVol": "250 mL of D10 (25 g)",
-     "detail": "Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.",
+     "deliveryDose": "Infuse 125–250 mL IV/IO · titrate to mentation",
+     "readyVol": "125–250 mL of D10",
+     "detail": "125–250 mL (12.5–25 g) IV/IO, titrated to return of normal mental status. If BGL drops again within 10 min, consider sulfonylurea OD. Peds: 5 mL/kg titrated. NEVER D50 in peds.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -11187,7 +11746,7 @@
      "packageSpec": "5 mg/mL",
      "deliveryDose": "0.4 mL of 5 mg/mL",
      "readyVol": "0.4 mL of 5 mg/mL",
-     "detail": "Severe anxiety 2 mg.",
+     "detail": "Severe anxiety 2 mg IV/IO/IM/IN; repeat every 10 min PRN. Pediatric severe anxiety: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -11231,7 +11790,7 @@
        "vol": "0.15 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -11262,7 +11821,7 @@
        "vol": "1.5 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -11480,12 +12039,12 @@
     "defib": {
      "primary": "120 J",
      "secondary": "1st shock · biphasic",
-     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF."
+     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF/VT."
     },
     "cardiovert": {
-     "primary": "70 J → 120 J → 150 J",
-     "secondary": "escalating · sync",
-     "detail": "Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses."
+     "primary": "100–200 J",
+     "secondary": "by rhythm · sync",
+     "detail": "Narrow & regular 100 J · Narrow & irregular 200 J · Wide & regular 200 J · Wide & irregular: defibrillate 200 J (unsynchronized). Sedate if conscious and time permits."
     },
     "pace": {
      "primary": "80 BPM",
@@ -11614,11 +12173,11 @@
      "name": "Epinephrine 1:10,000",
      "class": "Vasopressor — CARDIAC ARREST",
      "indication": "Cardiac arrest (all rhythms) — IV/IO ONLY",
-     "weightDose": "1 mg",
+     "weightDose": "0.5–1 mg",
      "packageSpec": "0.1 mg/mL (1:10,000) · 10 mL prefilled syringe",
-     "deliveryDose": "Push 10 mL IV/IO",
-     "readyVol": "10 mL of 0.1 mg/mL (1:10,000)",
-     "detail": "1 mg IV/IO every 3–5 min. Max cumulative 3 mg. ET: 2–2.5 mg of 1:1,000. NOT for IM use.",
+     "deliveryDose": "Push 5–10 mL IV/IO",
+     "readyVol": "5–10 mL of 0.1 mg/mL (1:10,000)",
+     "detail": "0.5–1 mg IV/IO every 3–5 min. Max cumulative 3 mg. IV/IO only — NOT for IM use.",
      "route": "IV / IO",
      "max": "3 mg cumulative"
     },
@@ -11796,13 +12355,13 @@
      "rhythm": "non-arrest",
      "name": "Dexamethasone",
      "class": "Steroid",
-     "indication": "Croup · Asthma · Allergic reaction",
-     "weightDose": "10.0 mg (max 10)",
+     "indication": "Asthma · Allergic reaction",
+     "weightDose": "10 mg",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
+     "deliveryDose": "Push 1 mL IV/IO",
      "readyVol": "1 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
+     "detail": "Adult 10 mg IV/IO. Peds: 0.6 mg/kg (max 16 mg), PO preferred.",
+     "route": "IV / IO",
      "max": "10 mg"
     },
     {
@@ -11875,10 +12434,10 @@
      "name": "Naloxone (Narcan)",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
-     "weightDose": "0.4–2 mg",
+     "weightDose": "0.4 mg · repeat PRN",
      "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "0.4–2 mL IV/IM · IN: 1 spray per nostril",
-     "readyVol": "0.4–2 mL of 1 mg/mL",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "readyVol": "0.4 mL of 1 mg/mL",
      "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -11892,9 +12451,35 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
-     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Peds: 15 mg/kg max 1 g.",
-     "route": "IV / IO",
+     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
+     "route": "IV / IO / NEB / IN",
      "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "2 g",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "2 g IV/IO over 15 min for open fractures. Peds: 30 mg/kg (max 2 g) over 15 min. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -11914,11 +12499,11 @@
      "name": "D10W",
      "class": "Carbohydrate",
      "indication": "Unconscious hypoglycemia (BGL <60)",
-     "weightDose": "25 g (full bag)",
+     "weightDose": "12.5–25 g",
      "packageSpec": "D10 (0.1 g/mL) · 250 mL bag",
-     "deliveryDose": "Infuse 250 mL bag IV/IO · titrate to BGL > 80",
-     "readyVol": "250 mL of D10 (25 g)",
-     "detail": "Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.",
+     "deliveryDose": "Infuse 125–250 mL IV/IO · titrate to mentation",
+     "readyVol": "125–250 mL of D10",
+     "detail": "125–250 mL (12.5–25 g) IV/IO, titrated to return of normal mental status. If BGL drops again within 10 min, consider sulfonylurea OD. Peds: 5 mL/kg titrated. NEVER D50 in peds.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -11962,7 +12547,7 @@
      "packageSpec": "5 mg/mL",
      "deliveryDose": "0.4 mL of 5 mg/mL",
      "readyVol": "0.4 mL of 5 mg/mL",
-     "detail": "Severe anxiety 2 mg.",
+     "detail": "Severe anxiety 2 mg IV/IO/IM/IN; repeat every 10 min PRN. Pediatric severe anxiety: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12006,7 +12591,7 @@
        "vol": "0.16 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12037,7 +12622,7 @@
        "vol": "1.6 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12255,12 +12840,12 @@
     "defib": {
      "primary": "120 J",
      "secondary": "1st shock · biphasic",
-     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF."
+     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF/VT."
     },
     "cardiovert": {
-     "primary": "70 J → 120 J → 150 J",
-     "secondary": "escalating · sync",
-     "detail": "Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses."
+     "primary": "100–200 J",
+     "secondary": "by rhythm · sync",
+     "detail": "Narrow & regular 100 J · Narrow & irregular 200 J · Wide & regular 200 J · Wide & irregular: defibrillate 200 J (unsynchronized). Sedate if conscious and time permits."
     },
     "pace": {
      "primary": "80 BPM",
@@ -12389,11 +12974,11 @@
      "name": "Epinephrine 1:10,000",
      "class": "Vasopressor — CARDIAC ARREST",
      "indication": "Cardiac arrest (all rhythms) — IV/IO ONLY",
-     "weightDose": "1 mg",
+     "weightDose": "0.5–1 mg",
      "packageSpec": "0.1 mg/mL (1:10,000) · 10 mL prefilled syringe",
-     "deliveryDose": "Push 10 mL IV/IO",
-     "readyVol": "10 mL of 0.1 mg/mL (1:10,000)",
-     "detail": "1 mg IV/IO every 3–5 min. Max cumulative 3 mg. ET: 2–2.5 mg of 1:1,000. NOT for IM use.",
+     "deliveryDose": "Push 5–10 mL IV/IO",
+     "readyVol": "5–10 mL of 0.1 mg/mL (1:10,000)",
+     "detail": "0.5–1 mg IV/IO every 3–5 min. Max cumulative 3 mg. IV/IO only — NOT for IM use.",
      "route": "IV / IO",
      "max": "3 mg cumulative"
     },
@@ -12571,13 +13156,13 @@
      "rhythm": "non-arrest",
      "name": "Dexamethasone",
      "class": "Steroid",
-     "indication": "Croup · Asthma · Allergic reaction",
-     "weightDose": "10.0 mg (max 10)",
+     "indication": "Asthma · Allergic reaction",
+     "weightDose": "10 mg",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
+     "deliveryDose": "Push 1 mL IV/IO",
      "readyVol": "1 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
+     "detail": "Adult 10 mg IV/IO. Peds: 0.6 mg/kg (max 16 mg), PO preferred.",
+     "route": "IV / IO",
      "max": "10 mg"
     },
     {
@@ -12650,10 +13235,10 @@
      "name": "Naloxone (Narcan)",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
-     "weightDose": "0.4–2 mg",
+     "weightDose": "0.4 mg · repeat PRN",
      "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "0.4–2 mL IV/IM · IN: 1 spray per nostril",
-     "readyVol": "0.4–2 mL of 1 mg/mL",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "readyVol": "0.4 mL of 1 mg/mL",
      "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -12667,9 +13252,35 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
-     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Peds: 15 mg/kg max 1 g.",
-     "route": "IV / IO",
+     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
+     "route": "IV / IO / NEB / IN",
      "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "2 g",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "2 g IV/IO over 15 min for open fractures. Peds: 30 mg/kg (max 2 g) over 15 min. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -12689,11 +13300,11 @@
      "name": "D10W",
      "class": "Carbohydrate",
      "indication": "Unconscious hypoglycemia (BGL <60)",
-     "weightDose": "25 g (full bag)",
+     "weightDose": "12.5–25 g",
      "packageSpec": "D10 (0.1 g/mL) · 250 mL bag",
-     "deliveryDose": "Infuse 250 mL bag IV/IO · titrate to BGL > 80",
-     "readyVol": "250 mL of D10 (25 g)",
-     "detail": "Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.",
+     "deliveryDose": "Infuse 125–250 mL IV/IO · titrate to mentation",
+     "readyVol": "125–250 mL of D10",
+     "detail": "125–250 mL (12.5–25 g) IV/IO, titrated to return of normal mental status. If BGL drops again within 10 min, consider sulfonylurea OD. Peds: 5 mL/kg titrated. NEVER D50 in peds.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -12737,7 +13348,7 @@
      "packageSpec": "5 mg/mL",
      "deliveryDose": "0.4 mL of 5 mg/mL",
      "readyVol": "0.4 mL of 5 mg/mL",
-     "detail": "Severe anxiety 2 mg.",
+     "detail": "Severe anxiety 2 mg IV/IO/IM/IN; repeat every 10 min PRN. Pediatric severe anxiety: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12781,7 +13392,7 @@
        "vol": "0.18 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12812,7 +13423,7 @@
        "vol": "1.8 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -13030,12 +13641,12 @@
     "defib": {
      "primary": "120 J",
      "secondary": "1st shock · biphasic",
-     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF."
+     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF/VT."
     },
     "cardiovert": {
-     "primary": "70 J → 120 J → 150 J",
-     "secondary": "escalating · sync",
-     "detail": "Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses."
+     "primary": "100–200 J",
+     "secondary": "by rhythm · sync",
+     "detail": "Narrow & regular 100 J · Narrow & irregular 200 J · Wide & regular 200 J · Wide & irregular: defibrillate 200 J (unsynchronized). Sedate if conscious and time permits."
     },
     "pace": {
      "primary": "80 BPM",
@@ -13164,11 +13775,11 @@
      "name": "Epinephrine 1:10,000",
      "class": "Vasopressor — CARDIAC ARREST",
      "indication": "Cardiac arrest (all rhythms) — IV/IO ONLY",
-     "weightDose": "1 mg",
+     "weightDose": "0.5–1 mg",
      "packageSpec": "0.1 mg/mL (1:10,000) · 10 mL prefilled syringe",
-     "deliveryDose": "Push 10 mL IV/IO",
-     "readyVol": "10 mL of 0.1 mg/mL (1:10,000)",
-     "detail": "1 mg IV/IO every 3–5 min. Max cumulative 3 mg. ET: 2–2.5 mg of 1:1,000. NOT for IM use.",
+     "deliveryDose": "Push 5–10 mL IV/IO",
+     "readyVol": "5–10 mL of 0.1 mg/mL (1:10,000)",
+     "detail": "0.5–1 mg IV/IO every 3–5 min. Max cumulative 3 mg. IV/IO only — NOT for IM use.",
      "route": "IV / IO",
      "max": "3 mg cumulative"
     },
@@ -13346,13 +13957,13 @@
      "rhythm": "non-arrest",
      "name": "Dexamethasone",
      "class": "Steroid",
-     "indication": "Croup · Asthma · Allergic reaction",
-     "weightDose": "10.0 mg (max 10)",
+     "indication": "Asthma · Allergic reaction",
+     "weightDose": "10 mg",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
+     "deliveryDose": "Push 1 mL IV/IO",
      "readyVol": "1 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
+     "detail": "Adult 10 mg IV/IO. Peds: 0.6 mg/kg (max 16 mg), PO preferred.",
+     "route": "IV / IO",
      "max": "10 mg"
     },
     {
@@ -13425,10 +14036,10 @@
      "name": "Naloxone (Narcan)",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
-     "weightDose": "0.4–2 mg",
+     "weightDose": "0.4 mg · repeat PRN",
      "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "0.4–2 mL IV/IM · IN: 1 spray per nostril",
-     "readyVol": "0.4–2 mL of 1 mg/mL",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "readyVol": "0.4 mL of 1 mg/mL",
      "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -13442,9 +14053,35 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
-     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Peds: 15 mg/kg max 1 g.",
-     "route": "IV / IO",
+     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
+     "route": "IV / IO / NEB / IN",
      "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "2 g",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "2 g IV/IO over 15 min for open fractures. Peds: 30 mg/kg (max 2 g) over 15 min. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -13464,11 +14101,11 @@
      "name": "D10W",
      "class": "Carbohydrate",
      "indication": "Unconscious hypoglycemia (BGL <60)",
-     "weightDose": "25 g (full bag)",
+     "weightDose": "12.5–25 g",
      "packageSpec": "D10 (0.1 g/mL) · 250 mL bag",
-     "deliveryDose": "Infuse 250 mL bag IV/IO · titrate to BGL > 80",
-     "readyVol": "250 mL of D10 (25 g)",
-     "detail": "Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.",
+     "deliveryDose": "Infuse 125–250 mL IV/IO · titrate to mentation",
+     "readyVol": "125–250 mL of D10",
+     "detail": "125–250 mL (12.5–25 g) IV/IO, titrated to return of normal mental status. If BGL drops again within 10 min, consider sulfonylurea OD. Peds: 5 mL/kg titrated. NEVER D50 in peds.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -13512,7 +14149,7 @@
      "packageSpec": "5 mg/mL",
      "deliveryDose": "0.4 mL of 5 mg/mL",
      "readyVol": "0.4 mL of 5 mg/mL",
-     "detail": "Severe anxiety 2 mg.",
+     "detail": "Severe anxiety 2 mg IV/IO/IM/IN; repeat every 10 min PRN. Pediatric severe anxiety: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -13556,7 +14193,7 @@
        "vol": "0.20 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -13587,7 +14224,7 @@
        "vol": "2.0 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -13805,12 +14442,12 @@
     "defib": {
      "primary": "120 J",
      "secondary": "1st shock · biphasic",
-     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF."
+     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF/VT."
     },
     "cardiovert": {
-     "primary": "70 J → 120 J → 150 J",
-     "secondary": "escalating · sync",
-     "detail": "Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses."
+     "primary": "100–200 J",
+     "secondary": "by rhythm · sync",
+     "detail": "Narrow & regular 100 J · Narrow & irregular 200 J · Wide & regular 200 J · Wide & irregular: defibrillate 200 J (unsynchronized). Sedate if conscious and time permits."
     },
     "pace": {
      "primary": "80 BPM",
@@ -13939,11 +14576,11 @@
      "name": "Epinephrine 1:10,000",
      "class": "Vasopressor — CARDIAC ARREST",
      "indication": "Cardiac arrest (all rhythms) — IV/IO ONLY",
-     "weightDose": "1 mg",
+     "weightDose": "0.5–1 mg",
      "packageSpec": "0.1 mg/mL (1:10,000) · 10 mL prefilled syringe",
-     "deliveryDose": "Push 10 mL IV/IO",
-     "readyVol": "10 mL of 0.1 mg/mL (1:10,000)",
-     "detail": "1 mg IV/IO every 3–5 min. Max cumulative 3 mg. ET: 2–2.5 mg of 1:1,000. NOT for IM use.",
+     "deliveryDose": "Push 5–10 mL IV/IO",
+     "readyVol": "5–10 mL of 0.1 mg/mL (1:10,000)",
+     "detail": "0.5–1 mg IV/IO every 3–5 min. Max cumulative 3 mg. IV/IO only — NOT for IM use.",
      "route": "IV / IO",
      "max": "3 mg cumulative"
     },
@@ -14121,13 +14758,13 @@
      "rhythm": "non-arrest",
      "name": "Dexamethasone",
      "class": "Steroid",
-     "indication": "Croup · Asthma · Allergic reaction",
-     "weightDose": "10.0 mg (max 10)",
+     "indication": "Asthma · Allergic reaction",
+     "weightDose": "10 mg",
      "packageSpec": "10 mg/mL · 1 mL vial",
-     "deliveryDose": "1.00 mL IV/IO/IM/PO",
+     "deliveryDose": "Push 1 mL IV/IO",
      "readyVol": "1 mL of 10 mg/mL",
-     "detail": "0.6 mg/kg. Max 10 mg.",
-     "route": "IV / IO / IM / PO",
+     "detail": "Adult 10 mg IV/IO. Peds: 0.6 mg/kg (max 16 mg), PO preferred.",
+     "route": "IV / IO",
      "max": "10 mg"
     },
     {
@@ -14200,10 +14837,10 @@
      "name": "Naloxone (Narcan)",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
-     "weightDose": "0.4–2 mg",
+     "weightDose": "0.4 mg · repeat PRN",
      "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "0.4–2 mL IV/IM · IN: 1 spray per nostril",
-     "readyVol": "0.4–2 mL of 1 mg/mL",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "readyVol": "0.4 mL of 1 mg/mL",
      "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
@@ -14217,9 +14854,35 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
-     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Peds: 15 mg/kg max 1 g.",
-     "route": "IV / IO",
+     "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
+     "route": "IV / IO / NEB / IN",
      "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Cefazolin (Ancef)",
+     "class": "Antibiotic — cephalosporin",
+     "indication": "Open fracture",
+     "weightDose": "2 g",
+     "packageSpec": "2 g vial · reconstitute",
+     "deliveryDose": "Infuse over 15 min IV/IO",
+     "readyVol": "—",
+     "detail": "2 g IV/IO over 15 min for open fractures. Peds: 30 mg/kg (max 2 g) over 15 min. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).",
+     "route": "IV / IO / IM",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Hydrocortisone",
+     "class": "Corticosteroid",
+     "indication": "Adrenal insufficiency crisis",
+     "weightDose": "Dose TBD",
+     "packageSpec": "Solu-Cortef vial",
+     "deliveryDose": "Dose/route TBD — contact Medical Control",
+     "readyVol": "—",
+     "detail": "Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.",
+     "route": "IV / IO / IM",
+     "max": "TBD"
     },
     {
      "rhythm": "non-arrest",
@@ -14239,11 +14902,11 @@
      "name": "D10W",
      "class": "Carbohydrate",
      "indication": "Unconscious hypoglycemia (BGL <60)",
-     "weightDose": "25 g (full bag)",
+     "weightDose": "12.5–25 g",
      "packageSpec": "D10 (0.1 g/mL) · 250 mL bag",
-     "deliveryDose": "Infuse 250 mL bag IV/IO · titrate to BGL > 80",
-     "readyVol": "250 mL of D10 (25 g)",
-     "detail": "Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.",
+     "deliveryDose": "Infuse 125–250 mL IV/IO · titrate to mentation",
+     "readyVol": "125–250 mL of D10",
+     "detail": "125–250 mL (12.5–25 g) IV/IO, titrated to return of normal mental status. If BGL drops again within 10 min, consider sulfonylurea OD. Peds: 5 mL/kg titrated. NEVER D50 in peds.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -14287,7 +14950,7 @@
      "packageSpec": "5 mg/mL",
      "deliveryDose": "0.4 mL of 5 mg/mL",
      "readyVol": "0.4 mL of 5 mg/mL",
-     "detail": "Severe anxiety 2 mg.",
+     "detail": "Severe anxiety 2 mg IV/IO/IM/IN; repeat every 10 min PRN. Pediatric severe anxiety: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -14331,7 +14994,7 @@
        "vol": "0.20 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -14362,7 +15025,7 @@
        "vol": "2.0 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -14580,12 +15243,12 @@
     "defib": {
      "primary": "120 J",
      "secondary": "1st shock · biphasic",
-     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF."
+     "detail": "Pad placement: Anterior/Posterior. Escalating: 120 J (1st) → 150 J (2nd) → 200 J (3rd+). Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF/VT."
     },
     "cardiovert": {
-     "primary": "70 J → 120 J → 150 J",
-     "secondary": "escalating · sync",
-     "detail": "Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses."
+     "primary": "100–200 J",
+     "secondary": "by rhythm · sync",
+     "detail": "Narrow & regular 100 J · Narrow & irregular 200 J · Wide & regular 200 J · Wide & irregular: defibrillate 200 J (unsynchronized). Sedate if conscious and time permits."
     },
     "pace": {
      "primary": "80 BPM",

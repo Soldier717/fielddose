@@ -3913,10 +3913,10 @@ function ctTick() {
   // SWFL 2025: After 3rd shock + anti-dysrhythmic, prompt DSD for refractory VF/pVT
   if (!ctState.dsdCued && ctState.shockCount >= 3 && ctState.antiDysrhythmicGiven && ctState.lastRhythm === 'shockable') {
     ctState.dsdCued = true;
-    ctShowCueBanner('Refractory VF — Consider DSD (set up 2nd AED)', 'normal', 5000);
+    ctShowCueBanner('Refractory VF/VT — Consider DSD (set up 2nd AED)', 'normal', 5000);
     ctCueTone();
-    ctSpeak('Refractory VF. Consider dual sequential defibrillation. Set up second AED.');
-    ctLogEvent('DSD Cue', `Refractory VF @ ${ctFormatTime(ctState.elapsedMs)} — ${ctState.shockCount} shocks delivered`);
+    ctSpeak('Refractory VF or VT. Consider dual sequential defibrillation. Set up second AED.');
+    ctLogEvent('DSD Cue', `Refractory VF/VT @ ${ctFormatTime(ctState.elapsedMs)} — ${ctState.shockCount} shocks delivered`);
   }
 
   const display = document.getElementById('ct-display');
@@ -4193,8 +4193,8 @@ function ccGetElectrical() {
     const ord = (i) => i === 1 ? '1st' : i === 2 ? '2nd' : i === 3 ? '3rd' : i + 'th';
     const seqTxt = shockSeq.map((j, i) => `${j} J (${ord(i + 1)}${i === shockSeq.length - 1 ? '+' : ''})`).join(' → ');
     return {
-      defib: { primary: `${nextShockJ} J`, secondary: `${shockLabel} · biphasic`, detail: `Pad placement: Anterior/Posterior. Escalating: ${seqTxt}. Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF.` },
-      cardiovert: { primary: '70 J → 120 J → 150 J', secondary: 'escalating · sync', detail: 'Synchronized cardioversion — escalating energy ladder: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses.' },
+      defib: { primary: `${nextShockJ} J`, secondary: `${shockLabel} · biphasic`, detail: `Pad placement: Anterior/Posterior. Escalating: ${seqTxt}. Monophasic: 360 J. After 3rd shock + anti-dysrhythmic → consider DSD for refractory VF/VT.` },
+      cardiovert: (() => { const cv = fdCardioversion(); return { primary: cv.primary, secondary: cv.secondary, detail: cv.detail }; })(),
       pace: { primary: '80 BPM', secondary: 'increase mA until capture', detail: 'Start 80 BPM. Increase mA by 10 until electrical + mechanical capture. Typical 50–100 mA.' }
     };
   } else if (band === 'pediatric') {
@@ -4283,6 +4283,38 @@ async function fdPackRefresh() {
 }
 setTimeout(() => { try { fdPackRefresh(); } catch (_) {} }, 3500);
 
+// Synchronized cardioversion — the 8/2026 regional guideline moved to
+// rhythm-based settings (narrow reg 100 J, otherwise 200 J, wide
+// irregular = 200 J unsynchronized). Agencies that follow their
+// monitor vendor's escalating ladder (GNFR: Zoll 70→120→150) keep it
+// via pack.defib.cardioversion = "zoll".
+function fdCardioversion() {
+  const p = fdPack();
+  if (p && p.defib && p.defib.cardioversion === 'zoll') {
+    return {
+      primary: '70 J → 120 J → 150 J',
+      secondary: 'Zoll escalating · sync',
+      detail: 'Zoll recommended escalating energy: 70 J (1st) → 120 J (2nd) → 150 J (3rd+). Sedate if conscious and time permits. Polymorphic VT: treat as VF with unsynchronized defib doses.',
+      protoRegular: 'Zoll escalating 70 → 120 → 150 J',
+      protoNarrowIrr: 'Zoll escalating 70 → 120 → 150 J',
+    };
+  }
+  return {
+    primary: '100–200 J',
+    secondary: 'by rhythm · sync',
+    detail: 'Narrow & regular 100 J · Narrow & irregular 200 J · Wide & regular 200 J · Wide & irregular: defibrillate 200 J (unsynchronized). Sedate if conscious and time permits.',
+    protoRegular: 'Narrow 100 J · Wide 200 J',
+    protoNarrowIrr: '200 J',
+  };
+}
+// Protocol item token replacement, so static protocol text can carry
+// pack-dependent values (currently the cardioversion energies).
+function fdProtoTokens(s) {
+  if (typeof s !== 'string' || s.indexOf('{{') === -1) return s;
+  const cv = fdCardioversion();
+  return s.replace('{{CV_REGULAR}}', cv.protoRegular).replace('{{CV_NARROW_IRR}}', cv.protoNarrowIrr);
+}
+
 // Adult defib energy ladder — pack override or the SWFL default.
 function fdAdultShockSeq() {
   const p = fdPack();
@@ -4334,11 +4366,11 @@ function ccGetDrugsBase() {
   if (band === 'adult') {
     return [
       { primary: true, rhythm: 'all', name: 'Epinephrine 1:10,000', class: 'Vasopressor — CARDIAC ARREST', indication: 'Cardiac arrest (all rhythms) — IV/IO ONLY',
-        weightDose: '1 mg',
+        weightDose: '0.5–1 mg',
         packageSpec: '0.1 mg/mL (1:10,000) · 10 mL prefilled syringe',
-        deliveryDose: 'Push 10 mL IV/IO',
-        readyVol: '10 mL of 0.1 mg/mL (1:10,000)',
-        detail: '1 mg IV/IO every 3–5 min. Max cumulative 3 mg. ET: 2–2.5 mg of 1:1,000. NOT for IM use.', route: 'IV / IO', max: '3 mg cumulative' },
+        deliveryDose: 'Push 5–10 mL IV/IO',
+        readyVol: '5–10 mL of 0.1 mg/mL (1:10,000)',
+        detail: '0.5–1 mg IV/IO every 3–5 min. Max cumulative 3 mg. IV/IO only — NOT for IM use.', route: 'IV / IO', max: '3 mg cumulative' },
       { primary: true, rhythm: 'shockable', name: 'Amiodarone', class: 'Antiarrhythmic', indication: 'Refractory VF / pVT (after 3rd shock)',
         weightDose: '300 mg → 150 mg',
         packageSpec: '50 mg/mL · 3 mL vial (150 mg)',
@@ -4419,12 +4451,12 @@ function ccGetDrugsBase() {
         deliveryDose: `${ccFmt(Math.min(2*kg, 125)/62.5, 1)} mL IV/IO/IM`,
         readyVol: '2 mL of 62.5 mg/mL',
         detail: '1–2 mg/kg IV/IO/IM. Max 125 mg.', route: 'IV / IO / IM', max: '125 mg' },
-      { rhythm: 'non-arrest', name: 'Dexamethasone', class: 'Steroid', indication: 'Croup · Asthma · Allergic reaction',
-        weightDose: `${ccFmt(Math.min(0.6*kg, 10), 1)} mg (max 10)`,
+      { rhythm: 'non-arrest', name: 'Dexamethasone', class: 'Steroid', indication: 'Asthma · Allergic reaction',
+        weightDose: '10 mg',
         packageSpec: '10 mg/mL · 1 mL vial',
-        deliveryDose: `${ccFmt(Math.min(0.6*kg, 10)/10, 2)} mL IV/IO/IM/PO`,
+        deliveryDose: 'Push 1 mL IV/IO',
         readyVol: '1 mL of 10 mg/mL',
-        detail: '0.6 mg/kg. Max 10 mg.', route: 'IV / IO / IM / PO', max: '10 mg' },
+        detail: 'Adult 10 mg IV/IO. Peds: 0.6 mg/kg (max 16 mg), PO preferred.', route: 'IV / IO', max: '10 mg' },
       { rhythm: 'non-arrest', name: 'Ondansetron', class: 'Antiemetic', indication: 'Nausea / vomiting',
         weightDose: '4 mg',
         packageSpec: '4 mg / 2 mL vial',
@@ -4456,17 +4488,29 @@ function ccGetDrugsBase() {
         readyVol: '2 mL of 2%',
         detail: '40 mg IO before flush. Numbs the marrow in conscious patients. Wait 60 sec, then standard NS flush.', route: 'IO', max: '40 mg' },
       { rhythm: 'non-arrest', name: 'Naloxone (Narcan)', class: 'Opioid antagonist', indication: 'Opioid OD with respiratory depression',
-        weightDose: '0.4–2 mg',
+        weightDose: '0.4 mg · repeat PRN',
         packageSpec: '1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray',
-        deliveryDose: '0.4–2 mL IV/IM · IN: 1 spray per nostril',
-        readyVol: '0.4–2 mL of 1 mg/mL',
+        deliveryDose: 'Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray',
+        readyVol: '0.4 mL of 1 mg/mL',
         detail: 'Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Tranexamic Acid (TXA)', class: 'Antifibrinolytic', indication: 'Moderate/massive hemorrhage · Trauma',
         weightDose: '2 g (2000 mg)',
         packageSpec: '1000 mg / 10 mL vial (2 vials needed)',
         deliveryDose: 'Push 20 mL slow IVP over 2 min',
         readyVol: '20 mL of 100 mg/mL',
-        detail: '2 g IV/IO slow push over 2 min. Within 3 hours of injury. Peds: 15 mg/kg max 1 g.', route: 'IV / IO', max: '2 g' },
+        detail: '2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.', route: 'IV / IO / NEB / IN', max: '2 g' },
+      { rhythm: 'non-arrest', name: 'Cefazolin (Ancef)', class: 'Antibiotic — cephalosporin', indication: 'Open fracture',
+        weightDose: '2 g',
+        packageSpec: '2 g vial · reconstitute',
+        deliveryDose: 'Infuse over 15 min IV/IO',
+        readyVol: '—',
+        detail: '2 g IV/IO over 15 min for open fractures. Peds: 30 mg/kg (max 2 g) over 15 min. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).', route: 'IV / IO / IM', max: '2 g' },
+      { rhythm: 'non-arrest', name: 'Hydrocortisone', class: 'Corticosteroid', indication: 'Adrenal insufficiency crisis',
+        weightDose: 'Dose TBD',
+        packageSpec: 'Solu-Cortef vial',
+        deliveryDose: 'Dose/route TBD — contact Medical Control',
+        readyVol: '—',
+        detail: 'Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.', route: 'IV / IO / IM', max: 'TBD' },
       { rhythm: 'non-arrest', name: 'Oral Glucose', class: 'Carbohydrate', indication: 'Conscious hypoglycemia',
         weightDose: '30 g',
         packageSpec: '15 g tube (2 tubes)',
@@ -4474,11 +4518,11 @@ function ccGetDrugsBase() {
         readyVol: '2 tubes',
         detail: 'Adult 30 g PO (Peds 15 g). Only if patient can protect airway and swallow.', route: 'PO / Buccal', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'D10W', class: 'Carbohydrate', indication: 'Unconscious hypoglycemia (BGL <60)',
-        weightDose: '25 g (full bag)',
+        weightDose: '12.5–25 g',
         packageSpec: 'D10 (0.1 g/mL) · 250 mL bag',
-        deliveryDose: 'Infuse 250 mL bag IV/IO · titrate to BGL > 80',
-        readyVol: '250 mL of D10 (25 g)',
-        detail: 'Adult: 25 g (250 mL bag) IV/IO. Peds: 0.5–1 g/kg (5–10 mL/kg of D10). NEVER D50 in peds.', route: 'IV / IO', max: 'Per protocol' },
+        deliveryDose: 'Infuse 125–250 mL IV/IO · titrate to mentation',
+        readyVol: '125–250 mL of D10',
+        detail: '125–250 mL (12.5–25 g) IV/IO, titrated to return of normal mental status. If BGL drops again within 10 min, consider sulfonylurea OD. Peds: 5 mL/kg titrated. NEVER D50 in peds.', route: 'IV / IO', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Midazolam — Seizure', class: 'Benzodiazepine', indication: 'Seizure · sedation · sympathomimetic tox',
         weightDose: '5 mg IV/IO · 10 mg IM/IN',
         packageSpec: '5 mg/mL',
@@ -4494,7 +4538,7 @@ function ccGetDrugsBase() {
         packageSpec: '5 mg/mL',
         deliveryDose: '0.4 mL of 5 mg/mL',
         readyVol: '0.4 mL of 5 mg/mL',
-        detail: 'Severe anxiety 2 mg.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Severe anxiety 2 mg IV/IO/IM/IN; repeat every 10 min PRN. Pediatric severe anxiety: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Fentanyl (Sublimaze)', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(1*kg, 0)} mcg (1 mcg/kg)`,
         packageSpec: '50 mcg/mL',
@@ -4510,7 +4554,7 @@ function ccGetDrugsBase() {
           ['IV/IO', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `Draw ${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL (50 mg/mL)`],
           ['IM/IN', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
         weightDose: `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
         packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
@@ -4520,7 +4564,7 @@ function ccGetDrugsBase() {
           ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `Draw ${ccFmt(1*kg/100, 1)} mL of 100 mg/mL + ${ccFmt(1*kg/100, 1)} mL NS → push ${ccFmt(1*kg/50, 1)} mL (50 mg/mL)`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 1)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Delirium', class: 'Dissociative analgesic', indication: 'Hyperactive delirium',
         weightDose: `${ccFmt(Math.min(4*kg, 500), 0)} mg (4 mg/kg, max 500)`,
         packageSpec: '100 mg/mL',
@@ -4715,17 +4759,23 @@ function ccGetDrugsBase() {
         readyVol: `${ccFmt(Math.min(2*kg, 125)/62.5, 2)} mL of 62.5 mg/mL`,
         detail: '2 mg/kg IV/IO/IM. Max 125 mg.', route: 'IV / IO / IM', max: '125 mg' },
       { rhythm: 'non-arrest', name: 'Dexamethasone', class: 'Steroid', indication: 'Croup · Asthma',
-        weightDose: `${ccFmt(Math.min(0.6*kg, 10), 1)} mg (max 10)`,
+        weightDose: `${ccFmt(Math.min(0.6*kg, 16), 1)} mg (0.6 mg/kg, max 16)`,
         packageSpec: '10 mg/mL · 1 mL vial',
-        deliveryDose: `${ccFmt(Math.min(0.6*kg, 10)/10, 2)} mL IV/IO/IM/PO`,
-        readyVol: `${ccFmt(Math.min(0.6*kg, 10)/10, 2)} mL of 10 mg/mL`,
-        detail: '0.6 mg/kg. Max 10 mg.', route: 'IV / IO / IM / PO', max: '10 mg' },
+        deliveryDose: `${ccFmt(Math.min(0.6*kg, 16)/10, 2)} mL IV/IO — PO preferred if no IV needed`,
+        readyVol: `${ccFmt(Math.min(0.6*kg, 16)/10, 2)} mL of 10 mg/mL`,
+        detail: '0.6 mg/kg IV/IO/PO (max 16 mg). Oral steroids in pediatrics are highly effective with similar onset — PO is the preferred route when an IV/IO isn’t otherwise needed.', route: 'IV / IO / PO', max: '16 mg' },
+      { rhythm: 'non-arrest', name: 'Epinephrine — Croup (Neb)', class: 'Alpha & beta agonist', indication: 'Croup · stridor at rest',
+        weightDose: kg >= 10 ? '5 mg (≥ 1 yr)' : '2.5 mg (< 1 yr)',
+        packageSpec: '1 mg/mL (1:1,000) · nebulized',
+        deliveryDose: kg >= 10 ? 'Nebulize 5 mL AT' : 'Nebulize 2.5 mL AT',
+        readyVol: kg >= 10 ? '5 mL of 1 mg/mL' : '2.5 mL of 1 mg/mL',
+        detail: 'Nebulized epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT; < 1 yr 2.5 mg (2.5 mL) AT. Alternative — Racemic epinephrine 2.25%: ≥ 1 yr 0.5 mL, < 1 yr 0.25 mL, diluted in 3 mL NS. Monitor for rebound airway obstruction. Contraindicated in epiglottitis.', route: 'NEB', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ondansetron', class: 'Antiemetic', indication: 'Nausea / vomiting',
-        weightDose: `${ccFmt(Math.min(0.15*kg, 4), 1)} mg`,
+        weightDose: `${ccFmt(Math.min(0.1*kg, 4), 1)} mg (0.1 mg/kg)`,
         packageSpec: '4 mg / 2 mL vial',
-        deliveryDose: `${ccFmt(Math.min(0.15*kg, 4)/2, 2)} mL slow IV/IO/IM`,
-        readyVol: `${ccFmt(Math.min(0.15*kg, 4)/2, 2)} mL of 2 mg/mL`,
-        detail: '0.15 mg/kg, max 4 mg. ODT available 4 mg PO.', route: 'IV / IO / IM / PO', max: '4 mg' },
+        deliveryDose: `${ccFmt(Math.min(0.1*kg, 4)/2, 2)} mL slow IV/IO/IM`,
+        readyVol: `${ccFmt(Math.min(0.1*kg, 4)/2, 2)} mL of 2 mg/mL`,
+        detail: '0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.', route: 'IV / IO / IM / PO', max: '4 mg' },
       { rhythm: 'non-arrest', name: 'Adenosine (Adenocard)', class: 'Antiarrhythmic', indication: 'Stable SVT (narrow regular)',
         weightDose: `${ccFmt(Math.min(0.1*kg, 6), 1)} mg → ${ccFmt(Math.min(0.2*kg, 12), 1)} mg`,
         packageSpec: '6 mg / 2 mL · 12 mg / 4 mL',
@@ -4744,6 +4794,18 @@ function ccGetDrugsBase() {
         deliveryDose: `${ccFmt(Math.min(15*kg, 1000)/100, 1)} mL in 100 mL NS over 10 min`,
         readyVol: `${ccFmt(Math.min(15*kg, 1000)/100, 1)} mL of 100 mg/mL`,
         detail: '15 mg/kg IV/IO over 10 min. Max 1 g. Within 3 hours of injury.', route: 'IV / IO', max: '1 g' },
+      { rhythm: 'non-arrest', name: 'Cefazolin (Ancef)', class: 'Antibiotic — cephalosporin', indication: 'Open fracture',
+        weightDose: `${ccFmt(Math.min(30*kg, 2000), 0)} mg (30 mg/kg, max 2 g)`,
+        packageSpec: '2 g vial · reconstitute',
+        deliveryDose: 'Infuse over 15 min IV/IO',
+        readyVol: '—',
+        detail: '30 mg/kg (max 2 g) IV/IO over 15 min for open fractures. Caution with severe penicillin / beta-lactam allergy (possible cross-reactivity).', route: 'IV / IO / IM', max: '2 g' },
+      { rhythm: 'non-arrest', name: 'Hydrocortisone', class: 'Corticosteroid', indication: 'Adrenal insufficiency crisis',
+        weightDose: 'Dose TBD',
+        packageSpec: 'Solu-Cortef vial',
+        deliveryDose: 'Dose/route TBD — contact Medical Control',
+        readyVol: '—',
+        detail: 'Added to the 8/2026 pharmacology reference for adrenal insufficiency (Addisonian) crisis. Dosing not yet specified — contact medical control and follow the patient’s emergency plan / STARS guidance. Reference routes: IV/IO/IM.', route: 'IV / IO / IM', max: 'TBD' },
       { rhythm: 'non-arrest', name: 'Oral Glucose', class: 'Carbohydrate', indication: 'Conscious hypoglycemia',
         weightDose: '15 g',
         packageSpec: '15 g tube',
@@ -4790,7 +4852,7 @@ function ccGetDrugsBase() {
           ['IV/IO', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `Draw ${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL (50 mg/mL)`],
           ['IM/IN', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
         weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
         packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
@@ -4800,7 +4862,7 @@ function ccGetDrugsBase() {
           ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `Draw ${ccFmt(1*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(1*kg/100, 2)} mL NS → push ${ccFmt(1*kg/50, 2)} mL (50 mg/mL)`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Morphine', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`,
         packageSpec: '4 mg/mL',
@@ -4909,7 +4971,7 @@ const CC_HS_TS = [
   { label: 'Hypo/Hyperkalemia', detail: 'Hypo: KCl carefully. Hyper: CaCl + bicarb + insulin/D50 + albuterol.' },
   { label: 'Hypothermia', detail: 'Active rewarming. Withhold meds until >30°C. Extended resuscitation.' },
   { label: 'Tension pneumothorax', detail: 'Needle decompression: 2nd ICS midclavicular OR 4th–5th ICS anterior axillary.' },
-  { label: 'Tamponade (cardiac)', detail: "Pericardiocentesis. Beck's triad: hypotension, JVD, muffled heart sounds." },
+  { label: 'Tamponade (cardiac)', detail: "Rapid transport — POCUS if available. Beck's triad: hypotension, JVD, muffled heart sounds." },
   { label: 'Toxins', detail: 'Naloxone (opioids), bicarb (TCA), glucagon/Ca (BB/CCB), digibind (digoxin).' },
   { label: 'Thrombosis (pulmonary)', detail: 'Massive PE. Consider thrombolytics if high suspicion.' },
   { label: 'Thrombosis (coronary)', detail: 'Cath lab post-ROSC. STEMI on 12-lead → activate.' }
@@ -5856,7 +5918,9 @@ function rcParseVol(dose) {
 function rcParseRoute(route) {
   if (!route) return '—';
   if (/neb/i.test(route)) return 'NEB';
-  if (/oral|po/i.test(route)) return 'PO';
+  // Oral-only drugs → PO; a PO option among parenteral routes must not
+  // swallow the IV/IO display (peds dex/ondansetron list PO alongside IV/IO)
+  if (/^\s*(oral|po)\s*$/i.test(route)) return 'PO';
   // All routes, in full — dropping the 3rd route hid real options (IM).
   const parts = route.split(/[\/,]/).map(p => p.trim()).filter(Boolean);
   if (parts.length === 0) return '—';
@@ -6979,11 +7043,11 @@ const CC_PROTOCOLS = [
       { label: 'Primary Treatment', items: ['CPR','Defibrillation — Anterior/Posterior placement (Handtevy for peds energy)','Advanced airway management as needed'] },
       { label: 'Primary Medication — Anti-Dysrhythmic (choose one)', items: ['Amiodarone 300 mg IV/IO (1st) → 150 mg (2nd) · Peds 5 mg/kg, up to 3 doses (≤ adult total)','Lidocaine 1.5 mg/kg IV/IO (1st) → 0.5 mg/kg (2nd) · Peds 1 mg/kg','Magnesium Sulfate 2 g IV/IO — torsades or refractory VT · Peds 50 mg/kg (max 2 g)'] },
       { label: 'Secondary Medication — Epinephrine', items: ['Epinephrine 0.5–1 mg IV/IO every 3–5 min (max 3 mg) · Peds 0.01 mg/kg'] },
-      { label: 'Refractory VF (Adult)', items: ['Dual Sequential Defibrillation (DSD) after 3rd shock — shocks < 1 sec apart'] },
+      { label: 'Refractory VF/VT (Adult)', items: ['Dual Sequential Defibrillation (DSD) after 3rd shock for refractory VF/VT — shocks < 1 sec apart'] },
       { label: 'Suspected Hyperkalemia', items: ['Calcium Chloride 1 g IV/IO'] },
     ], pearls: [
       'Shockable arrests benefit from defibrillation and anti-dysrhythmic BEFORE epinephrine',
-      'Refractory VF = defibrillated ≥ 3× and 1st anti-dysrhythmic given, still in VF',
+      'Refractory VF/VT = defibrillated ≥ 3× and 1st anti-dysrhythmic given, still in VF/VT',
       'Lidocaine preferred when arrest is toxicology-related',
       'Blind administration of sodium bicarb or calcium is NOT recommended',
       'Naloxone not indicated for cardiac arrest',
@@ -7023,7 +7087,7 @@ const CC_PROTOCOLS = [
       { label: 'Adjuncts', items: ['Diphenhydramine 50 mg IV/IO','Solu-Medrol 125 mg IV/IO','Albuterol 2.5 mg Neb if wheezing'] },
     ]},
     { id: 'croup', name: 'Croup', banner: 'Croup', sections: [
-      { label: 'Treatment', items: ['Dexamethasone 10 mg PO','Racemic Epinephrine 2.25% 0.5 mL in 3 mL NS Neb — stridor at rest'] },
+      { label: 'Treatment', items: ['Dexamethasone 0.6 mg/kg PO (max 16 mg) — PO preferred','Nebulized Epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT · < 1 yr 2.5 mg (2.5 mL) AT — stridor at rest','Racemic Epinephrine 2.25%: ≥ 1 yr 0.5 mL · < 1 yr 0.25 mL in 3 mL NS AT'] },
     ]},
   ]},
   { cat: 'Cardiac', list: [
@@ -7043,8 +7107,8 @@ const CC_PROTOCOLS = [
       { label: 'Stable · AFib/AFlutter or refractory SVT', items: ['Diltiazem 0.25 mg/kg IV over 2 min (max 20 mg)'] },
       { label: 'Stable · Wide Monomorphic VT', items: ['Amiodarone 150 mg in 100 mL over 10 min · Peds 5 mg/kg (max 150 mg) over 30 min','Lidocaine 1 mg/kg → 0.5 mg/kg if refractory (up to 3 mg/kg)'] },
       { label: 'Torsades de Pointes', items: ['Magnesium Sulfate 2 g in 100 mL IV/IO over 10 min'] },
-      { label: 'Unstable · Regular (narrow or wide)', items: ['Synchronized Cardioversion — Zoll 70 → 120 → 150 J · Peds per Handtevy'] },
-      { label: 'Unstable · Narrow Irregular', items: ['Synchronized Cardioversion — Zoll 70 → 120 → 150 J'] },
+      { label: 'Unstable · Regular (narrow or wide)', items: ['Synchronized Cardioversion — {{CV_REGULAR}} · Peds per Handtevy'] },
+      { label: 'Unstable · Narrow Irregular', items: ['Synchronized Cardioversion — {{CV_NARROW_IRR}}'] },
       { label: 'Unstable · Wide Irregular', items: ['Asynchronized Cardioversion 200 J'] },
       { label: 'Suspected Hyperkalemia', items: ['Calcium Chloride 1 g IV/IO'] },
     ], pearls: [
@@ -7146,13 +7210,13 @@ const CC_PROTOCOLS = [
   { cat: 'Trauma', list: [
     { id: 'hemorrhage', name: 'Significant Hemorrhage', banner: 'Significant Hemorrhage', sections: [
       { label: 'Control', items: ['Direct pressure, pressure dressing, tourniquet, wound packing','Thermal preservation (Hibler\'s method)'] },
-      { label: 'Medications', items: ['Tranexamic Acid 2 g IV/IO over 10 min · Peds 15 mg/kg (max 1 g)','Calcium Chloride 1 g IV/IO · Peds 20 mg/kg (max 1 g)'] },
+      { label: 'Medications', items: ['Tranexamic Acid 2 g IV/IO over 2 min · Peds 15 mg/kg (max 1 g)','Calcium Chloride 1 g IV/IO · Peds 20 mg/kg (max 1 g)','Cefazolin 2 g IV/IO over 15 min for open fractures · Peds 30 mg/kg (max 2 g)'] },
       { label: 'Advanced', items: ['Whole blood administration (preferred over crystalloid)'] },
     ], pearls: [ 'Permissive hypotension — target return of peripheral pulses' ]},
     { id: 'traumaarrest', name: 'Traumatic Circulatory Arrest', banner: 'Traumatic Circulatory Arrest', sections: [
       { label: 'Priorities (before/not delayed by CPR)', items: ['Hemorrhage control','Bilateral chest decompression — finger thoracostomy preferred','Pelvic splint for blunt-force arrest'] },
       { label: 'Medications', items: ['Epinephrine 0.5–1 mg IV/IO q3–5 min (max 3 mg) · Peds 0.01 mg/kg','Tranexamic Acid 2 g IV/IO · Peds 15 mg/kg (max 1 g)','Calcium Chloride 1 g IV/IO · Peds 20 mg/kg (max 1 g)'] },
-      { label: 'Advanced', items: ['Whole blood (preferred over crystalloid)','Pericardiocentesis if indicated','POCUS for cardiac activity','→ Medical Cardiac Arrest if a shockable rhythm presents'] },
+      { label: 'Advanced', items: ['Whole blood (preferred over crystalloid)','POCUS for cardiac activity','→ Medical Cardiac Arrest if a shockable rhythm presents'] },
     ], pearls: [
       'CPR must not delay hemorrhage control or bilateral decompression',
       'Transport to a trauma center if within a 20-minute window',
@@ -7294,7 +7358,8 @@ function rcRenderProtocolDetail(p) {
   const sec = (label, items, warn) => `
     <div class="cc-proto-section${warn ? ' warn' : ''}">
       <div class="cc-proto-section-label">${warn ? '⚠ ' : ''}${escapeHtml(label)}</div>
-      ${items.map(it => {
+      ${items.map(itRaw => {
+        const it = typeof itRaw === 'string' ? fdProtoTokens(itRaw) : itRaw;
         if (it && it.jump) {
           return `<button class="cc-proto-item jump" data-proto-sel="${escapeAttr(it.jump)}"><span>${escapeHtml(it.t)}</span><span class="arrow">→</span></button>`;
         }
@@ -8045,16 +8110,16 @@ function bindRunCodeEvents() {
     },
     {
       id: 'qsofa',
-      name: 'Sepsis Screen (qSOFA)',
-      meta: 'RR · SBP · mentation',
+      name: 'Sepsis Screen (3.1)',
+      meta: 'Infection · qSOFA any 2 · EtCO₂ ≤ 29',
       icon: '<svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>',
       render: renderQsofaTool,
       bind: bindQsofaTool,
     },
     {
       id: 'stroke',
-      name: 'Stroke Screen (FAST-VAN)',
-      meta: 'FAST · LVO · hemorrhagic flags',
+      name: 'Stroke Screen (BEFAST-VAN)',
+      meta: 'FAST · VAN/LVO · hemorrhagic flags',
       icon: '<svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
       render: renderStrokeTool,
       bind: bindStrokeTool,
@@ -8546,90 +8611,133 @@ function bindRunCodeEvents() {
     paint();
   }
 
-  // ---- Sepsis screen (qSOFA) tool ----
-  // 1 point each: RR >= 22, SBP <= 100, altered mentation. >= 2 = high risk.
+  // ---- Sepsis screen tool — SWFL "Sepsis 3.1 | qSOFA + etCO2" ----
+  // Alert = infection (suspected/known) + ANY 2 of (AMS, RR ≥ 22,
+  // SBP < 100) + EtCO₂ ≤ 29 mmHg. All three boxes = Sepsis Alert.
   function renderQsofaTool() {
     return `
-      <div class="qref-disclaimer" style="margin-top:0;margin-bottom:16px;">
-        For patients with <b>suspected or confirmed infection</b>. One point
-        per criterion met.
+      <div class="qref-gcs-group" style="margin-top:0;">
+        <div class="glabel"><span>Infection</span><span class="picked" id="qref-qs-inf-tag">—</span></div>
+        <button class="qref-gcs-opt" id="qref-qs-inf"><span class="sc">☐</span><span>Suspected or known infection (fever, UTI/URI sx, antibiotics, visible…)</span></button>
       </div>
-      <div class="qref-tool-inputs">
-        <div class="qref-field">
-          <label for="qref-qs-rr">Resp Rate</label>
-          <input id="qref-qs-rr" type="number" inputmode="numeric" min="0" max="99" placeholder="—">
-          <div class="qref-unit" id="qref-qs-rr-tag">criterion: ≥ 22 /min</div>
+      <div class="qref-gcs-group">
+        <div class="glabel"><span>Sepsis criteria — any 2</span><span class="picked" id="qref-qs-crit-tag">0/3</span></div>
+        <div class="qref-gcs-mode" style="margin-bottom:10px;">
+          <button id="qref-qs-alert">Alert · baseline</button>
+          <button id="qref-qs-ams">Altered / lethargic</button>
         </div>
-        <div class="qref-field">
-          <label for="qref-qs-sbp">Systolic BP</label>
-          <input id="qref-qs-sbp" type="number" inputmode="numeric" min="0" max="400" placeholder="—">
-          <div class="qref-unit" id="qref-qs-sbp-tag">criterion: ≤ 100 mmHg</div>
+        <div class="qref-tool-inputs">
+          <div class="qref-field">
+            <label for="qref-qs-rr">Resp Rate</label>
+            <input id="qref-qs-rr" type="number" inputmode="numeric" min="0" max="99" placeholder="—">
+            <div class="qref-unit" id="qref-qs-rr-tag">criterion: ≥ 22 /min</div>
+          </div>
+          <div class="qref-field">
+            <label for="qref-qs-sbp">Systolic BP</label>
+            <input id="qref-qs-sbp" type="number" inputmode="numeric" min="0" max="400" placeholder="—">
+            <div class="qref-unit" id="qref-qs-sbp-tag">criterion: &lt; 100 mmHg</div>
+          </div>
         </div>
       </div>
-      <div class="qref-gcs-group" style="margin-top:16px;">
-        <div class="glabel"><span>Mentation</span><span class="picked" id="qref-qs-ams-tag">—</span></div>
-        <div class="qref-gcs-mode" style="margin-bottom:0;">
-          <button id="qref-qs-alert">Alert (GCS 15)</button>
-          <button id="qref-qs-ams">Altered (GCS &lt; 15)</button>
+      <div class="qref-gcs-group">
+        <div class="glabel"><span>Capnography</span><span class="picked" id="qref-qs-co2-tag2">—</span></div>
+        <div class="qref-tool-inputs">
+          <div class="qref-field">
+            <label for="qref-qs-co2">EtCO₂</label>
+            <input id="qref-qs-co2" type="number" inputmode="numeric" min="0" max="99" placeholder="—">
+            <div class="qref-unit" id="qref-qs-co2-tag">criterion: ≤ 29 mmHg</div>
+          </div>
         </div>
       </div>
       <div class="qref-result">
-        <div class="qref-result-label">qSOFA Score</div>
-        <div class="qref-result-value dim" id="qref-qs-out">—</div>
+        <div class="qref-result-label">Sepsis 3.1 Screen</div>
+        <div class="qref-result-value dim" id="qref-qs-out" style="font-size:34px;">—</div>
         <div id="qref-qs-chip"></div>
       </div>
       <div class="qref-disclaimer">
-        qSOFA ≥ 2 with suspected infection: high risk for sepsis &mdash; treat
-        and notify per sepsis alert protocol. A score &lt; 2 does not rule
+        All three boxes checked &mdash; infection, any 2 sepsis criteria
+        (altered mentation, RR ≥ 22, SBP &lt; 100), and EtCO₂ ≤ 29 mmHg
+        &mdash; = <b>Sepsis Alert</b>: treat and notify per protocol;
+        transport to any admit facility. A negative screen does not rule
         sepsis out; reassess. Always confirm against current local protocols
         and medical control. Training &amp; reference only.
       </div>`;
   }
 
   function bindQsofaTool() {
-    const rrEl = $('qref-qs-rr'), sbpEl = $('qref-qs-sbp');
+    const rrEl = $('qref-qs-rr'), sbpEl = $('qref-qs-sbp'), co2El = $('qref-qs-co2');
+    const infBtn = $('qref-qs-inf');
     const alertBtn = $('qref-qs-alert'), amsBtn = $('qref-qs-ams');
+    let inf = false;
     let ams = null; // null = unanswered, false = alert, true = altered
 
     function recompute() {
       const rr = parseFloat(rrEl.value);
       const sbp = parseFloat(sbpEl.value);
+      const co2 = parseFloat(co2El.value);
       const rrOk = isFinite(rr) && rr > 0;
       const sbpOk = isFinite(sbp) && sbp > 0;
+      const co2Ok = isFinite(co2) && co2 > 0;
       const rrPt = rrOk && rr >= 22;
-      const sbpPt = sbpOk && sbp <= 100;
+      const sbpPt = sbpOk && sbp < 100;
+      const co2Pt = co2Ok && co2 <= 29;
 
+      infBtn.querySelector('.sc').textContent = inf ? '✓' : '☐';
+      infBtn.classList.toggle('sel', inf);
+      $('qref-qs-inf-tag').textContent = inf ? '✓' : '—';
       $('qref-qs-rr-tag').innerHTML = rrOk
-        ? (rrPt ? '<b style="color:var(--clin-red);">≥ 22 — +1</b>' : 'below 22 — 0')
+        ? (rrPt ? '<b style="color:var(--clin-red);">≥ 22 — met</b>' : 'below 22 — not met')
         : 'criterion: ≥ 22 /min';
       $('qref-qs-sbp-tag').innerHTML = sbpOk
-        ? (sbpPt ? '<b style="color:var(--clin-red);">≤ 100 — +1</b>' : 'above 100 — 0')
-        : 'criterion: ≤ 100 mmHg';
-      $('qref-qs-ams-tag').textContent = ams == null ? '—' : (ams ? '+1' : '0');
+        ? (sbpPt ? '<b style="color:var(--clin-red);">&lt; 100 — met</b>' : '≥ 100 — not met')
+        : 'criterion: < 100 mmHg';
+      $('qref-qs-co2-tag').innerHTML = co2Ok
+        ? (co2Pt ? '<b style="color:var(--clin-red);">≤ 29 — met</b>' : 'above 29 — not met')
+        : 'criterion: ≤ 29 mmHg';
+      $('qref-qs-co2-tag2').textContent = co2Ok ? (co2Pt ? '✓' : '✗') : '—';
       alertBtn.classList.toggle('active', ams === false);
       amsBtn.classList.toggle('active', ams === true);
 
+      const critN = (ams === true ? 1 : 0) + (rrPt ? 1 : 0) + (sbpPt ? 1 : 0);
+      $('qref-qs-crit-tag').textContent = critN + '/3';
+
       const out = $('qref-qs-out'), chip = $('qref-qs-chip');
-      if (!rrOk || !sbpOk || ams == null) {
-        out.textContent = '—';
-        out.classList.add('dim');
-        chip.innerHTML = '';
+      const answered = rrOk && sbpOk && co2Ok && ams != null;
+      const alertMet = inf && critN >= 2 && co2Pt;
+      if (alertMet) {
+        out.classList.remove('dim');
+        out.textContent = 'SEPSIS ALERT';
+        chip.innerHTML = '<span class="qref-chip low">All boxes checked — treat &amp; notify per protocol · any admit facility</span>';
         return;
       }
-      const score = (rrPt ? 1 : 0) + (sbpPt ? 1 : 0) + (ams ? 1 : 0);
+      if (!answered) {
+        out.textContent = '—';
+        out.classList.add('dim');
+        const missing = [];
+        if (!inf) missing.push('infection');
+        if (ams == null) missing.push('mentation');
+        if (!rrOk) missing.push('RR');
+        if (!sbpOk) missing.push('SBP');
+        if (!co2Ok) missing.push('EtCO₂');
+        chip.innerHTML = missing.length ? `<span class="qref-chip mid">complete: ${missing.join(' · ')}</span>` : '';
+        return;
+      }
       out.classList.remove('dim');
-      out.innerHTML = score + ' <small>/ 3</small>';
-      chip.innerHTML = score >= 2
-        ? '<span class="qref-chip low">≥ 2 · HIGH RISK — sepsis alert per protocol</span>'
-        : score === 1
-          ? '<span class="qref-chip mid">1 · below threshold — reassess</span>'
-          : '<span class="qref-chip ok">0 · below threshold</span>';
+      out.textContent = 'Negative';
+      const unmet = [];
+      if (!inf) unmet.push('no infection source');
+      if (critN < 2) unmet.push(`criteria ${critN}/3 (need 2)`);
+      if (!co2Pt) unmet.push('EtCO₂ > 29');
+      chip.innerHTML = `<span class="qref-chip ok">screen negative — ${unmet.join(' · ')} · reassess</span>`;
     }
 
+    infBtn.addEventListener('click', () => { inf = !inf; recompute(); });
     rrEl.addEventListener('input', recompute);
     sbpEl.addEventListener('input', recompute);
+    co2El.addEventListener('input', recompute);
     alertBtn.addEventListener('click', () => { ams = ams === false ? null : false; recompute(); });
     amsBtn.addEventListener('click', () => { ams = ams === true ? null : true; recompute(); });
+    recompute();
     rrEl.focus();
   }
 
@@ -8647,9 +8755,10 @@ function bindRunCodeEvents() {
     ],
     hemo: [
       ['thunder', 'Sudden "worst headache of life"'],
-      ['vomit', 'Vomiting'],
-      ['seizure', 'Seizure at onset'],
-      ['loc', 'Decreasing LOC / GCS dropping'],
+      ['vomit', 'Severe new-onset nausea / vomiting'],
+      ['htn', 'Acute hypertension'],
+      ['seizure', 'Seizure preceding stroke-like deficits'],
+      ['loc', 'Sudden unexplained altered mental status'],
       ['antico', 'On anticoagulants / blood thinners'],
       ['pupils', 'Unequal pupils'],
     ],
@@ -8670,6 +8779,7 @@ function bindRunCodeEvents() {
           <label for="qref-st-lkw">Last Known Well</label>
           <input id="qref-st-lkw" type="time" style="font-size:22px;">
           <div class="qref-unit" id="qref-st-lkw-tag">elapsed: —</div>
+          <button class="qref-gcs-opt" id="qref-st-lkw24" style="margin-top:6px;"><span class="sc">＋</span><span>&gt; 24 h ago / unknown</span></button>
         </div>
         <div class="qref-field">
           <label for="qref-st-bgl">Blood Glucose</label>
@@ -8698,6 +8808,8 @@ function bindRunCodeEvents() {
   function bindStrokeTool() {
     const on = {}; // id -> bool
     const lkwEl = $('qref-st-lkw'), bglEl = $('qref-st-bgl');
+    const lkw24Btn = $('qref-st-lkw24');
+    let lkw24 = false; // the time field can only express the last 24 h
 
     function recompute() {
       const cnt = (keys) => keys.reduce((s, [id]) => s + (on[id] ? 1 : 0), 0);
@@ -8710,12 +8822,17 @@ function bindRunCodeEvents() {
 
       // Elapsed since last known well (assumes within the last 24 h)
       let lkwTxt = 'elapsed: —';
-      if (lkwEl.value) {
+      let lkwHours = null;
+      if (lkw24) {
+        lkwHours = 25;
+        lkwTxt = 'elapsed: > 24 h';
+      } else if (lkwEl.value) {
         const [h, m] = lkwEl.value.split(':').map(Number);
         const now = new Date();
         let t = new Date(now); t.setHours(h, m, 0, 0);
         if (t > now) t.setDate(t.getDate() - 1);
         const mins = Math.round((now - t) / 60000);
+        lkwHours = mins / 60;
         lkwTxt = 'elapsed: ' + Math.floor(mins / 60) + 'h ' + (mins % 60) + 'm';
       }
       $('qref-st-lkw-tag').textContent = lkwTxt;
@@ -8731,9 +8848,10 @@ function bindRunCodeEvents() {
       const out = $('qref-st-out'), chips = $('qref-st-chips');
       const chipList = [];
       if (bglLow) chipList.push('<span class="qref-chip mid">BGL &lt; 60 — treat hypoglycemia · stroke mimic</span>');
-      if (vanPos) chipList.push('<span class="qref-chip low">VAN + — suspect LVO · comprehensive stroke center per protocol</span>');
-      else if (fastPos) chipList.push('<span class="qref-chip low">FAST + — stroke alert per protocol</span>');
-      if (hemoN > 0) chipList.push(`<span class="qref-chip mid">${hemoN} hemorrhagic feature${hemoN === 1 ? '' : 's'} — airway · BP · report anticoagulants</span>`);
+      if (vanPos) chipList.push('<span class="qref-chip low">VAN + — suspect LVO · closest Comprehensive / Thrombectomy-capable center</span>');
+      else if (fastPos && lkwHours != null && lkwHours > 24) chipList.push('<span class="qref-chip low">FAST + · LKW &gt; 24 h — closest Comprehensive / Thrombectomy-capable center</span>');
+      else if (fastPos) chipList.push('<span class="qref-chip low">FAST + — stroke alert · closest stroke center</span>');
+      if (hemoN > 0) chipList.push(`<span class="qref-chip mid">${hemoN} hemorrhagic feature${hemoN === 1 ? '' : 's'} — suspect hemorrhagic: closest CSC/TSC · airway · BP · report anticoagulants</span>`);
       if (!fastPos && !vanPos && hemoN === 0 && !bglLow) chipList.push('<span class="qref-chip ok">screen negative — reassess · check BGL</span>');
 
       out.classList.toggle('dim', !fastPos && !vanPos);
@@ -8748,7 +8866,14 @@ function bindRunCodeEvents() {
       b.querySelector('.sc').textContent = on[id] ? '✓' : '＋';
       recompute();
     }));
-    lkwEl.addEventListener('input', recompute);
+    lkwEl.addEventListener('input', () => { if (lkwEl.value) { lkw24 = false; lkw24Btn.classList.remove('sel'); lkw24Btn.querySelector('.sc').textContent = '＋'; } recompute(); });
+    lkw24Btn.addEventListener('click', () => {
+      lkw24 = !lkw24;
+      if (lkw24) lkwEl.value = '';
+      lkw24Btn.classList.toggle('sel', lkw24);
+      lkw24Btn.querySelector('.sc').textContent = lkw24 ? '✓' : '＋';
+      recompute();
+    });
     bglEl.addEventListener('input', recompute);
     recompute();
   }

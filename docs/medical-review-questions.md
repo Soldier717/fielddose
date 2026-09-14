@@ -126,9 +126,27 @@ with the official CS log process, and the witness field wording.
 Confirm scope and what the CS log expects from it.
 **Decision:**
 
-## 8 · Display policy
+## 8 · New in the 8/2026 revision
 
-**8.1 —** Computed volumes render as the headline number (pink chip). The app
+**8.1 — Hydrocortisone dosing.** Hydrocortisone was added to the 8/2026
+pharmacology reference (adrenal insufficiency / Addisonian crisis) but the
+reference carries no dose. The app currently displays "Dose/route TBD —
+contact Medical Control." Provide adult and pediatric dosing and route so
+the app can display real numbers.
+**Decision:**
+
+**8.2 — Cardioversion energy policy.** The 8/2026 regional guideline moved
+synchronized cardioversion to rhythm-based settings (narrow regular 100 J;
+narrow irregular / wide regular 200 J; wide irregular — defibrillate 200 J
+unsynchronized). Per direction, GNFR devices continue to display the Zoll
+recommended escalating ladder (70 → 120 → 150 J) via the GNFR agency pack,
+while the regional baseline shows the new settings. Confirm this is the
+intended standing policy for GNFR.
+**Decision:**
+
+## 9 · Display policy
+
+**9.1 —** Computed volumes render as the headline number (pink chip). The app
 disclaims "training & reference; confirm against protocols and medical control;
 partner cross-check." Is this framing sufficient for agency deployment, or does
 medical direction want additional wording anywhere dose math is displayed?

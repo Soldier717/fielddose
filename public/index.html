@@ -4467,12 +4467,12 @@ function ccGetDrugsBase() {
         deliveryDose: `1st: Push ${ccFmt(Math.min(1.5*kg, 100)/20, 1)} mL IVP · 2nd: Push ${ccFmt(Math.min(0.5*kg, 50)/20, 1)} mL IVP`,
         readyVol: `${ccFmt(Math.min(1.5*kg, 100)/20, 1)} mL of 2%`,
         detail: '1st: 1.5 mg/kg IVP (max 100 mg). 2nd: 0.5 mg/kg IVP (max 50 mg) q5–10 min. Total max 3 mg/kg. PEARL: Preferred for tox-related arrest.', route: 'IV / IO', max: '100 mg / dose · 3 mg/kg total' },
-      { rhythm: 'shockable', name: 'Magnesium Sulfate', class: 'Electrolyte / Antiarrhythmic', indication: 'Torsades de pointes / refractory VT',
+      { rhythm: 'shockable', name: 'Magnesium Sulfate — Torsades / VT', class: 'Electrolyte / Antiarrhythmic', indication: 'Torsades de pointes / refractory VT',
         weightDose: '2 g',
         packageSpec: '50% (500 mg/mL) · 10 mL vial',
         deliveryDose: 'Dilute 4 mL in 10 mL D5W, push',
         readyVol: '4 mL of 50% diluted in 10 mL D5W',
-        detail: '2 g IV/IO push for arrest with torsades or refractory VT.', route: 'IV / IO', max: 'Per protocol' },
+        detail: '2 g IV/IO. Arrest with torsades or refractory VT: push. Torsades with a pulse: 2 g in 100 mL over 10 min.', route: 'IV / IO', max: 'Per protocol' },
       { rhythm: 'nonshockable', name: 'Sodium Bicarbonate', class: 'Alkalinizer', indication: 'CONFIRMED hyperkalemia, TCA OD, severe acidosis',
         weightDose: `${ccFmt(1*kg, 0)} mEq`,
         packageSpec: '8.4% (1 mEq/mL) · 50 mL prefilled syringe',
@@ -4569,6 +4569,28 @@ function ccGetDrugsBase() {
         deliveryDose: 'Push 10 mL IV/IO q3–5 min',
         readyVol: '10 mL of 0.1 mg/mL',
         detail: '1 mg IV/IO q3–5 min. Max 3 mg cumulative. Peds: 0.02 mg/kg (min 0.1 mg, max 0.5 mg).', route: 'IV / IO', max: '3 mg cumulative' },
+      { rhythm: 'non-arrest', name: 'Magnesium Sulfate — Asthma', class: 'Bronchodilator (smooth muscle)', indication: 'Severe / refractory reactive airway',
+        weightDose: '2 g',
+        packageSpec: '50% (500 mg/mL) · 10 mL vial',
+        deliveryDose: '4 mL of 50% in 50–100 mL NS over 20 min',
+        readyVol: '4 mL of 50%',
+        detail: '2 g IV/IO over 20 min for severe bronchospasm refractory to albuterol / epinephrine. Peds: 25–50 mg/kg (max 2 g).', route: 'IV / IO', max: '2 g' },
+      { rhythm: 'non-arrest', name: 'Magnesium Sulfate — Hypomagnesemia', class: 'Electrolyte', indication: 'Suspected hypomagnesemia',
+        weightDose: '2 g',
+        packageSpec: '50% (500 mg/mL) · 10 mL vial',
+        deliveryDose: '4 mL of 50% in 100 mL NS — infuse',
+        readyVol: '4 mL of 50%',
+        detail: '2 g IV/IO diluted for suspected hypomagnesemia (malnutrition, chronic alcohol use, prolonged QT). Confirm infusion rate per protocol / medical control.', route: 'IV / IO', max: '2 g' },
+      { rhythm: 'non-arrest', name: 'Magnesium Sulfate — Eclampsia', class: 'Anticonvulsant (OB)', indication: 'Eclampsia · severe pre-eclampsia',
+        weightDose: '4 g',
+        packageSpec: '50% (500 mg/mL) · 10 mL vial (2 vials for IM)',
+        deliveryDose: '8 mL of 50% in 100 mL D5W over 20 min',
+        readyVol: '8 mL of 50%',
+        routeDoses: rcRouteDoses([
+          ['IV/IO', '4 g', '8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open'],
+          ['IM', '10 g', '5 g (10 mL) deep IM each buttock — no IV access'],
+        ]),
+        detail: 'Severe features or seizing: 4 g IV/IO in 100 mL D5W over 20 min. Actively seizing: 4 g wide open until seizure stops. No access: 10 g IM — 5 g each buttock.', route: 'IV / IO / IM', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Lidocaine 2% (IO Anesthesia)', class: 'Local anesthetic', indication: 'IO insertion pain (conscious patient)',
         weightDose: '40 mg',
         packageSpec: '2% (20 mg/mL) · 20 mL multi-dose vial',
@@ -4793,7 +4815,7 @@ function ccGetDrugsBase() {
         deliveryDose: `Push ${ccFmt(lido_mg/20, 1)} mL IV/IO`,
         readyVol: `${ccFmt(lido_mg/20, 1)} mL of 2% (20 mg/mL)`,
         detail: '1 mg/kg IV/IO bolus (max 100 mg). PEARL: Preferred for tox-related arrest.', route: 'IV / IO', max: '100 mg / dose' },
-      { rhythm: 'shockable', name: 'Magnesium Sulfate', class: 'Electrolyte / Antiarrhythmic', indication: 'Torsades / refractory VT',
+      { rhythm: 'shockable', name: 'Magnesium Sulfate — Torsades / VT', class: 'Electrolyte / Antiarrhythmic', indication: 'Torsades / refractory VT',
         weightDose: `${ccFmt(Math.min(50*kg, 2000), 0)} mg`,
         packageSpec: '50% (500 mg/mL) · 10 mL vial',
         deliveryDose: `Dilute ${ccFmt(Math.min(50*kg, 2000)/500, 1)} mL in 10 mL D5W, push`,
@@ -4925,7 +4947,7 @@ function ccGetDrugsBase() {
         deliveryDose: 'Chew 4 tablets (81 mg ×4)',
         readyVol: '4 × 81 mg',
         detail: 'NOT routine for pediatric chest pain — verify cause first.', route: 'PO', max: '324 mg' },
-      { rhythm: 'non-arrest', name: 'Magnesium Sulfate (Asthma)', class: 'Bronchodilator', indication: 'Severe refractory asthma',
+      { rhythm: 'non-arrest', name: 'Magnesium Sulfate — Asthma', class: 'Bronchodilator', indication: 'Severe / refractory reactive airway',
         weightDose: `${ccFmt(Math.min(50*kg, 2000), 0)} mg`,
         packageSpec: '50% (500 mg/mL) · 10 mL vial',
         deliveryDose: `${ccFmt(Math.min(50*kg, 2000)/500, 1)} mL diluted in 50–100 mL NS over 20 min`,
@@ -7311,7 +7333,8 @@ const CC_PROTOCOLS = [
   { cat: 'Airway / Breathing', list: [
     { id: 'asthma', name: 'Asthma', banner: 'Asthma', sections: [
       { label: 'Mild – Moderate', items: ['Albuterol 2.5 mg Neb','Dexamethasone 10 mg PO'] },
-      { label: 'Moderate – Severe', items: ['Albuterol 2.5 mg Neb','Solu-Medrol 125 mg IV/IO','Epinephrine 0.5 mg IM'] },
+      { label: 'Moderate – Severe', items: ['Albuterol 2.5 mg Neb','Solu-Medrol 125 mg IV/IO','Epinephrine 0.5 mg IM',
+        { t: 'Magnesium Sulfate 2 g IV/IO over 20 min — severe / refractory', drug: 'Magnesium Sulfate — Asthma' }] },
     ]},
     { id: 'copd', name: 'COPD Exacerbation', banner: 'COPD Exacerbation', sections: [
       { label: 'Treatment', items: ['Albuterol 2.5 mg Neb','Solu-Medrol 125 mg IV/IO','Epinephrine 0.5 mg IM','CPAP as indicated'] },
@@ -7414,7 +7437,10 @@ const CC_PROTOCOLS = [
     { id: 'eclampsia', name: 'Peripartum HTN / Eclampsia', banner: 'Peripartum Hypertension & Eclampsia', sections: [
       { label: 'General', items: ['Left lateral recumbent position','BP every 5 minutes'] },
       { label: 'Antihypertensive (SBP ≥160 / DBP ≥110 ×10 min)', items: ['Labetalol 20 mg IV → 40 mg → 80 mg q10 min (max cumulative 300 mg) · target SBP 130–150 / DBP 80–100'] },
-      { label: 'Magnesium (severe features or seizing)', items: ['Magnesium Sulfate 4 g in 100 mL D5W IV/IO over 20 min (10 g IM if no access)','Actively seizing: 4 g IV/IO wide open until seizure stops'] },
+      { label: 'Magnesium (severe features or seizing)', items: [
+        { t: 'Magnesium Sulfate 4 g in 100 mL D5W IV/IO over 20 min (10 g IM if no access)', drug: 'Magnesium Sulfate — Eclampsia' },
+        { t: 'Actively seizing: 4 g IV/IO wide open until seizure stops', drug: 'Magnesium Sulfate — Eclampsia' },
+      ] },
     ], warn: { label: 'Labetalol Exclusions', items: ['Trauma','HR < 60','CHF','Heart block on ECG','Asthma'] }, pearls: [
       'Antihypertensives are the highest priority when both are indicated',
       'Elevated BP in pregnancy & up to 6 weeks postpartum requires treatment',
@@ -7515,7 +7541,7 @@ function crProtoDrugMatch(text) {
     ['epinephrine', 'Epinephrine'],
     ['amiodarone', 'Amiodarone'],
     ['lidocaine', 'Lidocaine'],
-    ['magnesium', 'Magnesium Sulfate'],
+    ['magnesium', 'Magnesium Sulfate — Torsades / VT'],
     ['calcium chloride', 'Calcium Chloride 10%'],
     ['sodium bicarbonate', 'Sodium Bicarbonate'],
     ['albuterol', 'Albuterol'],
@@ -7597,13 +7623,19 @@ function rcRenderProtocolDetail(p) {
         if (it && it.jump) {
           return `<button class="cc-proto-item jump" data-proto-sel="${escapeAttr(it.jump)}"><span>${escapeHtml(it.t)}</span><span class="arrow">→</span></button>`;
         }
-        const match = warn ? null : crProtoDrugMatch(it);
+        // Item is a plain string, or { t, drug } pinning the line to an exact
+        // drug row (for when keyword matching would pick the wrong variant).
+        // The pin only holds if that row exists for this patient; otherwise
+        // fall back to keyword matching against the current list.
+        const label = typeof it === 'string' ? it : fdProtoTokens(it.t || '');
+        const explicit = (it && it.drug && ccGetDrugs().some(x => x.name === it.drug)) ? it.drug : null;
+        const match = warn ? null : (explicit || crProtoDrugMatch(label));
         if (match && crIsFutureUse(match))
-          return `<div class="cc-proto-item future"><span>${escapeHtml(it)}</span><span class="future-tag">FUTURE USE</span></div>`;
+          return `<div class="cc-proto-item future"><span>${escapeHtml(label)}</span><span class="future-tag">FUTURE USE</span></div>`;
         const gb = match ? fdGivenBadge(match) : '';
         return match
-          ? `<button class="cc-proto-item drug${gb ? ' given' : ''}" data-drug-name="${escapeAttr(match)}"><span>${escapeHtml(it)}</span>${gb}<span class="arrow">›</span></button>`
-          : `<div class="cc-proto-item">${escapeHtml(it)}</div>`;
+          ? `<button class="cc-proto-item drug${gb ? ' given' : ''}" data-drug-name="${escapeAttr(match)}"><span>${escapeHtml(label)}</span>${gb}<span class="arrow">›</span></button>`
+          : `<div class="cc-proto-item">${escapeHtml(label)}</div>`;
       }).join('')}
     </div>`;
   const pedsNote = (cr.patient && cr.patient.type === 'peds')

@@ -400,7 +400,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "250 mg",
@@ -691,9 +691,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "250 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "0.5 mL diluted in 50–100 mL NS over 20 min",
@@ -1079,7 +1079,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "325 mg",
@@ -1370,9 +1370,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "325 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "0.7 mL diluted in 50–100 mL NS over 20 min",
@@ -1794,7 +1794,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "425 mg",
@@ -2085,9 +2085,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "425 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "0.8 mL diluted in 50–100 mL NS over 20 min",
@@ -2509,7 +2509,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "525 mg",
@@ -2800,9 +2800,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "525 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "1.1 mL diluted in 50–100 mL NS over 20 min",
@@ -3224,7 +3224,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "650 mg",
@@ -3515,9 +3515,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "650 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "1.3 mL diluted in 50–100 mL NS over 20 min",
@@ -3939,7 +3939,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "825 mg",
@@ -4230,9 +4230,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "825 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "1.6 mL diluted in 50–100 mL NS over 20 min",
@@ -4654,7 +4654,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "1050 mg",
@@ -4945,9 +4945,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "1050 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "2.1 mL diluted in 50–100 mL NS over 20 min",
@@ -5369,7 +5369,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "1325 mg",
@@ -5660,9 +5660,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "1325 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "2.6 mL diluted in 50–100 mL NS over 20 min",
@@ -6084,7 +6084,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "1650 mg",
@@ -6375,9 +6375,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "1650 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "3.3 mL diluted in 50–100 mL NS over 20 min",
@@ -6799,14 +6799,14 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades de pointes / refractory VT",
      "weightDose": "2 g",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "Dilute 4 mL in 10 mL D5W, push",
      "readyVol": "4 mL of 50% diluted in 10 mL D5W",
-     "detail": "2 g IV/IO push for arrest with torsades or refractory VT.",
+     "detail": "2 g IV/IO. Arrest with torsades or refractory VT: push. Torsades with a pulse: 2 g in 100 mL over 10 min.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -7022,6 +7022,59 @@
      "detail": "1 mg IV/IO q3–5 min. Max 3 mg cumulative. Peds: 0.02 mg/kg (min 0.1 mg, max 0.5 mg).",
      "route": "IV / IO",
      "max": "3 mg cumulative"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Asthma",
+     "class": "Bronchodilator (smooth muscle)",
+     "indication": "Severe / refractory reactive airway",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 50–100 mL NS over 20 min",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO over 20 min for severe bronchospasm refractory to albuterol / epinephrine. Peds: 25–50 mg/kg (max 2 g).",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Hypomagnesemia",
+     "class": "Electrolyte",
+     "indication": "Suspected hypomagnesemia",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 100 mL NS — infuse",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO diluted for suspected hypomagnesemia (malnutrition, chronic alcohol use, prolonged QT). Confirm infusion rate per protocol / medical control.",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Eclampsia",
+     "class": "Anticonvulsant (OB)",
+     "indication": "Eclampsia · severe pre-eclampsia",
+     "weightDose": "4 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial (2 vials for IM)",
+     "deliveryDose": "8 mL of 50% in 100 mL D5W over 20 min",
+     "readyVol": "8 mL of 50%",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IO": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IM": {
+       "dose": "10 g",
+       "vol": "5 g (10 mL) deep IM each buttock — no IV access"
+      }
+     },
+     "detail": "Severe features or seizing: 4 g IV/IO in 100 mL D5W over 20 min. Actively seizing: 4 g wide open until seizure stops. No access: 10 g IM — 5 g each buttock.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
@@ -7841,7 +7894,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "500 mg",
@@ -8132,9 +8185,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "500 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "1.0 mL diluted in 50–100 mL NS over 20 min",
@@ -8556,7 +8609,7 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades / refractory VT",
      "weightDose": "1250 mg",
@@ -8847,9 +8900,9 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Magnesium Sulfate (Asthma)",
+     "name": "Magnesium Sulfate — Asthma",
      "class": "Bronchodilator",
-     "indication": "Severe refractory asthma",
+     "indication": "Severe / refractory reactive airway",
      "weightDose": "1250 mg",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "2.5 mL diluted in 50–100 mL NS over 20 min",
@@ -9271,14 +9324,14 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades de pointes / refractory VT",
      "weightDose": "2 g",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "Dilute 4 mL in 10 mL D5W, push",
      "readyVol": "4 mL of 50% diluted in 10 mL D5W",
-     "detail": "2 g IV/IO push for arrest with torsades or refractory VT.",
+     "detail": "2 g IV/IO. Arrest with torsades or refractory VT: push. Torsades with a pulse: 2 g in 100 mL over 10 min.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -9494,6 +9547,59 @@
      "detail": "1 mg IV/IO q3–5 min. Max 3 mg cumulative. Peds: 0.02 mg/kg (min 0.1 mg, max 0.5 mg).",
      "route": "IV / IO",
      "max": "3 mg cumulative"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Asthma",
+     "class": "Bronchodilator (smooth muscle)",
+     "indication": "Severe / refractory reactive airway",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 50–100 mL NS over 20 min",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO over 20 min for severe bronchospasm refractory to albuterol / epinephrine. Peds: 25–50 mg/kg (max 2 g).",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Hypomagnesemia",
+     "class": "Electrolyte",
+     "indication": "Suspected hypomagnesemia",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 100 mL NS — infuse",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO diluted for suspected hypomagnesemia (malnutrition, chronic alcohol use, prolonged QT). Confirm infusion rate per protocol / medical control.",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Eclampsia",
+     "class": "Anticonvulsant (OB)",
+     "indication": "Eclampsia · severe pre-eclampsia",
+     "weightDose": "4 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial (2 vials for IM)",
+     "deliveryDose": "8 mL of 50% in 100 mL D5W over 20 min",
+     "readyVol": "8 mL of 50%",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IO": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IM": {
+       "dose": "10 g",
+       "vol": "5 g (10 mL) deep IM each buttock — no IV access"
+      }
+     },
+     "detail": "Severe features or seizing: 4 g IV/IO in 100 mL D5W over 20 min. Actively seizing: 4 g wide open until seizure stops. No access: 10 g IM — 5 g each buttock.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
@@ -10139,14 +10245,14 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades de pointes / refractory VT",
      "weightDose": "2 g",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "Dilute 4 mL in 10 mL D5W, push",
      "readyVol": "4 mL of 50% diluted in 10 mL D5W",
-     "detail": "2 g IV/IO push for arrest with torsades or refractory VT.",
+     "detail": "2 g IV/IO. Arrest with torsades or refractory VT: push. Torsades with a pulse: 2 g in 100 mL over 10 min.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -10362,6 +10468,59 @@
      "detail": "1 mg IV/IO q3–5 min. Max 3 mg cumulative. Peds: 0.02 mg/kg (min 0.1 mg, max 0.5 mg).",
      "route": "IV / IO",
      "max": "3 mg cumulative"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Asthma",
+     "class": "Bronchodilator (smooth muscle)",
+     "indication": "Severe / refractory reactive airway",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 50–100 mL NS over 20 min",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO over 20 min for severe bronchospasm refractory to albuterol / epinephrine. Peds: 25–50 mg/kg (max 2 g).",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Hypomagnesemia",
+     "class": "Electrolyte",
+     "indication": "Suspected hypomagnesemia",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 100 mL NS — infuse",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO diluted for suspected hypomagnesemia (malnutrition, chronic alcohol use, prolonged QT). Confirm infusion rate per protocol / medical control.",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Eclampsia",
+     "class": "Anticonvulsant (OB)",
+     "indication": "Eclampsia · severe pre-eclampsia",
+     "weightDose": "4 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial (2 vials for IM)",
+     "deliveryDose": "8 mL of 50% in 100 mL D5W over 20 min",
+     "readyVol": "8 mL of 50%",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IO": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IM": {
+       "dose": "10 g",
+       "vol": "5 g (10 mL) deep IM each buttock — no IV access"
+      }
+     },
+     "detail": "Severe features or seizing: 4 g IV/IO in 100 mL D5W over 20 min. Actively seizing: 4 g wide open until seizure stops. No access: 10 g IM — 5 g each buttock.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
@@ -11007,14 +11166,14 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades de pointes / refractory VT",
      "weightDose": "2 g",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "Dilute 4 mL in 10 mL D5W, push",
      "readyVol": "4 mL of 50% diluted in 10 mL D5W",
-     "detail": "2 g IV/IO push for arrest with torsades or refractory VT.",
+     "detail": "2 g IV/IO. Arrest with torsades or refractory VT: push. Torsades with a pulse: 2 g in 100 mL over 10 min.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -11230,6 +11389,59 @@
      "detail": "1 mg IV/IO q3–5 min. Max 3 mg cumulative. Peds: 0.02 mg/kg (min 0.1 mg, max 0.5 mg).",
      "route": "IV / IO",
      "max": "3 mg cumulative"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Asthma",
+     "class": "Bronchodilator (smooth muscle)",
+     "indication": "Severe / refractory reactive airway",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 50–100 mL NS over 20 min",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO over 20 min for severe bronchospasm refractory to albuterol / epinephrine. Peds: 25–50 mg/kg (max 2 g).",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Hypomagnesemia",
+     "class": "Electrolyte",
+     "indication": "Suspected hypomagnesemia",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 100 mL NS — infuse",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO diluted for suspected hypomagnesemia (malnutrition, chronic alcohol use, prolonged QT). Confirm infusion rate per protocol / medical control.",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Eclampsia",
+     "class": "Anticonvulsant (OB)",
+     "indication": "Eclampsia · severe pre-eclampsia",
+     "weightDose": "4 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial (2 vials for IM)",
+     "deliveryDose": "8 mL of 50% in 100 mL D5W over 20 min",
+     "readyVol": "8 mL of 50%",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IO": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IM": {
+       "dose": "10 g",
+       "vol": "5 g (10 mL) deep IM each buttock — no IV access"
+      }
+     },
+     "detail": "Severe features or seizing: 4 g IV/IO in 100 mL D5W over 20 min. Actively seizing: 4 g wide open until seizure stops. No access: 10 g IM — 5 g each buttock.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
@@ -11875,14 +12087,14 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades de pointes / refractory VT",
      "weightDose": "2 g",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "Dilute 4 mL in 10 mL D5W, push",
      "readyVol": "4 mL of 50% diluted in 10 mL D5W",
-     "detail": "2 g IV/IO push for arrest with torsades or refractory VT.",
+     "detail": "2 g IV/IO. Arrest with torsades or refractory VT: push. Torsades with a pulse: 2 g in 100 mL over 10 min.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -12098,6 +12310,59 @@
      "detail": "1 mg IV/IO q3–5 min. Max 3 mg cumulative. Peds: 0.02 mg/kg (min 0.1 mg, max 0.5 mg).",
      "route": "IV / IO",
      "max": "3 mg cumulative"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Asthma",
+     "class": "Bronchodilator (smooth muscle)",
+     "indication": "Severe / refractory reactive airway",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 50–100 mL NS over 20 min",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO over 20 min for severe bronchospasm refractory to albuterol / epinephrine. Peds: 25–50 mg/kg (max 2 g).",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Hypomagnesemia",
+     "class": "Electrolyte",
+     "indication": "Suspected hypomagnesemia",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 100 mL NS — infuse",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO diluted for suspected hypomagnesemia (malnutrition, chronic alcohol use, prolonged QT). Confirm infusion rate per protocol / medical control.",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Eclampsia",
+     "class": "Anticonvulsant (OB)",
+     "indication": "Eclampsia · severe pre-eclampsia",
+     "weightDose": "4 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial (2 vials for IM)",
+     "deliveryDose": "8 mL of 50% in 100 mL D5W over 20 min",
+     "readyVol": "8 mL of 50%",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IO": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IM": {
+       "dose": "10 g",
+       "vol": "5 g (10 mL) deep IM each buttock — no IV access"
+      }
+     },
+     "detail": "Severe features or seizing: 4 g IV/IO in 100 mL D5W over 20 min. Actively seizing: 4 g wide open until seizure stops. No access: 10 g IM — 5 g each buttock.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
@@ -12743,14 +13008,14 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades de pointes / refractory VT",
      "weightDose": "2 g",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "Dilute 4 mL in 10 mL D5W, push",
      "readyVol": "4 mL of 50% diluted in 10 mL D5W",
-     "detail": "2 g IV/IO push for arrest with torsades or refractory VT.",
+     "detail": "2 g IV/IO. Arrest with torsades or refractory VT: push. Torsades with a pulse: 2 g in 100 mL over 10 min.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -12966,6 +13231,59 @@
      "detail": "1 mg IV/IO q3–5 min. Max 3 mg cumulative. Peds: 0.02 mg/kg (min 0.1 mg, max 0.5 mg).",
      "route": "IV / IO",
      "max": "3 mg cumulative"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Asthma",
+     "class": "Bronchodilator (smooth muscle)",
+     "indication": "Severe / refractory reactive airway",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 50–100 mL NS over 20 min",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO over 20 min for severe bronchospasm refractory to albuterol / epinephrine. Peds: 25–50 mg/kg (max 2 g).",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Hypomagnesemia",
+     "class": "Electrolyte",
+     "indication": "Suspected hypomagnesemia",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 100 mL NS — infuse",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO diluted for suspected hypomagnesemia (malnutrition, chronic alcohol use, prolonged QT). Confirm infusion rate per protocol / medical control.",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Eclampsia",
+     "class": "Anticonvulsant (OB)",
+     "indication": "Eclampsia · severe pre-eclampsia",
+     "weightDose": "4 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial (2 vials for IM)",
+     "deliveryDose": "8 mL of 50% in 100 mL D5W over 20 min",
+     "readyVol": "8 mL of 50%",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IO": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IM": {
+       "dose": "10 g",
+       "vol": "5 g (10 mL) deep IM each buttock — no IV access"
+      }
+     },
+     "detail": "Severe features or seizing: 4 g IV/IO in 100 mL D5W over 20 min. Actively seizing: 4 g wide open until seizure stops. No access: 10 g IM — 5 g each buttock.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
@@ -13611,14 +13929,14 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades de pointes / refractory VT",
      "weightDose": "2 g",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "Dilute 4 mL in 10 mL D5W, push",
      "readyVol": "4 mL of 50% diluted in 10 mL D5W",
-     "detail": "2 g IV/IO push for arrest with torsades or refractory VT.",
+     "detail": "2 g IV/IO. Arrest with torsades or refractory VT: push. Torsades with a pulse: 2 g in 100 mL over 10 min.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -13834,6 +14152,59 @@
      "detail": "1 mg IV/IO q3–5 min. Max 3 mg cumulative. Peds: 0.02 mg/kg (min 0.1 mg, max 0.5 mg).",
      "route": "IV / IO",
      "max": "3 mg cumulative"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Asthma",
+     "class": "Bronchodilator (smooth muscle)",
+     "indication": "Severe / refractory reactive airway",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 50–100 mL NS over 20 min",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO over 20 min for severe bronchospasm refractory to albuterol / epinephrine. Peds: 25–50 mg/kg (max 2 g).",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Hypomagnesemia",
+     "class": "Electrolyte",
+     "indication": "Suspected hypomagnesemia",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 100 mL NS — infuse",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO diluted for suspected hypomagnesemia (malnutrition, chronic alcohol use, prolonged QT). Confirm infusion rate per protocol / medical control.",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Eclampsia",
+     "class": "Anticonvulsant (OB)",
+     "indication": "Eclampsia · severe pre-eclampsia",
+     "weightDose": "4 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial (2 vials for IM)",
+     "deliveryDose": "8 mL of 50% in 100 mL D5W over 20 min",
+     "readyVol": "8 mL of 50%",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IO": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IM": {
+       "dose": "10 g",
+       "vol": "5 g (10 mL) deep IM each buttock — no IV access"
+      }
+     },
+     "detail": "Severe features or seizing: 4 g IV/IO in 100 mL D5W over 20 min. Actively seizing: 4 g wide open until seizure stops. No access: 10 g IM — 5 g each buttock.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
@@ -14479,14 +14850,14 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades de pointes / refractory VT",
      "weightDose": "2 g",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "Dilute 4 mL in 10 mL D5W, push",
      "readyVol": "4 mL of 50% diluted in 10 mL D5W",
-     "detail": "2 g IV/IO push for arrest with torsades or refractory VT.",
+     "detail": "2 g IV/IO. Arrest with torsades or refractory VT: push. Torsades with a pulse: 2 g in 100 mL over 10 min.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -14702,6 +15073,59 @@
      "detail": "1 mg IV/IO q3–5 min. Max 3 mg cumulative. Peds: 0.02 mg/kg (min 0.1 mg, max 0.5 mg).",
      "route": "IV / IO",
      "max": "3 mg cumulative"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Asthma",
+     "class": "Bronchodilator (smooth muscle)",
+     "indication": "Severe / refractory reactive airway",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 50–100 mL NS over 20 min",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO over 20 min for severe bronchospasm refractory to albuterol / epinephrine. Peds: 25–50 mg/kg (max 2 g).",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Hypomagnesemia",
+     "class": "Electrolyte",
+     "indication": "Suspected hypomagnesemia",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 100 mL NS — infuse",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO diluted for suspected hypomagnesemia (malnutrition, chronic alcohol use, prolonged QT). Confirm infusion rate per protocol / medical control.",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Eclampsia",
+     "class": "Anticonvulsant (OB)",
+     "indication": "Eclampsia · severe pre-eclampsia",
+     "weightDose": "4 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial (2 vials for IM)",
+     "deliveryDose": "8 mL of 50% in 100 mL D5W over 20 min",
+     "readyVol": "8 mL of 50%",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IO": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IM": {
+       "dose": "10 g",
+       "vol": "5 g (10 mL) deep IM each buttock — no IV access"
+      }
+     },
+     "detail": "Severe features or seizing: 4 g IV/IO in 100 mL D5W over 20 min. Actively seizing: 4 g wide open until seizure stops. No access: 10 g IM — 5 g each buttock.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",
@@ -15347,14 +15771,14 @@
     },
     {
      "rhythm": "shockable",
-     "name": "Magnesium Sulfate",
+     "name": "Magnesium Sulfate — Torsades / VT",
      "class": "Electrolyte / Antiarrhythmic",
      "indication": "Torsades de pointes / refractory VT",
      "weightDose": "2 g",
      "packageSpec": "50% (500 mg/mL) · 10 mL vial",
      "deliveryDose": "Dilute 4 mL in 10 mL D5W, push",
      "readyVol": "4 mL of 50% diluted in 10 mL D5W",
-     "detail": "2 g IV/IO push for arrest with torsades or refractory VT.",
+     "detail": "2 g IV/IO. Arrest with torsades or refractory VT: push. Torsades with a pulse: 2 g in 100 mL over 10 min.",
      "route": "IV / IO",
      "max": "Per protocol"
     },
@@ -15570,6 +15994,59 @@
      "detail": "1 mg IV/IO q3–5 min. Max 3 mg cumulative. Peds: 0.02 mg/kg (min 0.1 mg, max 0.5 mg).",
      "route": "IV / IO",
      "max": "3 mg cumulative"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Asthma",
+     "class": "Bronchodilator (smooth muscle)",
+     "indication": "Severe / refractory reactive airway",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 50–100 mL NS over 20 min",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO over 20 min for severe bronchospasm refractory to albuterol / epinephrine. Peds: 25–50 mg/kg (max 2 g).",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Hypomagnesemia",
+     "class": "Electrolyte",
+     "indication": "Suspected hypomagnesemia",
+     "weightDose": "2 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial",
+     "deliveryDose": "4 mL of 50% in 100 mL NS — infuse",
+     "readyVol": "4 mL of 50%",
+     "detail": "2 g IV/IO diluted for suspected hypomagnesemia (malnutrition, chronic alcohol use, prolonged QT). Confirm infusion rate per protocol / medical control.",
+     "route": "IV / IO",
+     "max": "2 g"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Magnesium Sulfate — Eclampsia",
+     "class": "Anticonvulsant (OB)",
+     "indication": "Eclampsia · severe pre-eclampsia",
+     "weightDose": "4 g",
+     "packageSpec": "50% (500 mg/mL) · 10 mL vial (2 vials for IM)",
+     "deliveryDose": "8 mL of 50% in 100 mL D5W over 20 min",
+     "readyVol": "8 mL of 50%",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IO": {
+       "dose": "4 g",
+       "vol": "8 mL of 50% in 100 mL D5W over 20 min · seizing: wide open"
+      },
+      "IM": {
+       "dose": "10 g",
+       "vol": "5 g (10 mL) deep IM each buttock — no IV access"
+      }
+     },
+     "detail": "Severe features or seizing: 4 g IV/IO in 100 mL D5W over 20 min. Actively seizing: 4 g wide open until seizure stops. No access: 10 g IM — 5 g each buttock.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
     },
     {
      "rhythm": "non-arrest",

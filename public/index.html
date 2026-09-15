@@ -1772,6 +1772,40 @@
   }
   .cr-new-pat-btn:hover { background: var(--accent); color: white; }
 
+  /* Return-to-active-patient bar on the entry screen (via ⌂ Home) */
+  .cr-resume-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    background: rgba(47, 168, 79, 0.10);
+    border: 2px solid var(--clin-green, #2fa84f);
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--clin-text, #383838);
+  }
+  .cr-resume-btn small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0;
+    text-transform: none;
+    margin-top: 3px;
+    color: var(--clin-text-muted, #8a8a8a);
+  }
+  .cr-resume-btn .arrow { color: var(--clin-green, #2fa84f); font-size: 22px; flex-shrink: 0; }
+  .cr-resume-btn:hover { background: rgba(47, 168, 79, 0.18); }
+
   @media (max-width: 720px) {
     .cr-entry-cards { grid-template-columns: 1fr; }
     .cr-zone { grid-template-columns: 100px 1fr auto; }
@@ -5246,6 +5280,12 @@ function chartDelete(id) {
 function chartOpen(id) {
   const chart = chartsLoadAll().find((c) => c.id === id);
   if (!chart) { showToast('Chart no longer available', true); render(); return; }
+  // Reachable with a live session via ⌂ Home — switching is safe (the
+  // active session is continuously saved as its own chart) but confirm.
+  if (cr.patient && cr.chartId !== id) {
+    if (!confirm('Open this saved chart? Your current patient stays saved in the chart list.')) return;
+    if (ctState.running) ctPause();
+  }
   cr.patient = chart.patient;
   cr.chartId = chart.id;
   cr.view = 'dose';
@@ -6855,8 +6895,20 @@ function renderCREntryCharts() {
 }
 
 function renderCREntry() {
+  // Reached via ⌂ Home with a patient still active → offer the way back
+  const p = cr.patient;
+  const resumeSummary = p
+    ? (p.type === 'peds'
+        ? `${p.zoneLabel ? p.zoneLabel + ' · ' : ''}${p.weight} kg${ctState.running ? ' · CPR RUNNING' : ''}`
+        : `${p.lbs} lb / ${p.weight} kg${ctState.running ? ' · CPR RUNNING' : ''}`)
+    : '';
   return `
     <div class="cr-entry">
+      ${p ? `
+      <button class="cr-resume-btn" id="cr-resume-patient">
+        <span>▸ Return to Active Patient<small>${escapeHtml(resumeSummary)}</small></span>
+        <span class="arrow">›</span>
+      </button>` : ''}
       <button class="fd-arrest-btn" id="fd-arrest-btn">⚡ CARDIAC ARREST<span>weight → straight to the algorithm</span></button>
       <div class="cr-entry-title">New Patient</div>
       <div class="cr-entry-sub">Select patient type to begin</div>
@@ -6967,6 +7019,7 @@ function renderCRPatientBar() {
     <div class="cr-patient-bar-v2 ${isPeds ? 'peds' : ''}">
       <div class="cr-pat-summary">${summary}</div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <button class="cr-new-pat-btn" id="cr-go-home">⌂ Home</button>
         <button class="cr-new-pat-btn" id="cr-new-patient">⟲ New</button>
       </div>
     </div>
@@ -8149,10 +8202,22 @@ function bindRunCodeEvents() {
   if (callBtn) callBtn.addEventListener('click', fdShowContacts);
 
   // ENTRY FLOW — Adult/Peds picker
+  // Home keeps the active patient, so starting a NEW patient from the
+  // entry screen must clear the old session first (chart stays saved).
+  const crGuardNewPatient = () => {
+    if (!cr.patient) return true;
+    if (!confirm('An active patient is loaded. Start a NEW patient? The current session clears (its chart stays saved).')) return false;
+    crNewPatient();
+    return true;
+  };
   const goPeds = document.getElementById('cr-go-peds');
-  if (goPeds) goPeds.addEventListener('click', () => { cr.view = 'entry-peds'; render(); });
+  if (goPeds) goPeds.addEventListener('click', () => { if (!crGuardNewPatient()) return; cr.view = 'entry-peds'; render(); });
   const goAdult = document.getElementById('cr-go-adult');
-  if (goAdult) goAdult.addEventListener('click', () => { cr.view = 'entry-adult'; render(); });
+  if (goAdult) goAdult.addEventListener('click', () => { if (!crGuardNewPatient()) return; cr.view = 'entry-adult'; render(); });
+
+  // ENTRY FLOW — resume the active patient (arrived here via ⌂ Home)
+  const resumeBtn = document.getElementById('cr-resume-patient');
+  if (resumeBtn) resumeBtn.addEventListener('click', () => { cr.view = 'dose'; render(); });
   const back = document.getElementById('cr-entry-back');
   if (back) back.addEventListener('click', () => { cr.view = 'entry'; render(); });
 
@@ -8181,6 +8246,7 @@ function bindRunCodeEvents() {
   // ENTRY FLOW — Cardiac Arrest fast path (pick weight → arrest algorithm)
   const arrestBtn = document.getElementById('fd-arrest-btn');
   if (arrestBtn) arrestBtn.addEventListener('click', () => {
+    if (!crGuardNewPatient()) return;
     cr.arrestPending = true;
     cr.view = 'entry-adult';
     render();
@@ -8225,6 +8291,10 @@ function bindRunCodeEvents() {
     const age = parseFloat(document.getElementById('cr-peds-custom-age').value) || null;
     crSetPedsCustom(kg, age);
   });
+
+  // DOSE VIEW — Home button (back to entry screen, patient stays active)
+  const goHome = document.getElementById('cr-go-home');
+  if (goHome) goHome.addEventListener('click', () => { cr.view = 'entry'; render(); });
 
   // DOSE VIEW — New Patient button (clears everything, returns to entry)
   const newPat = document.getElementById('cr-new-patient');

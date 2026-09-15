@@ -517,6 +517,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction",
@@ -1191,6 +1204,19 @@
      "deliveryDose": "Neb via mask · May repeat ×3",
      "readyVol": "3 mL nebulized",
      "detail": "<1 yr: 1.25 mg. ≥1 yr: 2.5 mg.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
      "route": "NEB",
      "max": "Per protocol"
     },
@@ -1911,6 +1937,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction",
@@ -2621,6 +2660,19 @@
      "deliveryDose": "Neb via mask · May repeat ×3",
      "readyVol": "3 mL nebulized",
      "detail": "<1 yr: 1.25 mg. ≥1 yr: 2.5 mg.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
      "route": "NEB",
      "max": "Per protocol"
     },
@@ -3341,6 +3393,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction",
@@ -4051,6 +4116,19 @@
      "deliveryDose": "Neb via mask · May repeat ×3",
      "readyVol": "3 mL nebulized",
      "detail": "<1 yr: 1.25 mg. ≥1 yr: 2.5 mg.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
      "route": "NEB",
      "max": "Per protocol"
     },
@@ -4771,6 +4849,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction",
@@ -5481,6 +5572,19 @@
      "deliveryDose": "Neb via mask · May repeat ×3",
      "readyVol": "3 mL nebulized",
      "detail": "<1 yr: 1.25 mg. ≥1 yr: 2.5 mg.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
      "route": "NEB",
      "max": "Per protocol"
     },
@@ -6201,6 +6305,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction",
@@ -6885,6 +7002,19 @@
      "deliveryDose": "Neb 3 mL via mask · May repeat ×3",
      "readyVol": "3 mL nebulized",
      "detail": "Continuous neb for severe. Peds: 2.5 mg same dose (or 1.25 mg <1 yr).",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with Albuterol 2.5 mg (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with Albuterol 2.5 mg (DuoNeb). Secondary treatment — reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis. Peds: same 0.5 mg all ages.",
      "route": "NEB",
      "max": "Per protocol"
     },
@@ -8011,6 +8141,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction",
@@ -8726,6 +8869,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with albuterol (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction",
@@ -9410,6 +9566,19 @@
      "deliveryDose": "Neb 3 mL via mask · May repeat ×3",
      "readyVol": "3 mL nebulized",
      "detail": "Continuous neb for severe. Peds: 2.5 mg same dose (or 1.25 mg <1 yr).",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with Albuterol 2.5 mg (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with Albuterol 2.5 mg (DuoNeb). Secondary treatment — reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis. Peds: same 0.5 mg all ages.",
      "route": "NEB",
      "max": "Per protocol"
     },
@@ -10336,6 +10505,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with Albuterol 2.5 mg (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with Albuterol 2.5 mg (DuoNeb). Secondary treatment — reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis. Peds: same 0.5 mg all ages.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction / anaphylaxis adjunct",
@@ -11252,6 +11434,19 @@
      "deliveryDose": "Neb 3 mL via mask · May repeat ×3",
      "readyVol": "3 mL nebulized",
      "detail": "Continuous neb for severe. Peds: 2.5 mg same dose (or 1.25 mg <1 yr).",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with Albuterol 2.5 mg (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with Albuterol 2.5 mg (DuoNeb). Secondary treatment — reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis. Peds: same 0.5 mg all ages.",
      "route": "NEB",
      "max": "Per protocol"
     },
@@ -12178,6 +12373,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with Albuterol 2.5 mg (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with Albuterol 2.5 mg (DuoNeb). Secondary treatment — reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis. Peds: same 0.5 mg all ages.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction / anaphylaxis adjunct",
@@ -13094,6 +13302,19 @@
      "deliveryDose": "Neb 3 mL via mask · May repeat ×3",
      "readyVol": "3 mL nebulized",
      "detail": "Continuous neb for severe. Peds: 2.5 mg same dose (or 1.25 mg <1 yr).",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with Albuterol 2.5 mg (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with Albuterol 2.5 mg (DuoNeb). Secondary treatment — reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis. Peds: same 0.5 mg all ages.",
      "route": "NEB",
      "max": "Per protocol"
     },
@@ -14020,6 +14241,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with Albuterol 2.5 mg (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with Albuterol 2.5 mg (DuoNeb). Secondary treatment — reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis. Peds: same 0.5 mg all ages.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction / anaphylaxis adjunct",
@@ -14941,6 +15175,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with Albuterol 2.5 mg (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with Albuterol 2.5 mg (DuoNeb). Secondary treatment — reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis. Peds: same 0.5 mg all ages.",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Diphenhydramine",
      "class": "Antihistamine",
      "indication": "Allergic reaction / anaphylaxis adjunct",
@@ -15857,6 +16104,19 @@
      "deliveryDose": "Neb 3 mL via mask · May repeat ×3",
      "readyVol": "3 mL nebulized",
      "detail": "Continuous neb for severe. Peds: 2.5 mg same dose (or 1.25 mg <1 yr).",
+     "route": "NEB",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ipratropium (Atrovent)",
+     "class": "Anticholinergic bronchodilator",
+     "indication": "Bronchospasm adjunct — with albuterol (DuoNeb)",
+     "weightDose": "0.5 mg",
+     "packageSpec": "0.5 mg / 2.5 mL unit dose vial",
+     "deliveryDose": "Neb 2.5 mL with Albuterol 2.5 mg (DuoNeb)",
+     "readyVol": "2.5 mL nebulized",
+     "detail": "0.5 mg nebulized with Albuterol 2.5 mg (DuoNeb). Secondary treatment — reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis. Peds: same 0.5 mg all ages.",
      "route": "NEB",
      "max": "Per protocol"
     },

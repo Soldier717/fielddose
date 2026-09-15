@@ -4511,6 +4511,12 @@ function ccGetDrugsBase() {
         deliveryDose: 'Neb 3 mL via mask · May repeat ×3',
         readyVol: '3 mL nebulized',
         detail: 'Continuous neb for severe. Peds: 2.5 mg same dose (or 1.25 mg <1 yr).', route: 'NEB', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Ipratropium (Atrovent)', class: 'Anticholinergic bronchodilator', indication: 'Bronchospasm adjunct — with albuterol (DuoNeb)',
+        weightDose: '0.5 mg',
+        packageSpec: '0.5 mg / 2.5 mL unit dose vial',
+        deliveryDose: 'Neb 2.5 mL with Albuterol 2.5 mg (DuoNeb)',
+        readyVol: '2.5 mL nebulized',
+        detail: '0.5 mg nebulized with Albuterol 2.5 mg (DuoNeb). Secondary treatment — reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis. Peds: same 0.5 mg all ages.', route: 'NEB', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Diphenhydramine', class: 'Antihistamine', indication: 'Allergic reaction / anaphylaxis adjunct',
         weightDose: `${ccFmt(Math.min(1*kg, 50), 0)} mg (1 mg/kg, max 50)`,
         packageSpec: '50 mg / 1 mL vial',
@@ -4871,6 +4877,12 @@ function ccGetDrugsBase() {
         deliveryDose: 'Neb via mask · May repeat ×3',
         readyVol: '3 mL nebulized',
         detail: '<1 yr: 1.25 mg. ≥1 yr: 2.5 mg.', route: 'NEB', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Ipratropium (Atrovent)', class: 'Anticholinergic bronchodilator', indication: 'Bronchospasm adjunct — with albuterol (DuoNeb)',
+        weightDose: '0.5 mg',
+        packageSpec: '0.5 mg / 2.5 mL unit dose vial',
+        deliveryDose: 'Neb 2.5 mL with albuterol (DuoNeb)',
+        readyVol: '2.5 mL nebulized',
+        detail: '0.5 mg nebulized with albuterol (DuoNeb) — same dose all ages. Secondary treatment for reactive airway disease, refractory bronchospasm, allergic reaction / anaphylaxis.', route: 'NEB', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Diphenhydramine', class: 'Antihistamine', indication: 'Allergic reaction',
         weightDose: `${ccFmt(Math.min(kg, 50), 0)} mg (1 mg/kg, max 50)`,
         packageSpec: '50 mg / 1 mL vial',
@@ -6268,6 +6280,7 @@ const CC_DRUG_REF = {
   epinephrine: { action: 'Alpha & beta agonist — ↑ heart rate, contractility, SVR & BP; bronchodilation.', contra: ['None in emergency settings'], precautions: ['Cardiovascular disease, hypertension, tachyarrhythmia','Protect from light; deactivated by alkaline solutions (bicarb)'] },
   adenosine: { action: 'Slows AV-node conduction; interrupts reentrant AV-nodal pathways.', contra: ['None in emergent settings'], precautions: ['Not for hemodynamically unstable patients','Bronchoconstrictive disease — auscultate lungs after','Must be pushed rapidly and followed by flush'] },
   albuterol: { action: 'Selective β2 agonist — smooth-muscle relaxation & bronchodilation.', contra: ['None in emergent settings'], precautions: ['Symptomatic tachycardia — may precipitate angina/dysrhythmia'] },
+  ipratropium: { action: 'Anticholinergic — blocks muscarinic receptors in bronchial smooth muscle; bronchodilation, ↓ secretions.', contra: ['None in emergent settings'], precautions: ['Secondary treatment — never delays albuterol / epinephrine','Anticholinergic effects: caution glaucoma, urinary retention','Avoid spraying into eyes (mydriasis / blurred vision)'] },
   amiodarone: { action: 'Class III antidysrhythmic — blocks Na/K/Ca channels; prolongs action potential.', contra: ['QTc > 500 ms'], precautions: ['Heart failure','Torsades de Pointes'] },
   aspirin: { action: 'Inhibits platelet aggregation.', contra: ['Known anaphylaxis','Active, uncontrolled bleeding'], precautions: ['GI bleeding','Give full dose even if patient took a morning 81 mg'] },
   atropine: { action: 'Parasympatholytic — blocks acetylcholine receptors; ↑ heart rate; ↓ secretions.', contra: ['None when used emergently'], precautions: ['If administered too slowly, reflex bradycardia may occur'] },
@@ -6293,6 +6306,7 @@ function crDrugRef(name) {
   if (n.includes('epi') || n.includes('epinephrine')) return R.epinephrine;
   if (n.includes('adenosine')) return R.adenosine;
   if (n.includes('albuterol')) return R.albuterol;
+  if (n.includes('ipratropium') || n.includes('atrovent') || n.includes('duoneb')) return R.ipratropium;
   if (n.includes('amiodarone')) return R.amiodarone;
   if (n.includes('aspirin')) return R.aspirin;
   if (n.includes('atropine')) return R.atropine;
@@ -7334,14 +7348,15 @@ const CC_PROTOCOLS = [
     { id: 'asthma', name: 'Asthma', banner: 'Asthma', sections: [
       { label: 'Mild – Moderate', items: ['Albuterol 2.5 mg Neb','Dexamethasone 10 mg PO'] },
       { label: 'Moderate – Severe', items: ['Albuterol 2.5 mg Neb','Solu-Medrol 125 mg IV/IO','Epinephrine 0.5 mg IM',
+        'DuoNeb — Albuterol 2.5 mg + Ipratropium 0.5 mg Neb (secondary)',
         { t: 'Magnesium Sulfate 2 g IV/IO over 20 min — severe / refractory', drug: 'Magnesium Sulfate — Asthma' }] },
     ]},
     { id: 'copd', name: 'COPD Exacerbation', banner: 'COPD Exacerbation', sections: [
-      { label: 'Treatment', items: ['Albuterol 2.5 mg Neb','Solu-Medrol 125 mg IV/IO','Epinephrine 0.5 mg IM','CPAP as indicated'] },
+      { label: 'Treatment', items: ['Albuterol 2.5 mg Neb','Solu-Medrol 125 mg IV/IO','Epinephrine 0.5 mg IM','DuoNeb — Albuterol 2.5 mg + Ipratropium 0.5 mg Neb (secondary)','CPAP as indicated'] },
     ]},
     { id: 'anaphylaxis', name: 'Anaphylaxis', banner: 'Anaphylaxis', sections: [
       { label: 'First-Line', items: ['Epinephrine 0.5 mg IM'] },
-      { label: 'Adjuncts', items: ['Diphenhydramine 50 mg IV/IO','Dexamethasone 10 mg IV/IO or PO','Solu-Medrol 125 mg IV/IO','Albuterol 2.5 mg Neb if wheezing'] },
+      { label: 'Adjuncts', items: ['Diphenhydramine 50 mg IV/IO','Dexamethasone 10 mg IV/IO or PO','Solu-Medrol 125 mg IV/IO','Albuterol 2.5 mg Neb if wheezing','DuoNeb — Albuterol 2.5 mg + Ipratropium 0.5 mg Neb (secondary)'] },
     ]},
     { id: 'croup', name: 'Croup', banner: 'Croup', sections: [
       { label: 'Treatment', items: ['Dexamethasone 0.6 mg/kg PO (max 16 mg) — PO preferred','Nebulized Epinephrine (1 mg/mL): ≥ 1 yr 5 mg (5 mL) AT · < 1 yr 2.5 mg (2.5 mL) AT — stridor at rest','Racemic Epinephrine 2.25%: ≥ 1 yr 0.5 mL · < 1 yr 0.25 mL in 3 mL NS AT'] },
@@ -7544,6 +7559,9 @@ function crProtoDrugMatch(text) {
     ['magnesium', 'Magnesium Sulfate — Torsades / VT'],
     ['calcium chloride', 'Calcium Chloride 10%'],
     ['sodium bicarbonate', 'Sodium Bicarbonate'],
+    ['duoneb', 'Ipratropium (Atrovent)'],
+    ['ipratropium', 'Ipratropium (Atrovent)'],
+    ['atrovent', 'Ipratropium (Atrovent)'],
     ['albuterol', 'Albuterol'],
     ['dexamethasone', 'Dexamethasone'],
     ['solu-medrol', 'Solu-Medrol'],

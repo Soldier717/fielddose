@@ -573,9 +573,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "0.5 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "0.25 mL slow IV/IO/IM",
      "readyVol": "0.25 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.5 mg (0.1 mg/kg)",
+       "vol": "0.25 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "0.5 mg (0.1 mg/kg)",
+       "vol": "0.25 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "0.5 mg (0.1 mg/kg)",
+       "vol": "0.25 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -599,10 +617,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.50 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "0.50 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "0.50 mL IV/IM · IN via MAD",
      "readyVol": "0.50 mL of 1 mg/mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -1234,9 +1252,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "0.7 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "0.33 mL slow IV/IO/IM",
      "readyVol": "0.33 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.7 mg (0.1 mg/kg)",
+       "vol": "0.33 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "0.7 mg (0.1 mg/kg)",
+       "vol": "0.33 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "0.7 mg (0.1 mg/kg)",
+       "vol": "0.33 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -1260,10 +1296,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.65 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "0.65 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "0.65 mL IV/IM · IN via MAD",
      "readyVol": "0.65 mL of 1 mg/mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -1931,9 +1967,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "0.9 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "0.43 mL slow IV/IO/IM",
      "readyVol": "0.43 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.9 mg (0.1 mg/kg)",
+       "vol": "0.43 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "0.9 mg (0.1 mg/kg)",
+       "vol": "0.43 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "0.9 mg (0.1 mg/kg)",
+       "vol": "0.43 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -1957,10 +2011,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.85 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "0.85 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "0.85 mL IV/IM · IN via MAD",
      "readyVol": "0.85 mL of 1 mg/mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -2628,9 +2682,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "1.1 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "0.53 mL slow IV/IO/IM",
      "readyVol": "0.53 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "1.1 mg (0.1 mg/kg)",
+       "vol": "0.53 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "1.1 mg (0.1 mg/kg)",
+       "vol": "0.53 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "1.1 mg (0.1 mg/kg)",
+       "vol": "0.53 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -2654,10 +2726,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "1.05 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "1.05 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "1.05 mL IV/IM · IN via MAD",
      "readyVol": "1.05 mL of 1 mg/mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -3325,9 +3397,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "1.3 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "0.65 mL slow IV/IO/IM",
      "readyVol": "0.65 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "1.3 mg (0.1 mg/kg)",
+       "vol": "0.65 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "1.3 mg (0.1 mg/kg)",
+       "vol": "0.65 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "1.3 mg (0.1 mg/kg)",
+       "vol": "0.65 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -3351,10 +3441,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "1.30 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "1.30 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "1.30 mL IV/IM · IN via MAD",
      "readyVol": "1.30 mL of 1 mg/mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -4022,9 +4112,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "1.7 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "0.83 mL slow IV/IO/IM",
      "readyVol": "0.83 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "1.7 mg (0.1 mg/kg)",
+       "vol": "0.83 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "1.7 mg (0.1 mg/kg)",
+       "vol": "0.83 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "1.7 mg (0.1 mg/kg)",
+       "vol": "0.83 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -4048,10 +4156,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "1.65 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "1.65 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "1.65 mL IV/IM · IN via MAD",
      "readyVol": "1.65 mL of 1 mg/mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -4719,9 +4827,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "2.1 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "1.05 mL slow IV/IO/IM",
      "readyVol": "1.05 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2.1 mg (0.1 mg/kg)",
+       "vol": "1.05 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "2.1 mg (0.1 mg/kg)",
+       "vol": "1.05 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "2.1 mg (0.1 mg/kg)",
+       "vol": "1.05 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -4745,10 +4871,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "2 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "2 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "2 mL IV/IM · IN via MAD",
      "readyVol": "2 mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -5416,9 +5542,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "2.7 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "1.33 mL slow IV/IO/IM",
      "readyVol": "1.33 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2.7 mg (0.1 mg/kg)",
+       "vol": "1.33 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "2.7 mg (0.1 mg/kg)",
+       "vol": "1.33 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "2.7 mg (0.1 mg/kg)",
+       "vol": "1.33 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -5442,10 +5586,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "2 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "2 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "2 mL IV/IM · IN via MAD",
      "readyVol": "2 mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -6113,9 +6257,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "3.3 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "1.65 mL slow IV/IO/IM",
      "readyVol": "1.65 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "3.3 mg (0.1 mg/kg)",
+       "vol": "1.65 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "3.3 mg (0.1 mg/kg)",
+       "vol": "1.65 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "3.3 mg (0.1 mg/kg)",
+       "vol": "1.65 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -6139,10 +6301,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "2 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "2 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "2 mL IV/IM · IN via MAD",
      "readyVol": "2 mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -6797,10 +6959,28 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "4 mg",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 4 mg ODT",
      "deliveryDose": "2 mL slow IV/IO/IM · ODT 4 mg PO",
      "readyVol": "2 mL of 2 mg/mL",
-     "detail": "4 mg IV/IO over 2 min. Peds: 0.1–0.15 mg/kg max 4 mg.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IO": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IM": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "PO": {
+       "dose": "4 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
+     "detail": "4 mg IV/IO over 2 min. Peds: 0.1 mg/kg (max 4 mg), ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "8 mg"
     },
@@ -6858,15 +7038,46 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Naloxone (Narcan)",
+     "name": "Naloxone (Narcan) — Vial",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.4 mg · repeat PRN",
-     "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · IN via MAD",
      "readyVol": "0.4 mL of 1 mg/mL",
-     "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IO": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IM": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IN": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "0.4 mL via MAD atomizer"
+      }
+     },
+     "detail": "Start 0.4 mg; titrate to adequate respirations (0.4–2 mg). May repeat q2–3 min. IN: draw from the vial, atomize via MAD device. PEARL: NOT for cardiac arrest.",
      "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Naloxone (Narcan) — 4 mg Spray",
+     "class": "Opioid antagonist",
+     "indication": "Opioid OD (prefilled nasal spray)",
+     "weightDose": "4 mg · 1 spray",
+     "packageSpec": "4 mg / 0.1 mL prefilled nasal spray",
+     "deliveryDose": "1 spray in one nostril",
+     "readyVol": "1 spray",
+     "detail": "Prefilled 4 mg nasal spray — one full spray in one nostril. May repeat q2–3 min, alternating nostrils. PEARL: NOT for cardiac arrest.",
+     "route": "IN",
      "max": "Per protocol"
     },
     {
@@ -6878,6 +7089,24 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "IO": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "NEB": {
+       "dose": "1 g — hemoptysis",
+       "vol": "Nebulize 10 mL of 100 mg/mL (AT)"
+      },
+      "IN": {
+       "dose": "1 g — upper airway",
+       "vol": "10 mL IN/AT or topical (soaked gauze)"
+      }
+     },
      "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
      "route": "IV / IO / NEB / IN",
      "max": "2 g"
@@ -7785,9 +8014,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "1.0 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "0.50 mL slow IV/IO/IM",
      "readyVol": "0.50 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "1.0 mg (0.1 mg/kg)",
+       "vol": "0.50 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "1.0 mg (0.1 mg/kg)",
+       "vol": "0.50 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "1.0 mg (0.1 mg/kg)",
+       "vol": "0.50 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -7811,10 +8058,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "1.00 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "1.00 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "1.00 mL IV/IM · IN via MAD",
      "readyVol": "1.00 mL of 1 mg/mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -8482,9 +8729,27 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "2.5 mg (0.1 mg/kg)",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 2 mg ODT",
      "deliveryDose": "1.25 mL slow IV/IO/IM",
      "readyVol": "1.25 mL of 2 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2.5 mg (0.1 mg/kg)",
+       "vol": "1.25 mL of 2 mg/mL slow"
+      },
+      "IO": {
+       "dose": "2.5 mg (0.1 mg/kg)",
+       "vol": "1.25 mL of 2 mg/mL slow"
+      },
+      "IM": {
+       "dose": "2.5 mg (0.1 mg/kg)",
+       "vol": "1.25 mL of 2 mg/mL slow"
+      },
+      "PO": {
+       "dose": "2 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
      "detail": "0.1 mg/kg IV/IO/IM (max 4 mg). ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "4 mg"
@@ -8508,10 +8773,10 @@
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "2 mg",
-     "packageSpec": "2 mg / 2 mL vial · 4 mg IN spray",
-     "deliveryDose": "2 mL IV/IM/IN",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "2 mL IV/IM · IN via MAD",
      "readyVol": "2 mL",
-     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min.",
+     "detail": "<20 kg: 0.1 mg/kg. ≥20 kg: 2 mg. May repeat q2–3 min. IN: draw from the vial, atomize via MAD device.",
      "route": "IV / IO / IM / IN",
      "max": "2 mg"
     },
@@ -9166,10 +9431,28 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "4 mg",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 4 mg ODT",
      "deliveryDose": "2 mL slow IV/IO/IM · ODT 4 mg PO",
      "readyVol": "2 mL of 2 mg/mL",
-     "detail": "4 mg IV/IO over 2 min. Peds: 0.1–0.15 mg/kg max 4 mg.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IO": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IM": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "PO": {
+       "dose": "4 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
+     "detail": "4 mg IV/IO over 2 min. Peds: 0.1 mg/kg (max 4 mg), ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "8 mg"
     },
@@ -9227,15 +9510,46 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Naloxone (Narcan)",
+     "name": "Naloxone (Narcan) — Vial",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.4 mg · repeat PRN",
-     "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · IN via MAD",
      "readyVol": "0.4 mL of 1 mg/mL",
-     "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IO": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IM": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IN": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "0.4 mL via MAD atomizer"
+      }
+     },
+     "detail": "Start 0.4 mg; titrate to adequate respirations (0.4–2 mg). May repeat q2–3 min. IN: draw from the vial, atomize via MAD device. PEARL: NOT for cardiac arrest.",
      "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Naloxone (Narcan) — 4 mg Spray",
+     "class": "Opioid antagonist",
+     "indication": "Opioid OD (prefilled nasal spray)",
+     "weightDose": "4 mg · 1 spray",
+     "packageSpec": "4 mg / 0.1 mL prefilled nasal spray",
+     "deliveryDose": "1 spray in one nostril",
+     "readyVol": "1 spray",
+     "detail": "Prefilled 4 mg nasal spray — one full spray in one nostril. May repeat q2–3 min, alternating nostrils. PEARL: NOT for cardiac arrest.",
+     "route": "IN",
      "max": "Per protocol"
     },
     {
@@ -9247,6 +9561,24 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "IO": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "NEB": {
+       "dose": "1 g — hemoptysis",
+       "vol": "Nebulize 10 mL of 100 mg/mL (AT)"
+      },
+      "IN": {
+       "dose": "1 g — upper airway",
+       "vol": "10 mL IN/AT or topical (soaked gauze)"
+      }
+     },
      "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
      "route": "IV / IO / NEB / IN",
      "max": "2 g"
@@ -9967,10 +10299,28 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "4 mg",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 4 mg ODT",
      "deliveryDose": "2 mL slow IV/IO/IM · ODT 4 mg PO",
      "readyVol": "2 mL of 2 mg/mL",
-     "detail": "4 mg IV/IO over 2 min. Peds: 0.1–0.15 mg/kg max 4 mg.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IO": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IM": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "PO": {
+       "dose": "4 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
+     "detail": "4 mg IV/IO over 2 min. Peds: 0.1 mg/kg (max 4 mg), ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "8 mg"
     },
@@ -10028,15 +10378,46 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Naloxone (Narcan)",
+     "name": "Naloxone (Narcan) — Vial",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.4 mg · repeat PRN",
-     "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · IN via MAD",
      "readyVol": "0.4 mL of 1 mg/mL",
-     "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IO": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IM": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IN": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "0.4 mL via MAD atomizer"
+      }
+     },
+     "detail": "Start 0.4 mg; titrate to adequate respirations (0.4–2 mg). May repeat q2–3 min. IN: draw from the vial, atomize via MAD device. PEARL: NOT for cardiac arrest.",
      "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Naloxone (Narcan) — 4 mg Spray",
+     "class": "Opioid antagonist",
+     "indication": "Opioid OD (prefilled nasal spray)",
+     "weightDose": "4 mg · 1 spray",
+     "packageSpec": "4 mg / 0.1 mL prefilled nasal spray",
+     "deliveryDose": "1 spray in one nostril",
+     "readyVol": "1 spray",
+     "detail": "Prefilled 4 mg nasal spray — one full spray in one nostril. May repeat q2–3 min, alternating nostrils. PEARL: NOT for cardiac arrest.",
+     "route": "IN",
      "max": "Per protocol"
     },
     {
@@ -10048,6 +10429,24 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "IO": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "NEB": {
+       "dose": "1 g — hemoptysis",
+       "vol": "Nebulize 10 mL of 100 mg/mL (AT)"
+      },
+      "IN": {
+       "dose": "1 g — upper airway",
+       "vol": "10 mL IN/AT or topical (soaked gauze)"
+      }
+     },
      "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
      "route": "IV / IO / NEB / IN",
      "max": "2 g"
@@ -10768,10 +11167,28 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "4 mg",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 4 mg ODT",
      "deliveryDose": "2 mL slow IV/IO/IM · ODT 4 mg PO",
      "readyVol": "2 mL of 2 mg/mL",
-     "detail": "4 mg IV/IO over 2 min. Peds: 0.1–0.15 mg/kg max 4 mg.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IO": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IM": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "PO": {
+       "dose": "4 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
+     "detail": "4 mg IV/IO over 2 min. Peds: 0.1 mg/kg (max 4 mg), ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "8 mg"
     },
@@ -10829,15 +11246,46 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Naloxone (Narcan)",
+     "name": "Naloxone (Narcan) — Vial",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.4 mg · repeat PRN",
-     "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · IN via MAD",
      "readyVol": "0.4 mL of 1 mg/mL",
-     "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IO": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IM": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IN": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "0.4 mL via MAD atomizer"
+      }
+     },
+     "detail": "Start 0.4 mg; titrate to adequate respirations (0.4–2 mg). May repeat q2–3 min. IN: draw from the vial, atomize via MAD device. PEARL: NOT for cardiac arrest.",
      "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Naloxone (Narcan) — 4 mg Spray",
+     "class": "Opioid antagonist",
+     "indication": "Opioid OD (prefilled nasal spray)",
+     "weightDose": "4 mg · 1 spray",
+     "packageSpec": "4 mg / 0.1 mL prefilled nasal spray",
+     "deliveryDose": "1 spray in one nostril",
+     "readyVol": "1 spray",
+     "detail": "Prefilled 4 mg nasal spray — one full spray in one nostril. May repeat q2–3 min, alternating nostrils. PEARL: NOT for cardiac arrest.",
+     "route": "IN",
      "max": "Per protocol"
     },
     {
@@ -10849,6 +11297,24 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "IO": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "NEB": {
+       "dose": "1 g — hemoptysis",
+       "vol": "Nebulize 10 mL of 100 mg/mL (AT)"
+      },
+      "IN": {
+       "dose": "1 g — upper airway",
+       "vol": "10 mL IN/AT or topical (soaked gauze)"
+      }
+     },
      "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
      "route": "IV / IO / NEB / IN",
      "max": "2 g"
@@ -11569,10 +12035,28 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "4 mg",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 4 mg ODT",
      "deliveryDose": "2 mL slow IV/IO/IM · ODT 4 mg PO",
      "readyVol": "2 mL of 2 mg/mL",
-     "detail": "4 mg IV/IO over 2 min. Peds: 0.1–0.15 mg/kg max 4 mg.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IO": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IM": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "PO": {
+       "dose": "4 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
+     "detail": "4 mg IV/IO over 2 min. Peds: 0.1 mg/kg (max 4 mg), ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "8 mg"
     },
@@ -11630,15 +12114,46 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Naloxone (Narcan)",
+     "name": "Naloxone (Narcan) — Vial",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.4 mg · repeat PRN",
-     "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · IN via MAD",
      "readyVol": "0.4 mL of 1 mg/mL",
-     "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IO": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IM": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IN": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "0.4 mL via MAD atomizer"
+      }
+     },
+     "detail": "Start 0.4 mg; titrate to adequate respirations (0.4–2 mg). May repeat q2–3 min. IN: draw from the vial, atomize via MAD device. PEARL: NOT for cardiac arrest.",
      "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Naloxone (Narcan) — 4 mg Spray",
+     "class": "Opioid antagonist",
+     "indication": "Opioid OD (prefilled nasal spray)",
+     "weightDose": "4 mg · 1 spray",
+     "packageSpec": "4 mg / 0.1 mL prefilled nasal spray",
+     "deliveryDose": "1 spray in one nostril",
+     "readyVol": "1 spray",
+     "detail": "Prefilled 4 mg nasal spray — one full spray in one nostril. May repeat q2–3 min, alternating nostrils. PEARL: NOT for cardiac arrest.",
+     "route": "IN",
      "max": "Per protocol"
     },
     {
@@ -11650,6 +12165,24 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "IO": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "NEB": {
+       "dose": "1 g — hemoptysis",
+       "vol": "Nebulize 10 mL of 100 mg/mL (AT)"
+      },
+      "IN": {
+       "dose": "1 g — upper airway",
+       "vol": "10 mL IN/AT or topical (soaked gauze)"
+      }
+     },
      "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
      "route": "IV / IO / NEB / IN",
      "max": "2 g"
@@ -12370,10 +12903,28 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "4 mg",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 4 mg ODT",
      "deliveryDose": "2 mL slow IV/IO/IM · ODT 4 mg PO",
      "readyVol": "2 mL of 2 mg/mL",
-     "detail": "4 mg IV/IO over 2 min. Peds: 0.1–0.15 mg/kg max 4 mg.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IO": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IM": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "PO": {
+       "dose": "4 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
+     "detail": "4 mg IV/IO over 2 min. Peds: 0.1 mg/kg (max 4 mg), ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "8 mg"
     },
@@ -12431,15 +12982,46 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Naloxone (Narcan)",
+     "name": "Naloxone (Narcan) — Vial",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.4 mg · repeat PRN",
-     "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · IN via MAD",
      "readyVol": "0.4 mL of 1 mg/mL",
-     "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IO": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IM": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IN": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "0.4 mL via MAD atomizer"
+      }
+     },
+     "detail": "Start 0.4 mg; titrate to adequate respirations (0.4–2 mg). May repeat q2–3 min. IN: draw from the vial, atomize via MAD device. PEARL: NOT for cardiac arrest.",
      "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Naloxone (Narcan) — 4 mg Spray",
+     "class": "Opioid antagonist",
+     "indication": "Opioid OD (prefilled nasal spray)",
+     "weightDose": "4 mg · 1 spray",
+     "packageSpec": "4 mg / 0.1 mL prefilled nasal spray",
+     "deliveryDose": "1 spray in one nostril",
+     "readyVol": "1 spray",
+     "detail": "Prefilled 4 mg nasal spray — one full spray in one nostril. May repeat q2–3 min, alternating nostrils. PEARL: NOT for cardiac arrest.",
+     "route": "IN",
      "max": "Per protocol"
     },
     {
@@ -12451,6 +13033,24 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "IO": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "NEB": {
+       "dose": "1 g — hemoptysis",
+       "vol": "Nebulize 10 mL of 100 mg/mL (AT)"
+      },
+      "IN": {
+       "dose": "1 g — upper airway",
+       "vol": "10 mL IN/AT or topical (soaked gauze)"
+      }
+     },
      "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
      "route": "IV / IO / NEB / IN",
      "max": "2 g"
@@ -13171,10 +13771,28 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "4 mg",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 4 mg ODT",
      "deliveryDose": "2 mL slow IV/IO/IM · ODT 4 mg PO",
      "readyVol": "2 mL of 2 mg/mL",
-     "detail": "4 mg IV/IO over 2 min. Peds: 0.1–0.15 mg/kg max 4 mg.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IO": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IM": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "PO": {
+       "dose": "4 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
+     "detail": "4 mg IV/IO over 2 min. Peds: 0.1 mg/kg (max 4 mg), ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "8 mg"
     },
@@ -13232,15 +13850,46 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Naloxone (Narcan)",
+     "name": "Naloxone (Narcan) — Vial",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.4 mg · repeat PRN",
-     "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · IN via MAD",
      "readyVol": "0.4 mL of 1 mg/mL",
-     "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IO": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IM": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IN": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "0.4 mL via MAD atomizer"
+      }
+     },
+     "detail": "Start 0.4 mg; titrate to adequate respirations (0.4–2 mg). May repeat q2–3 min. IN: draw from the vial, atomize via MAD device. PEARL: NOT for cardiac arrest.",
      "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Naloxone (Narcan) — 4 mg Spray",
+     "class": "Opioid antagonist",
+     "indication": "Opioid OD (prefilled nasal spray)",
+     "weightDose": "4 mg · 1 spray",
+     "packageSpec": "4 mg / 0.1 mL prefilled nasal spray",
+     "deliveryDose": "1 spray in one nostril",
+     "readyVol": "1 spray",
+     "detail": "Prefilled 4 mg nasal spray — one full spray in one nostril. May repeat q2–3 min, alternating nostrils. PEARL: NOT for cardiac arrest.",
+     "route": "IN",
      "max": "Per protocol"
     },
     {
@@ -13252,6 +13901,24 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "IO": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "NEB": {
+       "dose": "1 g — hemoptysis",
+       "vol": "Nebulize 10 mL of 100 mg/mL (AT)"
+      },
+      "IN": {
+       "dose": "1 g — upper airway",
+       "vol": "10 mL IN/AT or topical (soaked gauze)"
+      }
+     },
      "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
      "route": "IV / IO / NEB / IN",
      "max": "2 g"
@@ -13972,10 +14639,28 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "4 mg",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 4 mg ODT",
      "deliveryDose": "2 mL slow IV/IO/IM · ODT 4 mg PO",
      "readyVol": "2 mL of 2 mg/mL",
-     "detail": "4 mg IV/IO over 2 min. Peds: 0.1–0.15 mg/kg max 4 mg.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IO": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IM": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "PO": {
+       "dose": "4 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
+     "detail": "4 mg IV/IO over 2 min. Peds: 0.1 mg/kg (max 4 mg), ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "8 mg"
     },
@@ -14033,15 +14718,46 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Naloxone (Narcan)",
+     "name": "Naloxone (Narcan) — Vial",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.4 mg · repeat PRN",
-     "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · IN via MAD",
      "readyVol": "0.4 mL of 1 mg/mL",
-     "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IO": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IM": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IN": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "0.4 mL via MAD atomizer"
+      }
+     },
+     "detail": "Start 0.4 mg; titrate to adequate respirations (0.4–2 mg). May repeat q2–3 min. IN: draw from the vial, atomize via MAD device. PEARL: NOT for cardiac arrest.",
      "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Naloxone (Narcan) — 4 mg Spray",
+     "class": "Opioid antagonist",
+     "indication": "Opioid OD (prefilled nasal spray)",
+     "weightDose": "4 mg · 1 spray",
+     "packageSpec": "4 mg / 0.1 mL prefilled nasal spray",
+     "deliveryDose": "1 spray in one nostril",
+     "readyVol": "1 spray",
+     "detail": "Prefilled 4 mg nasal spray — one full spray in one nostril. May repeat q2–3 min, alternating nostrils. PEARL: NOT for cardiac arrest.",
+     "route": "IN",
      "max": "Per protocol"
     },
     {
@@ -14053,6 +14769,24 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "IO": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "NEB": {
+       "dose": "1 g — hemoptysis",
+       "vol": "Nebulize 10 mL of 100 mg/mL (AT)"
+      },
+      "IN": {
+       "dose": "1 g — upper airway",
+       "vol": "10 mL IN/AT or topical (soaked gauze)"
+      }
+     },
      "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
      "route": "IV / IO / NEB / IN",
      "max": "2 g"
@@ -14773,10 +15507,28 @@
      "class": "Antiemetic",
      "indication": "Nausea / vomiting",
      "weightDose": "4 mg",
-     "packageSpec": "4 mg / 2 mL vial",
+     "packageSpec": "4 mg / 2 mL vial · 4 mg ODT",
      "deliveryDose": "2 mL slow IV/IO/IM · ODT 4 mg PO",
      "readyVol": "2 mL of 2 mg/mL",
-     "detail": "4 mg IV/IO over 2 min. Peds: 0.1–0.15 mg/kg max 4 mg.",
+     "routeDoses": {
+      "IV": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IO": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "IM": {
+       "dose": "4 mg",
+       "vol": "2 mL of 2 mg/mL slow (over 2 min)"
+      },
+      "PO": {
+       "dose": "4 mg ODT",
+       "vol": "1 ODT tablet on tongue"
+      }
+     },
+     "detail": "4 mg IV/IO over 2 min. Peds: 0.1 mg/kg (max 4 mg), ODT 2 mg PO.",
      "route": "IV / IO / IM / PO",
      "max": "8 mg"
     },
@@ -14834,15 +15586,46 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Naloxone (Narcan)",
+     "name": "Naloxone (Narcan) — Vial",
      "class": "Opioid antagonist",
      "indication": "Opioid OD with respiratory depression",
      "weightDose": "0.4 mg · repeat PRN",
-     "packageSpec": "1 mg/mL · 2 mL vial (2 mg) · 4 mg IN spray",
-     "deliveryDose": "Push 0.4 mL IV/IO/IM · repeat PRN · IN: 1 spray",
+     "packageSpec": "1 mg/mL · 2 mL vial (2 mg)",
+     "deliveryDose": "Push 0.4 mL IV/IO/IM · IN via MAD",
      "readyVol": "0.4 mL of 1 mg/mL",
-     "detail": "Start 0.4–2 mg, titrate to respirations. May repeat q2–3 min. PEARL: NOT for cardiac arrest. IN: 4 mg/spray q3 min.",
+     "routeDoses": {
+      "IV": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IO": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IM": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "Push 0.4 mL of 1 mg/mL"
+      },
+      "IN": {
+       "dose": "0.4 mg · repeat PRN",
+       "vol": "0.4 mL via MAD atomizer"
+      }
+     },
+     "detail": "Start 0.4 mg; titrate to adequate respirations (0.4–2 mg). May repeat q2–3 min. IN: draw from the vial, atomize via MAD device. PEARL: NOT for cardiac arrest.",
      "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Naloxone (Narcan) — 4 mg Spray",
+     "class": "Opioid antagonist",
+     "indication": "Opioid OD (prefilled nasal spray)",
+     "weightDose": "4 mg · 1 spray",
+     "packageSpec": "4 mg / 0.1 mL prefilled nasal spray",
+     "deliveryDose": "1 spray in one nostril",
+     "readyVol": "1 spray",
+     "detail": "Prefilled 4 mg nasal spray — one full spray in one nostril. May repeat q2–3 min, alternating nostrils. PEARL: NOT for cardiac arrest.",
+     "route": "IN",
      "max": "Per protocol"
     },
     {
@@ -14854,6 +15637,24 @@
      "packageSpec": "1000 mg / 10 mL vial (2 vials needed)",
      "deliveryDose": "Push 20 mL slow IVP over 2 min",
      "readyVol": "20 mL of 100 mg/mL",
+     "routeDoses": {
+      "IV": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "IO": {
+       "dose": "2 g (2000 mg)",
+       "vol": "Push 20 mL slow IVP over 2 min"
+      },
+      "NEB": {
+       "dose": "1 g — hemoptysis",
+       "vol": "Nebulize 10 mL of 100 mg/mL (AT)"
+      },
+      "IN": {
+       "dose": "1 g — upper airway",
+       "vol": "10 mL IN/AT or topical (soaked gauze)"
+      }
+     },
      "detail": "2 g IV/IO slow push over 2 min. Within 3 hours of injury. Hemoptysis/respiratory tract bleeding: 1 g nebulized (AT). Upper airway bleeding: 1 g IN/AT or topical (soaked gauze). Peds: 15 mg/kg max 1 g.",
      "route": "IV / IO / NEB / IN",
      "max": "2 g"

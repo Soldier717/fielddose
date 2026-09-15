@@ -2830,6 +2830,89 @@
     background: #cbd5e1;
     color: var(--clin-text);
   }
+  .cr-modal-btn.given.blocked, .cr-modal-btn.given:disabled {
+    background: #cbd5e1;
+    color: #7a2c2c;
+    cursor: not-allowed;
+    filter: none;
+    font-size: 14px;
+  }
+
+  /* Dose-amount picker (Give: row) — styled like the route toggle */
+  .cr-dose-toggle {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    background: white;
+    border: 2px solid var(--clin-green);
+    border-radius: 8px;
+    overflow: hidden;
+    align-self: start;
+  }
+  .cr-dose-toggle button {
+    background: white;
+    border: none;
+    padding: 8px 12px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--clin-text);
+    cursor: pointer;
+    border-right: 1px solid var(--clin-border);
+  }
+  .cr-dose-toggle button.active {
+    background: var(--clin-green);
+    color: white;
+  }
+  .cr-dose-toggle .unit {
+    padding: 0 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--clin-text-muted, #8a8a8a);
+  }
+
+  /* Given-history block in the drug modal */
+  .fd-given-hist ul { margin: 6px 0 0; }
+  .fd-given-hist .none { color: var(--clin-text-muted, #8a8a8a); font-size: 12.5px; margin-top: 4px; }
+  .fd-given-hist .fd-cum {
+    margin-top: 8px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    background: rgba(47, 168, 79, 0.10);
+    border-left: 3px solid var(--clin-green);
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .fd-given-hist .fd-cum.maxed {
+    background: rgba(183, 17, 37, 0.10);
+    border-left-color: var(--clin-red);
+    color: var(--clin-red);
+  }
+
+  /* "✓ given" pill on med-list rows and protocol drug links */
+  .fd-given-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    align-self: start;
+    margin-top: 3px;
+    background: rgba(47, 168, 79, 0.12);
+    color: #1d7a38;
+    border: 1px solid rgba(47, 168, 79, 0.45);
+    border-radius: 999px;
+    padding: 1px 8px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .cr-drug-row.given { box-shadow: inset 3px 0 0 var(--clin-green); }
+  button.cc-proto-item.drug.given { border-left-color: var(--clin-green); }
+  button.cc-proto-item.drug.given .fd-given-pill { flex-shrink: 0; }
 
   @media (max-width: 520px) {
     .cr-modal { max-width: 100%; border-radius: 12px; }
@@ -3971,8 +4054,9 @@ function ctFormatTime(ms) {
 }
 
 let fdLogSeq = 0;
-function ctLogEvent(type, note) {
+function ctLogEvent(type, note, meta) {
   const entry = { id: Date.now().toString(36) + '-' + (++fdLogSeq), time: ctFormatTime(ctState.elapsedMs), type, note, ts: Date.now() };
+  if (meta) Object.assign(entry, meta); // structured fields (drug, amt, unit, route) for given-tracking
   ctState.log.unshift(entry);
   chartSaveActive();
   ctRenderLog();
@@ -5025,6 +5109,7 @@ const cr = {
   moreView: 'log',   // 'log' | 'vitals' | 'etco2' | 'hts' — More tab sub-view
   modal: null,       // null | { type: 'drug', drug } | { type: 'defib', selectedIdx }
   drugRoute: 'IV',   // 'IV' | 'IO' — current route toggle in drug modal
+  doseSel: null,     // dose amount picked in the modal's Give: toggle (null = default)
 };
 
 /* ============================================================
@@ -6045,6 +6130,7 @@ function crShowDripModal(dripName) {
     rhythm: drip.isArrest ? 'all' : 'non-arrest',
   };
   cr.drugRoute = 'IV';
+  cr.doseSel = null;
   cr.modal = { type: 'drug', drug: adapted, availableRoutes: ['IV', 'IO'] };
   crRenderModal();
 }
@@ -6103,6 +6189,7 @@ function crShowDrugModal(drugName) {
   // Default route: pick the first one from drug data
   const routes = (d.route || 'IV').split(/[\/,]/).map(s => s.trim()).filter(Boolean);
   cr.drugRoute = routes.includes('IV') ? 'IV' : routes[0] || 'IV';
+  cr.doseSel = null;
   cr.modal = { type: 'drug', drug: d, availableRoutes: routes };
   crRenderModal();
 }
@@ -6180,6 +6267,71 @@ function crDrugRef(name) {
   return null;
 }
 
+/* ============================================================
+   MEDICATION ADMINISTRATION TRACKING
+   Every "Given" tap stores structured fields (drug, amt, unit,
+   route) on its log entry, so given-marks, per-drug history and
+   cumulative-max enforcement all derive from ctState.log — they
+   survive chart save/reopen and reset with New Patient for free.
+============================================================ */
+// First numeric dose in a display string: "0.5–1 mg" → {min:0.5, max:1, unit:'mg'}
+function fdParseDoseAmt(txt) {
+  const m = (txt || '').match(/([\d.]+)(?:\s*[–-]\s*([\d.]+))?\s*(mcg|mg|g|mEq|units?)\b/i);
+  if (!m) return null;
+  const a = parseFloat(m[1]);
+  const b = m[2] != null ? parseFloat(m[2]) : a;
+  return { min: Math.min(a, b), max: Math.max(a, b), unit: m[3] };
+}
+// Selectable dose amounts for a display string.
+//   "300 mg → 150 mg"  → sequence [300, 150] (default follows dose count)
+//   "0.5–1 mg"         → stepped range [0.5, 0.6 … 1]
+//   "1 mg"             → fixed [1]
+function fdDoseChoices(txt) {
+  if (!txt) return null;
+  const seq = (txt || '').match(/([\d.]+)\s*(?:mcg|mg|g|mEq)?\s*(?:→|->)\s*([\d.]+)\s*(mcg|mg|g|mEq)\b/i);
+  if (seq) return { choices: [parseFloat(seq[1]), parseFloat(seq[2])], unit: seq[3], kind: 'seq' };
+  const r = fdParseDoseAmt(txt);
+  if (!r) return null;
+  if (r.max > r.min) {
+    const span = r.max - r.min;
+    const step = [0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10, 25, 50, 100, 250].find(s => span / s <= 8) || span;
+    const choices = [];
+    for (let v = r.min; v < r.max - 1e-9; v += step) choices.push(+v.toFixed(2));
+    choices.push(r.max);
+    return { choices, unit: r.unit, kind: 'range' };
+  }
+  return { choices: [r.min], unit: r.unit, kind: 'fixed' };
+}
+// Administrations of one drug this patient — newest first (log order)
+function fdGivenList(name) {
+  return (ctState.log || []).filter(e => e.type === 'Drug' && e.drug === name);
+}
+function fdGivenTotal(name, unit) {
+  return fdGivenList(name).reduce((s, e) => s + ((e.unit === unit && isFinite(e.amt)) ? e.amt : 0), 0);
+}
+// Hard cumulative cap — only rows whose max string says "cumulative"
+// (e.g. arrest Epi "3 mg cumulative", Atropine "3 mg cumulative")
+function fdMaxCum(d) {
+  const m = ((d && d.max) || '').match(/([\d.]+)\s*(mcg|mg|g|mEq)\s*cumulative/i);
+  return m ? { amt: parseFloat(m[1]), unit: m[2] } : null;
+}
+// Default dose to log when the medic hasn't touched the picker:
+// sequences follow the dose count (1st 300, 2nd 150), ranges default
+// to the top of the range, fixed doses are themselves.
+function fdDefaultDose(d, dc) {
+  if (!dc) return null;
+  if (dc.kind === 'seq') return dc.choices[Math.min(fdGivenList(d.name).length, dc.choices.length - 1)];
+  return dc.choices[dc.choices.length - 1];
+}
+function fdFmtAmt(n) { return String(Math.round(n * 100) / 100); }
+function fdOrdinal(i) { return i === 1 ? '1st' : i === 2 ? '2nd' : i === 3 ? '3rd' : i + 'th'; }
+// "✓ ×2 · 14:32" pill for med-list rows and protocol drug links
+function fdGivenBadge(name) {
+  const g = fdGivenList(name);
+  if (!g.length) return '';
+  return `<span class="fd-given-pill">✓ ${g.length > 1 ? '×' + g.length + ' · ' : ''}${fdClock(g[0].ts).slice(0, 5)}</span>`;
+}
+
 function renderDrugModal(m) {
   const d = m.drug;
   const ref = crDrugRef(d.name);
@@ -6193,6 +6345,34 @@ function renderDrugModal(m) {
     : `<div class="cr-modal-value white">${escapeHtml(routes[0] || '—')}</div>`;
   // Sub-heading: drug class / indication
   const subtitle = `${d.class ? escapeHtml(d.class) + ' · ' : ''}${escapeHtml(d.indication || '')}`;
+  // Administration tracking: dose picker, per-patient history, cumulative max
+  const activeDose = (d.routeDoses && d.routeDoses[cr.drugRoute] && d.routeDoses[cr.drugRoute].dose) || d.weightDose || '';
+  const dc = fdDoseChoices(activeDose);
+  const sel = cr.doseSel != null ? cr.doseSel : fdDefaultDose(d, dc);
+  const maxCum = fdMaxCum(d);
+  const givenNew = fdGivenList(d.name); // newest first
+  const cumUnit = maxCum ? maxCum.unit : (dc ? dc.unit : null);
+  const total = cumUnit ? fdGivenTotal(d.name, cumUnit) : 0;
+  const maxed = !!(maxCum && total >= maxCum.amt - 1e-9);
+  const wouldExceed = !!(maxCum && !maxed && dc && dc.unit === maxCum.unit && sel != null && total + sel > maxCum.amt + 1e-9);
+  const dosePicker = dc && dc.choices.length > 1 ? `
+        <div class="cr-modal-row">
+          <div class="cr-modal-label">Give:</div>
+          <div class="cr-dose-toggle">
+            ${dc.choices.map(v => `<button class="${sel === v ? 'active' : ''}" data-cr-dose="${v}">${fdFmtAmt(v)}</button>`).join('')}
+            <span class="unit">${escapeHtml(dc.unit)}</span>
+          </div>
+        </div>` : '';
+  const givenHist = (givenNew.length || maxCum) ? `
+        <div class="cr-modal-note fd-given-hist">
+          <span class="label">Given — this patient:</span>
+          ${givenNew.length
+            ? `<ul>${[...givenNew].reverse().map((e, i) => `<li><b>${fdOrdinal(i + 1)}</b> — ${e.amt != null ? fdFmtAmt(e.amt) + ' ' + escapeHtml(e.unit || '') + ' ' : ''}${escapeHtml(e.route || '')} · ${fdClock(e.ts)}</li>`).join('')}</ul>`
+            : `<div class="none">None recorded yet</div>`}
+          ${maxCum
+            ? `<div class="fd-cum${maxed ? ' maxed' : ''}">Total ${fdFmtAmt(total)} ${maxCum.unit} of ${fdFmtAmt(maxCum.amt)} ${maxCum.unit} max${maxed ? ' — MAX REACHED' : ''}</div>`
+            : (givenNew.length && total > 0 ? `<div class="fd-cum">Total ${fdFmtAmt(total)} ${escapeHtml(cumUnit)}</div>` : '')}
+        </div>` : '';
   return `
     <div class="cr-modal" role="dialog" aria-modal="true">
       <div class="cr-modal-head">
@@ -6205,8 +6385,9 @@ function renderDrugModal(m) {
       <div class="cr-modal-body">
         <div class="cr-modal-row">
           <div class="cr-modal-label">Dose:</div>
-          <div class="cr-modal-value">${escapeHtml((d.routeDoses && d.routeDoses[cr.drugRoute] && d.routeDoses[cr.drugRoute].dose) || d.weightDose || '—')}</div>
+          <div class="cr-modal-value">${escapeHtml(activeDose || '—')}</div>
         </div>
+        ${dosePicker}
         <div class="cr-modal-row">
           <div class="cr-modal-label">Route:</div>
           ${routeToggle}
@@ -6246,10 +6427,14 @@ function renderDrugModal(m) {
           <span class="label">Precautions:</span>
           <ul>${ref.precautions.map(c => `<li>${escapeHtml(c)}</li>`).join('')}</ul>
         </div>` : ''}
+        ${givenHist}
       </div>
       <div class="cr-modal-foot">
         <button class="cr-modal-btn requested" data-cr-action="requested">Requested</button>
-        <button class="cr-modal-btn given" data-cr-action="given">Given</button>
+        <button class="cr-modal-btn given${maxed || wouldExceed ? ' blocked' : ''}" data-cr-action="given" ${maxed || wouldExceed ? 'disabled' : ''}>${
+          maxed ? `Maxed at ${fdFmtAmt(maxCum.amt)} ${escapeHtml(maxCum.unit)}`
+          : wouldExceed ? `Only ${fdFmtAmt(maxCum.amt - total)} ${escapeHtml(maxCum.unit)} left — lower the dose`
+          : 'Given'}</button>
       </div>
     </div>
   `;
@@ -6328,6 +6513,15 @@ function bindModalEvents() {
   mount.querySelectorAll('[data-cr-route]').forEach(b => {
     b.addEventListener('click', () => {
       cr.drugRoute = b.dataset.crRoute;
+      cr.doseSel = null; // route change can change the dose range
+      crRenderModal();
+    });
+  });
+
+  // Dose-amount picker in drug modal (range / sequence doses)
+  mount.querySelectorAll('[data-cr-dose]').forEach(b => {
+    b.addEventListener('click', () => {
+      cr.doseSel = parseFloat(b.dataset.crDose);
       crRenderModal();
     });
   });
@@ -6365,14 +6559,31 @@ function handleDrugModalAction(action) {
     ctLogEvent('Request', `${d.name} ${doseTxt} ${route} — requested`);
     ctShowCueBanner(`${d.name} requested`, 'normal', 1500);
   } else if (action === 'given') {
-    ctLogEvent('Drug', `${d.name} ${doseTxt} ${route} (${volTxt})`);
+    // Resolve the actual amount given (picker selection or default)
+    const dc = fdDoseChoices(doseTxt);
+    const amt = cr.doseSel != null ? cr.doseSel : fdDefaultDose(d, dc);
+    const unit = dc ? dc.unit : null;
+    // Cumulative-max backstop — the button is disabled in the UI, but
+    // never log past a hard cap even if this is reached another way
+    const maxCum = fdMaxCum(d);
+    if (maxCum && unit === maxCum.unit) {
+      const total = fdGivenTotal(d.name, unit);
+      if (total >= maxCum.amt - 1e-9 || (amt != null && total + amt > maxCum.amt + 1e-9)) {
+        ctShowCueBanner(`${d.name} — max ${fdFmtAmt(maxCum.amt)} ${maxCum.unit} cumulative reached`, 'normal', 2200);
+        crCloseModal();
+        rcPartialRender();
+        return;
+      }
+    }
+    const doseLogTxt = (amt != null && dc && dc.kind !== 'fixed') ? `${fdFmtAmt(amt)} ${unit}` : doseTxt;
+    ctLogEvent('Drug', `${d.name} ${doseLogTxt} ${route} (${volTxt})`, { drug: d.name, amt: amt != null ? amt : undefined, unit: unit || undefined, route });
     ctShowCueBanner(`${d.name} given`, d.primary ? 'epi' : 'normal', 1800);
     // Cumulative Epi tracking (arrest Epi only)
     const isArrestEpi = (d.name === 'Epinephrine' || d.name === 'Epinephrine 1:10,000') && d.rhythm === 'all';
     if (isArrestEpi) {
       ctState.lastEpiMs = ctState.elapsedMs;
-      const m = (d.weightDose || '').match(/([\d.]+)\s*mg/);
-      if (m) ctState.cumulativeEpiMg += parseFloat(m[1]);
+      if (amt != null && unit === 'mg') ctState.cumulativeEpiMg += amt;
+      else { const m = (d.weightDose || '').match(/([\d.]+)\s*mg/); if (m) ctState.cumulativeEpiMg += parseFloat(m[1]); }
     }
     if (d.name === 'Amiodarone' || d.name === 'Lidocaine') ctState.antiDysrhythmicGiven = true;
   }
@@ -7366,8 +7577,9 @@ function rcRenderProtocolDetail(p) {
         const match = warn ? null : crProtoDrugMatch(it);
         if (match && crIsFutureUse(match))
           return `<div class="cc-proto-item future"><span>${escapeHtml(it)}</span><span class="future-tag">FUTURE USE</span></div>`;
+        const gb = match ? fdGivenBadge(match) : '';
         return match
-          ? `<button class="cc-proto-item drug" data-drug-name="${escapeAttr(match)}"><span>${escapeHtml(it)}</span><span class="arrow">›</span></button>`
+          ? `<button class="cc-proto-item drug${gb ? ' given' : ''}" data-drug-name="${escapeAttr(match)}"><span>${escapeHtml(it)}</span>${gb}<span class="arrow">›</span></button>`
           : `<div class="cc-proto-item">${escapeHtml(it)}</div>`;
       }).join('')}
     </div>`;
@@ -7422,10 +7634,12 @@ function rcRenderTabMeds(kg, elec) {
         const volCell = rcVolIsRouteOnly(volTxt)
           ? `<div class="cr-drug-cell vol long"><span class="none">—</span></div>`
           : `<div class="cr-drug-cell vol${rcVolIsInstruction(volTxt) ? ' long' : ''}">${escapeHtml(volTxt)}</div>`;
+        const givenBadge = fdGivenBadge(d.name);
         const inner = `
             <div class="cr-drug-cell drug">
               <div class="name${rcNameIsTight(d.name) ? ' tight' : ''}">${escapeHtml(d.name)}</div>
               <div class="ind">${escapeHtml(d.indication || '')}</div>
+              ${givenBadge}
             </div>
             <div class="cr-drug-cell conc">${escapeHtml(rcParseConc(d.packageSpec))}</div>
             ${volCell}
@@ -7436,7 +7650,7 @@ function rcRenderTabMeds(kg, elec) {
             </div>`;
         return future
           ? `<div class="cr-drug-row future">${inner}</div>`
-          : `<button class="cr-drug-row ${arrest ? 'arrest' : ''}" data-drug-name="${escapeAttr(d.name)}">${inner}</button>`;
+          : `<button class="cr-drug-row ${arrest ? 'arrest' : ''}${givenBadge ? ' given' : ''}" data-drug-name="${escapeAttr(d.name)}">${inner}</button>`;
       }).join('');
 
   return `

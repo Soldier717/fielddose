@@ -13,11 +13,13 @@
 <meta property="og:title" content="FieldDose — Field dosing, done right">
 <meta property="og:description" content="Weight-based drug dosing, code timing, and narcotics accountability for fire-rescue EMS. Works with zero signal. Your agency's protocols, updated the day medical direction approves them.">
 <meta property="og:url" content="https://fielddose.com/">
-<meta property="og:image" content="https://fielddose.com/fielddose-logo.png">
+<meta property="og:image" content="https://fielddose.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FieldDose — Field dosing, done right">
 <meta name="twitter:description" content="Weight-based dosing, code timing, and narcotics accountability for fire-rescue EMS — offline-first, no app store.">
-<meta name="twitter:image" content="https://fielddose.com/fielddose-logo.png">
+<meta name="twitter:image" content="https://fielddose.com/og-card.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -192,6 +194,29 @@
   .quotebox p { margin-top: 10px; font-size: 15.5px; color: rgba(237,240,245,0.85); }
   .quotebox p + p { margin-top: 12px; }
 
+  /* ===== Trusted-by strip ===== */
+  .trust-strip {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    padding: 34px 0 38px;
+  }
+  .trust-row {
+    margin-top: 16px;
+    display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center;
+  }
+  .trust-chip {
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 14px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--navy);
+    border: 1.5px solid var(--line); border-radius: 999px;
+    padding: 8px 18px; background: var(--paper);
+    white-space: nowrap;
+  }
+  .trust-chip.more {
+    border-style: dashed; color: var(--dim); font-weight: 500;
+    text-transform: none; letter-spacing: 0.02em; font-family: 'Inter', sans-serif;
+  }
+
   /* ===== CTA band ===== */
   .cta-band { background: var(--red); color: #fff; padding: 60px 0; }
   .cta-band h2 { color: #fff; margin-top: 0; }
@@ -356,6 +381,21 @@
     </div>
   </div>
 </section>
+
+<!-- PLACEHOLDER AGENCIES — fictional names for layout only.
+     Replace with real agencies (with their permission) before the apex goes live. -->
+<div class="trust-strip">
+  <div class="wrap">
+    <span class="eyebrow">Trusted in the field</span>
+    <div class="trust-row">
+      <span class="trust-chip">Palmetto Ridge Fire District</span>
+      <span class="trust-chip">Gulfshore Fire Rescue</span>
+      <span class="trust-chip">Cypress Creek Fire &amp; EMS</span>
+      <span class="trust-chip">Bayfront EMS</span>
+      <span class="trust-chip more">+ agencies onboarding across SWFL</span>
+    </div>
+  </div>
+</div>
 
 <div class="cta-band">
   <div class="wrap">

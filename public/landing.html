@@ -6,6 +6,18 @@
 <title>FieldDose — Field dosing, done right</title>
 <meta name="description" content="Weight-based drug dosing, code timing, and narcotics accountability for fire-rescue EMS. Works with zero signal. Your agency's protocols, updated the day medical direction approves them.">
 <link rel="icon" href="/favicon-32.png">
+<link rel="icon" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FieldDose">
+<meta property="og:title" content="FieldDose — Field dosing, done right">
+<meta property="og:description" content="Weight-based drug dosing, code timing, and narcotics accountability for fire-rescue EMS. Works with zero signal. Your agency's protocols, updated the day medical direction approves them.">
+<meta property="og:url" content="https://fielddose.com/">
+<meta property="og:image" content="https://fielddose.com/fielddose-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FieldDose — Field dosing, done right">
+<meta name="twitter:description" content="Weight-based dosing, code timing, and narcotics accountability for fire-rescue EMS — offline-first, no app store.">
+<meta name="twitter:image" content="https://fielddose.com/fielddose-logo.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -115,6 +127,13 @@
   .mock-row .rt { font-size: 13px; text-align: center; color: var(--ink); }
   .mock-row.arrest { border: 2px solid var(--red); border-radius: 8px; margin: 3px 6px; }
   .mock-row.arrest .nm { color: var(--red); }
+  .mock-row .gpill {
+    display: inline-block; margin-top: 4px;
+    background: rgba(47,168,79,0.12); color: #1d7a38;
+    border: 1px solid rgba(47,168,79,0.45); border-radius: 999px;
+    padding: 0 8px; font-family: 'Oswald', sans-serif;
+    font-weight: 600; font-size: 10.5px; letter-spacing: 0.03em;
+  }
   .mock-note {
     padding: 10px 14px; font-family: var(--mono); font-size: 10.5px;
     color: var(--dim); background: #FBF9F5;
@@ -200,6 +219,8 @@
     .pillars { grid-template-columns: 1fr; }
     .twocol { grid-template-columns: 1fr; }
     section { padding: 54px 0; }
+    /* let the dilution example wrap instead of hiding its payoff offscreen */
+    .flowline { white-space: normal; line-height: 1.8; }
   }
 </style>
 </head>
@@ -229,8 +250,8 @@
         <div class="mock-patient">154 lb / 70 kg <small>· 5'7" Ideal Weight</small></div>
         <div class="mock-head"><div>Drug</div><div>Conc.</div><div>Vol.</div><div>Route</div></div>
         <div class="mock-row arrest">
-          <div><div class="nm">Epinephrine 1:10,000</div><div class="ind">Cardiac arrest — all rhythms</div></div>
-          <div class="conc">0.1 mg/mL</div><div class="vol">10 mL</div><div class="rt">IV/IO</div>
+          <div><div class="nm">Epinephrine 1:10,000</div><div class="ind">Cardiac arrest — all rhythms</div><span class="gpill">✓ ×2 · 14:32</span></div>
+          <div class="conc">0.1 mg/mL</div><div class="vol">5–10 mL</div><div class="rt">IV/IO</div>
         </div>
         <div class="mock-row">
           <div><div class="nm">Ketamine — Sedation</div><div class="ind">Procedural sedation</div></div>
@@ -272,6 +293,27 @@
         <p>A protocol change your medical director approves in the morning is on
         every phone by the afternoon. No review queue, no version fragmentation.</p>
       </div>
+      <div class="pillar">
+        <span class="big">GIVEN-TRACKING</span>
+        <h3>Know what's on board</h3>
+        <p>Every administration is marked on the med list — dose, route, and real
+        clock time. Drugs with cumulative caps lock out at max: arrest epi stops
+        the button at 3 mg.</p>
+      </div>
+      <div class="pillar">
+        <span class="big">NARCOTICS ACCOUNTABILITY</span>
+        <h3>Chain of custody, every shift</h3>
+        <p>Daily transfer with two signatures on one device, seal or key modes to
+        match your SOP, quantity limits checked automatically, and escalation
+        contacts one tap away.</p>
+      </div>
+      <div class="pillar">
+        <span class="big">CLINICAL SCREENS</span>
+        <h3>The references crews reach for</h3>
+        <p>Sepsis 3.1 (qSOFA + EtCO₂) with alert criteria, BEFAST-VAN stroke screen
+        with destination guidance, GCS adult &amp; infant, MAP — all offline, all
+        two taps away.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -298,15 +340,15 @@
       <div class="feature-list">
         <div class="feature"><span class="tick">✓</span><div><b>Your energy ladders, your drug box.</b> <span>Each agency runs its own protocol pack over the regional baseline — defib sequences, drug specifics, medical-direction contacts.</span></div></div>
         <div class="feature"><span class="tick">✓</span><div><b>One join code enrolls a device.</b> <span>Crews enter it once at orientation. The pack caches on the phone and follows published updates automatically.</span></div></div>
-        <div class="feature"><span class="tick">✓</span><div><b>Signed off, versioned, auditable.</b> <span>Every pack and every baseline change carries medical-director review, with a versioned change trail and a 790-dose regression suite guarding the math.</span></div></div>
-        <div class="feature"><span class="tick">✓</span><div><b>Tools included.</b> <span>MAP, GCS (adult & infant), qSOFA sepsis screen, FAST-VAN stroke screen with hemorrhagic checklist — all offline.</span></div></div>
+        <div class="feature"><span class="tick">✓</span><div><b>Signed off, versioned, auditable.</b> <span>Every pack and every baseline change carries medical-director review, with a versioned change trail and an 897-dose regression suite guarding the math.</span></div></div>
+        <div class="feature"><span class="tick">✓</span><div><b>Your device settings, honored.</b> <span>Where an agency follows manufacturer-recommended energies — Zoll's escalating cardioversion ladder, say — its pack displays exactly that, while the regional baseline shows the book.</span></div></div>
       </div>
       <div class="quotebox">
         <span class="eyebrow">Clinical governance</span>
-        <p>FieldDose is built on the SWFL Regional Common Treatment Guidelines and
-        operates as a training and reference tool under agency medical direction.
-        Dosing changes ship only after physician sign-off, through a review process
-        that produces a documented decision trail.</p>
+        <p>FieldDose is built on the SWFL Regional Common Treatment Guidelines
+        (Revised 8/2026) and operates as a training and reference tool under agency
+        medical direction. Dosing changes ship only after physician sign-off, through
+        a review process that produces a documented decision trail.</p>
         <p>Patient worksheets never leave the medic's device: the ten most recent
         are kept, everything expires in seven days, and nothing is transmitted or
         stored server-side.</p>
@@ -339,7 +381,7 @@
     </div>
     <div class="cols">
       <span>© 2026 FieldDose · fielddose.com</span>
-      <span>Data source: SWFL Regional Common Treatment Guidelines (2025 rev.)</span>
+      <span>Data source: SWFL Regional Common Treatment Guidelines (Revised 8/2026)</span>
       <a href="https://www.fielddose.com">Open the tool</a>
     </div>
   </div>

@@ -65,6 +65,15 @@
     padding: 9px 18px;
   }
   .hero-top a.launch:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+  .topnav { display: flex; gap: 26px; margin-left: auto; margin-right: 26px; }
+  .topnav a {
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 13.5px;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    color: rgba(237,240,245,0.75); text-decoration: none;
+    padding: 4px 0; border-bottom: 2px solid transparent;
+  }
+  .topnav a:hover { color: #fff; border-bottom-color: var(--red-bright); }
+  section[id] { scroll-margin-top: 18px; }
   .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }
   .hero h1 {
     font-family: 'Oswald', sans-serif;
@@ -196,10 +205,18 @@
 
   /* ===== Trusted-by strip ===== */
   .trust-strip {
-    background: var(--surface);
-    border-top: 1px solid var(--line);
+    background: var(--paper);
     padding: 34px 0 38px;
   }
+  .soon {
+    display: inline-block; vertical-align: 1px; margin-left: 6px;
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 10.5px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: #8a6d1f; background: rgba(212,163,65,0.14);
+    border: 1px solid rgba(212,163,65,0.5); border-radius: 999px;
+    padding: 1px 9px; white-space: nowrap;
+  }
+  .pillar p a { color: var(--red); font-weight: 600; }
   .trust-row {
     margin-top: 16px;
     display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center;
@@ -234,8 +251,27 @@
     border: 1px solid rgba(255,255,255,0.15); border-left: 3px solid var(--gold);
     border-radius: 8px; padding: 14px 16px; max-width: 74ch; line-height: 1.6;
   }
-  footer .cols { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 26px; align-items: baseline; }
+  footer .cols { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 30px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.12); align-items: baseline; }
   footer a { color: rgba(237,240,245,0.85); }
+  .foot-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px;
+    margin-top: 32px;
+  }
+  .foot-col { display: grid; gap: 9px; align-content: start; }
+  .foot-col .ft {
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 13px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 3px;
+  }
+  .foot-col a { text-decoration: none; font-size: 13.5px; }
+  .foot-col a:hover { color: #fff; text-decoration: underline; }
+  .foot-col .dead { color: rgba(237,240,245,0.4); font-size: 13.5px; }
+  .foot-col .dead i {
+    font-style: normal; font-family: 'Oswald', sans-serif; font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border: 1px solid rgba(212,163,65,0.45); color: rgba(212,163,65,0.8);
+    border-radius: 999px; padding: 0 7px; margin-left: 5px; vertical-align: 1px;
+  }
 
   a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
@@ -244,6 +280,9 @@
     .pillars { grid-template-columns: 1fr; }
     .twocol { grid-template-columns: 1fr; }
     section { padding: 54px 0; }
+    /* one-flick page: the footer carries full navigation on phones */
+    .topnav { display: none; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
     /* let the dilution example wrap instead of hiding its payoff offscreen */
     .flowline { white-space: normal; line-height: 1.8; }
   }
@@ -255,7 +294,13 @@
   <div class="wrap">
     <div class="hero-top">
       <img src="/fielddose-logo-nav.png" alt="FieldDose" width="127" height="52">
-      <a class="launch" href="https://www.fielddose.com">Open the tool →</a>
+      <nav class="topnav" aria-label="Site">
+        <a href="#product">Product</a>
+        <a href="#onscene">On scene</a>
+        <a href="#packs">Agency packs</a>
+        <a href="#support">Support</a>
+      </nav>
+      <a class="launch" href="https://www.fielddose.com">Agency Login →</a>
     </div>
     <div class="hero-grid">
       <div>
@@ -292,7 +337,7 @@
   </div>
 </header>
 
-<section>
+<section id="product">
   <div class="wrap">
     <span class="eyebrow">Why crews trust it</span>
     <h2>Built for the truck, not the office</h2>
@@ -343,7 +388,7 @@
   </div>
 </section>
 
-<section class="alt">
+<section class="alt" id="onscene">
   <div class="wrap">
     <span class="eyebrow">On scene</span>
     <h2>From dispatch to PCR</h2>
@@ -357,7 +402,7 @@
   </div>
 </section>
 
-<section>
+<section id="packs">
   <div class="wrap">
     <span class="eyebrow">One product, your protocols</span>
     <h2>Agency packs</h2>
@@ -377,6 +422,36 @@
         <p>Patient worksheets never leave the medic's device: the ten most recent
         are kept, everything expires in seven days, and nothing is transmitted or
         stored server-side.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="support">
+  <div class="wrap">
+    <span class="eyebrow">We've got your back</span>
+    <h2>Support, resources &amp; learning</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="big">SUPPORT</span>
+        <h3>A working medic answers</h3>
+        <p>Questions, onboarding help, pack requests, and protocol-change
+        submissions — email <a href="mailto:sean@ppssfl.com?subject=FieldDose%20support">sean@ppssfl.com</a>
+        and you'll hear back from someone who rides a truck, not a ticket queue.</p>
+      </div>
+      <div class="pillar">
+        <span class="big">LEARNING CENTER <span class="soon">Coming soon</span></span>
+        <h3>Train like you treat</h3>
+        <p>Scenario-based training mode for recruits and refreshers — run the
+        same tool you run on calls against practice patients, with walk-throughs
+        for every screen and skill drills built from real call flows.</p>
+      </div>
+      <div class="pillar">
+        <span class="big">RESOURCES</span>
+        <h3>The paper trail, in one place</h3>
+        <p>The regional guideline baseline (Revised 8/2026), your agency pack's
+        versioned change trail, and the medical-direction decisions behind every
+        dosing update. <span class="soon">Public change log coming soon</span></p>
       </div>
     </div>
   </div>
@@ -419,10 +494,36 @@
       protocols and perform a partner cross-check before administration. Treatment
       worksheets are documentation aids, not patient care records.
     </div>
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="ft">Product</div>
+        <a href="#product">Why FieldDose</a>
+        <a href="#onscene">On scene</a>
+        <a href="#packs">Agency packs</a>
+        <a href="https://www.fielddose.com">Open the tool</a>
+      </div>
+      <div class="foot-col">
+        <div class="ft">Resources</div>
+        <a href="#support">Support &amp; resources</a>
+        <span class="dead">Learning Center <i>soon</i></span>
+        <span class="dead">Change log <i>soon</i></span>
+      </div>
+      <div class="foot-col">
+        <div class="ft">Support</div>
+        <a href="mailto:sean@ppssfl.com?subject=FieldDose%20support">Email support</a>
+        <a href="mailto:sean@ppssfl.com?subject=FieldDose%20demo%20request">Request a demo</a>
+        <a href="mailto:sean@ppssfl.com?subject=FieldDose%20agency%20access">Agency access</a>
+      </div>
+      <div class="foot-col">
+        <div class="ft">Access</div>
+        <a href="https://www.fielddose.com">Agency Login</a>
+        <a href="https://www.fielddose.com">Regional baseline</a>
+        <span class="dead">User accounts <i>soon</i></span>
+      </div>
+    </div>
     <div class="cols">
       <span>© 2026 FieldDose · fielddose.com</span>
       <span>Data source: SWFL Regional Common Treatment Guidelines (Revised 8/2026)</span>
-      <a href="https://www.fielddose.com">Open the tool</a>
     </div>
   </div>
 </footer>

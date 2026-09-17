@@ -3772,6 +3772,11 @@
 <script src="/vendor/supabase-js.js"></script>
 
 <script>
+// Build number — bump together with the sw.js CACHE version. Shown in
+// the narcotics footer so "which version is this phone running?" is
+// answerable at a glance during field bug reports.
+const FD_BUILD = 15;
+
 /* ============================================================
    FIELDDOSE CORE — shared utilities + boot
    (The 2602 Misfits class-dashboard code this app was extracted
@@ -5717,7 +5722,28 @@ function fdNarcLoad() {
   return { unit: '', seal: '', items: [], transfers: [] };
 }
 function fdNarcSave(s) {
-  try { localStorage.setItem(FD_NARC_KEY, JSON.stringify(s)); } catch (_) {}
+  try { localStorage.setItem(FD_NARC_KEY, JSON.stringify(s)); return true; }
+  catch (e) {
+    // Storage full — charts/photos share this origin's quota. NEVER fail
+    // silently on custody data: shed weight (keep the 15 newest transfer
+    // records, strip signature images from records already on the agency
+    // ledger — the server copy keeps them) and retry.
+    try {
+      const slim = {
+        ...s,
+        transfers: s.transfers.slice(0, 15).map((r) => (r.serverId && r.assumed && r.witness)
+          ? { ...r, assumed: { ...r.assumed, sig: null }, witness: { ...r.witness, sig: null } }
+          : r),
+      };
+      localStorage.setItem(FD_NARC_KEY, JSON.stringify(slim));
+      s.transfers = slim.transfers;
+      showToast('Device storage was full — trimmed to the 15 newest transfer records');
+      return true;
+    } catch (e2) {
+      showToast('⚠ STORAGE FULL — narcotics edits are NOT saving. Delete old patient charts / photos, then re-enter.', true);
+      return false;
+    }
+  }
 }
 
 // Push device transfers that haven't reached the agency ledger yet.
@@ -6052,6 +6078,7 @@ function fdShowNarcTransfer() {
         <div style="font-size:11.5px;color:var(--clin-text-dim);margin-top:8px;line-height:1.5;">
           Date and time are stamped automatically at completion. This device
           record supports — does not replace — the agency controlled-substance log.
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;opacity:0.7;">· build ${FD_BUILD}</span>
         </div>
 
         <div class="fd-narc-sec">Transfer History (this device)</div>

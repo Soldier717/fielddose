@@ -39,10 +39,35 @@ env if ever needed; the publishable key above is the one the app uses.
    signatures, timestamps = not PHI; Pro plan fine). Patient-tracking-
    by-user later would need a BAA = Supabase Team plan; separate decision.
 
-## Planned build (when gates clear)
+## Schema — supabase/migrations/001_narcotics.sql
 
-Schema: agencies, memberships (user ↔ agency + role), narc inventory
-(lot/expiration), transfers (two signatures, seal/key modes), waste/usage
-events. RLS: every table scoped to agency membership. Auth: email magic
-link, session cached for station use. The "Agency Login" button on the
-landing page becomes the real entry point.
+Written Sep 17, 2026. Apply: dashboard → SQL Editor → New query → paste
+the whole file → Run. Creates:
+
+- `agencies` (code, transfer_mode seal/keys, timezone, retention_days
+  floor — no auto-purge in phase one), seeded with GNFR2026 (keys mode)
+- `memberships` (user ↔ agency, role medic/officer/admin, display name)
+- `narc_items` (inventory: unit, drug, qty, lot, expiration, mg/unit;
+  soft-delete only)
+- `transfers` (daily sign-over: seal or keys mode, both signatures as
+  data-URLs, items snapshot jsonb, attestation text) — **IMMUTABLE**:
+  no update/delete policy exists for anyone
+- `narc_events` (use/waste/restock/adjust, witness) — **IMMUTABLE**;
+  corrections are new 'adjust' rows, never edits
+- RLS on everything, scoped by `my_agency_ids()` (security-definer
+  helper); roster managed by agency admins only
+
+Verify after apply (no auth needed — RLS returns empty, 404 means the
+table is missing): GET `rest/v1/agencies?select=id` with the publishable
+key + `Accept-Profile: public` → expect `200 []`.
+
+## Next build steps (app side)
+
+1. Vendor supabase-js UMD into public/vendor/ (offline PWA — no runtime
+   CDN dependency), precache in sw.js.
+2. Magic-link login flow (Agency Login), session cached for station use.
+3. Daily-transfer screen gains "record to agency" when online + signed
+   in; localStorage stays the offline record (posture unchanged).
+4. Admin roster: first admin per agency inserted via dashboard (Table
+   Editor → memberships) after their first magic-link sign-in creates
+   the auth.users row.

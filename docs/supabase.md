@@ -11,13 +11,18 @@ only.
   (safe to ship in the PWA — it's the public client key)
 - **Never** put the `service_role` / secret key in this repo or the app.
 
-Verified Sep 17, 2026: Auth API healthy (GoTrue v2.197.0). Data API
-returned 401 at that time — likely the "Data API" toggle in Project
-Settings; must be enabled before schema work.
+Verified Sep 17, 2026: Auth ✓ (GoTrue v2.197.0) · Storage ✓ · Data API ✓
+(public schema reachable). NOTE: exposed schemas list `graphql_public`
+first, so unqualified REST requests default to the wrong schema — either
+reorder so `public` is first (Settings → Data API → Exposed schemas), or
+pin it client-side: `createClient(url, key, { db: { schema: 'public' } })`.
+The legacy anon JWT also works and is recorded in the project's Vercel
+env if ever needed; the publishable key above is the one the app uses.
 
 ## Dashboard checklist (Sean)
 
-- [ ] Enable Data API (Settings → Data API) — REST 401 as of Sep 17
+- [x] Enable Data API — done Sep 17 (was disabled at creation)
+- [ ] Reorder exposed schemas so `public` is first (optional, recommended)
 - [ ] Confirm **Pro plan** (free tier pauses on inactivity — disqualifying
       for chain of custody; Pro adds daily backups)
 - [ ] Auth → Providers: enable **Email** with **magic links** (no passwords)

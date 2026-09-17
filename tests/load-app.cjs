@@ -22,7 +22,9 @@ function magicStub() {
 function loadApp() {
   const html = fs.readFileSync(path.join(__dirname, '..', 'public', 'index.html'), 'utf8');
   const start = html.indexOf('<script>') + '<script>'.length;
-  const end = html.indexOf('</script>');
+  // search from `start`: external <script src> tags earlier in the file
+  // have their own closing tags that would otherwise match first
+  const end = html.indexOf('</script>', start);
   const src = html.slice(start, end);
 
   const dom = magicStub();

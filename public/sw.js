@@ -6,10 +6,11 @@
  *  - Blob uploads:         cache-first (reference cards viewable offline once loaded).
  *  - Fonts + static files: cache-first.
  */
-const CACHE = 'fielddose-v12';
+const CACHE = 'fielddose-v13';
 
 const PRECACHE = [
   '/',
+  '/vendor/supabase-js.js',
   '/manifest.json',
   '/fielddose-logo.png',
   '/favicon-32.png',

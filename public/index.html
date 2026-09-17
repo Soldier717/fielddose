@@ -1489,6 +1489,21 @@
   }
   .fd-narc-hist .who { font-weight: 600; }
   .fd-narc-hist .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--clin-text-dim); }
+
+  /* Agency-ledger account strip + sync badge */
+  .fd-narc-acct {
+    background: var(--clin-surface); border: 1px solid var(--clin-border);
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 12px;
+    font-size: 12.5px; line-height: 1.5; color: var(--clin-text);
+  }
+  .fd-narc-acct.on { border-left: 3px solid var(--clin-green); }
+  .fd-narc-acct .fd-mini-btn { margin-left: 6px; vertical-align: 1px; }
+  .fd-sync-ok {
+    display: inline-block; font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase;
+    color: #1d7a39; border: 1px solid rgba(47,168,79,0.45); border-radius: 999px;
+    padding: 0 7px; margin-left: 6px; vertical-align: 1px; white-space: nowrap;
+  }
   @media (max-width: 560px) {
     .fd-narc-item { grid-template-columns: 0.5fr 0.7fr 0.9fr 1.4fr auto; }
     .fd-narc-item .fd-n-drugwrap { grid-column: 1 / -1; }
@@ -3727,6 +3742,11 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- Vendored supabase-js 2.116.0 (UMD) — agency-ledger features only.
+     Local file, service-worker cached: the offline dosing tool never
+     depends on it or on any CDN. -->
+<script src="/vendor/supabase-js.js"></script>
+
 <script>
 /* ============================================================
    FIELDDOSE CORE — shared utilities + boot
@@ -5597,6 +5617,72 @@ function fdShowContacts() {
    prefill. Records share out as text. Central ledger (server) later;
    every record carries origin: 'device' until then.
 ============================================================ */
+/* ============================================================
+   AGENCY ACCOUNT — Supabase (narcotics ledger only).
+   The dosing tool NEVER depends on this: no session, no network,
+   no problem — narcotics records simply stay device-local, exactly
+   as before. Auth is email magic link (no passwords on shift
+   change). Config + schema: docs/supabase.md.
+============================================================ */
+const FD_SB_URL = 'https://qxqrvaxewtodsfrwfdyh.supabase.co';
+const FD_SB_KEY = 'sb_publishable_E6VIgQxAVAjbOKD8GTEeww_9yHD4Frb';
+let fdSbClient = null, fdSbUser = null, fdSbMembership = null;
+
+function fdSb() {
+  if (fdSbClient) return fdSbClient;
+  if (typeof supabase === 'undefined' || !supabase.createClient) return null;
+  try {
+    fdSbClient = supabase.createClient(FD_SB_URL, FD_SB_KEY, { db: { schema: 'public' } });
+  } catch (_) { return null; }
+  return fdSbClient;
+}
+
+async function fdSbLoadMembership() {
+  const c = fdSb();
+  if (!c || !fdSbUser) { fdSbMembership = null; return null; }
+  try {
+    const { data, error } = await c.from('memberships')
+      .select('id, agency_id, role, display_name, agencies(code, name, short_name)')
+      .eq('active', true).limit(1);
+    fdSbMembership = (!error && data && data.length) ? data[0] : null;
+  } catch (_) { fdSbMembership = null; }
+  return fdSbMembership;
+}
+
+// Runs once at boot: restores a cached session (works offline — the
+// session lives in localStorage) and finishes a magic-link redirect.
+async function fdSbInit() {
+  const c = fdSb();
+  if (!c) return;
+  try {
+    c.auth.onAuthStateChange((_evt, session) => {
+      fdSbUser = session ? session.user : null;
+      fdSbMembership = null;
+      if (fdSbUser) fdSbLoadMembership();
+    });
+    const { data } = await c.auth.getSession();
+    fdSbUser = (data && data.session) ? data.session.user : null;
+    if (fdSbUser) await fdSbLoadMembership();
+  } catch (_) { /* offline or auth unreachable — device-local mode */ }
+}
+try { fdSbInit(); } catch (_) {}
+
+async function fdSbSignIn(email) {
+  const c = fdSb();
+  if (!c) { showToast('Account service needs a connection', true); return false; }
+  try {
+    const { error } = await c.auth.signInWithOtp({ email, options: { emailRedirectTo: location.origin } });
+    if (error) { showToast('Sign-in failed: ' + error.message, true); return false; }
+    return true;
+  } catch (_) { showToast('Sign-in failed — check the connection', true); return false; }
+}
+
+async function fdSbSignOut() {
+  const c = fdSb();
+  if (c) { try { await c.auth.signOut(); } catch (_) {} }
+  fdSbUser = null; fdSbMembership = null;
+}
+
 const FD_NARC_KEY = 'fielddose-narc-v1';
 
 function fdNarcLoad() {
@@ -5608,6 +5694,49 @@ function fdNarcLoad() {
 }
 function fdNarcSave(s) {
   try { localStorage.setItem(FD_NARC_KEY, JSON.stringify(s)); } catch (_) {}
+}
+
+// Push device transfers that haven't reached the agency ledger yet.
+// Device-local storage stays the source of truth for the UI; the
+// server row is append-only evidence. Requires a signed-in user with
+// an approved membership — otherwise a silent no-op. Stops at the
+// first failure (offline) and retries on the next screen open.
+let fdNarcSyncBusy = false;
+async function fdNarcSync(s, onChange) {
+  if (fdNarcSyncBusy || !fdSbUser || !fdSbMembership) return;
+  const c = fdSb();
+  if (!c) return;
+  fdNarcSyncBusy = true;
+  let pushed = 0;
+  try {
+    for (const r of [...s.transfers].reverse()) {   // oldest first
+      if (r.serverId) continue;
+      const row = {
+        agency_id: fdSbMembership.agency_id,
+        unit: r.unit || '',
+        mode: r.mode || 'seal',
+        old_seal: r.oldSeal || null,
+        new_seal: r.newSeal || r.seal || null,
+        from_name: (r.witness && r.witness.name) || r.from || '',
+        to_name: (r.assumed && r.assumed.name) || r.to || '',
+        to_user: fdSbUser.id,   // the recorder's account
+        items: (r.items || []).map((it) => ({ drug: it.drug, qty: it.qty, mg: it.mg, lot: it.lot, exp: it.exp })),
+        attestation: r.attest
+          ? 'Both parties visually inspected all controlled substances: present, intact, within expiration date, and in required quantities.'
+          : null,
+        from_signature: (r.witness && r.witness.sig) || null,
+        to_signature: (r.assumed && r.assumed.sig) || null,
+        occurred_at: new Date(r.ts).toISOString(),
+      };
+      const { data, error } = await c.from('transfers').insert(row).select('id').single();
+      if (error || !data) break;                     // offline/rejected — retry later
+      r.serverId = data.id;
+      pushed++;
+      fdNarcSave(s);
+    }
+  } catch (_) { /* connection dropped mid-sync — resume next time */ }
+  fdNarcSyncBusy = false;
+  if (pushed && typeof onChange === 'function') onChange(pushed);
 }
 
 // Agency narcotics policy from the pack: transfer mode ('keys' per
@@ -5669,6 +5798,7 @@ function fdNarcRecordText(r) {
     lines.push(`New seal applied: ${r.newSeal || r.seal || '—'}`);
   }
   lines.push(`Completed:       ${fdDateTime(r.ts)}${fdTzLabel() ? ' · ' + fdTzLabel() : ''}`);
+  if (r.serverId) lines.push('Agency ledger:   recorded (server copy is append-only)');
   lines.push('');
   if (r.attest) {
     lines.push('Visual inspection by both parties: all controlled substances');
@@ -5779,6 +5909,11 @@ function fdShowNarcTransfer() {
     bg.innerHTML = `
       <div class="fd-narc-head"><span>🔒 Daily Narcotic Transfer</span><button id="fdn-close">✕ Close</button></div>
       <div class="fd-narc-body">
+        ${fdSbUser
+          ? (fdSbMembership
+            ? `<div class="fd-narc-acct on">☁ <b>${escapeHtml(fdSbMembership.display_name)}</b> · ${escapeHtml((fdSbMembership.agencies && (fdSbMembership.agencies.short_name || fdSbMembership.agencies.name)) || 'agency')} — transfers also record to the agency ledger <button class="fd-mini-btn" id="fdn-signout">Sign out</button></div>`
+            : `<div class="fd-narc-acct">Signed in as ${escapeHtml(fdSbUser.email || '')} — awaiting agency roster approval; records stay on this device for now. <button class="fd-mini-btn" id="fdn-signout">Sign out</button></div>`)
+          : `<div class="fd-narc-acct">Records save on this device. <button class="fd-mini-btn" id="fdn-signin">Sign in — agency ledger</button></div>`}
         ${cfg.sop ? `<div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--clin-text-dim);margin-bottom:6px;">Per ${escapeHtml(cfg.sop)}</div>` : ''}
         ${step('Open the box', keysMode ? '(offgoing + oncoming paramedics together)' : '(assuming person)')}
         <div class="fd-narc-field" style="margin-bottom:10px;"><label for="fdn-unit">Unit / Box ID</label><input id="fdn-unit" value="${escapeAttr(s.unit)}" placeholder="e.g. MED 71 · Box 2"></div>
@@ -5863,13 +5998,29 @@ function fdShowNarcTransfer() {
         ${s.transfers.length === 0 ? '<div style="font-size:13px;color:var(--clin-text-dim);">No transfers recorded yet.</div>' : ''}
         ${s.transfers.slice(0, 20).map((r) => `
           <div class="fd-narc-hist" data-narc-view="${r.id}">
-            <div><div class="who">${escapeHtml((r.witness && r.witness.name) || r.from || '?')} → ${escapeHtml((r.assumed && r.assumed.name) || r.to || '?')}</div>
+            <div><div class="who">${escapeHtml((r.witness && r.witness.name) || r.from || '?')} → ${escapeHtml((r.assumed && r.assumed.name) || r.to || '?')}${r.serverId ? ' <span class="fd-sync-ok">☁ agency</span>' : ''}</div>
             <div class="when">${fdDateTime(r.ts)} · ${escapeHtml(r.unit || '—')} · ${r.items.length} item${r.items.length === 1 ? '' : 's'}</div></div>
             <button class="fd-mini-btn" data-narc-share="${r.id}">📤</button>
           </div>`).join('')}
       </div>`;
 
     bg.querySelector('#fdn-close').addEventListener('click', () => { collect(); fdNarcSave(s); bg.remove(); });
+
+    // Agency-ledger account controls
+    const signInBtn = bg.querySelector('#fdn-signin');
+    if (signInBtn) signInBtn.addEventListener('click', async () => {
+      const email = prompt('Work email — we\'ll send a one-tap sign-in link:');
+      if (!email || !/@/.test(email)) return;
+      collect();
+      if (await fdSbSignIn(email.trim())) showToast('Sign-in link sent — check your email on this device');
+    });
+    const signOutBtn = bg.querySelector('#fdn-signout');
+    if (signOutBtn) signOutBtn.addEventListener('click', async () => {
+      collect();
+      await fdSbSignOut();
+      showToast('Signed out — records stay on this device');
+      paint();
+    });
     bg.querySelector('#fdn-add').addEventListener('click', () => {
       collect();
       s.items.push({ drug: '', qty: '', lot: '', exp: '' });
@@ -5955,6 +6106,8 @@ function fdShowNarcTransfer() {
       sess.assumedName = ''; sess.witnessName = ''; sess.note = ''; sess.sigA = null; sess.sigW = null;
       showToast('Transfer recorded — ' + fdClock(rec.ts));
       paint();
+      // Push to the agency ledger when signed in + online (no-op otherwise)
+      fdNarcSync(s, () => { if (document.body.contains(bg)) paint(); });
     });
     bg.querySelectorAll('[data-narc-share]').forEach((b) => b.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -5967,6 +6120,8 @@ function fdShowNarcTransfer() {
     }));
   };
   paint();
+  // Catch up any transfers recorded offline since the last sync
+  fdNarcSync(s, () => { if (document.body.contains(bg)) paint(); });
 }
 
 function fdLogWaste(entryId) {

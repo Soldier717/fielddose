@@ -61,13 +61,29 @@ Verify after apply (no auth needed — RLS returns empty, 404 means the
 table is missing): GET `rest/v1/agencies?select=id` with the publishable
 key + `Accept-Profile: public` → expect `200 []`.
 
-## Next build steps (app side)
+## App integration — DONE Sep 17, 2026
 
-1. Vendor supabase-js UMD into public/vendor/ (offline PWA — no runtime
-   CDN dependency), precache in sw.js.
-2. Magic-link login flow (Agency Login), session cached for station use.
-3. Daily-transfer screen gains "record to agency" when online + signed
-   in; localStorage stays the offline record (posture unchanged).
-4. Admin roster: first admin per agency inserted via dashboard (Table
-   Editor → memberships) after their first magic-link sign-in creates
-   the auth.users row.
+- supabase-js 2.116.0 vendored at public/vendor/supabase-js.js,
+  SW-precached (no runtime CDN). Account module in index.html
+  (fdSb/fdSbInit/fdSbSignIn — magic link, schema pinned to public).
+- Daily-transfer screen: account strip (sign in / signed in / roster-
+  pending states), fdNarcSync pushes unsynced transfers to the ledger
+  on screen open + after completion; "☁ agency" badge on synced rows.
+  Signed-out/offline behavior is byte-for-byte the old device-local flow.
+
+## Activation (Sean, one time)
+
+1. Dashboard → Auth → Providers: enable **Email**, magic links on.
+   Auth → URL Configuration: Site URL `https://www.fielddose.com`,
+   add it to the redirect allowlist.
+2. On the deployed app: Narcotics screen → "Sign in — agency ledger"
+   → enter email → tap the emailed link on the same device.
+3. That first sign-in creates your auth.users row. Then SQL Editor:
+
+   insert into public.memberships (user_id, agency_id, role, display_name)
+   select u.id, a.id, 'admin', 'Sean — GNFR'
+   from auth.users u, public.agencies a
+   where u.email = 'sean@ppssfl.com' and a.code = 'GNFR2026';
+
+   (Edit display_name to taste.) Reopen the narcotics screen — the
+   strip goes green and the next transfer records to the ledger.

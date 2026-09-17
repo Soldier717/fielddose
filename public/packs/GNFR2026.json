@@ -1,10 +1,11 @@
 {
   "agency": { "id": "gnfr", "name": "Greater Naples Fire Rescue", "shortName": "GNFR" },
-  "version": "2026-09-14",
+  "version": "2026-09-17",
   "timezone": "America/New_York",
   "defib": { "adultLadder": [120, 150, 200], "cardioversion": "zoll" },
   "narcotics": {
     "transferMode": "keys",
+    "roster": ["Russ", "Santana", "Clement", "Oleary"],
     "sop": "SOP #1051 (approved 8/7/2025)",
     "escalation": "ANY issues during turnover: immediately contact the Battalion Chief (BC) or Division Chief of EMS.",
     "oncomingHint": "If the oncoming Lieutenant is a paramedic, that officer signs. If the Lieutenant is an EMT, the most senior paramedic (Driver-Engineer or Paramedic Firefighter) signs.",

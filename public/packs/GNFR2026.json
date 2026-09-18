@@ -4,7 +4,7 @@
     "name": "Greater Naples Fire Rescue",
     "shortName": "GNFR"
   },
-  "version": "2026-09-18",
+  "version": "2026-09-18b",
   "timezone": "America/New_York",
   "defib": {
     "adultLadder": [
@@ -31,10 +31,12 @@
     ],
     "stock": [
       {
-        "drug": "Fentanyl 100 mcg / 2 mL"
+        "drug": "Fentanyl 100 mcg / 2 mL",
+        "unit": "mcg"
       },
       {
-        "drug": "Ketamine 500 mg / 5 mL"
+        "drug": "Ketamine 500 mg / 5 mL",
+        "unit": "mg"
       }
     ],
     "sop": "SOP #1051 (approved 8/7/2025)",
@@ -44,26 +46,30 @@
       {
         "match": "dilaudid|hydromorphone",
         "label": "Dilaudid",
-        "minMg": 2,
-        "maxMg": 10
+        "min": 2,
+        "max": 10,
+        "unit": "mg"
       },
       {
         "match": "versed|midazolam",
         "label": "Versed",
-        "minMg": 10,
-        "maxMg": 25
+        "min": 10,
+        "max": 25,
+        "unit": "mg"
       },
       {
         "match": "ketamine|ketalar",
         "label": "Ketamine",
-        "minMg": 500,
-        "maxMg": 1500
+        "min": 500,
+        "max": 1500,
+        "unit": "mg"
       },
       {
         "match": "ativan|lorazepam",
         "label": "Ativan",
-        "minMg": 2,
-        "maxMg": 10
+        "min": 2,
+        "max": 10,
+        "unit": "mg"
       }
     ]
   },

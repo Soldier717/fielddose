@@ -93,7 +93,7 @@ vm.createContext(ctx);
 const html = fs.readFileSync(APP, 'utf8');
 const start = html.indexOf('<script>') + '<script>'.length;
 const src = html.slice(start, html.indexOf('</script>', start));
-vm.runInContext(src + '\n;globalThis.__show = fdShowNarcTransfer; globalThis.__load = fdNarcLoad; globalThis.__save = fdNarcSave;', ctx, { filename: 'app.js' });
+vm.runInContext(src + '\n;globalThis.__show = fdShowNarcTransfer; globalThis.__load = fdNarcLoad; globalThis.__save = fdNarcSave; globalThis.__lim = fdNarcLimitStatus; globalThis.__guess = fdNarcGuessUnit; globalThis.__toMcg = fdNarcToMcg; globalThis.__rec = fdNarcRecordText;', ctx, { filename: 'app.js' });
 
 // showToast is what surfaces gating failures — capture instead of render
 vm.runInContext('showToast = function (m, bad) { globalThis.__toasts.push([m, !!bad]); };', ctx);
@@ -221,6 +221,74 @@ console.log('\nGNFR PACK — keys mode, seeded stock');
   ctx.__save(s2);
   ctx.__show();
   ok(ctx.__load().items[0].drug === 'EDITED', 'pack stock does not overwrite an existing inventory');
+}
+
+// ---- Units: mcg / mg / g. Fentanyl is stocked in micrograms and ketamine in
+// milligrams, so a single hardcoded "mg" field would record a 1000x error.
+console.log('\nUNITS — mcg / mg / g');
+{
+  ok(ctx.__guess('Fentanyl 100 mcg / 2 mL') === 'mcg', 'reads mcg out of a drug string');
+  ok(ctx.__guess('Ketamine 500 mg / 5 mL') === 'mg', 'reads mg out of a drug string');
+  ok(ctx.__guess('Magnesium Sulfate 1 g / 2 mL') === 'g', 'reads g out of a drug string');
+  ok(ctx.__guess('Versed') === null, 'no unit in the string means no guess');
+  // mcg must not be mistaken for mg (mcg contains no "mg" substring, but a
+  // naive gram match would swallow it)
+  ok(ctx.__guess('Fentanyl 100 mcg') !== 'mg' && ctx.__guess('Fentanyl 100 mcg') !== 'g', 'mcg is never read as mg or g');
+
+  ok(ctx.__toMcg(1, 'g') === 1000000, '1 g -> 1,000,000 mcg');
+  ok(ctx.__toMcg(1, 'mg') === 1000, '1 mg -> 1,000 mcg');
+  ok(ctx.__toMcg(400, 'mcg') === 400, '400 mcg -> 400 mcg');
+
+  // seeded stock carries the right unit per drug
+  ctx.__save({ unit: '', seal: '', items: [], transfers: [] });
+  ctx.__show();
+  const seeded = ctx.__load();
+  const fent = seeded.items.find((i) => /Fentanyl/.test(i.drug));
+  const ket = seeded.items.find((i) => /Ketamine/.test(i.drug));
+  ok(fent && fent.unit === 'mcg', 'Fentanyl seeded as mcg, got ' + JSON.stringify(fent && fent.unit));
+  ok(ket && ket.unit === 'mg', 'Ketamine seeded as mg, got ' + JSON.stringify(ket && ket.unit));
+  ok(state.html.indexOf('fd-n-unit') > -1, 'unit selector rendered on the row');
+  ok(/<option value="mcg" selected>/.test(state.html), 'mcg preselected for Fentanyl');
+
+  // SOP limits normalise: GNFR ketamine is 500-1500 mg
+  const L = (items) => ctx.__lim(items).find((x) => x.label === 'Ketamine');
+  ok(L([{ drug: 'Ketamine 500 mg / 5 mL', amt: '500', unit: 'mg' }]).status === 'ok', '500 mg ketamine is at the SOP floor -> ok');
+  ok(L([{ drug: 'Ketamine 500 mg / 5 mL', amt: '400', unit: 'mg' }]).status === 'low', '400 mg ketamine -> BELOW MIN');
+  ok(L([{ drug: 'Ketamine 500 mg / 5 mL', amt: '2', unit: 'g' }]).status === 'high', '2 g ketamine -> ABOVE MAX (g normalised against an mg limit)');
+  const asG = L([{ drug: 'Ketamine 500 mg / 5 mL', amt: '1', unit: 'g' }]);
+  ok(asG.status === 'ok' && asG.total === 1000 && asG.unit === 'mg', '1 g ketamine reports as 1000 mg, in range: ' + JSON.stringify([asG.total, asG.unit, asG.status]));
+
+  // the 1000x trap: the same NUMBER in the wrong unit must not read as in-range
+  ok(L([{ drug: 'Ketamine 500 mg / 5 mL', amt: '500', unit: 'mcg' }]).status === 'low', '500 mcg ketamine is NOT treated as 500 mg');
+
+  // fentanyl in mcg must not disturb a ketamine limit
+  const mixed = ctx.__lim([
+    { drug: 'Fentanyl 100 mcg / 2 mL', amt: '400', unit: 'mcg' },
+    { drug: 'Ketamine 500 mg / 5 mL', amt: '1000', unit: 'mg' },
+  ]);
+  ok(mixed.find((x) => x.label === 'Ketamine').status === 'ok', 'fentanyl in mcg does not disturb the ketamine total');
+
+  // legacy inventories written before units existed
+  vm.runInContext('localStorage.setItem(FD_NARC_KEY, JSON.stringify({ unit: "E22", seal: "", transfers: [], items: [{ drug: "Versed 5 mg/mL", qty: "4", mg: "20", lot: "X", exp: "2028-01" }] }));', ctx);
+  const migrated = ctx.__load();
+  ok(migrated.items[0].amt === '20', 'legacy mg value carried over as the amount');
+  ok(migrated.items[0].unit === 'mg', 'legacy item is explicitly mg');
+  ok(migrated.items[0].mg === undefined, 'legacy mg key dropped after migration');
+
+  // record text prints each drug in its own unit
+  const txt = ctx.__rec({
+    id: 'nX', ts: Date.now(), unit: 'E22', mode: 'keys', attest: true,
+    assumed: { name: 'A' }, witness: { name: 'B' },
+    items: [
+      { drug: 'Fentanyl 100 mcg / 2 mL', qty: '4', amt: '400', unit: 'mcg', lot: 'L1', exp: '2029-09' },
+      { drug: 'Ketamine 500 mg / 5 mL', qty: '2', amt: '1000', unit: 'mg', lot: 'L2', exp: '2029-09' },
+    ],
+    limits: ctx.__lim([{ drug: 'Ketamine 500 mg / 5 mL', amt: '1000', unit: 'mg' }]),
+  });
+  ok(txt.indexOf('400 mcg') > -1, 'shared record shows fentanyl in mcg');
+  ok(txt.indexOf('1000 mg') > -1, 'shared record shows ketamine in mg');
+  ok(txt.indexOf('400 mg') === -1, 'fentanyl is never printed as mg');
+  ok(txt.indexOf('TOTAL MG') === -1, 'record header no longer claims every total is mg');
 }
 
 console.log(fail ? '\n' + fail + ' CHECK(S) FAILED' : '\nALL CHECKS PASSED');

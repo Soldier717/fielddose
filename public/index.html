@@ -1529,6 +1529,11 @@
     padding: 0 7px; margin-left: 6px; vertical-align: 1px; white-space: nowrap;
   }
 
+  /* Total amount + its unit share one cell */
+  .fd-n-amtwrap { display: flex; gap: 4px; }
+  .fd-n-amtwrap input { flex: 1 1 auto; min-width: 0; }
+  .fd-n-amtwrap select { flex: 0 0 62px; padding-left: 5px; padding-right: 2px; }
+
   /* Transfer wizard: Verify -> Sign -> Confirm */
   .fd-narc-steps {
     display: flex; gap: 6px; margin-bottom: 14px;
@@ -5752,7 +5757,16 @@ const FD_NARC_KEY = 'fielddose-narc-v1';
 function fdNarcLoad() {
   try {
     const s = JSON.parse(localStorage.getItem(FD_NARC_KEY));
-    if (s && Array.isArray(s.items) && Array.isArray(s.transfers)) return s;
+    if (s && Array.isArray(s.items) && Array.isArray(s.transfers)) {
+      // Inventories written before units existed held a bare `mg` number.
+      // Carry it over as an explicit mg amount rather than reinterpreting it.
+      s.items.forEach((it) => {
+        if (it.amt == null && it.mg != null) { it.amt = it.mg; it.unit = it.unit || 'mg'; }
+        if (!fdNarcUnitOk(it.unit)) it.unit = fdNarcGuessUnit(it.drug) || 'mg';
+        delete it.mg;
+      });
+      return s;
+    }
   } catch (_) {}
   return { unit: '', seal: '', items: [], transfers: [] };
 }
@@ -5805,7 +5819,12 @@ async function fdNarcSync(s, onChange) {
         from_name: (r.witness && r.witness.name) || r.from || '',
         to_name: (r.assumed && r.assumed.name) || r.to || '',
         to_user: fdSbUser.id,   // the recorder's account
-        items: (r.items || []).map((it) => ({ drug: it.drug, qty: it.qty, mg: it.mg, lot: it.lot, exp: it.exp })),
+        items: (r.items || []).map((it) => ({
+          drug: it.drug, qty: it.qty,
+          amt: it.amt != null && it.amt !== '' ? it.amt : it.mg,
+          unit: fdNarcUnitOk(it.unit) || 'mg',
+          lot: it.lot, exp: it.exp,
+        })),
         attestation: r.attest
           ? 'Both parties visually inspected all controlled substances: present, intact, within expiration date, and in required quantities.'
           : null,
@@ -5830,6 +5849,34 @@ async function fdNarcSync(s, onChange) {
 function fdNarcCfg() {
   const p = fdPack();
   return (p && p.narcotics) || {};
+}
+
+// Controlled substances are not all measured in mg: fentanyl is stocked in
+// micrograms, ketamine in milligrams, and some drugs in grams. Every count is
+// stored as an amount PLUS its unit, and comparisons normalise to micrograms,
+// so a fentanyl box total can never be read as milligrams.
+const FD_UNITS = ['mcg', 'mg', 'g'];
+const FD_UNIT_MCG = { mcg: 1, mg: 1000, g: 1000000 };
+function fdNarcUnitOk(u) { return FD_UNITS.indexOf(u) > -1 ? u : null; }
+// Read the unit out of a drug string: "Fentanyl 100 mcg / 2 mL" -> mcg.
+// mcg is tested first; it does not contain "mg" as a substring, but the bare
+// gram test would otherwise swallow it.
+function fdNarcGuessUnit(txt) {
+  const t = String(txt || '');
+  if (/\b(mcg|ug)\b|µg/i.test(t)) return 'mcg';
+  if (/\bmg\b/i.test(t)) return 'mg';
+  if (/\bg\b/i.test(t)) return 'g';
+  return null;
+}
+// Amount in micrograms, for range checks that must not care about the unit.
+function fdNarcToMcg(amt, unit) {
+  const n = parseFloat(amt);
+  if (!isFinite(n)) return null;
+  return n * (FD_UNIT_MCG[fdNarcUnitOk(unit) || 'mg']);
+}
+function fdNarcFromMcg(mcg, unit) {
+  const f = FD_UNIT_MCG[fdNarcUnitOk(unit) || 'mg'];
+  return Math.round((mcg / f) * 1000) / 1000;
 }
 
 // Placeholder lot / expiry for pack-seeded stock: lot dated today, expiry
@@ -5858,7 +5905,8 @@ function fdNarcSeedStock(s) {
     return {
       drug: it.drug || '',
       qty: it.qty != null ? it.qty : '',
-      mg: it.mg != null ? it.mg : '',
+      amt: it.amt != null ? it.amt : '',
+      unit: fdNarcUnitOk(it.unit) || fdNarcGuessUnit(it.drug) || 'mg',
       lot: it.lot || auto.lot,
       exp: it.exp || auto.exp,
     };
@@ -5866,21 +5914,31 @@ function fdNarcSeedStock(s) {
   return true;
 }
 
-// SOP "required quantities": per-drug min/max totals in mg.
+// SOP "required quantities": per-drug min/max box totals.
+//
+// A limit declares its own unit -- {min, max, unit} -- or the legacy
+// {minMg, maxMg} shorthand, which means milligrams. Box totals are summed in
+// micrograms so drugs stocked in mcg, mg or g all compare correctly, then
+// reported back in the limit's unit for display.
 function fdNarcLimitStatus(items) {
   const cfg = fdNarcCfg();
   const out = [];
   (cfg.limits || []).forEach((L) => {
     let re; try { re = new RegExp(L.match, 'i'); } catch (_) { return; }
+    const unit = fdNarcUnitOk(L.unit) || (L.minMg != null || L.maxMg != null ? 'mg' : 'mg');
+    const min = L.min != null ? L.min : L.minMg;
+    const max = L.max != null ? L.max : L.maxMg;
+    const minMcg = fdNarcToMcg(min, unit), maxMcg = fdNarcToMcg(max, unit);
     const matched = items.filter((it) => re.test(it.drug || ''));
-    const allEntered = matched.length > 0 && matched.every((it) => it.mg !== '' && it.mg != null && isFinite(parseFloat(it.mg)));
-    const total = matched.reduce((sum, it) => sum + (parseFloat(it.mg) || 0), 0);
+    const allEntered = matched.length > 0 && matched.every((it) => it.amt !== '' && it.amt != null && isFinite(parseFloat(it.amt)));
+    const totalMcg = matched.reduce((sum, it) => sum + (fdNarcToMcg(it.amt, it.unit) || 0), 0);
+    const total = fdNarcFromMcg(totalMcg, unit);
     out.push({
-      label: L.label, min: L.minMg, max: L.maxMg, total,
+      label: L.label, min, max, unit, total,
       status: matched.length === 0 ? 'missing'
         : !allEntered ? 'unknown'
-        : total < L.minMg ? 'low'
-        : total > L.maxMg ? 'high' : 'ok',
+        : (minMcg != null && totalMcg < minMcg) ? 'low'
+        : (maxMcg != null && totalMcg > maxMcg) ? 'high' : 'ok',
     });
   });
   return out;
@@ -5927,15 +5985,19 @@ function fdNarcRecordText(r) {
   lines.push(`${r.mode === 'keys' ? 'Oncoming paramedic:' : 'Assumed by:      '} ${r.assumed ? r.assumed.name : r.to}${r.assumed && r.assumed.sig ? ' (signed)' : ''}`);
   lines.push(`${r.mode === 'keys' ? 'Offgoing paramedic:' : 'Relinquished by: '} ${r.witness ? r.witness.name : r.from}${r.witness && r.witness.sig ? ' (signed)' : ''}`);
   lines.push('');
-  lines.push('DRUG · QTY · TOTAL MG · LOT # · EXPIRATION');
+  lines.push('DRUG · QTY · TOTAL · LOT · EXPIRATION');
   r.items.forEach((it) => {
-    lines.push(`${it.drug} · qty ${it.qty} · ${it.mg ? it.mg + ' mg' : '— mg'} · lot ${it.lot || '—'} · exp ${it.exp || '—'}`);
+    // Records written before units existed carry a bare mg amount.
+    const amt = it.amt != null && it.amt !== '' ? it.amt : it.mg;
+    const u = fdNarcUnitOk(it.unit) || 'mg';
+    lines.push(`${it.drug} · qty ${it.qty} · ${amt ? amt + ' ' + u : '—'} · lot ${it.lot || '—'} · exp ${it.exp || '—'}`);
   });
   if (r.limits && r.limits.length) {
     lines.push('');
     lines.push('REQUIRED QUANTITIES (SOP)');
     r.limits.forEach((x) => {
-      lines.push(`${x.label}: ${x.status === 'unknown' || x.status === 'missing' ? '—' : x.total + ' mg'} (required ${x.min}–${x.max} mg) · ${x.status.toUpperCase()}`);
+      const u = fdNarcUnitOk(x.unit) || 'mg';
+      lines.push(`${x.label}: ${x.status === 'unknown' || x.status === 'missing' ? '—' : x.total + ' ' + u} (required ${x.min}–${x.max} ${u}) · ${x.status.toUpperCase()}`);
     });
   }
   if (r.note) { lines.push(''); lines.push('Notes: ' + r.note); }
@@ -5994,14 +6056,14 @@ function fdNarcLimitsHtml(s) {
   const lim = fdNarcLimitStatus(s.items);
   if (!lim.length) return '';
   const color = (st) => st === 'ok' ? '#1d7a39' : st === 'unknown' ? 'var(--clin-text-dim)' : 'var(--clin-red)';
-  const word = (st) => st === 'ok' ? 'OK' : st === 'low' ? 'BELOW MIN' : st === 'high' ? 'ABOVE MAX' : st === 'missing' ? 'NOT IN BOX' : 'enter total mg';
+  const word = (st) => st === 'ok' ? 'OK' : st === 'low' ? 'BELOW MIN' : st === 'high' ? 'ABOVE MAX' : st === 'missing' ? 'NOT IN BOX' : 'enter total';
   const anyBad = lim.some((x) => x.status === 'low' || x.status === 'high' || x.status === 'missing');
   return `
         <div class="fd-narc-sec">Required Quantities <span style="text-transform:none;font-weight:500;">(SOP minimum / maximum)</span></div>
         ${lim.map((x) => `
           <div style="display:flex;justify-content:space-between;align-items:center;background:var(--clin-surface);border:1px solid var(--clin-border);border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:13px;">
-            <span><b>${escapeHtml(x.label)}</b> <span style="color:var(--clin-text-dim);">· ${x.min}–${x.max} mg required</span></span>
-            <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:${color(x.status)};">${x.status === 'unknown' || x.status === 'missing' ? '' : x.total + ' mg · '}${word(x.status)}</span>
+            <span><b>${escapeHtml(x.label)}</b> <span style="color:var(--clin-text-dim);">· ${x.min}–${x.max} ${escapeHtml(x.unit)} required</span></span>
+            <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:${color(x.status)};">${x.status === 'unknown' || x.status === 'missing' ? '' : x.total + ' ' + escapeHtml(x.unit) + ' · '}${word(x.status)}</span>
           </div>`).join('')}
         ${anyBad && fdNarcCfg().escalation ? `<div style="background:var(--clin-blue-light);border:1px solid var(--clin-red);border-radius:8px;padding:10px 12px;font-size:12.5px;font-weight:600;color:var(--clin-red);margin-top:4px;">${escapeHtml(fdNarcCfg().escalation)}</div>` : ''}`;
 }
@@ -6056,7 +6118,8 @@ function fdShowNarcTransfer() {
       if (!s.items[i]) return;
       s.items[i].drug = row.querySelector('.fd-n-drug').value.trim();
       s.items[i].qty = row.querySelector('.fd-n-qty').value;
-      s.items[i].mg = row.querySelector('.fd-n-mg').value;
+      s.items[i].amt = row.querySelector('.fd-n-amt').value;
+      s.items[i].unit = fdNarcUnitOk(row.querySelector('.fd-n-unit').value) || 'mg';
       s.items[i].lot = row.querySelector('.fd-n-lot').value.trim();
       s.items[i].exp = row.querySelector('.fd-n-exp').value;
     });
@@ -6132,7 +6195,14 @@ function fdShowNarcTransfer() {
             <input class="fd-n-drug" value="${escapeAttr(it.drug || '')}" placeholder="Fentanyl 100 mcg / 2 mL">
           </div>
           <div class="fd-narc-field"><label>Qty</label><input class="fd-n-qty" type="number" min="0" max="99" inputmode="numeric" value="${escapeAttr(it.qty != null ? String(it.qty) : '')}"></div>
-          <div class="fd-narc-field"><label>Total mg</label><input class="fd-n-mg" type="number" min="0" step="0.5" inputmode="decimal" value="${escapeAttr(it.mg != null ? String(it.mg) : '')}"></div>
+          <div class="fd-narc-field"><label>Total in box</label>
+            <div class="fd-n-amtwrap">
+              <input class="fd-n-amt" type="number" min="0" step="any" inputmode="decimal" value="${escapeAttr(it.amt != null ? String(it.amt) : '')}">
+              <select class="fd-n-unit" aria-label="Unit for ${escapeAttr(it.drug || 'this drug')}">
+                ${FD_UNITS.map((u) => `<option value="${u}"${(fdNarcUnitOk(it.unit) || 'mg') === u ? ' selected' : ''}>${u}</option>`).join('')}
+              </select>
+            </div>
+          </div>
           <div class="fd-narc-field"><label>Lot</label><input class="fd-n-lot" value="${escapeAttr(it.lot || '')}"></div>
           <div class="fd-narc-field">
             <label>Expiration</label>
@@ -6201,7 +6271,7 @@ function fdShowNarcTransfer() {
           const est = fdNarcExpState(it.exp);
           return row(
             escapeHtml(it.drug),
-            `×${escapeHtml(String(it.qty))}${it.mg ? ' · ' + escapeHtml(String(it.mg)) + ' mg' : ''}${est ? `<span style="color:${est === 'expired' ? 'var(--clin-red)' : '#8a5a10'};"> · ${est === 'expired' ? 'EXPIRED' : 'exp ≤30d'}</span>` : ''}`,
+            `×${escapeHtml(String(it.qty))}${it.amt !== '' && it.amt != null ? ' · ' + escapeHtml(String(it.amt)) + ' ' + escapeHtml(fdNarcUnitOk(it.unit) || 'mg') : ''}${est ? `<span style="color:${est === 'expired' ? 'var(--clin-red)' : '#8a5a10'};"> · ${est === 'expired' ? 'EXPIRED' : 'exp ≤30d'}</span>` : ''}`,
             true);
         }).join('') || '<div class="row"><span class="k">No drugs listed</span></div>'}
       </div>
@@ -6293,7 +6363,7 @@ function fdShowNarcTransfer() {
     on('#fdn-seal-bad', 'click', () => { collect(); sess.sealCheck = 'mismatch'; paint(); });
     on('#fdn-add', 'click', () => {
       collect();
-      s.items.push({ drug: '', qty: '', lot: '', exp: '' });
+      s.items.push({ drug: '', qty: '', amt: '', unit: 'mg', lot: '', exp: '' });
       fdNarcSave(s); paint();
     });
     bg.querySelectorAll('[data-narc-del]').forEach((b) => b.addEventListener('click', () => {
@@ -6319,12 +6389,26 @@ function fdShowNarcTransfer() {
         tag.textContent = est === 'expired' ? 'EXPIRED — remove from service' : 'expires ≤ 30 days';
       } else if (tag) tag.remove();
     }));
-    // Mg totals feed the required-quantities panel — refreshed in place
-    bg.querySelectorAll('.fd-n-mg').forEach((el) => el.addEventListener('change', () => {
+    // Box totals feed the required-quantities panel — refreshed in place.
+    // The unit matters as much as the number, so both retrigger it.
+    bg.querySelectorAll('.fd-n-amt, .fd-n-unit').forEach((el) => el.addEventListener('change', () => {
       collect(); fdNarcSave(s);
       const lp = $('#fdn-limits');
       if (lp) lp.innerHTML = fdNarcLimitsHtml(s);
     }));
+    // Typing a drug name adopts that drug's unit, until a unit is picked by
+    // hand: "Fentanyl 100 mcg / 2 mL" should not stay on the mg default.
+    bg.querySelectorAll('.fd-n-drug').forEach((el) => el.addEventListener('change', () => {
+      const r = el.closest('[data-narc-i]');
+      if (!r) return;
+      const guess = fdNarcGuessUnit(el.value);
+      const sel = r.querySelector('.fd-n-unit');
+      if (guess && sel && !sel.dataset.touched) sel.value = guess;
+      collect(); fdNarcSave(s);
+      const lp = $('#fdn-limits');
+      if (lp) lp.innerHTML = fdNarcLimitsHtml(s);
+    }));
+    bg.querySelectorAll('.fd-n-unit').forEach((el) => el.addEventListener('change', () => { el.dataset.touched = '1'; }));
 
     // ---- Step 2 controls
     on('#fdn-keys', 'click', () => { collect(); sess.keysOk = !sess.keysOk; paint(); });
@@ -6359,7 +6443,7 @@ function fdShowNarcTransfer() {
       if (bad) { showToast(bad, true); return; }
       if (sess.sealCheck === 'mismatch' && !sess.note) { showToast('Seal mismatch — describe it in the notes', true); return; }
       if (limBad && !sess.note) { showToast('Quantity outside SOP min/max — note it and contact the BC / Division Chief of EMS', true); return; }
-      const summary = its.map((it) => `${it.drug} ×${it.qty}${it.mg ? ' (' + it.mg + ' mg)' : ''}`).join(', ');
+      const summary = its.map((it) => `${it.drug} ×${it.qty}${it.amt !== '' && it.amt != null ? ' (' + it.amt + ' ' + (fdNarcUnitOk(it.unit) || 'mg') + ')' : ''}`).join(', ');
       const sealTxt = keysMode ? 'Key turnover confirmed' : `${s.seal ? 'Seal removed: ' + s.seal + (sess.sealCheck === 'ok' ? ' (verified)' : ' (MISMATCH)') + '\n' : ''}New seal: ${sess.newSeal}`;
       if (!confirm(`Complete transfer?\n\n${s.unit}\n${sealTxt}\n${summary}\n\n${keysMode ? 'Oncoming' : 'Assumed by'}: ${sess.assumedName}\n${keysMode ? 'Offgoing' : 'Witness'}: ${sess.witnessName}`)) return;
       const rec = {

@@ -1,35 +1,151 @@
 {
-  "agency": { "id": "gnfr", "name": "Greater Naples Fire Rescue", "shortName": "GNFR" },
-  "version": "2026-09-17",
+  "agency": {
+    "id": "gnfr",
+    "name": "Greater Naples Fire Rescue",
+    "shortName": "GNFR"
+  },
+  "version": "2026-09-18",
   "timezone": "America/New_York",
-  "defib": { "adultLadder": [120, 150, 200], "cardioversion": "zoll" },
+  "defib": {
+    "adultLadder": [
+      120,
+      150,
+      200
+    ],
+    "cardioversion": "zoll"
+  },
   "narcotics": {
     "transferMode": "keys",
-    "roster": ["Russ", "Santana", "Clement", "Oleary"],
+    "units": [
+      "L21",
+      "E22",
+      "E23",
+      "E24",
+      "E25"
+    ],
+    "roster": [
+      "Russ",
+      "Santana",
+      "Clement",
+      "Oleary"
+    ],
+    "stock": [
+      {
+        "drug": "Fentanyl 100 mcg / 2 mL"
+      },
+      {
+        "drug": "Ketamine 500 mg / 5 mL"
+      }
+    ],
     "sop": "SOP #1051 (approved 8/7/2025)",
     "escalation": "ANY issues during turnover: immediately contact the Battalion Chief (BC) or Division Chief of EMS.",
     "oncomingHint": "If the oncoming Lieutenant is a paramedic, that officer signs. If the Lieutenant is an EMT, the most senior paramedic (Driver-Engineer or Paramedic Firefighter) signs.",
     "limits": [
-      { "match": "dilaudid|hydromorphone", "label": "Dilaudid", "minMg": 2, "maxMg": 10 },
-      { "match": "versed|midazolam", "label": "Versed", "minMg": 10, "maxMg": 25 },
-      { "match": "ketamine|ketalar", "label": "Ketamine", "minMg": 500, "maxMg": 1500 },
-      { "match": "ativan|lorazepam", "label": "Ativan", "minMg": 2, "maxMg": 10 }
+      {
+        "match": "dilaudid|hydromorphone",
+        "label": "Dilaudid",
+        "minMg": 2,
+        "maxMg": 10
+      },
+      {
+        "match": "versed|midazolam",
+        "label": "Versed",
+        "minMg": 10,
+        "maxMg": 25
+      },
+      {
+        "match": "ketamine|ketalar",
+        "label": "Ketamine",
+        "minMg": 500,
+        "maxMg": 1500
+      },
+      {
+        "match": "ativan|lorazepam",
+        "label": "Ativan",
+        "minMg": 2,
+        "maxMg": 10
+      }
     ]
   },
   "drugOverrides": [],
   "contacts": [
-    { "group": "EMS Leadership · Medical Direction", "name": "EMS Chief Dennis Disarro", "sub": "Lead contact · cell", "num": "239-961-2882" },
-    { "group": "EMS Leadership · Medical Direction", "name": "Scott Dunavant, MD", "sub": "Associate Medical Director · cell", "num": "859-806-7593" },
-    { "group": "Hospital ED Red Phones", "name": "Gulf Coast Medical Center", "sub": "D5", "num": "239-343-0434" },
-    { "group": "Hospital ED Red Phones", "name": "HealthPark Medical Center", "sub": "D7", "num": "239-343-5334" },
-    { "group": "Hospital ED Red Phones", "name": "Golisano Children's Hospital", "sub": "D2", "num": "239-343-6260" },
-    { "group": "Hospital ED Red Phones", "name": "NCH North", "sub": "D14", "num": "239-624-9199" },
-    { "group": "Hospital ED Red Phones", "name": "NCH Bonita", "sub": "D32", "num": "239-624-6924" },
-    { "group": "Hospital ED Red Phones", "name": "NCH Northeast", "sub": "D34", "num": "239-624-8728" },
-    { "group": "Hospital ED Red Phones", "name": "Physicians Regional Medical Center", "sub": "D13", "num": "239-304-4737" },
-    { "group": "Hospital ED Red Phones", "name": "Physicians Regional Medical Center", "sub": "D15", "num": "239-354-6191" },
-    { "group": "Specialty / Emergency", "name": "Poison Control Center", "sub": "24/7", "num": "800-222-1222" },
-    { "group": "Specialty / Emergency", "name": "CHEMTREC", "sub": "Hazmat emergency", "num": "800-424-9300" },
-    { "group": "Specialty / Emergency", "name": "Diver's Alert Network (DAN)", "sub": "Dive emergency", "num": "919-684-9111" }
+    {
+      "group": "EMS Leadership · Medical Direction",
+      "name": "EMS Chief Dennis Disarro",
+      "sub": "Lead contact · cell",
+      "num": "239-961-2882"
+    },
+    {
+      "group": "EMS Leadership · Medical Direction",
+      "name": "Scott Dunavant, MD",
+      "sub": "Associate Medical Director · cell",
+      "num": "859-806-7593"
+    },
+    {
+      "group": "Hospital ED Red Phones",
+      "name": "Gulf Coast Medical Center",
+      "sub": "D5",
+      "num": "239-343-0434"
+    },
+    {
+      "group": "Hospital ED Red Phones",
+      "name": "HealthPark Medical Center",
+      "sub": "D7",
+      "num": "239-343-5334"
+    },
+    {
+      "group": "Hospital ED Red Phones",
+      "name": "Golisano Children's Hospital",
+      "sub": "D2",
+      "num": "239-343-6260"
+    },
+    {
+      "group": "Hospital ED Red Phones",
+      "name": "NCH North",
+      "sub": "D14",
+      "num": "239-624-9199"
+    },
+    {
+      "group": "Hospital ED Red Phones",
+      "name": "NCH Bonita",
+      "sub": "D32",
+      "num": "239-624-6924"
+    },
+    {
+      "group": "Hospital ED Red Phones",
+      "name": "NCH Northeast",
+      "sub": "D34",
+      "num": "239-624-8728"
+    },
+    {
+      "group": "Hospital ED Red Phones",
+      "name": "Physicians Regional Medical Center",
+      "sub": "D13",
+      "num": "239-304-4737"
+    },
+    {
+      "group": "Hospital ED Red Phones",
+      "name": "Physicians Regional Medical Center",
+      "sub": "D15",
+      "num": "239-354-6191"
+    },
+    {
+      "group": "Specialty / Emergency",
+      "name": "Poison Control Center",
+      "sub": "24/7",
+      "num": "800-222-1222"
+    },
+    {
+      "group": "Specialty / Emergency",
+      "name": "CHEMTREC",
+      "sub": "Hazmat emergency",
+      "num": "800-424-9300"
+    },
+    {
+      "group": "Specialty / Emergency",
+      "name": "Diver's Alert Network (DAN)",
+      "sub": "Dive emergency",
+      "num": "919-684-9111"
+    }
   ]
 }

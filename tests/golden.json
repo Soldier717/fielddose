@@ -761,27 +761,14 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "CONTRAINDICATED ≤ 3 mo",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Contraindicated ≤ 3 months of age",
-     "readyVol": "—",
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
      "weightDose": "CONTRAINDICATED ≤ 3 mo",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
+     "packageSpec": "100 mg/mL",
      "deliveryDose": "Contraindicated ≤ 3 months of age",
      "readyVol": "—",
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -1453,52 +1440,23 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "1.3 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.01 mL + 0.01 mL NS → push 0.03 mL IV/IO",
-     "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "1.3 mg (0.2 mg/kg)",
-       "vol": "Draw 0.01 mL of 100 mg/mL + 0.01 mL NS → push 0.03 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "1.3 mg (0.2 mg/kg)",
-       "vol": "Draw 0.01 mL of 100 mg/mL + 0.01 mL NS → push 0.03 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "1.3 mg (0.2 mg/kg)",
-       "vol": "0.01 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "1.3 mg (0.2 mg/kg)",
-       "vol": "0.01 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "7 mg IV/IO · 13 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.07 mL + 0.07 mL NS → push 0.13 mL IV/IO",
+     "weightDose": "0.65 mg IV/IO · 13 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.007 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "7 mg (1 mg/kg)",
-       "vol": "Draw 0.07 mL of 100 mg/mL + 0.07 mL NS → push 0.13 mL (50 mg/mL)"
+       "dose": "0.65 mg (0.1 mg/kg)",
+       "vol": "0.007 mL of 100 mg/mL (undiluted)",
+       "range": "0.65–1.30 mg"
       },
       "IO": {
-       "dose": "7 mg (1 mg/kg)",
-       "vol": "Draw 0.07 mL of 100 mg/mL + 0.07 mL NS → push 0.13 mL (50 mg/mL)"
+       "dose": "0.65 mg (0.1 mg/kg)",
+       "vol": "0.007 mL of 100 mg/mL (undiluted)",
+       "range": "0.65–1.30 mg"
       },
       "IM": {
        "dose": "13 mg (2 mg/kg)",
@@ -1509,7 +1467,7 @@
        "vol": "0.13 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2181,52 +2139,23 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "1.7 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.02 mL + 0.02 mL NS → push 0.03 mL IV/IO",
-     "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "1.7 mg (0.2 mg/kg)",
-       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.03 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "1.7 mg (0.2 mg/kg)",
-       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.03 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "1.7 mg (0.2 mg/kg)",
-       "vol": "0.02 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "1.7 mg (0.2 mg/kg)",
-       "vol": "0.02 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "9 mg IV/IO · 17 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.09 mL + 0.09 mL NS → push 0.17 mL IV/IO",
+     "weightDose": "0.85 mg IV/IO · 17 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.009 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "9 mg (1 mg/kg)",
-       "vol": "Draw 0.09 mL of 100 mg/mL + 0.09 mL NS → push 0.17 mL (50 mg/mL)"
+       "dose": "0.85 mg (0.1 mg/kg)",
+       "vol": "0.009 mL of 100 mg/mL (undiluted)",
+       "range": "0.85–1.70 mg"
       },
       "IO": {
-       "dose": "9 mg (1 mg/kg)",
-       "vol": "Draw 0.09 mL of 100 mg/mL + 0.09 mL NS → push 0.17 mL (50 mg/mL)"
+       "dose": "0.85 mg (0.1 mg/kg)",
+       "vol": "0.009 mL of 100 mg/mL (undiluted)",
+       "range": "0.85–1.70 mg"
       },
       "IM": {
        "dose": "17 mg (2 mg/kg)",
@@ -2237,7 +2166,7 @@
        "vol": "0.17 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2909,52 +2838,23 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "2.1 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.02 mL + 0.02 mL NS → push 0.04 mL IV/IO",
-     "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "2.1 mg (0.2 mg/kg)",
-       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.04 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "2.1 mg (0.2 mg/kg)",
-       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.04 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "2.1 mg (0.2 mg/kg)",
-       "vol": "0.02 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "2.1 mg (0.2 mg/kg)",
-       "vol": "0.02 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "11 mg IV/IO · 21 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.10 mL + 0.10 mL NS → push 0.21 mL IV/IO",
+     "weightDose": "1.05 mg IV/IO · 21 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.011 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "11 mg (1 mg/kg)",
-       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.21 mL (50 mg/mL)"
+       "dose": "1.05 mg (0.1 mg/kg)",
+       "vol": "0.011 mL of 100 mg/mL (undiluted)",
+       "range": "1.05–2.10 mg"
       },
       "IO": {
-       "dose": "11 mg (1 mg/kg)",
-       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.21 mL (50 mg/mL)"
+       "dose": "1.05 mg (0.1 mg/kg)",
+       "vol": "0.011 mL of 100 mg/mL (undiluted)",
+       "range": "1.05–2.10 mg"
       },
       "IM": {
        "dose": "21 mg (2 mg/kg)",
@@ -2965,7 +2865,7 @@
        "vol": "0.21 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -3637,52 +3537,23 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "2.6 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.03 mL + 0.03 mL NS → push 0.05 mL IV/IO",
-     "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "2.6 mg (0.2 mg/kg)",
-       "vol": "Draw 0.03 mL of 100 mg/mL + 0.03 mL NS → push 0.05 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "2.6 mg (0.2 mg/kg)",
-       "vol": "Draw 0.03 mL of 100 mg/mL + 0.03 mL NS → push 0.05 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "2.6 mg (0.2 mg/kg)",
-       "vol": "0.03 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "2.6 mg (0.2 mg/kg)",
-       "vol": "0.03 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "13 mg IV/IO · 26 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.13 mL + 0.13 mL NS → push 0.26 mL IV/IO",
+     "weightDose": "1.30 mg IV/IO · 26 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.013 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "13 mg (1 mg/kg)",
-       "vol": "Draw 0.13 mL of 100 mg/mL + 0.13 mL NS → push 0.26 mL (50 mg/mL)"
+       "dose": "1.30 mg (0.1 mg/kg)",
+       "vol": "0.013 mL of 100 mg/mL (undiluted)",
+       "range": "1.30–2.60 mg"
       },
       "IO": {
-       "dose": "13 mg (1 mg/kg)",
-       "vol": "Draw 0.13 mL of 100 mg/mL + 0.13 mL NS → push 0.26 mL (50 mg/mL)"
+       "dose": "1.30 mg (0.1 mg/kg)",
+       "vol": "0.013 mL of 100 mg/mL (undiluted)",
+       "range": "1.30–2.60 mg"
       },
       "IM": {
        "dose": "26 mg (2 mg/kg)",
@@ -3693,7 +3564,7 @@
        "vol": "0.26 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4365,52 +4236,23 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "3.3 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.03 mL + 0.03 mL NS → push 0.07 mL IV/IO",
-     "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "3.3 mg (0.2 mg/kg)",
-       "vol": "Draw 0.03 mL of 100 mg/mL + 0.03 mL NS → push 0.07 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "3.3 mg (0.2 mg/kg)",
-       "vol": "Draw 0.03 mL of 100 mg/mL + 0.03 mL NS → push 0.07 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "3.3 mg (0.2 mg/kg)",
-       "vol": "0.03 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "3.3 mg (0.2 mg/kg)",
-       "vol": "0.03 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "17 mg IV/IO · 33 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.17 mL + 0.17 mL NS → push 0.33 mL IV/IO",
+     "weightDose": "1.65 mg IV/IO · 33 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.017 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "17 mg (1 mg/kg)",
-       "vol": "Draw 0.17 mL of 100 mg/mL + 0.17 mL NS → push 0.33 mL (50 mg/mL)"
+       "dose": "1.65 mg (0.1 mg/kg)",
+       "vol": "0.017 mL of 100 mg/mL (undiluted)",
+       "range": "1.65–3.30 mg"
       },
       "IO": {
-       "dose": "17 mg (1 mg/kg)",
-       "vol": "Draw 0.17 mL of 100 mg/mL + 0.17 mL NS → push 0.33 mL (50 mg/mL)"
+       "dose": "1.65 mg (0.1 mg/kg)",
+       "vol": "0.017 mL of 100 mg/mL (undiluted)",
+       "range": "1.65–3.30 mg"
       },
       "IM": {
        "dose": "33 mg (2 mg/kg)",
@@ -4421,7 +4263,7 @@
        "vol": "0.33 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5093,52 +4935,23 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "4.2 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.04 mL + 0.04 mL NS → push 0.08 mL IV/IO",
-     "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "4.2 mg (0.2 mg/kg)",
-       "vol": "Draw 0.04 mL of 100 mg/mL + 0.04 mL NS → push 0.08 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "4.2 mg (0.2 mg/kg)",
-       "vol": "Draw 0.04 mL of 100 mg/mL + 0.04 mL NS → push 0.08 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "4.2 mg (0.2 mg/kg)",
-       "vol": "0.04 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "4.2 mg (0.2 mg/kg)",
-       "vol": "0.04 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "21 mg IV/IO · 42 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.21 mL + 0.21 mL NS → push 0.42 mL IV/IO",
+     "weightDose": "2.10 mg IV/IO · 42 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.021 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "21 mg (1 mg/kg)",
-       "vol": "Draw 0.21 mL of 100 mg/mL + 0.21 mL NS → push 0.42 mL (50 mg/mL)"
+       "dose": "2.10 mg (0.1 mg/kg)",
+       "vol": "0.021 mL of 100 mg/mL (undiluted)",
+       "range": "2.10–4.20 mg"
       },
       "IO": {
-       "dose": "21 mg (1 mg/kg)",
-       "vol": "Draw 0.21 mL of 100 mg/mL + 0.21 mL NS → push 0.42 mL (50 mg/mL)"
+       "dose": "2.10 mg (0.1 mg/kg)",
+       "vol": "0.021 mL of 100 mg/mL (undiluted)",
+       "range": "2.10–4.20 mg"
       },
       "IM": {
        "dose": "42 mg (2 mg/kg)",
@@ -5149,7 +4962,7 @@
        "vol": "0.42 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5821,52 +5634,23 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "5.3 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.05 mL + 0.05 mL NS → push 0.11 mL IV/IO",
-     "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "5.3 mg (0.2 mg/kg)",
-       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.11 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "5.3 mg (0.2 mg/kg)",
-       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.11 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "5.3 mg (0.2 mg/kg)",
-       "vol": "0.05 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "5.3 mg (0.2 mg/kg)",
-       "vol": "0.05 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "27 mg IV/IO · 53 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.27 mL + 0.27 mL NS → push 0.53 mL IV/IO",
+     "weightDose": "2.65 mg IV/IO · 53 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.027 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "27 mg (1 mg/kg)",
-       "vol": "Draw 0.27 mL of 100 mg/mL + 0.27 mL NS → push 0.53 mL (50 mg/mL)"
+       "dose": "2.65 mg (0.1 mg/kg)",
+       "vol": "0.027 mL of 100 mg/mL (undiluted)",
+       "range": "2.65–5.30 mg"
       },
       "IO": {
-       "dose": "27 mg (1 mg/kg)",
-       "vol": "Draw 0.27 mL of 100 mg/mL + 0.27 mL NS → push 0.53 mL (50 mg/mL)"
+       "dose": "2.65 mg (0.1 mg/kg)",
+       "vol": "0.027 mL of 100 mg/mL (undiluted)",
+       "range": "2.65–5.30 mg"
       },
       "IM": {
        "dose": "53 mg (2 mg/kg)",
@@ -5877,7 +5661,7 @@
        "vol": "0.53 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -6549,52 +6333,23 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "6.6 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.07 mL + 0.07 mL NS → push 0.13 mL IV/IO",
-     "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "6.6 mg (0.2 mg/kg)",
-       "vol": "Draw 0.07 mL of 100 mg/mL + 0.07 mL NS → push 0.13 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "6.6 mg (0.2 mg/kg)",
-       "vol": "Draw 0.07 mL of 100 mg/mL + 0.07 mL NS → push 0.13 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "6.6 mg (0.2 mg/kg)",
-       "vol": "0.07 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "6.6 mg (0.2 mg/kg)",
-       "vol": "0.07 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "33 mg IV/IO · 66 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.33 mL + 0.33 mL NS → push 0.66 mL IV/IO",
+     "weightDose": "3.30 mg IV/IO · 66 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.033 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "33 mg (1 mg/kg)",
-       "vol": "Draw 0.33 mL of 100 mg/mL + 0.33 mL NS → push 0.66 mL (50 mg/mL)"
+       "dose": "3.30 mg (0.1 mg/kg)",
+       "vol": "0.033 mL of 100 mg/mL (undiluted)",
+       "range": "3.30–6.60 mg"
       },
       "IO": {
-       "dose": "33 mg (1 mg/kg)",
-       "vol": "Draw 0.33 mL of 100 mg/mL + 0.33 mL NS → push 0.66 mL (50 mg/mL)"
+       "dose": "3.30 mg (0.1 mg/kg)",
+       "vol": "0.033 mL of 100 mg/mL (undiluted)",
+       "range": "3.30–6.60 mg"
       },
       "IM": {
        "dose": "66 mg (2 mg/kg)",
@@ -6605,7 +6360,7 @@
        "vol": "0.66 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -7408,18 +7163,20 @@
      "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
      "indication": "Sub-dissociative pain",
-     "weightDose": "9 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.09 mL + 0.09 mL NS → push 0.18 mL IV/IO",
+     "weightDose": "4.5 mg IV/IO · 9 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.04 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "9 mg (0.2 mg/kg)",
-       "vol": "Draw 0.09 mL of 100 mg/mL + 0.09 mL NS → push 0.18 mL (50 mg/mL)"
+       "dose": "4.5 mg (0.1 mg/kg)",
+       "vol": "0.04 mL of 100 mg/mL (undiluted)",
+       "range": "4.5–9.0 mg"
       },
       "IO": {
-       "dose": "9 mg (0.2 mg/kg)",
-       "vol": "Draw 0.09 mL of 100 mg/mL + 0.09 mL NS → push 0.18 mL (50 mg/mL)"
+       "dose": "4.5 mg (0.1 mg/kg)",
+       "vol": "0.04 mL of 100 mg/mL (undiluted)",
+       "range": "4.5–9.0 mg"
       },
       "IM": {
        "dose": "9 mg (0.2 mg/kg)",
@@ -7430,7 +7187,7 @@
        "vol": "0.09 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -7439,18 +7196,20 @@
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "45 mg IV/IO · 90 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.5 mL + 0.5 mL NS → push 0.9 mL IV/IO",
+     "weightDose": "4.5 mg IV/IO · 90 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.04 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "45 mg (1 mg/kg)",
-       "vol": "Draw 0.5 mL of 100 mg/mL + 0.5 mL NS → push 0.9 mL (50 mg/mL)"
+       "dose": "4.5 mg (0.1 mg/kg)",
+       "vol": "0.04 mL of 100 mg/mL (undiluted)",
+       "range": "4.5–9.0 mg"
       },
       "IO": {
-       "dose": "45 mg (1 mg/kg)",
-       "vol": "Draw 0.5 mL of 100 mg/mL + 0.5 mL NS → push 0.9 mL (50 mg/mL)"
+       "dose": "4.5 mg (0.1 mg/kg)",
+       "vol": "0.04 mL of 100 mg/mL (undiluted)",
+       "range": "4.5–9.0 mg"
       },
       "IM": {
        "dose": "90 mg (2 mg/kg)",
@@ -7461,7 +7220,7 @@
        "vol": "0.9 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -7568,45 +7327,6 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Nausea",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea / vomiting",
-     "weightDose": "1.25 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 0.5 mL IV/IO/IM",
-     "readyVol": "0.5 mL of 2.5 mg/mL",
-     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Delirium",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Hyperactive delirium",
-     "weightDose": "5 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 2 mL IV/IO/IM",
-     "readyVol": "2 mL of 2.5 mg/mL",
-     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Promethazine (Phenergan)",
-     "class": "Antiemetic / antihistamine",
-     "indication": "Nausea / vomiting",
-     "weightDose": "25 mg",
-     "packageSpec": "25 mg/mL",
-     "deliveryDose": "IV — dilute, infuse slowly",
-     "readyVol": "—",
-     "detail": "25 mg IV. Extravasation can cause severe tissue damage.",
-     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -8385,52 +8105,23 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "2.0 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.02 mL + 0.02 mL NS → push 0.04 mL IV/IO",
-     "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "2.0 mg (0.2 mg/kg)",
-       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.04 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "2.0 mg (0.2 mg/kg)",
-       "vol": "Draw 0.02 mL of 100 mg/mL + 0.02 mL NS → push 0.04 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "2.0 mg (0.2 mg/kg)",
-       "vol": "0.02 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "2.0 mg (0.2 mg/kg)",
-       "vol": "0.02 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "10 mg IV/IO · 20 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.10 mL + 0.10 mL NS → push 0.20 mL IV/IO",
+     "weightDose": "1.00 mg IV/IO · 20 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.010 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "10 mg (1 mg/kg)",
-       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.20 mL (50 mg/mL)"
+       "dose": "1.00 mg (0.1 mg/kg)",
+       "vol": "0.010 mL of 100 mg/mL (undiluted)",
+       "range": "1.00–2.00 mg"
       },
       "IO": {
-       "dose": "10 mg (1 mg/kg)",
-       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.20 mL (50 mg/mL)"
+       "dose": "1.00 mg (0.1 mg/kg)",
+       "vol": "0.010 mL of 100 mg/mL (undiluted)",
+       "range": "1.00–2.00 mg"
       },
       "IM": {
        "dose": "20 mg (2 mg/kg)",
@@ -8441,7 +8132,7 @@
        "vol": "0.20 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -9113,52 +8804,23 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Pain",
-     "class": "Dissociative analgesic",
-     "indication": "Sub-dissociative pain",
-     "weightDose": "5.0 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.05 mL + 0.05 mL NS → push 0.10 mL IV/IO",
-     "readyVol": "—",
-     "routeDoses": {
-      "IV": {
-       "dose": "5.0 mg (0.2 mg/kg)",
-       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.10 mL (50 mg/mL)"
-      },
-      "IO": {
-       "dose": "5.0 mg (0.2 mg/kg)",
-       "vol": "Draw 0.05 mL of 100 mg/mL + 0.05 mL NS → push 0.10 mL (50 mg/mL)"
-      },
-      "IM": {
-       "dose": "5.0 mg (0.2 mg/kg)",
-       "vol": "0.05 mL of 100 mg/mL (undiluted)"
-      },
-      "IN": {
-       "dose": "5.0 mg (0.2 mg/kg)",
-       "vol": "0.05 mL of 100 mg/mL (undiluted)"
-      }
-     },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.",
-     "route": "IV / IO / IM / IN",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "25 mg IV/IO · 50 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.25 mL + 0.25 mL NS → push 0.50 mL IV/IO",
+     "weightDose": "2.50 mg IV/IO · 50 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.025 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "25 mg (1 mg/kg)",
-       "vol": "Draw 0.25 mL of 100 mg/mL + 0.25 mL NS → push 0.50 mL (50 mg/mL)"
+       "dose": "2.50 mg (0.1 mg/kg)",
+       "vol": "0.025 mL of 100 mg/mL (undiluted)",
+       "range": "2.50–5.00 mg"
       },
       "IO": {
-       "dose": "25 mg (1 mg/kg)",
-       "vol": "Draw 0.25 mL of 100 mg/mL + 0.25 mL NS → push 0.50 mL (50 mg/mL)"
+       "dose": "2.50 mg (0.1 mg/kg)",
+       "vol": "0.025 mL of 100 mg/mL (undiluted)",
+       "range": "2.50–5.00 mg"
       },
       "IM": {
        "dose": "50 mg (2 mg/kg)",
@@ -9169,7 +8831,7 @@
        "vol": "0.50 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -9972,18 +9634,20 @@
      "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
      "indication": "Sub-dissociative pain",
-     "weightDose": "10 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.10 mL + 0.10 mL NS → push 0.20 mL IV/IO",
+     "weightDose": "5.0 mg IV/IO · 10 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.05 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "10 mg (0.2 mg/kg)",
-       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.20 mL (50 mg/mL)"
+       "dose": "5.0 mg (0.1 mg/kg)",
+       "vol": "0.05 mL of 100 mg/mL (undiluted)",
+       "range": "5.0–10.0 mg"
       },
       "IO": {
-       "dose": "10 mg (0.2 mg/kg)",
-       "vol": "Draw 0.10 mL of 100 mg/mL + 0.10 mL NS → push 0.20 mL (50 mg/mL)"
+       "dose": "5.0 mg (0.1 mg/kg)",
+       "vol": "0.05 mL of 100 mg/mL (undiluted)",
+       "range": "5.0–10.0 mg"
       },
       "IM": {
        "dose": "10 mg (0.2 mg/kg)",
@@ -9994,7 +9658,7 @@
        "vol": "0.10 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -10003,18 +9667,20 @@
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "50 mg IV/IO · 100 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.5 mL + 0.5 mL NS → push 1.0 mL IV/IO",
+     "weightDose": "5.0 mg IV/IO · 100 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.05 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "50 mg (1 mg/kg)",
-       "vol": "Draw 0.5 mL of 100 mg/mL + 0.5 mL NS → push 1.0 mL (50 mg/mL)"
+       "dose": "5.0 mg (0.1 mg/kg)",
+       "vol": "0.05 mL of 100 mg/mL (undiluted)",
+       "range": "5.0–10.0 mg"
       },
       "IO": {
-       "dose": "50 mg (1 mg/kg)",
-       "vol": "Draw 0.5 mL of 100 mg/mL + 0.5 mL NS → push 1.0 mL (50 mg/mL)"
+       "dose": "5.0 mg (0.1 mg/kg)",
+       "vol": "0.05 mL of 100 mg/mL (undiluted)",
+       "range": "5.0–10.0 mg"
       },
       "IM": {
        "dose": "100 mg (2 mg/kg)",
@@ -10025,7 +9691,7 @@
        "vol": "1.0 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -10132,45 +9798,6 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Nausea",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea / vomiting",
-     "weightDose": "1.25 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 0.5 mL IV/IO/IM",
-     "readyVol": "0.5 mL of 2.5 mg/mL",
-     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Delirium",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Hyperactive delirium",
-     "weightDose": "5 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 2 mL IV/IO/IM",
-     "readyVol": "2 mL of 2.5 mg/mL",
-     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Promethazine (Phenergan)",
-     "class": "Antiemetic / antihistamine",
-     "indication": "Nausea / vomiting",
-     "weightDose": "25 mg",
-     "packageSpec": "25 mg/mL",
-     "deliveryDose": "IV — dilute, infuse slowly",
-     "readyVol": "—",
-     "detail": "25 mg IV. Extravasation can cause severe tissue damage.",
-     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -10906,18 +10533,20 @@
      "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
      "indication": "Sub-dissociative pain",
-     "weightDose": "12 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.12 mL + 0.12 mL NS → push 0.24 mL IV/IO",
+     "weightDose": "6.0 mg IV/IO · 12 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.06 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "12 mg (0.2 mg/kg)",
-       "vol": "Draw 0.12 mL of 100 mg/mL + 0.12 mL NS → push 0.24 mL (50 mg/mL)"
+       "dose": "6.0 mg (0.1 mg/kg)",
+       "vol": "0.06 mL of 100 mg/mL (undiluted)",
+       "range": "6.0–12.0 mg"
       },
       "IO": {
-       "dose": "12 mg (0.2 mg/kg)",
-       "vol": "Draw 0.12 mL of 100 mg/mL + 0.12 mL NS → push 0.24 mL (50 mg/mL)"
+       "dose": "6.0 mg (0.1 mg/kg)",
+       "vol": "0.06 mL of 100 mg/mL (undiluted)",
+       "range": "6.0–12.0 mg"
       },
       "IM": {
        "dose": "12 mg (0.2 mg/kg)",
@@ -10928,7 +10557,7 @@
        "vol": "0.12 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -10937,18 +10566,20 @@
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "60 mg IV/IO · 120 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.6 mL + 0.6 mL NS → push 1.2 mL IV/IO",
+     "weightDose": "6.0 mg IV/IO · 120 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.06 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "60 mg (1 mg/kg)",
-       "vol": "Draw 0.6 mL of 100 mg/mL + 0.6 mL NS → push 1.2 mL (50 mg/mL)"
+       "dose": "6.0 mg (0.1 mg/kg)",
+       "vol": "0.06 mL of 100 mg/mL (undiluted)",
+       "range": "6.0–12.0 mg"
       },
       "IO": {
-       "dose": "60 mg (1 mg/kg)",
-       "vol": "Draw 0.6 mL of 100 mg/mL + 0.6 mL NS → push 1.2 mL (50 mg/mL)"
+       "dose": "6.0 mg (0.1 mg/kg)",
+       "vol": "0.06 mL of 100 mg/mL (undiluted)",
+       "range": "6.0–12.0 mg"
       },
       "IM": {
        "dose": "120 mg (2 mg/kg)",
@@ -10959,7 +10590,7 @@
        "vol": "1.2 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -11066,45 +10697,6 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Nausea",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea / vomiting",
-     "weightDose": "1.25 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 0.5 mL IV/IO/IM",
-     "readyVol": "0.5 mL of 2.5 mg/mL",
-     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Delirium",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Hyperactive delirium",
-     "weightDose": "5 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 2 mL IV/IO/IM",
-     "readyVol": "2 mL of 2.5 mg/mL",
-     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Promethazine (Phenergan)",
-     "class": "Antiemetic / antihistamine",
-     "indication": "Nausea / vomiting",
-     "weightDose": "25 mg",
-     "packageSpec": "25 mg/mL",
-     "deliveryDose": "IV — dilute, infuse slowly",
-     "readyVol": "—",
-     "detail": "25 mg IV. Extravasation can cause severe tissue damage.",
-     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -11840,18 +11432,20 @@
      "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
      "indication": "Sub-dissociative pain",
-     "weightDose": "14 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.14 mL + 0.14 mL NS → push 0.28 mL IV/IO",
+     "weightDose": "7.0 mg IV/IO · 14 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.07 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "14 mg (0.2 mg/kg)",
-       "vol": "Draw 0.14 mL of 100 mg/mL + 0.14 mL NS → push 0.28 mL (50 mg/mL)"
+       "dose": "7.0 mg (0.1 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)",
+       "range": "7.0–14.0 mg"
       },
       "IO": {
-       "dose": "14 mg (0.2 mg/kg)",
-       "vol": "Draw 0.14 mL of 100 mg/mL + 0.14 mL NS → push 0.28 mL (50 mg/mL)"
+       "dose": "7.0 mg (0.1 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)",
+       "range": "7.0–14.0 mg"
       },
       "IM": {
        "dose": "14 mg (0.2 mg/kg)",
@@ -11862,7 +11456,7 @@
        "vol": "0.14 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -11871,18 +11465,20 @@
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "70 mg IV/IO · 140 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.7 mL + 0.7 mL NS → push 1.4 mL IV/IO",
+     "weightDose": "7.0 mg IV/IO · 140 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.07 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "70 mg (1 mg/kg)",
-       "vol": "Draw 0.7 mL of 100 mg/mL + 0.7 mL NS → push 1.4 mL (50 mg/mL)"
+       "dose": "7.0 mg (0.1 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)",
+       "range": "7.0–14.0 mg"
       },
       "IO": {
-       "dose": "70 mg (1 mg/kg)",
-       "vol": "Draw 0.7 mL of 100 mg/mL + 0.7 mL NS → push 1.4 mL (50 mg/mL)"
+       "dose": "7.0 mg (0.1 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)",
+       "range": "7.0–14.0 mg"
       },
       "IM": {
        "dose": "140 mg (2 mg/kg)",
@@ -11893,7 +11489,7 @@
        "vol": "1.4 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12000,45 +11596,6 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Nausea",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea / vomiting",
-     "weightDose": "1.25 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 0.5 mL IV/IO/IM",
-     "readyVol": "0.5 mL of 2.5 mg/mL",
-     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Delirium",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Hyperactive delirium",
-     "weightDose": "5 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 2 mL IV/IO/IM",
-     "readyVol": "2 mL of 2.5 mg/mL",
-     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Promethazine (Phenergan)",
-     "class": "Antiemetic / antihistamine",
-     "indication": "Nausea / vomiting",
-     "weightDose": "25 mg",
-     "packageSpec": "25 mg/mL",
-     "deliveryDose": "IV — dilute, infuse slowly",
-     "readyVol": "—",
-     "detail": "25 mg IV. Extravasation can cause severe tissue damage.",
-     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -12774,18 +12331,20 @@
      "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
      "indication": "Sub-dissociative pain",
-     "weightDose": "15 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.15 mL + 0.15 mL NS → push 0.30 mL IV/IO",
+     "weightDose": "7.5 mg IV/IO · 15 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.07 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "15 mg (0.2 mg/kg)",
-       "vol": "Draw 0.15 mL of 100 mg/mL + 0.15 mL NS → push 0.30 mL (50 mg/mL)"
+       "dose": "7.5 mg (0.1 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)",
+       "range": "7.5–15.0 mg"
       },
       "IO": {
-       "dose": "15 mg (0.2 mg/kg)",
-       "vol": "Draw 0.15 mL of 100 mg/mL + 0.15 mL NS → push 0.30 mL (50 mg/mL)"
+       "dose": "7.5 mg (0.1 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)",
+       "range": "7.5–15.0 mg"
       },
       "IM": {
        "dose": "15 mg (0.2 mg/kg)",
@@ -12796,7 +12355,7 @@
        "vol": "0.15 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12805,18 +12364,20 @@
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "75 mg IV/IO · 150 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.8 mL + 0.8 mL NS → push 1.5 mL IV/IO",
+     "weightDose": "7.5 mg IV/IO · 150 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.07 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "75 mg (1 mg/kg)",
-       "vol": "Draw 0.8 mL of 100 mg/mL + 0.8 mL NS → push 1.5 mL (50 mg/mL)"
+       "dose": "7.5 mg (0.1 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)",
+       "range": "7.5–15.0 mg"
       },
       "IO": {
-       "dose": "75 mg (1 mg/kg)",
-       "vol": "Draw 0.8 mL of 100 mg/mL + 0.8 mL NS → push 1.5 mL (50 mg/mL)"
+       "dose": "7.5 mg (0.1 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)",
+       "range": "7.5–15.0 mg"
       },
       "IM": {
        "dose": "150 mg (2 mg/kg)",
@@ -12827,7 +12388,7 @@
        "vol": "1.5 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12934,45 +12495,6 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Nausea",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea / vomiting",
-     "weightDose": "1.25 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 0.5 mL IV/IO/IM",
-     "readyVol": "0.5 mL of 2.5 mg/mL",
-     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Delirium",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Hyperactive delirium",
-     "weightDose": "5 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 2 mL IV/IO/IM",
-     "readyVol": "2 mL of 2.5 mg/mL",
-     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Promethazine (Phenergan)",
-     "class": "Antiemetic / antihistamine",
-     "indication": "Nausea / vomiting",
-     "weightDose": "25 mg",
-     "packageSpec": "25 mg/mL",
-     "deliveryDose": "IV — dilute, infuse slowly",
-     "readyVol": "—",
-     "detail": "25 mg IV. Extravasation can cause severe tissue damage.",
-     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -13708,18 +13230,20 @@
      "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
      "indication": "Sub-dissociative pain",
-     "weightDose": "16 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.16 mL + 0.16 mL NS → push 0.32 mL IV/IO",
+     "weightDose": "8.0 mg IV/IO · 16 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.08 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "16 mg (0.2 mg/kg)",
-       "vol": "Draw 0.16 mL of 100 mg/mL + 0.16 mL NS → push 0.32 mL (50 mg/mL)"
+       "dose": "8.0 mg (0.1 mg/kg)",
+       "vol": "0.08 mL of 100 mg/mL (undiluted)",
+       "range": "8.0–16.0 mg"
       },
       "IO": {
-       "dose": "16 mg (0.2 mg/kg)",
-       "vol": "Draw 0.16 mL of 100 mg/mL + 0.16 mL NS → push 0.32 mL (50 mg/mL)"
+       "dose": "8.0 mg (0.1 mg/kg)",
+       "vol": "0.08 mL of 100 mg/mL (undiluted)",
+       "range": "8.0–16.0 mg"
       },
       "IM": {
        "dose": "16 mg (0.2 mg/kg)",
@@ -13730,7 +13254,7 @@
        "vol": "0.16 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -13739,18 +13263,20 @@
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "80 mg IV/IO · 160 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.8 mL + 0.8 mL NS → push 1.6 mL IV/IO",
+     "weightDose": "8.0 mg IV/IO · 160 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.08 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "80 mg (1 mg/kg)",
-       "vol": "Draw 0.8 mL of 100 mg/mL + 0.8 mL NS → push 1.6 mL (50 mg/mL)"
+       "dose": "8.0 mg (0.1 mg/kg)",
+       "vol": "0.08 mL of 100 mg/mL (undiluted)",
+       "range": "8.0–16.0 mg"
       },
       "IO": {
-       "dose": "80 mg (1 mg/kg)",
-       "vol": "Draw 0.8 mL of 100 mg/mL + 0.8 mL NS → push 1.6 mL (50 mg/mL)"
+       "dose": "8.0 mg (0.1 mg/kg)",
+       "vol": "0.08 mL of 100 mg/mL (undiluted)",
+       "range": "8.0–16.0 mg"
       },
       "IM": {
        "dose": "160 mg (2 mg/kg)",
@@ -13761,7 +13287,7 @@
        "vol": "1.6 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -13868,45 +13394,6 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Nausea",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea / vomiting",
-     "weightDose": "1.25 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 0.5 mL IV/IO/IM",
-     "readyVol": "0.5 mL of 2.5 mg/mL",
-     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Delirium",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Hyperactive delirium",
-     "weightDose": "5 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 2 mL IV/IO/IM",
-     "readyVol": "2 mL of 2.5 mg/mL",
-     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Promethazine (Phenergan)",
-     "class": "Antiemetic / antihistamine",
-     "indication": "Nausea / vomiting",
-     "weightDose": "25 mg",
-     "packageSpec": "25 mg/mL",
-     "deliveryDose": "IV — dilute, infuse slowly",
-     "readyVol": "—",
-     "detail": "25 mg IV. Extravasation can cause severe tissue damage.",
-     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -14642,18 +14129,20 @@
      "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
      "indication": "Sub-dissociative pain",
-     "weightDose": "18 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.18 mL + 0.18 mL NS → push 0.36 mL IV/IO",
+     "weightDose": "9.0 mg IV/IO · 18 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.09 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "18 mg (0.2 mg/kg)",
-       "vol": "Draw 0.18 mL of 100 mg/mL + 0.18 mL NS → push 0.36 mL (50 mg/mL)"
+       "dose": "9.0 mg (0.1 mg/kg)",
+       "vol": "0.09 mL of 100 mg/mL (undiluted)",
+       "range": "9.0–18.0 mg"
       },
       "IO": {
-       "dose": "18 mg (0.2 mg/kg)",
-       "vol": "Draw 0.18 mL of 100 mg/mL + 0.18 mL NS → push 0.36 mL (50 mg/mL)"
+       "dose": "9.0 mg (0.1 mg/kg)",
+       "vol": "0.09 mL of 100 mg/mL (undiluted)",
+       "range": "9.0–18.0 mg"
       },
       "IM": {
        "dose": "18 mg (0.2 mg/kg)",
@@ -14664,7 +14153,7 @@
        "vol": "0.18 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -14673,18 +14162,20 @@
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "90 mg IV/IO · 180 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.9 mL + 0.9 mL NS → push 1.8 mL IV/IO",
+     "weightDose": "9.0 mg IV/IO · 180 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.09 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "90 mg (1 mg/kg)",
-       "vol": "Draw 0.9 mL of 100 mg/mL + 0.9 mL NS → push 1.8 mL (50 mg/mL)"
+       "dose": "9.0 mg (0.1 mg/kg)",
+       "vol": "0.09 mL of 100 mg/mL (undiluted)",
+       "range": "9.0–18.0 mg"
       },
       "IO": {
-       "dose": "90 mg (1 mg/kg)",
-       "vol": "Draw 0.9 mL of 100 mg/mL + 0.9 mL NS → push 1.8 mL (50 mg/mL)"
+       "dose": "9.0 mg (0.1 mg/kg)",
+       "vol": "0.09 mL of 100 mg/mL (undiluted)",
+       "range": "9.0–18.0 mg"
       },
       "IM": {
        "dose": "180 mg (2 mg/kg)",
@@ -14695,7 +14186,7 @@
        "vol": "1.8 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -14802,45 +14293,6 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Nausea",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea / vomiting",
-     "weightDose": "1.25 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 0.5 mL IV/IO/IM",
-     "readyVol": "0.5 mL of 2.5 mg/mL",
-     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Delirium",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Hyperactive delirium",
-     "weightDose": "5 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 2 mL IV/IO/IM",
-     "readyVol": "2 mL of 2.5 mg/mL",
-     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Promethazine (Phenergan)",
-     "class": "Antiemetic / antihistamine",
-     "indication": "Nausea / vomiting",
-     "weightDose": "25 mg",
-     "packageSpec": "25 mg/mL",
-     "deliveryDose": "IV — dilute, infuse slowly",
-     "readyVol": "—",
-     "detail": "25 mg IV. Extravasation can cause severe tissue damage.",
-     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -15576,18 +15028,20 @@
      "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
      "indication": "Sub-dissociative pain",
-     "weightDose": "20 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.20 mL + 0.20 mL NS → push 0.40 mL IV/IO",
+     "weightDose": "10.0 mg IV/IO · 20 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.10 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "20 mg (0.2 mg/kg)",
-       "vol": "Draw 0.20 mL of 100 mg/mL + 0.20 mL NS → push 0.40 mL (50 mg/mL)"
+       "dose": "10.0 mg (0.1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)",
+       "range": "10.0–20.0 mg"
       },
       "IO": {
-       "dose": "20 mg (0.2 mg/kg)",
-       "vol": "Draw 0.20 mL of 100 mg/mL + 0.20 mL NS → push 0.40 mL (50 mg/mL)"
+       "dose": "10.0 mg (0.1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)",
+       "range": "10.0–20.0 mg"
       },
       "IM": {
        "dose": "20 mg (0.2 mg/kg)",
@@ -15598,7 +15052,7 @@
        "vol": "0.20 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -15607,18 +15061,20 @@
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "100 mg IV/IO · 200 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 1.0 mL + 1.0 mL NS → push 2.0 mL IV/IO",
+     "weightDose": "10.0 mg IV/IO · 200 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.10 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "100 mg (1 mg/kg)",
-       "vol": "Draw 1.0 mL of 100 mg/mL + 1.0 mL NS → push 2.0 mL (50 mg/mL)"
+       "dose": "10.0 mg (0.1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)",
+       "range": "10.0–20.0 mg"
       },
       "IO": {
-       "dose": "100 mg (1 mg/kg)",
-       "vol": "Draw 1.0 mL of 100 mg/mL + 1.0 mL NS → push 2.0 mL (50 mg/mL)"
+       "dose": "10.0 mg (0.1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)",
+       "range": "10.0–20.0 mg"
       },
       "IM": {
        "dose": "200 mg (2 mg/kg)",
@@ -15629,7 +15085,7 @@
        "vol": "2.0 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -15736,45 +15192,6 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Nausea",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea / vomiting",
-     "weightDose": "1.25 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 0.5 mL IV/IO/IM",
-     "readyVol": "0.5 mL of 2.5 mg/mL",
-     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Delirium",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Hyperactive delirium",
-     "weightDose": "5 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 2 mL IV/IO/IM",
-     "readyVol": "2 mL of 2.5 mg/mL",
-     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Promethazine (Phenergan)",
-     "class": "Antiemetic / antihistamine",
-     "indication": "Nausea / vomiting",
-     "weightDose": "25 mg",
-     "packageSpec": "25 mg/mL",
-     "deliveryDose": "IV — dilute, infuse slowly",
-     "readyVol": "—",
-     "detail": "25 mg IV. Extravasation can cause severe tissue damage.",
-     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -16510,18 +15927,20 @@
      "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
      "indication": "Sub-dissociative pain",
-     "weightDose": "20 mg (0.2 mg/kg)",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 0.20 mL + 0.20 mL NS → push 0.40 mL IV/IO",
+     "weightDose": "10.0 mg IV/IO · 20 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.10 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "20 mg (0.2 mg/kg)",
-       "vol": "Draw 0.20 mL of 100 mg/mL + 0.20 mL NS → push 0.40 mL (50 mg/mL)"
+       "dose": "10.0 mg (0.1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)",
+       "range": "10.0–20.0 mg"
       },
       "IO": {
-       "dose": "20 mg (0.2 mg/kg)",
-       "vol": "Draw 0.20 mL of 100 mg/mL + 0.20 mL NS → push 0.40 mL (50 mg/mL)"
+       "dose": "10.0 mg (0.1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)",
+       "range": "10.0–20.0 mg"
       },
       "IM": {
        "dose": "20 mg (0.2 mg/kg)",
@@ -16532,7 +15951,7 @@
        "vol": "0.20 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -16541,18 +15960,20 @@
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
-     "weightDose": "100 mg IV/IO · 200 mg IM/IN",
-     "packageSpec": "100 mg/mL · dilute 1:1 for IV (50 mg/mL)",
-     "deliveryDose": "Draw 1.0 mL + 1.0 mL NS → push 2.0 mL IV/IO",
+     "weightDose": "10.0 mg IV/IO · 200 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.10 mL IV/IO of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "100 mg (1 mg/kg)",
-       "vol": "Draw 1.0 mL of 100 mg/mL + 1.0 mL NS → push 2.0 mL (50 mg/mL)"
+       "dose": "10.0 mg (0.1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)",
+       "range": "10.0–20.0 mg"
       },
       "IO": {
-       "dose": "100 mg (1 mg/kg)",
-       "vol": "Draw 1.0 mL of 100 mg/mL + 1.0 mL NS → push 2.0 mL (50 mg/mL)"
+       "dose": "10.0 mg (0.1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)",
+       "range": "10.0–20.0 mg"
       },
       "IM": {
        "dose": "200 mg (2 mg/kg)",
@@ -16563,7 +15984,7 @@
        "vol": "2.0 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -16670,45 +16091,6 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Nausea",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Nausea / vomiting",
-     "weightDose": "1.25 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 0.5 mL IV/IO/IM",
-     "readyVol": "0.5 mL of 2.5 mg/mL",
-     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Droperidol — Delirium",
-     "class": "Antiemetic / antipsychotic",
-     "indication": "Hyperactive delirium",
-     "weightDose": "5 mg",
-     "packageSpec": "2.5 mg/mL",
-     "deliveryDose": "Push 2 mL IV/IO/IM",
-     "readyVol": "2 mL of 2.5 mg/mL",
-     "detail": "Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.",
-     "route": "IV / IO / IM",
-     "max": "Per protocol"
-    },
-    {
-     "rhythm": "non-arrest",
-     "name": "Promethazine (Phenergan)",
-     "class": "Antiemetic / antihistamine",
-     "indication": "Nausea / vomiting",
-     "weightDose": "25 mg",
-     "packageSpec": "25 mg/mL",
-     "deliveryDose": "IV — dilute, infuse slowly",
-     "readyVol": "—",
-     "detail": "25 mg IV. Extravasation can cause severe tissue damage.",
-     "route": "IV",
      "max": "Per protocol"
     },
     {

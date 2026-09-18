@@ -4760,25 +4760,25 @@ function ccGetDrugsBase() {
         readyVol: `${ccFmt(1*kg/50, 1)} mL of 50 mcg/mL`,
         detail: '1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Pain', class: 'Dissociative analgesic', indication: 'Sub-dissociative pain',
-        weightDose: `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`,
-        packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
-        deliveryDose: `Draw ${ccFmt(0.2*kg/100, 2)} mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL IV/IO`,
+        weightDose: `${ccFmt(0.1*kg, 1)} mg IV/IO · ${ccFmt(0.2*kg, 0)} mg IM/IN`,
+        packageSpec: '100 mg/mL',
+        deliveryDose: `${ccFmt(0.1*kg/100, 2)} mL IV/IO of 100 mg/mL (undiluted)`,
         readyVol: '—',
         routeDoses: rcRouteDoses([
-          ['IV/IO', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `Draw ${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL (50 mg/mL)`],
+          ['IV/IO', `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`, `${ccFmt(0.1*kg/100, 2)} mL of 100 mg/mL (undiluted)`, `${ccFmt(0.1*kg, 1)}–${ccFmt(0.2*kg, 1)} mg`],
           ['IM/IN', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
-        weightDose: `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
-        packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
-        deliveryDose: `Draw ${ccFmt(1*kg/100, 1)} mL + ${ccFmt(1*kg/100, 1)} mL NS → push ${ccFmt(1*kg/50, 1)} mL IV/IO`,
+        weightDose: `${ccFmt(0.1*kg, 1)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
+        packageSpec: '100 mg/mL',
+        deliveryDose: `${ccFmt(0.1*kg/100, 2)} mL IV/IO of 100 mg/mL (undiluted)`,
         readyVol: '—',
         routeDoses: rcRouteDoses([
-          ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `Draw ${ccFmt(1*kg/100, 1)} mL of 100 mg/mL + ${ccFmt(1*kg/100, 1)} mL NS → push ${ccFmt(1*kg/50, 1)} mL (50 mg/mL)`],
+          ['IV/IO', `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`, `${ccFmt(0.1*kg/100, 2)} mL of 100 mg/mL (undiluted)`, `${ccFmt(0.1*kg, 1)}–${ccFmt(0.2*kg, 1)} mg`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 1)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Procedural sedation: 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Delirium', class: 'Dissociative analgesic', indication: 'Hyperactive delirium',
         weightDose: `${ccFmt(Math.min(4*kg, 500), 0)} mg (4 mg/kg, max 500)`,
         packageSpec: '100 mg/mL',
@@ -4825,24 +4825,9 @@ function ccGetDrugsBase() {
         deliveryDose: 'Push 1 mL IV/IO q5 min PRN',
         readyVol: '1 mL of 5 mg/mL',
         detail: '5 mg IV/IO; repeat q5 min PRN.', route: 'IV / IO', max: 'Per protocol' },
-      { rhythm: 'non-arrest', name: 'Droperidol — Nausea', class: 'Antiemetic / antipsychotic', indication: 'Nausea / vomiting',
-        weightDose: '1.25 mg',
-        packageSpec: '2.5 mg/mL',
-        deliveryDose: 'Push 0.5 mL IV/IO/IM',
-        readyVol: '0.5 mL of 2.5 mg/mL',
-        detail: 'Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT.', route: 'IV / IO / IM', max: 'Per protocol' },
-      { rhythm: 'non-arrest', name: 'Droperidol — Delirium', class: 'Antiemetic / antipsychotic', indication: 'Hyperactive delirium',
-        weightDose: '5 mg',
-        packageSpec: '2.5 mg/mL',
-        deliveryDose: 'Push 2 mL IV/IO/IM',
-        readyVol: '2 mL of 2.5 mg/mL',
-        detail: 'Hyperactive delirium 5 mg IM/IV/IO. Caution: known long QT.', route: 'IV / IO / IM', max: 'Per protocol' },
-      { rhythm: 'non-arrest', name: 'Promethazine (Phenergan)', class: 'Antiemetic / antihistamine', indication: 'Nausea / vomiting',
-        weightDose: '25 mg',
-        packageSpec: '25 mg/mL',
-        deliveryDose: 'IV — dilute, infuse slowly',
-        readyVol: '—',
-        detail: '25 mg IV. Extravasation can cause severe tissue damage.', route: 'IV', max: 'Per protocol' },
+      // Droperidol and Promethazine withdrawn from the app per medical
+      // direction 9/2026 (Dr. Dunavant) — "remove from app". Ondansetron is
+      // now the only antiemetic; Midazolam the only delirium alternative.
       { rhythm: 'non-arrest', name: 'Labetalol', class: 'Beta/alpha blocker', indication: 'Peripartum hypertension / eclampsia',
         weightDose: '20 → 40 → 80 mg',
         packageSpec: '5 mg/mL',
@@ -5065,28 +5050,20 @@ function ccGetDrugsBase() {
         readyVol: `${ccFmt(1*kg/50, 2)} mL of 50 mcg/mL`,
         detail: '1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       // Ketamine peds: contraindicated ≤ 3 months. Broselow 3/4/5 kg zones
-      // are the "< 3 months" zones, so under 6 kg the rows show the
+      // are the "< 3 months" zones, so under 6 kg the row shows the
       // contraindication instead of computing a dose.
-      { rhythm: 'non-arrest', name: 'Ketamine — Pain', class: 'Dissociative analgesic', indication: 'Sub-dissociative pain',
-        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`,
-        packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
-        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `Draw ${ccFmt(0.2*kg/100, 2)} mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL IV/IO`,
-        readyVol: '—',
-        routeDoses: kg < 6 ? undefined : rcRouteDoses([
-          ['IV/IO', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `Draw ${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(0.2*kg/100, 2)} mL NS → push ${ccFmt(0.2*kg/50, 2)} mL (50 mg/mL)`],
-          ['IM/IN', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
-        ]),
-        detail: 'Sub-dissociative analgesia 0.2 mg/kg IV/IO/IM/IN; may repeat q20 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+      // There is deliberately NO pediatric Pain row: ketamine is not used
+      // for pediatric pain per medical direction 9/2026 (Dr. Dunavant).
       { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
-        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
-        packageSpec: '100 mg/mL · dilute 1:1 for IV (50 mg/mL)',
-        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `Draw ${ccFmt(1*kg/100, 2)} mL + ${ccFmt(1*kg/100, 2)} mL NS → push ${ccFmt(1*kg/50, 2)} mL IV/IO`,
+        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(0.1*kg, 2)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
+        packageSpec: '100 mg/mL',
+        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `${ccFmt(0.1*kg/100, 3)} mL IV/IO of 100 mg/mL (undiluted)`,
         readyVol: '—',
         routeDoses: kg < 6 ? undefined : rcRouteDoses([
-          ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `Draw ${ccFmt(1*kg/100, 2)} mL of 100 mg/mL + ${ccFmt(1*kg/100, 2)} mL NS → push ${ccFmt(1*kg/50, 2)} mL (50 mg/mL)`],
+          ['IV/IO', `${ccFmt(0.1*kg, 2)} mg (0.1 mg/kg)`, `${ccFmt(0.1*kg/100, 3)} mL of 100 mg/mL (undiluted)`, `${ccFmt(0.1*kg, 2)}–${ccFmt(0.2*kg, 2)} mg`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Procedural sedation 1 mg/kg IV/IO or 2 mg/kg IM/IN — dose changes with route; IV/IO may repeat q10 min PRN. IV/IO: calculate dose, draw it from the 100 mg/mL vial, dilute 1:1 with NS, push the full diluted volume. Medical Control/Orders/Requests: consult as needed. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Morphine', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`,
         packageSpec: '4 mg/mL',
@@ -6413,11 +6390,14 @@ if (typeof document !== 'undefined' && document.fonts && document.fonts.ready &&
 
 // Route-dependent dosing: builds a per-route lookup from
 // [routes, doseLabel, volLabel] rows — the drug card's route toggle
-// swaps dose AND volume together (e.g. Ketamine sedation 1 mg/kg
+// swaps dose AND volume together (e.g. Ketamine sedation 0.1 mg/kg
 // IV/IO vs 2 mg/kg IM/IN).
+// Optional 4th element is a titratable range for that route ("7-14 mg"):
+// the headline stays the single starting dose, the dose picker spans the
+// range. See renderDrugModal.
 function rcRouteDoses(defs) {
   const m = {};
-  defs.forEach(([routes, dose, vol]) => routes.split('/').forEach((r) => { m[r.trim()] = { dose, vol }; }));
+  defs.forEach(([routes, dose, vol, range]) => routes.split('/').forEach((r) => { m[r.trim()] = { dose, vol, range }; }));
   return m;
 }
 
@@ -6718,9 +6698,16 @@ function renderDrugModal(m) {
   // Sub-heading: drug class / indication
   const subtitle = `${d.class ? escapeHtml(d.class) + ' · ' : ''}${escapeHtml(d.indication || '')}`;
   // Administration tracking: dose picker, per-patient history, cumulative max
-  const activeDose = (d.routeDoses && d.routeDoses[cr.drugRoute] && d.routeDoses[cr.drugRoute].dose) || d.weightDose || '';
-  const dc = fdDoseChoices(activeDose);
-  const sel = cr.doseSel != null ? cr.doseSel : fdDefaultDose(d, dc);
+  const rdActive = (d.routeDoses && d.routeDoses[cr.drugRoute]) || null;
+  const activeDose = (rdActive && rdActive.dose) || d.weightDose || '';
+  // A route may be titratable above its headline dose (Ketamine IV/IO
+  // starts at 0.1 mg/kg, may go to 0.2). The picker spans that range and
+  // starts at the LOW end -- unlike a plain range label such as arrest
+  // Epinephrine "0.5-1 mg", which still defaults to the top via
+  // fdDefaultDose.
+  const doseRange = rdActive && rdActive.range;
+  const dc = fdDoseChoices(doseRange || activeDose);
+  const sel = cr.doseSel != null ? cr.doseSel : ((doseRange && dc) ? dc.choices[0] : fdDefaultDose(d, dc));
   const maxCum = fdMaxCum(d);
   const givenNew = fdGivenList(d.name); // newest first
   const cumUnit = maxCum ? maxCum.unit : (dc ? dc.unit : null);
@@ -7790,18 +7777,18 @@ const CC_PROTOCOLS = [
   { cat: 'Pain / Sedation', list: [
     { id: 'pain', name: 'Pain & Anxiety', banner: 'Pain & Anxiety Management', sections: [
       { label: 'Opioid Analgesia (choose one)', items: ['Fentanyl 1 mcg/kg IV/IO/IM/IN q10 min PRN','Hydromorphone 1 mg IV/IO/IM/IN q20 min PRN · Peds 5 mcg/kg','Morphine 0.2 mg/kg IV/IO/IM/IN q20 min PRN · Peds 0.1 mg/kg'] },
-      { label: 'Non-Opioid (choose one)', items: ['Acetaminophen 1 g IV/IO over 15 min · Peds 15 mg/kg (max 500 mg)','Ketorolac 15 mg IV/IO/IM · Peds 0.5 mg/kg (max 15 mg)','Ketamine 0.2 mg/kg IV/IO/IM/IN q20 min'] },
+      { label: 'Non-Opioid (choose one)', items: ['Acetaminophen 1 g IV/IO over 15 min · Peds 15 mg/kg (max 500 mg)','Ketorolac 15 mg IV/IO/IM · Peds 0.5 mg/kg (max 15 mg)','Ketamine 0.1 mg/kg IV/IO (titrate to 0.2) · 0.2 mg/kg IM/IN · repeat PRN · adults only'] },
       { label: 'IO Infusion Pain', items: ['Lidocaine 2% 40 mg IO over 2 min, dwell 60 s · Peds 0.5 mg/kg (max 40 mg)'] },
       { label: 'Severe Anxiety', items: ['Midazolam 2 mg IV/IO/IM/IN q10 min PRN'] },
     ], warn: { label: 'Caution', items: ['Ketorolac contraindicated in patients > 75 y/o'] }, pearls: [
       'Pain medication should not be held in fear of masking an injury/illness',
     ]},
     { id: 'nausea', name: 'Nausea & Vomiting', banner: 'Nausea & Vomiting', sections: [
-      { label: 'Antiemetic (choose one)', items: ['Ondansetron 4 mg IV/IO/IM (or 4 mg ODT) · repeat 10 min · Peds 0.1 mg/kg','Promethazine 25 mg IV','Droperidol 1.25 mg IV/IO/IM'] },
+      { label: 'Antiemetic', items: ['Ondansetron 4 mg IV/IO/IM (or 4 mg ODT) · repeat 10 min · Peds 0.1 mg/kg'] },
     ]},
     { id: 'delirium', name: 'Hyperactive Delirium', banner: 'Hyperactive Delirium', sections: [
       { label: 'Dissociation (first-line)', items: ['Ketamine 4 mg/kg IM (max 500 mg) — target large muscle'] },
-      { label: 'Alternatives', items: ['Droperidol 5 mg IM/IV/IO','Midazolam 5 mg IV or 10 mg IM'] },
+      { label: 'Alternative', items: ['Midazolam 5 mg IV or 10 mg IM'] },
     ], pearls: [
       'First-line therapy; no absolute contraindications',
       'Patients shall never be placed prone',
@@ -7909,8 +7896,6 @@ function crProtoDrugMatch(text) {
     ['acetaminophen', 'Acetaminophen (Tylenol)'],
     ['lorazepam', 'Lorazepam (Ativan)'],
     ['diazepam', 'Diazepam (Valium)'],
-    ['droperidol', 'Droperidol'],
-    ['promethazine', 'Promethazine (Phenergan)'],
     ['labetalol', 'Labetalol'],
     ['levetiracetam', 'Levetiracetam (Keppra)'],
     ['keppra', 'Levetiracetam (Keppra)'],

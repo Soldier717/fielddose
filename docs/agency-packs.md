@@ -60,5 +60,4 @@ guideline when unenrolled.
   a pack; real access control arrives with accounts.
 - Every pack change is protocol content: MD sign-off on the JSON diff, same as
   golden re-review for baseline dosing.
-- `DEMO01` is a sample agency (different defib ladder) for demos — no clinical
-  omits.
+- `DEMO01` is a sample agency (different defib ladder) for demos — **`clinical.omitDrugs` is empty**, so it pulls normal regional guideline usage (Droperidol / Promethazine visible). Contrast with `GNFR2026`, which omits those drugs.

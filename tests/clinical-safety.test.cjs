@@ -9,7 +9,7 @@ const {
   fdParseDrawMl, fdMeasurableVolWarn, FD_SYRINGE_GRAD_ML,
   crSetAdultIBW, crSetAdultCustom, crSetBroselow, crSetPedsCustom, BROSELOW, ADULT_IBW,
   ccGetDrugs, ctState, ctMarkEpiGiven, crNewPatient,
-  fdPackStore, fdPackOmits, fdPackUsageNote,
+  fdPackStore, fdPack, fdPackOmits, fdPackUsageNote,
 } = app;
 
 // ---- Draw-volume parsing ----
@@ -141,5 +141,14 @@ assert.ok(
   ccGetDrugs().some((d) => /Droperidol/i.test(d.name)),
   'clearing omit restores Droperidol on regional list'
 );
+
+// DEMO01 — normal regional usage (no omits)
+fdPackStore('DEMO01', JSON.parse(require('fs').readFileSync(
+  require('path').join(__dirname, '..', 'public', 'packs', 'DEMO01.json'), 'utf8'
+)));
+assert.strictEqual((fdPack().clinical && fdPack().clinical.omitDrugs || []).length, 0, 'DEMO01 omits nothing');
+assert.ok(ccGetDrugs().some((d) => /Droperidol/i.test(d.name)), 'DEMO01 still shows Droperidol');
+assert.ok(ccGetDrugs().some((d) => /Promethazine/i.test(d.name)), 'DEMO01 still shows Promethazine');
+assert.ok(/Regional SWFL/i.test(fdPackUsageNote()), 'DEMO01 usage notes regional guidelines');
 
 console.log('clinical-safety: ALL CHECKS PASSED');

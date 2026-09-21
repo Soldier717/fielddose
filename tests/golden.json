@@ -7474,7 +7474,7 @@
      "packageSpec": "100 mg/mL",
      "deliveryDose": "1.8 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.",
      "route": "IM",
      "max": "500 mg"
     },
@@ -7591,6 +7591,45 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Nausea",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Promethazine (Phenergan)",
+     "class": "Antiemetic / antihistamine",
+     "indication": "Nausea / vomiting",
+     "weightDose": "25 mg",
+     "packageSpec": "25 mg/mL",
+     "deliveryDose": "IV — dilute, infuse slowly",
+     "readyVol": "—",
+     "detail": "25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.",
+     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -10022,7 +10061,7 @@
      "packageSpec": "100 mg/mL",
      "deliveryDose": "2.0 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.",
      "route": "IM",
      "max": "500 mg"
     },
@@ -10139,6 +10178,45 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Nausea",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Promethazine (Phenergan)",
+     "class": "Antiemetic / antihistamine",
+     "indication": "Nausea / vomiting",
+     "weightDose": "25 mg",
+     "packageSpec": "25 mg/mL",
+     "deliveryDose": "IV — dilute, infuse slowly",
+     "readyVol": "—",
+     "detail": "25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.",
+     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -10940,7 +11018,7 @@
      "packageSpec": "100 mg/mL",
      "deliveryDose": "2.4 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.",
      "route": "IM",
      "max": "500 mg"
     },
@@ -11057,6 +11135,45 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Nausea",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Promethazine (Phenergan)",
+     "class": "Antiemetic / antihistamine",
+     "indication": "Nausea / vomiting",
+     "weightDose": "25 mg",
+     "packageSpec": "25 mg/mL",
+     "deliveryDose": "IV — dilute, infuse slowly",
+     "readyVol": "—",
+     "detail": "25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.",
+     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -11858,7 +11975,7 @@
      "packageSpec": "100 mg/mL",
      "deliveryDose": "2.8 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.",
      "route": "IM",
      "max": "500 mg"
     },
@@ -11975,6 +12092,45 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Nausea",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Promethazine (Phenergan)",
+     "class": "Antiemetic / antihistamine",
+     "indication": "Nausea / vomiting",
+     "weightDose": "25 mg",
+     "packageSpec": "25 mg/mL",
+     "deliveryDose": "IV — dilute, infuse slowly",
+     "readyVol": "—",
+     "detail": "25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.",
+     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -12776,7 +12932,7 @@
      "packageSpec": "100 mg/mL",
      "deliveryDose": "3.0 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.",
      "route": "IM",
      "max": "500 mg"
     },
@@ -12893,6 +13049,45 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Nausea",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Promethazine (Phenergan)",
+     "class": "Antiemetic / antihistamine",
+     "indication": "Nausea / vomiting",
+     "weightDose": "25 mg",
+     "packageSpec": "25 mg/mL",
+     "deliveryDose": "IV — dilute, infuse slowly",
+     "readyVol": "—",
+     "detail": "25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.",
+     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -13694,7 +13889,7 @@
      "packageSpec": "100 mg/mL",
      "deliveryDose": "3.2 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.",
      "route": "IM",
      "max": "500 mg"
     },
@@ -13811,6 +14006,45 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Nausea",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Promethazine (Phenergan)",
+     "class": "Antiemetic / antihistamine",
+     "indication": "Nausea / vomiting",
+     "weightDose": "25 mg",
+     "packageSpec": "25 mg/mL",
+     "deliveryDose": "IV — dilute, infuse slowly",
+     "readyVol": "—",
+     "detail": "25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.",
+     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -14612,7 +14846,7 @@
      "packageSpec": "100 mg/mL",
      "deliveryDose": "3.6 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.",
      "route": "IM",
      "max": "500 mg"
     },
@@ -14729,6 +14963,45 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Nausea",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Promethazine (Phenergan)",
+     "class": "Antiemetic / antihistamine",
+     "indication": "Nausea / vomiting",
+     "weightDose": "25 mg",
+     "packageSpec": "25 mg/mL",
+     "deliveryDose": "IV — dilute, infuse slowly",
+     "readyVol": "—",
+     "detail": "25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.",
+     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -15530,7 +15803,7 @@
      "packageSpec": "100 mg/mL",
      "deliveryDose": "4.0 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.",
      "route": "IM",
      "max": "500 mg"
     },
@@ -15647,6 +15920,45 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Nausea",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Promethazine (Phenergan)",
+     "class": "Antiemetic / antihistamine",
+     "indication": "Nausea / vomiting",
+     "weightDose": "25 mg",
+     "packageSpec": "25 mg/mL",
+     "deliveryDose": "IV — dilute, infuse slowly",
+     "readyVol": "—",
+     "detail": "25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.",
+     "route": "IV",
      "max": "Per protocol"
     },
     {
@@ -16448,7 +16760,7 @@
      "packageSpec": "100 mg/mL",
      "deliveryDose": "4.0 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.",
      "route": "IM",
      "max": "500 mg"
     },
@@ -16565,6 +16877,45 @@
      "readyVol": "1 mL of 5 mg/mL",
      "detail": "5 mg IV/IO; repeat q5 min PRN.",
      "route": "IV / IO",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Nausea",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Nausea / vomiting",
+     "weightDose": "1.25 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 0.5 mL IV/IO/IM",
+     "readyVol": "0.5 mL of 2.5 mg/mL",
+     "detail": "Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Droperidol — Delirium",
+     "class": "Antiemetic / antipsychotic",
+     "indication": "Hyperactive delirium",
+     "weightDose": "5 mg",
+     "packageSpec": "2.5 mg/mL",
+     "deliveryDose": "Push 2 mL IV/IO/IM",
+     "readyVol": "2 mL of 2.5 mg/mL",
+     "detail": "Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.",
+     "route": "IV / IO / IM",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Promethazine (Phenergan)",
+     "class": "Antiemetic / antihistamine",
+     "indication": "Nausea / vomiting",
+     "weightDose": "25 mg",
+     "packageSpec": "25 mg/mL",
+     "deliveryDose": "IV — dilute, infuse slowly",
+     "readyVol": "—",
+     "detail": "25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.",
+     "route": "IV",
      "max": "Per protocol"
     },
     {

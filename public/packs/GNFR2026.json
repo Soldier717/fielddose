@@ -4,73 +4,32 @@
     "name": "Greater Naples Fire Rescue",
     "shortName": "GNFR"
   },
-  "version": "2026-09-18b",
+  "version": "2026-09-21",
   "timezone": "America/New_York",
   "defib": {
-    "adultLadder": [
-      120,
-      150,
-      200
-    ],
+    "adultLadder": [120, 150, 200],
     "cardioversion": "zoll"
+  },
+  "clinical": {
+    "omitDrugs": ["Droperidol", "Promethazine", "Phenergan"],
+    "usage": "Droperidol & Promethazine not carried (MD 9/2026). Ondansetron-only nausea; Midazolam alternate for delirium."
   },
   "narcotics": {
     "transferMode": "keys",
-    "units": [
-      "L21",
-      "E22",
-      "E23",
-      "E24",
-      "E25"
-    ],
-    "roster": [
-      "Russ",
-      "Santana",
-      "Clement",
-      "Oleary"
-    ],
+    "units": ["L21", "E22", "E23", "E24", "E25"],
+    "roster": ["Russ", "Santana", "Clement", "Oleary"],
     "stock": [
-      {
-        "drug": "Fentanyl 100 mcg / 2 mL",
-        "unit": "mcg"
-      },
-      {
-        "drug": "Ketamine 500 mg / 5 mL",
-        "unit": "mg"
-      }
+      { "drug": "Fentanyl 100 mcg / 2 mL", "unit": "mcg" },
+      { "drug": "Ketamine 500 mg / 5 mL", "unit": "mg" }
     ],
     "sop": "SOP #1051 (approved 8/7/2025)",
     "escalation": "ANY issues during turnover: immediately contact the Battalion Chief (BC) or Division Chief of EMS.",
     "oncomingHint": "If the oncoming Lieutenant is a paramedic, that officer signs. If the Lieutenant is an EMT, the most senior paramedic (Driver-Engineer or Paramedic Firefighter) signs.",
     "limits": [
-      {
-        "match": "dilaudid|hydromorphone",
-        "label": "Dilaudid",
-        "min": 2,
-        "max": 10,
-        "unit": "mg"
-      },
-      {
-        "match": "versed|midazolam",
-        "label": "Versed",
-        "min": 10,
-        "max": 25,
-        "unit": "mg"
-      },
-      {
-        "match": "ketamine|ketalar",
-        "label": "Ketamine",
-        "min": 500,
-        "max": 1500,
-        "unit": "mg"
-      },
-      {
-        "match": "ativan|lorazepam",
-        "label": "Ativan",
-        "min": 2,
-        "max": 10,
-        "unit": "mg"
-      }
+      { "match": "dilaudid|hydromorphone", "label": "Dilaudid", "min": 2, "max": 10, "unit": "mg" },
+      { "match": "versed|midazolam", "label": "Versed", "min": 10, "max": 25, "unit": "mg" },
+      { "match": "ketamine|ketalar", "label": "Ketamine", "min": 500, "max": 1500, "unit": "mg" },
+      { "match": "ativan|lorazepam", "label": "Ativan", "min": 2, "max": 10, "unit": "mg" }
     ]
   },
   "drugOverrides": [],

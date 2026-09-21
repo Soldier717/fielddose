@@ -5,15 +5,14 @@
 
 ## Layers (in order)
 
-1. **Regional baseline** — doses, routes, protocols, electrical settings from SWFL.
-2. **Medical-direction deltas** — explicit MD answers that change the baseline
-   (recorded in `medical-review-*.md`). These are *overrides*, not a second SoT.
-3. **Agency packs** — `public/packs/<CODE>.json` overlays (defib ladder, contacts,
-   narcotics SOP, static drugOverrides). Packs never invent regional dosing;
-   they only customize for the enrolled agency.
+1. **Regional baseline** — doses, routes, protocols from SWFL (full printed card).
+2. **Agency pack** (`GNFR2026`, etc.) — **usage** overlays: omit drugs not carried,
+   defib/contacts/narcotics, rare static `drugOverrides`. Enroll via agency code.
+3. **No pack** — pure regional defaults for any department on the common guidelines.
 
-If a conflict appears, resolve against the regional guideline first, then apply
-any signed MD delta, then the pack.
+GNFR medical-direction choices (e.g. droperidol/promethazine not carried) live in
+`public/packs/GNFR2026.json` → `clinical.omitDrugs`, **not** by deleting rows from
+the regional baseline.
 
 ## What is already regional
 
@@ -28,16 +27,15 @@ Ipratropium, `959b7d2` route-dependent dosing, cardioversion rhythm ladder):
 Regression guard: `tests/dose-regression.test.cjs` + `tests/golden.json`.
 Any regional content change must update the golden file and be re-reviewed.
 
-## Known MD deltas (on top of SWFL)
+## Known MD / agency usage (via pack, not baseline deletes)
 
-| Delta | Scope | Source | Status |
-|---|---|---|---|
-| Drop droperidol & promethazine | All | Round 1 §3.1 / 5.1 | Live |
-| Midazolam anxiety — all routes, repeat PRN | Adult | Round 1 §2.3 | Live |
+| Usage | Where | Status |
+|---|---|---|
+| Drop droperidol & promethazine | `GNFR2026` `clinical.omitDrugs` | Live when enrolled with code **GNFR2026** |
+| Midazolam anxiety — all routes, repeat PRN | Regional + Round 1 §2.3 | Live in baseline |
+| Zoll cardioversion ladder | `GNFR2026` `defib.cardioversion` | Live on enroll |
 
-Round 1 §1.1 / 1.5 adult ketamine **0.1–0.2 mg/kg titratable** is **superseded** by the printed
-SWFL Pain & Anxiety / Procedural Sedation text (confirmed by agency) — see below.
-Undiluted 100 mg/mL preparation from §1.1 remains until Round 2 A1 decides dilution.
+Regional baseline still lists Droperidol / Promethazine for agencies that carry them.
 
 ### Ketamine — regional (adult + pediatric)
 
@@ -60,8 +58,8 @@ rows as contact-medical-control:
 - A2 Pediatric sedation 10× reduction — **resolved: regional 1 mg/kg IV/IO restored**
 - A3 IM/IN ketamine scope — **resolved** (pain 0.2 all routes; sedation 2 mg/kg IM/IN adult+peds)
 - Adult ketamine 0.1–0.2 MD delta — **resolved: regional 0.2 pain / 1 mg/kg sedation IV**
-- A4 Delirium ketamine confirmation — **resolved SWFL 2026:** Dissociation 4 mg/kg IM max 500; Emergence 1 mg/kg IV/IO max 500 (5–10 min if inadequate); peds contact medical control. Droperidol stays off app (MD). Midazolam remains Option 2.
-- B Coverage after droperidol/promethazine removal — **delirium half resolved** (midazolam-only alternate). **Nausea** still needs the regional Nausea card (ondansetron-only vs replacements).
+- A4 Delirium ketamine confirmation — **resolved SWFL 2026:** Dissociation 4 mg/kg IM max 500; Emergence 1 mg/kg IV/IO max 500; peds contact medical control. Droperidol remains on regional card; **GNFR omits via pack**.
+- B Coverage after droperidol/promethazine removal — **GNFR:** handled by pack omit (Ondansetron-only / Midazolam alternate). Other agencies still see full regional choose-one lists.
 - C1 Midazolam route-dose map — **confirmed SWFL:** adult 5 mg IV/IO / 10 mg IM/IN; peds 0.2 mg/kg (max 5 IV/IO / 10 IM/IN); may repeat every 5 min PRN
 - C2 Stocked concentrations
 - C3 Hard-stop vs caution list
@@ -76,7 +74,8 @@ rows as contact-medical-control:
    in the PR describing guideline cite or MD sheet item.
 3. **Warn, don’t invent.** Unmeasurable draws, TBD doses, and unconfirmed maps
    get caution UI — not guessed recipes — until MD answers.
-4. **Packs are overlays.** Weight-based math stays in the baseline; pack
-   `drugOverrides` are static strings only (`docs/agency-packs.md`).
+4. **Packs are usage overlays.** Regional baseline stays complete; agency omits /
+   defib / contacts / narcotics live in the pack (`docs/agency-packs.md`).
+   `drugOverrides` are static strings only (no per-kg math).
 5. **Version the claim.** Footer / meta should name the guideline revision the
    build claims to follow (currently Revised 8/2026).

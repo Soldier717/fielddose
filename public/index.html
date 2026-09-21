@@ -4598,11 +4598,36 @@ function fdTzLabel() {
 function fdApplyDrugOverrides(drugs) {
   const p = fdPack();
   const ov = p && Array.isArray(p.drugOverrides) ? p.drugOverrides : null;
-  if (!ov || !ov.length) return drugs;
-  return drugs.map((d) => {
-    const o = ov.find((x) => x && x.name === d.name && x.set);
-    return o ? Object.assign({}, d, o.set) : d;
+  let out = drugs;
+  if (ov && ov.length) {
+    out = out.map((d) => {
+      const o = ov.find((x) => x && x.name === d.name && x.set);
+      return o ? Object.assign({}, d, o.set) : d;
+    });
+  }
+  // Agency usage: hide drugs the enrolled agency does not carry / does not
+  // want displayed (GNFR: Droperidol + Promethazine). No pack = full SWFL list.
+  return out.filter((d) => !fdPackOmits(d.name));
+}
+
+// Pack clinical.omitDrugs — case-insensitive substring/regex list. Matches
+// drug row names and protocol line text so By Protocol stays in sync.
+function fdPackOmitList() {
+  const p = fdPack();
+  const list = (p && p.clinical && Array.isArray(p.clinical.omitDrugs)) ? p.clinical.omitDrugs
+    : (p && Array.isArray(p.omitDrugs)) ? p.omitDrugs : [];
+  return list.filter((s) => typeof s === 'string' && s.trim());
+}
+function fdPackOmits(text) {
+  const t = String(text || '');
+  if (!t) return false;
+  return fdPackOmitList().some((pat) => {
+    try { return new RegExp(pat, 'i').test(t); } catch (_) { return t.toLowerCase().indexOf(pat.toLowerCase()) !== -1; }
   });
+}
+function fdPackUsageNote() {
+  const p = fdPack();
+  return (p && p.clinical && p.clinical.usage) || '';
 }
 
 function ccGetDrugs() {
@@ -4866,7 +4891,7 @@ function ccGetDrugsBase() {
         packageSpec: '100 mg/mL',
         deliveryDose: `${ccFmt(Math.min(4*kg, 500)/100, 1)} mL IM of 100 mg/mL`,
         readyVol: '—',
-        detail: 'Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.', route: 'IM', max: '500 mg' },
+        detail: 'Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.', route: 'IM', max: '500 mg' },
       { rhythm: 'non-arrest', name: 'Ketamine — Delirium Emergence', class: 'Dissociative analgesic', indication: 'Hyperactive delirium — emergence / inadequate dissociation',
         weightDose: `${ccFmt(Math.min(1*kg, 500), 0)} mg (1 mg/kg, max 500)`,
         packageSpec: '100 mg/mL',
@@ -4916,9 +4941,27 @@ function ccGetDrugsBase() {
         deliveryDose: 'Push 1 mL IV/IO q5 min PRN',
         readyVol: '1 mL of 5 mg/mL',
         detail: '5 mg IV/IO; repeat q5 min PRN.', route: 'IV / IO', max: 'Per protocol' },
-      // Droperidol and Promethazine withdrawn from the app per medical
-      // direction 9/2026 (Dr. Dunavant) — "remove from app". Ondansetron is
-      // now the only antiemetic; Midazolam the only delirium alternative.
+      { rhythm: 'non-arrest', name: 'Droperidol — Nausea', class: 'Antiemetic / antipsychotic', indication: 'Nausea / vomiting',
+        weightDose: '1.25 mg',
+        packageSpec: '2.5 mg/mL',
+        deliveryDose: 'Push 0.5 mL IV/IO/IM',
+        readyVol: '0.5 mL of 2.5 mg/mL',
+        detail: 'Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.', route: 'IV / IO / IM', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Droperidol — Delirium', class: 'Antiemetic / antipsychotic', indication: 'Hyperactive delirium',
+        weightDose: '5 mg',
+        packageSpec: '2.5 mg/mL',
+        deliveryDose: 'Push 2 mL IV/IO/IM',
+        readyVol: '2 mL of 2.5 mg/mL',
+        detail: 'Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.', route: 'IV / IO / IM', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Promethazine (Phenergan)', class: 'Antiemetic / antihistamine', indication: 'Nausea / vomiting',
+        weightDose: '25 mg',
+        packageSpec: '25 mg/mL',
+        deliveryDose: 'IV — dilute, infuse slowly',
+        readyVol: '—',
+        detail: '25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.', route: 'IV', max: 'Per protocol' },
+      // Agencies that do not carry Droperidol / Promethazine (e.g. GNFR
+      // medical direction 9/2026) omit them via pack clinical.omitDrugs —
+      // they remain on the regional baseline for other departments.
       { rhythm: 'non-arrest', name: 'Labetalol', class: 'Beta/alpha blocker', indication: 'Peripartum hypertension / eclampsia',
         weightDose: '20 → 40 → 80 mg',
         packageSpec: '5 mg/mL',
@@ -7551,6 +7594,7 @@ function renderCREntry() {
       <div class="fd-agency-row">
         <div class="fd-agency-name">
           ${p ? `<b>${escapeHtml(p.agency.name)}</b> · agency protocols active` : 'Regional defaults · no agency enrolled'}
+          ${p && fdPackUsageNote() ? `<div style="margin-top:4px;font-size:12px;color:var(--clin-text-dim);">${escapeHtml(fdPackUsageNote())}</div>` : ''}
         </div>
         <div style="display:flex;gap:6px;">
           <button class="fd-mini-btn" id="fd-agency-btn">${p ? 'Change' : 'Enter agency code'}</button>
@@ -8140,22 +8184,27 @@ const CC_PROTOCOLS = [
       'Pain medication should not be held in fear of masking an injury/illness',
     ]},
     { id: 'nausea', name: 'Nausea & Vomiting', banner: 'Nausea & Vomiting', sections: [
-      { label: 'Antiemetic', items: ['Ondansetron 4 mg IV/IO/IM (or 4 mg ODT) · repeat 10 min · Peds 0.1 mg/kg'] },
+      { label: 'Antiemetic (choose one)', items: [
+        { t: 'Ondansetron 4 mg IV/IO/IM (or 4 mg ODT) · repeat 10 min · Peds 0.1 mg/kg', drug: 'Ondansetron' },
+        { t: 'Promethazine 25 mg IV', drug: 'Promethazine (Phenergan)' },
+        { t: 'Droperidol 1.25 mg IV/IO/IM', drug: 'Droperidol — Nausea' },
+      ] },
     ]},
     { id: 'delirium', name: 'Hyperactive Delirium', banner: 'Hyperactive Delirium', sections: [
       { label: 'Dissociation', items: [
         { t: 'Primary: Ketamine 4 mg/kg IM (max 500 mg) — large muscle', drug: 'Ketamine — Delirium' },
-        { t: 'Option: Midazolam 5 mg IV or 10 mg IM', drug: 'Midazolam — Seizure' },
+        { t: 'Option 1: Droperidol 5 mg IM/IV/IO', drug: 'Droperidol — Delirium' },
+        { t: 'Option 2: Midazolam 5 mg IV or 10 mg IM', drug: 'Midazolam — Seizure' },
       ] },
       { label: 'Dissociation Emergence (unlikely / rare)', items: [
         { t: 'Primary: Ketamine 1 mg/kg IV/IO (max 500 mg) — 5–10 min after if inadequate', drug: 'Ketamine — Delirium Emergence' },
-        { t: 'Option: Midazolam 5 mg IV or 10 mg IM', drug: 'Midazolam — Seizure' },
+        { t: 'Option 1: Droperidol 5 mg IM/IV/IO', drug: 'Droperidol — Delirium' },
+        { t: 'Option 2: Midazolam 5 mg IV or 10 mg IM', drug: 'Midazolam — Seizure' },
       ] },
     ], warn: { label: 'Pediatric', items: ['Contact Medical Control — no standing pediatric dose'] }, pearls: [
       'Ketamine first-line; no absolute contraindications',
       'Patients shall never be placed prone',
       'Document RASS like a vital sign — multiple times',
-      'Droperidol listed on regional card — removed from app per medical direction',
     ]},
   ]},
   { cat: 'Trauma', list: [
@@ -8259,6 +8308,9 @@ function crProtoDrugMatch(text) {
     ['acetaminophen', 'Acetaminophen (Tylenol)'],
     ['lorazepam', 'Lorazepam (Ativan)'],
     ['diazepam', 'Diazepam (Valium)'],
+    ['droperidol', 'Droperidol — Delirium'],
+    ['promethazine', 'Promethazine (Phenergan)'],
+    ['phenergan', 'Promethazine (Phenergan)'],
     ['labetalol', 'Labetalol'],
     ['levetiracetam', 'Levetiracetam (Keppra)'],
     ['keppra', 'Levetiracetam (Keppra)'],
@@ -8307,42 +8359,54 @@ const CC_FUTURE_USE = new Set([
 function crIsFutureUse(name) { return CC_FUTURE_USE.has(name); }
 
 function rcRenderProtocolDetail(p) {
-  const sec = (label, items, warn) => `
+  const sec = (label, items, warn) => {
+    const visible = (items || []).filter((itRaw) => {
+      const it = typeof itRaw === 'string' ? itRaw : itRaw;
+      const labelTxt = typeof it === 'string' ? it : (it.t || it.drug || '');
+      // Hide lines for drugs the enrolled agency omitted (GNFR pack).
+      if (fdPackOmits(labelTxt)) return false;
+      if (it && it.drug && fdPackOmits(it.drug)) return false;
+      return true;
+    });
+    if (!visible.length) return '';
+    return `
     <div class="cc-proto-section${warn ? ' warn' : ''}">
       <div class="cc-proto-section-label">${warn ? '⚠ ' : ''}${escapeHtml(label)}</div>
-      ${items.map(itRaw => {
+      ${visible.map(itRaw => {
         const it = typeof itRaw === 'string' ? fdProtoTokens(itRaw) : itRaw;
         if (it && it.jump) {
           return `<button class="cc-proto-item jump" data-proto-sel="${escapeAttr(it.jump)}"><span>${escapeHtml(it.t)}</span><span class="arrow">→</span></button>`;
         }
-        // Item is a plain string, or { t, drug } pinning the line to an exact
-        // drug row (for when keyword matching would pick the wrong variant).
-        // The pin only holds if that row exists for this patient; otherwise
-        // fall back to keyword matching against the current list.
-        const label = typeof it === 'string' ? it : fdProtoTokens(it.t || '');
+        const labelTxt = typeof it === 'string' ? it : fdProtoTokens(it.t || '');
         const explicit = (it && it.drug && ccGetDrugs().some(x => x.name === it.drug)) ? it.drug : null;
-        const match = warn ? null : (explicit || crProtoDrugMatch(label));
+        const match = warn ? null : (explicit || crProtoDrugMatch(labelTxt));
         if (match && crIsFutureUse(match))
-          return `<div class="cc-proto-item future"><span>${escapeHtml(label)}</span><span class="future-tag">FUTURE USE</span></div>`;
+          return `<div class="cc-proto-item future"><span>${escapeHtml(labelTxt)}</span><span class="future-tag">FUTURE USE</span></div>`;
         const gb = match ? fdGivenBadge(match) : '';
         return match
-          ? `<button class="cc-proto-item drug${gb ? ' given' : ''}" data-drug-name="${escapeAttr(match)}"><span>${escapeHtml(label)}</span>${gb}<span class="arrow">›</span></button>`
-          : `<div class="cc-proto-item">${escapeHtml(label)}</div>`;
+          ? `<button class="cc-proto-item drug${gb ? ' given' : ''}" data-drug-name="${escapeAttr(match)}"><span>${escapeHtml(labelTxt)}</span>${gb}<span class="arrow">›</span></button>`
+          : `<div class="cc-proto-item">${escapeHtml(labelTxt)}</div>`;
       }).join('')}
     </div>`;
+  };
   const pedsNote = (cr.patient && cr.patient.type === 'peds')
     ? `<div class="cc-proto-peds-note">⚠ Pediatric patient — tap a drug for the weight-based pediatric dose. Inline doses are reference values.</div>`
+    : '';
+  const usage = fdPackUsageNote();
+  const usageNote = usage
+    ? `<div class="cc-proto-peds-note">${escapeHtml((fdPack().agency && fdPack().agency.shortName) || 'Agency')} usage: ${escapeHtml(usage)}</div>`
     : '';
   let body;
   if (p.memory) {
     body = `<div class="cc-proto-memory">${p.memory.map(([d, dose]) => `<div class="cc-mem-row"><span class="cc-mem-drug">${escapeHtml(d)}</span><span class="cc-mem-dose">${escapeHtml(dose)}</span></div>`).join('')}</div>`;
   } else {
-    const pearls = (p.pearls || []).map(t => `<div class="cc-proto-pearl"><span class="lbl">PEARL</span> ${escapeHtml(t)}</div>`).join('');
+    const pearls = (p.pearls || []).filter((t) => !fdPackOmits(t)).map(t => `<div class="cc-proto-pearl"><span class="lbl">PEARL</span> ${escapeHtml(t)}</div>`).join('');
     body = `<div class="cc-proto-detail">${(p.sections || []).map(s => sec(s.label, s.items, false)).join('')}${p.warn ? sec(p.warn.label, p.warn.items, true) : ''}${pearls}</div>`;
   }
   return `
     <button class="cc-proto-back" data-proto-back>‹ All Protocols</button>
     <div class="cr-meds-banner"><span class="ico">▣</span><span>${escapeHtml(p.banner || p.name)}</span></div>
+    ${usageNote}
     ${pedsNote}
     ${body}
   `;

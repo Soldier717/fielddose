@@ -9,6 +9,7 @@ const {
   fdParseDrawMl, fdMeasurableVolWarn, FD_SYRINGE_GRAD_ML,
   crSetAdultIBW, crSetAdultCustom, crSetBroselow, crSetPedsCustom, BROSELOW, ADULT_IBW,
   ccGetDrugs, ctState, ctMarkEpiGiven, crNewPatient,
+  fdPackStore, fdPackOmits, fdPackUsageNote,
 } = app;
 
 // ---- Draw-volume parsing ----
@@ -108,5 +109,37 @@ crNewPatient();
 crSetAdultCustom(150);
 const delCap = ccGetDrugs().find(d => d.name === 'Ketamine — Delirium');
 assert.ok(/500 mg \(4 mg\/kg, max 500\)/.test(delCap.weightDose), `150 kg capped at 500, got ${delCap.weightDose}`);
+
+// ---- Agency pack omit (GNFR usage) ----
+crNewPatient();
+crSetAdultIBW(ADULT_IBW.find(a => a.kg === 70) || { lbs: 154, kg: 70, height: "5'7\"" });
+const before = ccGetDrugs().filter((d) => /Droperidol|Promethazine/i.test(d.name));
+assert.ok(before.length >= 2, 'regional baseline includes Droperidol/Promethazine when no omit pack');
+fdPackStore('GNFR2026', {
+  agency: { id: 'gnfr', name: 'Greater Naples Fire Rescue', shortName: 'GNFR' },
+  version: 'test',
+  clinical: {
+    omitDrugs: ['Droperidol', 'Promethazine'],
+    usage: 'test omit',
+  },
+});
+assert.ok(fdPackOmits('Droperidol — Nausea'), 'omit matcher hits Droperidol');
+assert.strictEqual(
+  ccGetDrugs().filter((d) => /Droperidol|Promethazine/i.test(d.name)).length,
+  0,
+  'GNFR pack hides Droperidol/Promethazine'
+);
+assert.ok(ccGetDrugs().some((d) => d.name === 'Ondansetron'), 'Ondansetron remains');
+assert.ok(ccGetDrugs().some((d) => d.name === 'Ketamine — Delirium'), 'Ketamine delirium remains');
+assert.strictEqual(fdPackUsageNote(), 'test omit');
+// Clear omit so this process can still see regional rows if anything else runs
+fdPackStore('NONE', {
+  agency: { id: 'none', name: 'None', shortName: 'NONE' },
+  clinical: { omitDrugs: [] },
+});
+assert.ok(
+  ccGetDrugs().some((d) => /Droperidol/i.test(d.name)),
+  'clearing omit restores Droperidol on regional list'
+);
 
 console.log('clinical-safety: ALL CHECKS PASSED');

@@ -62,7 +62,7 @@ rows as contact-medical-control:
 - A3 IM/IN ketamine scope — **resolved for peds sedation (2 mg/kg) and peds pain (0.2 all routes)**
 - A4 Delirium ketamine confirmation
 - B Coverage after droperidol/promethazine removal
-- C1 Midazolam route-dose map
+- C1 Midazolam route-dose map — **confirmed SWFL:** adult 5 mg IV/IO / 10 mg IM/IN; peds 0.2 mg/kg (max 5 IV/IO / 10 IM/IN); may repeat every 5 min PRN
 - C2 Stocked concentrations
 - C3 Hard-stop vs caution list
 - C4 Disclaimer blessing

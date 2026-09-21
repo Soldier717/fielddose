@@ -742,7 +742,7 @@
        "vol": "0.20 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -1434,7 +1434,7 @@
        "vol": "0.26 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -2162,7 +2162,7 @@
        "vol": "0.34 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -2890,7 +2890,7 @@
        "vol": "0.42 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -3618,7 +3618,7 @@
        "vol": "0.52 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -4346,7 +4346,7 @@
        "vol": "0.66 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -5074,7 +5074,7 @@
        "vol": "0.84 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -5802,7 +5802,7 @@
        "vol": "1.06 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -6530,7 +6530,7 @@
        "vol": "1.32 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -7373,7 +7373,7 @@
        "vol": "2 mL of 5 mg/mL"
       }
      },
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "detail": "5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8331,7 +8331,7 @@
        "vol": "0.40 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -9059,7 +9059,7 @@
        "vol": "1.00 mL of 5 mg/mL"
       }
      },
-     "detail": "0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.",
+     "detail": "0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "5 mg IV / 10 mg IM-IN"
     },
@@ -9902,7 +9902,7 @@
        "vol": "2 mL of 5 mg/mL"
       }
      },
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "detail": "5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -10801,7 +10801,7 @@
        "vol": "2 mL of 5 mg/mL"
       }
      },
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "detail": "5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -11700,7 +11700,7 @@
        "vol": "2 mL of 5 mg/mL"
       }
      },
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "detail": "5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12599,7 +12599,7 @@
        "vol": "2 mL of 5 mg/mL"
       }
      },
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "detail": "5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -13498,7 +13498,7 @@
        "vol": "2 mL of 5 mg/mL"
       }
      },
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "detail": "5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -14397,7 +14397,7 @@
        "vol": "2 mL of 5 mg/mL"
       }
      },
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "detail": "5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -15296,7 +15296,7 @@
        "vol": "2 mL of 5 mg/mL"
       }
      },
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "detail": "5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -16195,7 +16195,7 @@
        "vol": "2 mL of 5 mg/mL"
       }
      },
-     "detail": "Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.",
+     "detail": "5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },

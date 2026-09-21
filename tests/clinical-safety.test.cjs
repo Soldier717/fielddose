@@ -7,7 +7,7 @@ const { loadApp } = require('./load-app.cjs');
 const app = loadApp();
 const {
   fdParseDrawMl, fdMeasurableVolWarn, FD_SYRINGE_GRAD_ML,
-  crSetAdultIBW, crSetBroselow, BROSELOW, ADULT_IBW,
+  crSetAdultIBW, crSetBroselow, crSetPedsCustom, BROSELOW, ADULT_IBW,
   ccGetDrugs, ctState, ctMarkEpiGiven, crNewPatient,
 } = app;
 
@@ -63,5 +63,32 @@ assert.ok(ctState.log[0].amt === 1 && ctState.log[0].unit === 'mg', 'structured 
 ctMarkEpiGiven();
 ctMarkEpiGiven();
 assert.strictEqual(ctState.cumulativeEpiMg, 3, 'three timer epis reach SWFL 3 mg cumulative');
+
+// ---- Midazolam route map (SWFL / Round 2 C1) ----
+crNewPatient();
+crSetAdultIBW(ADULT_IBW.find(a => a.kg === 70) || { lbs: 154, kg: 70, height: "5'7\"" });
+const adultMz = ccGetDrugs().find(d => d.name === 'Midazolam — Seizure');
+assert.ok(adultMz && adultMz.routeDoses, 'adult midazolam seizure row');
+assert.strictEqual(adultMz.routeDoses.IV.dose, '5 mg');
+assert.strictEqual(adultMz.routeDoses.IM.dose, '10 mg');
+assert.ok(/every 5 minutes PRN/i.test(adultMz.detail), 'adult midazolam says every 5 min PRN');
+
+crNewPatient();
+crSetBroselow(BROSELOW.find(z => z.code === 'yellow') || BROSELOW[6]); // 13 kg
+const pedsMz = ccGetDrugs().find(d => /Midazolam/i.test(d.name));
+assert.ok(pedsMz && pedsMz.routeDoses, 'peds midazolam row');
+// 0.2*13 = 2.6 → under both caps
+assert.ok(/0\.2 mg\/kg, max 5/.test(pedsMz.routeDoses.IV.dose), `peds IV ${pedsMz.routeDoses.IV.dose}`);
+assert.ok(/0\.2 mg\/kg, max 10/.test(pedsMz.routeDoses.IM.dose), `peds IM ${pedsMz.routeDoses.IM.dose}`);
+assert.ok(/every 5 minutes PRN/i.test(pedsMz.detail), 'peds midazolam says every 5 min PRN');
+
+// Cap check: Green 33 kg — IV max 5 (0.2*33=6.6), IM uncapped at 6.6 (<10)
+crNewPatient();
+crSetBroselow(BROSELOW.find(z => z.code === 'green') || BROSELOW[9]);
+const bigMz = ccGetDrugs().find(d => /Midazolam/i.test(d.name));
+assert.ok(/5(\.0)? mg \(0\.2 mg\/kg, max 5\)/.test(bigMz.routeDoses.IV.dose),
+  `33 kg IV capped at 5, got ${bigMz.routeDoses.IV.dose}`);
+assert.ok(/6\.6 mg \(0\.2 mg\/kg, max 10\)/.test(bigMz.routeDoses.IM.dose),
+  `33 kg IM = 6.6 mg under 10 cap, got ${bigMz.routeDoses.IM.dose}`);
 
 console.log('clinical-safety: ALL CHECKS PASSED');

@@ -4828,7 +4828,7 @@ function ccGetDrugsBase() {
           ['IV/IO', '5 mg', '1 mL of 5 mg/mL'],
           ['IM/IN', '10 mg', '2 mL of 5 mg/mL'],
         ]),
-        detail: 'Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: '5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Midazolam — Anxiety', class: 'Benzodiazepine', indication: 'Severe anxiety',
         weightDose: '2 mg',
         packageSpec: '5 mg/mL',
@@ -5124,7 +5124,7 @@ function ccGetDrugsBase() {
           ['IV/IO', `${ccFmt(Math.min(0.2*kg, 5), 1)} mg (0.2 mg/kg, max 5)`, `${ccFmt(Math.min(0.2*kg, 5)/5, 2)} mL of 5 mg/mL`],
           ['IM/IN', `${ccFmt(Math.min(0.2*kg, 10), 1)} mg (0.2 mg/kg, max 10)`, `${ccFmt(Math.min(0.2*kg, 10)/5, 2)} mL of 5 mg/mL`],
         ]),
-        detail: '0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.', route: 'IV / IO / IM / IN', max: '5 mg IV / 10 mg IM-IN' },
+        detail: '0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.', route: 'IV / IO / IM / IN', max: '5 mg IV / 10 mg IM-IN' },
       { rhythm: 'non-arrest', name: 'Fentanyl (Sublimaze)', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(1*kg, 0)} mcg (1 mcg/kg)`,
         packageSpec: '50 mcg/mL',
@@ -8091,7 +8091,7 @@ const CC_PROTOCOLS = [
   { cat: 'Neuro', list: [
     { id: 'seizure', name: 'Seizure', banner: 'Seizure / Status Epilepticus', sections: [
       { label: 'Check First', items: ['Blood glucose — if < 60, treat hypoglycemia'] },
-      { label: 'Anticonvulsant (choose one)', items: ['Midazolam 5 mg IV/IO or 10 mg IM/IN · repeat q5 min · Peds 0.2 mg/kg (max 5 mg IV / 10 mg IM-IN)','Lorazepam 2 mg IV/IO/IM · dilute 1:1 w/ NS for IV · may repeat ×1 (max 8 mg) · Peds 0.1 mg/kg (max 2 mg)','Diazepam 5 mg IV/IO · repeat q5 min · Peds 0.2 mg/kg (max 5 mg)'] },
+      { label: 'Anticonvulsant (choose one)', items: ['Midazolam 5 mg IV/IO or 10 mg IM/IN · may repeat every 5 min PRN · Peds 0.2 mg/kg (max 5 mg IV/IO / 10 mg IM/IN)','Lorazepam 2 mg IV/IO/IM · dilute 1:1 w/ NS for IV · may repeat ×1 (max 8 mg) · Peds 0.1 mg/kg (max 2 mg)','Diazepam 5 mg IV/IO · repeat q5 min · Peds 0.2 mg/kg (max 5 mg)'] },
       { label: 'Refractory / Prolonged', items: ['Levetiracetam (Keppra) 2 g IV/IO infusion'] },
     ], pearls: [ 'Levetiracetam is second-line for prolonged or refractory seizures' ]},
     { id: 'stroke', name: 'Stroke', banner: 'Suspected Stroke', sections: [

@@ -3920,7 +3920,7 @@ const ctState = {
   cuesFired: {},
   pulseDotEl: null,
   lastRhythm: null, // 'shockable' | 'nonshockable' | null — drives auto-shock cue at 2:00
-  cumulativeEpiMg: 0, // Track total Epi dose toward 3 mg max (SWFL 2025)
+  cumulativeEpiMg: 0, // Track total Epi dose toward 3 mg max (SWFL Revised 8/2026)
   shockCount: 0, // Number of defibrillations delivered this code
   antiDysrhythmicGiven: false, // Has any anti-dysrhythmic (Amio/Lido) been logged?
   dsdCued: false, // Has DSD cue been fired this code?
@@ -4124,7 +4124,7 @@ function ctTick() {
   if (cycleElapsedMs >= 105000 && cycleElapsedMs < 106000) ctFireCue('prepare-charge');
   if (cycleElapsedMs >= 120000) { ctFireCue('rhythm-check'); ctStartNewCycle(); }
 
-  // SWFL 2025: Stop epi reminder once cumulative dose reaches 3 mg
+  // SWFL Revised 8/2026: Stop epi reminder once cumulative dose reaches 3 mg
   if (ctState.epiReminderOn && ctState.elapsedMs - ctState.lastEpiMs >= ctState.epiIntervalMs) {
     ctState.lastEpiMs = ctState.elapsedMs;
     if (ctState.cumulativeEpiMg >= 3) {

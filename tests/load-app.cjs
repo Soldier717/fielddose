@@ -65,6 +65,7 @@ function loadApp() {
     'BROSELOW', 'ADULT_IBW',
     'ctState', 'ctLogEvent', 'ctMarkEpiGiven',
     'fdParseDoseAmt', 'fdParseDrawMl', 'fdMeasurableVolWarn', 'FD_SYRINGE_GRAD_ML',
+    'fdDefaultDose', 'fdDoseChoices', 'escapeHtml',
     'fdPackStore', 'fdPack', 'fdPackOmits', 'fdPackUsageNote',
     'chartsLoadAll', 'chartsSaveAll', 'chartSaveActive', 'chartDelete', 'chartOpen',
     'chartWorksheetText',

@@ -4218,9 +4218,9 @@ function ctRenderLog() {
   if (ctState.log.length === 0) { logEl.innerHTML = '<div class="ct-log-empty">No events logged yet</div>'; return; }
   logEl.innerHTML = ctState.log.map(e => `
     <div class="ct-log-entry">
-      <div class="time">${e.ts ? fdClock(e.ts) : e.time}</div>
-      <div class="type">${e.type}</div>
-      <div class="note">${e.note}</div>
+      <div class="time">${escapeHtml(e.ts ? fdClock(e.ts) : (e.time || ''))}</div>
+      <div class="type">${escapeHtml(e.type || '')}</div>
+      <div class="note">${escapeHtml(e.note || '')}</div>
     </div>
   `).join('');
 }
@@ -4294,8 +4294,9 @@ function ctMarkEpiGiven() {
     const epi = drugs.find(d => (d.name === 'Epinephrine' || d.name === 'Epinephrine 1:10,000') && d.rhythm === 'all');
     if (epi) {
       name = epi.name;
-      const parsed = fdParseDoseAmt(epi.weightDose);
-      if (parsed && /^mg$/i.test(parsed.unit)) amt = parsed.max; // match fdDefaultDose for ranges
+      const dc = fdDoseChoices(epi.weightDose);
+      const def = fdDefaultDose(epi, dc);
+      if (def != null) amt = def;
     }
   } catch (_) { /* keep adult 1 mg fallback */ }
   ctLogEvent('Drug', `${name} ${fdFmtAmt(amt)} ${unit} IV/IO given @ ${ctFormatTime(ctState.elapsedMs)}`, {
@@ -7055,12 +7056,12 @@ function fdMaxCum(d) {
   return m ? { amt: parseFloat(m[1]), unit: m[2] } : null;
 }
 // Default dose to log when the medic hasn't touched the picker:
-// sequences follow the dose count (1st 300, 2nd 150), ranges default
-// to the top of the range, fixed doses are themselves.
+// sequences follow the dose count (1st 300, 2nd 150); titratable ranges
+// start at the LOW end (safer for "titrate up"); fixed doses are themselves.
 function fdDefaultDose(d, dc) {
   if (!dc) return null;
   if (dc.kind === 'seq') return dc.choices[Math.min(fdGivenList(d.name).length, dc.choices.length - 1)];
-  return dc.choices[dc.choices.length - 1];
+  return dc.choices[0];
 }
 function fdFmtAmt(n) { return String(Math.round(n * 100) / 100); }
 function fdOrdinal(i) { return i === 1 ? '1st' : i === 2 ? '2nd' : i === 3 ? '3rd' : i + 'th'; }
@@ -7337,10 +7338,9 @@ function handleDrugModalAction(action) {
       ctState.lastEpiMs = ctState.elapsedMs;
       if (amt != null && unit === 'mg') ctState.cumulativeEpiMg += amt;
       else {
-        // Prefer high end of a range ("0.5–1 mg") so timer + modal stay consistent
-        // with fdDefaultDose / ctMarkEpiGiven.
-        const parsed = fdParseDoseAmt(d.weightDose);
-        if (parsed && /^mg$/i.test(parsed.unit)) ctState.cumulativeEpiMg += parsed.max;
+        const dc = fdDoseChoices(d.weightDose);
+        const def = fdDefaultDose(d, dc);
+        if (def != null) ctState.cumulativeEpiMg += def;
       }
     }
     if (d.name === 'Amiodarone' || d.name === 'Lidocaine') ctState.antiDysrhythmicGiven = true;

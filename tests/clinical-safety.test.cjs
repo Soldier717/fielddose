@@ -10,6 +10,7 @@ const {
   crSetAdultIBW, crSetAdultCustom, crSetBroselow, crSetPedsCustom, BROSELOW, ADULT_IBW,
   ccGetDrugs, ctState, ctMarkEpiGiven, crNewPatient,
   fdPackStore, fdPack, fdPackOmits, fdPackUsageNote,
+  fdDefaultDose, fdDoseChoices, escapeHtml,
 } = app;
 
 // ---- Draw-volume parsing ----
@@ -61,11 +62,16 @@ crNewPatient();
 crSetAdultIBW(ADULT_IBW.find(a => a.kg === 70) || { lbs: 154, kg: 70, height: "5'7\"" });
 assert.strictEqual(ctState.cumulativeEpiMg, 0);
 ctMarkEpiGiven();
-assert.strictEqual(ctState.cumulativeEpiMg, 1, 'adult timer epi counts 1 mg (high end of 0.5–1)');
-assert.ok(ctState.log[0].amt === 1 && ctState.log[0].unit === 'mg', 'structured amt/unit on timer log');
+assert.strictEqual(ctState.cumulativeEpiMg, 0.5, 'adult timer epi counts 0.5 mg (low end of 0.5–1)');
+assert.ok(ctState.log[0].amt === 0.5 && ctState.log[0].unit === 'mg', 'structured amt/unit on timer log');
 ctMarkEpiGiven();
 ctMarkEpiGiven();
-assert.strictEqual(ctState.cumulativeEpiMg, 3, 'three timer epis reach SWFL 3 mg cumulative');
+assert.strictEqual(ctState.cumulativeEpiMg, 1.5, 'three low-end epis = 1.5 mg toward 3 mg cap');
+// Sequences (Amiodarone 300→150) still start at the first dose
+assert.strictEqual(fdDefaultDose({ name: 'Amiodarone' }, fdDoseChoices('300 mg → 150 mg')), 300);
+assert.strictEqual(fdDefaultDose({}, fdDoseChoices('0.5–1 mg')), 0.5, 'ranges default low');
+// XSS: notes are escaped in the log renderer
+assert.strictEqual(escapeHtml('<img src=x onerror=alert(1)>'), '&lt;img src=x onerror=alert(1)&gt;');
 
 // ---- Midazolam route map (SWFL / Round 2 C1) ----
 crNewPatient();

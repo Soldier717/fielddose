@@ -63,7 +63,8 @@ function loadApp() {
     'rcGetExpectedVitals', 'rcPickPedsTier',
     'crSetAdultIBW', 'crSetAdultCustom', 'crSetBroselow', 'crSetPedsCustom', 'crNewPatient',
     'BROSELOW', 'ADULT_IBW',
-    'ctState', 'ctLogEvent',
+    'ctState', 'ctLogEvent', 'ctMarkEpiGiven',
+    'fdParseDoseAmt', 'fdParseDrawMl', 'fdMeasurableVolWarn', 'FD_SYRINGE_GRAD_ML',
     'chartsLoadAll', 'chartsSaveAll', 'chartSaveActive', 'chartDelete', 'chartOpen',
     'chartWorksheetText',
   ];

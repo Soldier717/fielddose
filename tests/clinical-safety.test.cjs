@@ -7,7 +7,7 @@ const { loadApp } = require('./load-app.cjs');
 const app = loadApp();
 const {
   fdParseDrawMl, fdMeasurableVolWarn, FD_SYRINGE_GRAD_ML,
-  crSetAdultIBW, crSetBroselow, crSetPedsCustom, BROSELOW, ADULT_IBW,
+  crSetAdultIBW, crSetAdultCustom, crSetBroselow, crSetPedsCustom, BROSELOW, ADULT_IBW,
   ccGetDrugs, ctState, ctMarkEpiGiven, crNewPatient,
 } = app;
 
@@ -92,5 +92,21 @@ assert.ok(/5(\.0)? mg \(0\.2 mg\/kg, max 5\)/.test(bigMz.routeDoses.IV.dose),
   `33 kg IV capped at 5, got ${bigMz.routeDoses.IV.dose}`);
 assert.ok(/6\.6 mg \(0\.2 mg\/kg, max 10\)/.test(bigMz.routeDoses.IM.dose),
   `33 kg IM = 6.6 mg under 10 cap, got ${bigMz.routeDoses.IM.dose}`);
+
+// ---- Hyperactive delirium (SWFL 2026 card) ----
+crNewPatient();
+crSetAdultIBW(ADULT_IBW.find(a => a.kg === 70) || { lbs: 154, kg: 70, height: "5'7\"" });
+const del = ccGetDrugs().find(d => d.name === 'Ketamine — Delirium');
+const emg = ccGetDrugs().find(d => d.name === 'Ketamine — Delirium Emergence');
+assert.ok(del && /4 mg\/kg/.test(del.weightDose) && del.route === 'IM', `dissociation IM 4 mg/kg: ${del && del.weightDose}`);
+assert.strictEqual(del.weightDose, '280 mg (4 mg/kg, max 500)', '70 kg dissociation = 280 mg');
+assert.ok(emg && /1 mg\/kg/.test(emg.weightDose), `emergence 1 mg/kg: ${emg && emg.weightDose}`);
+assert.strictEqual(emg.weightDose, '70 mg (1 mg/kg, max 500)', '70 kg emergence = 70 mg');
+assert.ok(/IV/.test(emg.route), 'emergence is IV/IO');
+// Cap at 500 mg: 150 kg → min(600,500)=500
+crNewPatient();
+crSetAdultCustom(150);
+const delCap = ccGetDrugs().find(d => d.name === 'Ketamine — Delirium');
+assert.ok(/500 mg \(4 mg\/kg, max 500\)/.test(delCap.weightDose), `150 kg capped at 500, got ${delCap.weightDose}`);
 
 console.log('clinical-safety: ALL CHECKS PASSED');

@@ -4861,12 +4861,21 @@ function ccGetDrugsBase() {
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 1)} mL of 100 mg/mL (undiluted)`],
         ]),
         detail: 'Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
-      { rhythm: 'non-arrest', name: 'Ketamine — Delirium', class: 'Dissociative analgesic', indication: 'Hyperactive delirium',
+      { rhythm: 'non-arrest', name: 'Ketamine — Delirium', class: 'Dissociative analgesic', indication: 'Hyperactive delirium — dissociation',
         weightDose: `${ccFmt(Math.min(4*kg, 500), 0)} mg (4 mg/kg, max 500)`,
         packageSpec: '100 mg/mL',
         deliveryDose: `${ccFmt(Math.min(4*kg, 500)/100, 1)} mL IM of 100 mg/mL`,
         readyVol: '—',
-        detail: 'Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.', route: 'IM', max: '500 mg' },
+        detail: 'Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.', route: 'IM', max: '500 mg' },
+      { rhythm: 'non-arrest', name: 'Ketamine — Delirium Emergence', class: 'Dissociative analgesic', indication: 'Hyperactive delirium — emergence / inadequate dissociation',
+        weightDose: `${ccFmt(Math.min(1*kg, 500), 0)} mg (1 mg/kg, max 500)`,
+        packageSpec: '100 mg/mL',
+        deliveryDose: `${ccFmt(Math.min(1*kg, 500)/100, 2)} mL IV/IO of 100 mg/mL (undiluted)`,
+        readyVol: '—',
+        routeDoses: rcRouteDoses([
+          ['IV/IO', `${ccFmt(Math.min(1*kg, 500), 0)} mg (1 mg/kg, max 500)`, `${ccFmt(Math.min(1*kg, 500)/100, 2)} mL of 100 mg/mL (undiluted)`],
+        ]),
+        detail: 'Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.', route: 'IV / IO', max: '500 mg' },
       { rhythm: 'non-arrest', name: 'Morphine', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`,
         packageSpec: '4 mg/mL',
@@ -8134,12 +8143,19 @@ const CC_PROTOCOLS = [
       { label: 'Antiemetic', items: ['Ondansetron 4 mg IV/IO/IM (or 4 mg ODT) · repeat 10 min · Peds 0.1 mg/kg'] },
     ]},
     { id: 'delirium', name: 'Hyperactive Delirium', banner: 'Hyperactive Delirium', sections: [
-      { label: 'Dissociation (first-line)', items: ['Ketamine 4 mg/kg IM (max 500 mg) — target large muscle'] },
-      { label: 'Alternative', items: ['Midazolam 5 mg IV or 10 mg IM'] },
-    ], pearls: [
-      'First-line therapy; no absolute contraindications',
+      { label: 'Dissociation', items: [
+        { t: 'Primary: Ketamine 4 mg/kg IM (max 500 mg) — large muscle', drug: 'Ketamine — Delirium' },
+        { t: 'Option: Midazolam 5 mg IV or 10 mg IM', drug: 'Midazolam — Seizure' },
+      ] },
+      { label: 'Dissociation Emergence (unlikely / rare)', items: [
+        { t: 'Primary: Ketamine 1 mg/kg IV/IO (max 500 mg) — 5–10 min after if inadequate', drug: 'Ketamine — Delirium Emergence' },
+        { t: 'Option: Midazolam 5 mg IV or 10 mg IM', drug: 'Midazolam — Seizure' },
+      ] },
+    ], warn: { label: 'Pediatric', items: ['Contact Medical Control — no standing pediatric dose'] }, pearls: [
+      'Ketamine first-line; no absolute contraindications',
       'Patients shall never be placed prone',
-      'Document RASS like a vital sign',
+      'Document RASS like a vital sign — multiple times',
+      'Droperidol listed on regional card — removed from app per medical direction',
     ]},
   ]},
   { cat: 'Trauma', list: [

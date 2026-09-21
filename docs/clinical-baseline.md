@@ -60,8 +60,8 @@ rows as contact-medical-control:
 - A2 Pediatric sedation 10× reduction — **resolved: regional 1 mg/kg IV/IO restored**
 - A3 IM/IN ketamine scope — **resolved** (pain 0.2 all routes; sedation 2 mg/kg IM/IN adult+peds)
 - Adult ketamine 0.1–0.2 MD delta — **resolved: regional 0.2 pain / 1 mg/kg sedation IV**
-- A4 Delirium ketamine confirmation
-- B Coverage after droperidol/promethazine removal
+- A4 Delirium ketamine confirmation — **resolved SWFL 2026:** Dissociation 4 mg/kg IM max 500; Emergence 1 mg/kg IV/IO max 500 (5–10 min if inadequate); peds contact medical control. Droperidol stays off app (MD). Midazolam remains Option 2.
+- B Coverage after droperidol/promethazine removal — **delirium half resolved** (midazolam-only alternate). **Nausea** still needs the regional Nausea card (ondansetron-only vs replacements).
 - C1 Midazolam route-dose map — **confirmed SWFL:** adult 5 mg IV/IO / 10 mg IM/IN; peds 0.2 mg/kg (max 5 IV/IO / 10 IM/IN); may repeat every 5 min PRN
 - C2 Stocked concentrations
 - C3 Hard-stop vs caution list

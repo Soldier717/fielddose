@@ -7469,13 +7469,36 @@
      "rhythm": "non-arrest",
      "name": "Ketamine — Delirium",
      "class": "Dissociative analgesic",
-     "indication": "Hyperactive delirium",
+     "indication": "Hyperactive delirium — dissociation",
      "weightDose": "180 mg (4 mg/kg, max 500)",
      "packageSpec": "100 mg/mL",
      "deliveryDose": "1.8 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
      "route": "IM",
+     "max": "500 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium Emergence",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium — emergence / inadequate dissociation",
+     "weightDose": "45 mg (1 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.45 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "45 mg (1 mg/kg, max 500)",
+       "vol": "0.45 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "45 mg (1 mg/kg, max 500)",
+       "vol": "0.45 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.",
+     "route": "IV / IO",
      "max": "500 mg"
     },
     {
@@ -9994,13 +10017,36 @@
      "rhythm": "non-arrest",
      "name": "Ketamine — Delirium",
      "class": "Dissociative analgesic",
-     "indication": "Hyperactive delirium",
+     "indication": "Hyperactive delirium — dissociation",
      "weightDose": "200 mg (4 mg/kg, max 500)",
      "packageSpec": "100 mg/mL",
      "deliveryDose": "2.0 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
      "route": "IM",
+     "max": "500 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium Emergence",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium — emergence / inadequate dissociation",
+     "weightDose": "50 mg (1 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.50 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "50 mg (1 mg/kg, max 500)",
+       "vol": "0.50 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "50 mg (1 mg/kg, max 500)",
+       "vol": "0.50 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.",
+     "route": "IV / IO",
      "max": "500 mg"
     },
     {
@@ -10889,13 +10935,36 @@
      "rhythm": "non-arrest",
      "name": "Ketamine — Delirium",
      "class": "Dissociative analgesic",
-     "indication": "Hyperactive delirium",
+     "indication": "Hyperactive delirium — dissociation",
      "weightDose": "240 mg (4 mg/kg, max 500)",
      "packageSpec": "100 mg/mL",
      "deliveryDose": "2.4 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
      "route": "IM",
+     "max": "500 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium Emergence",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium — emergence / inadequate dissociation",
+     "weightDose": "60 mg (1 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.60 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "60 mg (1 mg/kg, max 500)",
+       "vol": "0.60 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "60 mg (1 mg/kg, max 500)",
+       "vol": "0.60 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.",
+     "route": "IV / IO",
      "max": "500 mg"
     },
     {
@@ -11784,13 +11853,36 @@
      "rhythm": "non-arrest",
      "name": "Ketamine — Delirium",
      "class": "Dissociative analgesic",
-     "indication": "Hyperactive delirium",
+     "indication": "Hyperactive delirium — dissociation",
      "weightDose": "280 mg (4 mg/kg, max 500)",
      "packageSpec": "100 mg/mL",
      "deliveryDose": "2.8 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
      "route": "IM",
+     "max": "500 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium Emergence",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium — emergence / inadequate dissociation",
+     "weightDose": "70 mg (1 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.70 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "70 mg (1 mg/kg, max 500)",
+       "vol": "0.70 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "70 mg (1 mg/kg, max 500)",
+       "vol": "0.70 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.",
+     "route": "IV / IO",
      "max": "500 mg"
     },
     {
@@ -12679,13 +12771,36 @@
      "rhythm": "non-arrest",
      "name": "Ketamine — Delirium",
      "class": "Dissociative analgesic",
-     "indication": "Hyperactive delirium",
+     "indication": "Hyperactive delirium — dissociation",
      "weightDose": "300 mg (4 mg/kg, max 500)",
      "packageSpec": "100 mg/mL",
      "deliveryDose": "3.0 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
      "route": "IM",
+     "max": "500 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium Emergence",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium — emergence / inadequate dissociation",
+     "weightDose": "75 mg (1 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.75 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "75 mg (1 mg/kg, max 500)",
+       "vol": "0.75 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "75 mg (1 mg/kg, max 500)",
+       "vol": "0.75 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.",
+     "route": "IV / IO",
      "max": "500 mg"
     },
     {
@@ -13574,13 +13689,36 @@
      "rhythm": "non-arrest",
      "name": "Ketamine — Delirium",
      "class": "Dissociative analgesic",
-     "indication": "Hyperactive delirium",
+     "indication": "Hyperactive delirium — dissociation",
      "weightDose": "320 mg (4 mg/kg, max 500)",
      "packageSpec": "100 mg/mL",
      "deliveryDose": "3.2 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
      "route": "IM",
+     "max": "500 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium Emergence",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium — emergence / inadequate dissociation",
+     "weightDose": "80 mg (1 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.80 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "80 mg (1 mg/kg, max 500)",
+       "vol": "0.80 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "80 mg (1 mg/kg, max 500)",
+       "vol": "0.80 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.",
+     "route": "IV / IO",
      "max": "500 mg"
     },
     {
@@ -14469,13 +14607,36 @@
      "rhythm": "non-arrest",
      "name": "Ketamine — Delirium",
      "class": "Dissociative analgesic",
-     "indication": "Hyperactive delirium",
+     "indication": "Hyperactive delirium — dissociation",
      "weightDose": "360 mg (4 mg/kg, max 500)",
      "packageSpec": "100 mg/mL",
      "deliveryDose": "3.6 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
      "route": "IM",
+     "max": "500 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium Emergence",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium — emergence / inadequate dissociation",
+     "weightDose": "90 mg (1 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.90 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "90 mg (1 mg/kg, max 500)",
+       "vol": "0.90 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "90 mg (1 mg/kg, max 500)",
+       "vol": "0.90 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.",
+     "route": "IV / IO",
      "max": "500 mg"
     },
     {
@@ -15364,13 +15525,36 @@
      "rhythm": "non-arrest",
      "name": "Ketamine — Delirium",
      "class": "Dissociative analgesic",
-     "indication": "Hyperactive delirium",
+     "indication": "Hyperactive delirium — dissociation",
      "weightDose": "400 mg (4 mg/kg, max 500)",
      "packageSpec": "100 mg/mL",
      "deliveryDose": "4.0 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
      "route": "IM",
+     "max": "500 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium Emergence",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium — emergence / inadequate dissociation",
+     "weightDose": "100 mg (1 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "1.00 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "100 mg (1 mg/kg, max 500)",
+       "vol": "1.00 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "100 mg (1 mg/kg, max 500)",
+       "vol": "1.00 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.",
+     "route": "IV / IO",
      "max": "500 mg"
     },
     {
@@ -16259,13 +16443,36 @@
      "rhythm": "non-arrest",
      "name": "Ketamine — Delirium",
      "class": "Dissociative analgesic",
-     "indication": "Hyperactive delirium",
+     "indication": "Hyperactive delirium — dissociation",
      "weightDose": "400 mg (4 mg/kg, max 500)",
      "packageSpec": "100 mg/mL",
      "deliveryDose": "4.0 mL IM of 100 mg/mL",
      "readyVol": "—",
-     "detail": "Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.",
+     "detail": "Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Adult standing order — pediatric: contact medical control. SWFL 2026. Alternative (MD): Midazolam 5 mg IV or 10 mg IM. Droperidol removed per medical direction.",
      "route": "IM",
+     "max": "500 mg"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Delirium Emergence",
+     "class": "Dissociative analgesic",
+     "indication": "Hyperactive delirium — emergence / inadequate dissociation",
+     "weightDose": "100 mg (1 mg/kg, max 500)",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "1.00 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "100 mg (1 mg/kg, max 500)",
+       "vol": "1.00 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "100 mg (1 mg/kg, max 500)",
+       "vol": "1.00 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.",
+     "route": "IV / IO",
      "max": "500 mg"
     },
     {

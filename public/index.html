@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FieldDose — Field ACLS Dosing & Protocols</title>
-<meta name="description" content="FieldDose — weight-based ACLS dosing, treatment protocols & electrical reference for EMS field use (SWFL 2025 guidelines).">
+<meta name="description" content="FieldDose — weight-based ACLS dosing, treatment protocols & electrical reference for EMS field use (SWFL Revised 8/2026 guidelines).">
 <meta property="og:title" content="FieldDose">
 <meta property="og:description" content="Weight-based ACLS dosing, treatment protocols & electrical reference.">
 <meta property="og:url" content="https://fielddose.com">
@@ -2736,6 +2736,9 @@
     display: flex;
     animation: cr-fade-in 0.18s ease-out;
   }
+  .cr-modal-backdrop.show.cr-modal-refresh {
+    animation: none;
+  }
   @keyframes cr-fade-in { from { opacity: 0; } to { opacity: 1; } }
 
   .cr-modal {
@@ -2749,6 +2752,9 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  }
+  /* Pop-in only on first open — never when refreshing an already-open card. */
+  .cr-modal-backdrop.show:not(.cr-modal-refresh) > .cr-modal {
     animation: cr-pop-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   @keyframes cr-pop-in {
@@ -3920,7 +3926,7 @@ const ctState = {
   cuesFired: {},
   pulseDotEl: null,
   lastRhythm: null, // 'shockable' | 'nonshockable' | null — drives auto-shock cue at 2:00
-  cumulativeEpiMg: 0, // Track total Epi dose toward 3 mg max (SWFL 2025)
+  cumulativeEpiMg: 0, // Track total Epi dose toward 3 mg max (SWFL Revised 8/2026)
   shockCount: 0, // Number of defibrillations delivered this code
   antiDysrhythmicGiven: false, // Has any anti-dysrhythmic (Amio/Lido) been logged?
   dsdCued: false, // Has DSD cue been fired this code?
@@ -4124,7 +4130,7 @@ function ctTick() {
   if (cycleElapsedMs >= 105000 && cycleElapsedMs < 106000) ctFireCue('prepare-charge');
   if (cycleElapsedMs >= 120000) { ctFireCue('rhythm-check'); ctStartNewCycle(); }
 
-  // SWFL 2025: Stop epi reminder once cumulative dose reaches 3 mg
+  // SWFL Revised 8/2026: Stop epi reminder once cumulative dose reaches 3 mg
   if (ctState.epiReminderOn && ctState.elapsedMs - ctState.lastEpiMs >= ctState.epiIntervalMs) {
     ctState.lastEpiMs = ctState.elapsedMs;
     if (ctState.cumulativeEpiMg >= 3) {
@@ -4139,7 +4145,7 @@ function ctTick() {
     }
   }
 
-  // SWFL 2025: After 3rd shock + anti-dysrhythmic, prompt DSD for refractory VF/pVT
+  // SWFL Revised 8/2026: After 3rd shock + anti-dysrhythmic, prompt DSD for refractory VF/pVT
   if (!ctState.dsdCued && ctState.shockCount >= 3 && ctState.antiDysrhythmicGiven && ctState.lastRhythm === 'shockable') {
     ctState.dsdCued = true;
     ctShowCueBanner('Refractory VF/VT — Consider DSD (set up 2nd AED)', 'normal', 5000);
@@ -4218,9 +4224,9 @@ function ctRenderLog() {
   if (ctState.log.length === 0) { logEl.innerHTML = '<div class="ct-log-empty">No events logged yet</div>'; return; }
   logEl.innerHTML = ctState.log.map(e => `
     <div class="ct-log-entry">
-      <div class="time">${e.ts ? fdClock(e.ts) : e.time}</div>
-      <div class="type">${e.type}</div>
-      <div class="note">${e.note}</div>
+      <div class="time">${escapeHtml(e.ts ? fdClock(e.ts) : (e.time || ''))}</div>
+      <div class="type">${escapeHtml(e.type || '')}</div>
+      <div class="note">${escapeHtml(e.note || '')}</div>
     </div>
   `).join('');
 }
@@ -4285,7 +4291,27 @@ function ctClearLog() {
     rcPartialRender();
   }
 }
-function ctMarkEpiGiven() { ctLogEvent('Drug', `Epinephrine given @ ${ctFormatTime(ctState.elapsedMs)}`); ctState.lastEpiMs = ctState.elapsedMs; ctShowCueBanner('Epi logged', 'epi', 1800); }
+function ctMarkEpiGiven() {
+  // Timer shortcut must stay in sync with the drug-modal "Given" path so the
+  // SWFL 3 mg cumulative arrest-epi lockout still fires (see clinical-baseline.md).
+  let amt = 1, unit = 'mg', name = 'Epinephrine 1:10,000';
+  try {
+    const drugs = typeof ccGetDrugs === 'function' ? ccGetDrugs() : [];
+    const epi = drugs.find(d => (d.name === 'Epinephrine' || d.name === 'Epinephrine 1:10,000') && d.rhythm === 'all');
+    if (epi) {
+      name = epi.name;
+      const dc = fdDoseChoices(epi.weightDose);
+      const def = fdDefaultDose(epi, dc);
+      if (def != null) amt = def;
+    }
+  } catch (_) { /* keep adult 1 mg fallback */ }
+  ctLogEvent('Drug', `${name} ${fdFmtAmt(amt)} ${unit} IV/IO given @ ${ctFormatTime(ctState.elapsedMs)}`, {
+    drug: name, amt, unit, route: 'IV/IO'
+  });
+  ctState.lastEpiMs = ctState.elapsedMs;
+  ctState.cumulativeEpiMg += amt;
+  ctShowCueBanner('Epi logged', 'epi', 1800);
+}
 function ctMarkShock() { ctLogEvent('Shock', `Shock delivered @ ${ctFormatTime(ctState.elapsedMs)}`); ctShowCueBanner('Shock logged', 'normal', 1800); }
 function ctMarkROSC() { ctLogEvent('ROSC', `ROSC @ ${ctFormatTime(ctState.elapsedMs)}`); ctShowCueBanner('ROSC logged', 'normal', 2500); ctPause(); }
 function ctMarkRhythm(rhythm) {
@@ -4579,11 +4605,36 @@ function fdTzLabel() {
 function fdApplyDrugOverrides(drugs) {
   const p = fdPack();
   const ov = p && Array.isArray(p.drugOverrides) ? p.drugOverrides : null;
-  if (!ov || !ov.length) return drugs;
-  return drugs.map((d) => {
-    const o = ov.find((x) => x && x.name === d.name && x.set);
-    return o ? Object.assign({}, d, o.set) : d;
+  let out = drugs;
+  if (ov && ov.length) {
+    out = out.map((d) => {
+      const o = ov.find((x) => x && x.name === d.name && x.set);
+      return o ? Object.assign({}, d, o.set) : d;
+    });
+  }
+  // Agency usage: hide drugs the enrolled agency does not carry / does not
+  // want displayed (GNFR: Droperidol + Promethazine). No pack = full SWFL list.
+  return out.filter((d) => !fdPackOmits(d.name));
+}
+
+// Pack clinical.omitDrugs — case-insensitive substring/regex list. Matches
+// drug row names and protocol line text so By Protocol stays in sync.
+function fdPackOmitList() {
+  const p = fdPack();
+  const list = (p && p.clinical && Array.isArray(p.clinical.omitDrugs)) ? p.clinical.omitDrugs
+    : (p && Array.isArray(p.omitDrugs)) ? p.omitDrugs : [];
+  return list.filter((s) => typeof s === 'string' && s.trim());
+}
+function fdPackOmits(text) {
+  const t = String(text || '');
+  if (!t) return false;
+  return fdPackOmitList().some((pat) => {
+    try { return new RegExp(pat, 'i').test(t); } catch (_) { return t.toLowerCase().indexOf(pat.toLowerCase()) !== -1; }
   });
+}
+function fdPackUsageNote() {
+  const p = fdPack();
+  return (p && p.clinical && p.clinical.usage) || '';
 }
 
 function ccGetDrugs() {
@@ -4809,7 +4860,7 @@ function ccGetDrugsBase() {
           ['IV/IO', '5 mg', '1 mL of 5 mg/mL'],
           ['IM/IN', '10 mg', '2 mL of 5 mg/mL'],
         ]),
-        detail: 'Seizure/dissociation: 5 mg IV/IO or 10 mg IM/IN, repeat q5 min — dose changes with route. Sympathomimetic tox: same dosing.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: '5 mg IV/IO or 10 mg IM/IN; may repeat every 5 minutes PRN — dose changes with route. Sympathomimetic tox: same dosing. SWFL regional guideline.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Midazolam — Anxiety', class: 'Benzodiazepine', indication: 'Severe anxiety',
         weightDose: '2 mg',
         packageSpec: '5 mg/mL',
@@ -4823,31 +4874,40 @@ function ccGetDrugsBase() {
         readyVol: `${ccFmt(1*kg/50, 1)} mL of 50 mcg/mL`,
         detail: '1 mcg/kg IV/IO/IM/IN, repeat q10 min PRN. Preferred analgesic for chest pain.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Pain', class: 'Dissociative analgesic', indication: 'Sub-dissociative pain',
-        weightDose: `${ccFmt(0.1*kg, 1)} mg IV/IO · ${ccFmt(0.2*kg, 0)} mg IM/IN`,
+        weightDose: `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`,
         packageSpec: '100 mg/mL',
-        deliveryDose: `${ccFmt(0.1*kg/100, 2)} mL IV/IO of 100 mg/mL (undiluted)`,
+        deliveryDose: `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`,
         readyVol: '—',
         routeDoses: rcRouteDoses([
-          ['IV/IO', `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`, `${ccFmt(0.1*kg/100, 2)} mL of 100 mg/mL (undiluted)`, `${ccFmt(0.1*kg, 1)}–${ccFmt(0.2*kg, 1)} mg`],
+          ['IV/IO', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
           ['IM/IN', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
-        weightDose: `${ccFmt(0.1*kg, 1)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
+        weightDose: `${ccFmt(1*kg, 0)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
         packageSpec: '100 mg/mL',
-        deliveryDose: `${ccFmt(0.1*kg/100, 2)} mL IV/IO of 100 mg/mL (undiluted)`,
+        deliveryDose: `${ccFmt(1*kg/100, 2)} mL IV/IO of 100 mg/mL (undiluted)`,
         readyVol: '—',
         routeDoses: rcRouteDoses([
-          ['IV/IO', `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`, `${ccFmt(0.1*kg/100, 2)} mL of 100 mg/mL (undiluted)`, `${ccFmt(0.1*kg, 1)}–${ccFmt(0.2*kg, 1)} mg`],
+          ['IV/IO', `${ccFmt(1*kg, 0)} mg (1 mg/kg)`, `${ccFmt(1*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 1)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).', route: 'IV / IO / IM / IN', max: 'Per protocol' },
-      { rhythm: 'non-arrest', name: 'Ketamine — Delirium', class: 'Dissociative analgesic', indication: 'Hyperactive delirium',
+        detail: 'Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Ketamine — Delirium', class: 'Dissociative analgesic', indication: 'Hyperactive delirium — dissociation',
         weightDose: `${ccFmt(Math.min(4*kg, 500), 0)} mg (4 mg/kg, max 500)`,
         packageSpec: '100 mg/mL',
         deliveryDose: `${ccFmt(Math.min(4*kg, 500)/100, 1)} mL IM of 100 mg/mL`,
         readyVol: '—',
-        detail: 'Hyperactive delirium 4 mg/kg IM (max 500 mg). IM only.', route: 'IM', max: '500 mg' },
+        detail: 'Hyperactive delirium — Dissociation (primary): 4 mg/kg IM (max 500 mg). IM only; target large muscle. First-line; no absolute contraindications. Never place patient prone. Document RASS. Option 1: Droperidol 5 mg IM/IV/IO. Option 2: Midazolam 5 mg IV or 10 mg IM. Adult standing order — pediatric: contact medical control. SWFL 2026.', route: 'IM', max: '500 mg' },
+      { rhythm: 'non-arrest', name: 'Ketamine — Delirium Emergence', class: 'Dissociative analgesic', indication: 'Hyperactive delirium — emergence / inadequate dissociation',
+        weightDose: `${ccFmt(Math.min(1*kg, 500), 0)} mg (1 mg/kg, max 500)`,
+        packageSpec: '100 mg/mL',
+        deliveryDose: `${ccFmt(Math.min(1*kg, 500)/100, 2)} mL IV/IO of 100 mg/mL (undiluted)`,
+        readyVol: '—',
+        routeDoses: rcRouteDoses([
+          ['IV/IO', `${ccFmt(Math.min(1*kg, 500), 0)} mg (1 mg/kg, max 500)`, `${ccFmt(Math.min(1*kg, 500)/100, 2)} mL of 100 mg/mL (undiluted)`],
+        ]),
+        detail: 'Dissociation Emergence (unlikely/rare): 1 mg/kg IV/IO (max 500 mg), 5–10 min after initial dose if dissociation inadequate. SWFL 2026. Adult standing order — pediatric: contact medical control.', route: 'IV / IO', max: '500 mg' },
       { rhythm: 'non-arrest', name: 'Morphine', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`,
         packageSpec: '4 mg/mL',
@@ -4888,9 +4948,27 @@ function ccGetDrugsBase() {
         deliveryDose: 'Push 1 mL IV/IO q5 min PRN',
         readyVol: '1 mL of 5 mg/mL',
         detail: '5 mg IV/IO; repeat q5 min PRN.', route: 'IV / IO', max: 'Per protocol' },
-      // Droperidol and Promethazine withdrawn from the app per medical
-      // direction 9/2026 (Dr. Dunavant) — "remove from app". Ondansetron is
-      // now the only antiemetic; Midazolam the only delirium alternative.
+      { rhythm: 'non-arrest', name: 'Droperidol — Nausea', class: 'Antiemetic / antipsychotic', indication: 'Nausea / vomiting',
+        weightDose: '1.25 mg',
+        packageSpec: '2.5 mg/mL',
+        deliveryDose: 'Push 0.5 mL IV/IO/IM',
+        readyVol: '0.5 mL of 2.5 mg/mL',
+        detail: 'Nausea/vomiting 1.25 mg IV/IO/IM. Caution: known long QT. SWFL regional — agencies may omit via pack.', route: 'IV / IO / IM', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Droperidol — Delirium', class: 'Antiemetic / antipsychotic', indication: 'Hyperactive delirium',
+        weightDose: '5 mg',
+        packageSpec: '2.5 mg/mL',
+        deliveryDose: 'Push 2 mL IV/IO/IM',
+        readyVol: '2 mL of 2.5 mg/mL',
+        detail: 'Hyperactive delirium Option 1: 5 mg IM/IV/IO. Caution: known long QT. SWFL regional — agencies may omit via pack.', route: 'IV / IO / IM', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Promethazine (Phenergan)', class: 'Antiemetic / antihistamine', indication: 'Nausea / vomiting',
+        weightDose: '25 mg',
+        packageSpec: '25 mg/mL',
+        deliveryDose: 'IV — dilute, infuse slowly',
+        readyVol: '—',
+        detail: '25 mg IV. Extravasation can cause severe tissue damage. SWFL regional — agencies may omit via pack.', route: 'IV', max: 'Per protocol' },
+      // Agencies that do not carry Droperidol / Promethazine (e.g. GNFR
+      // medical direction 9/2026) omit them via pack clinical.omitDrugs —
+      // they remain on the regional baseline for other departments.
       { rhythm: 'non-arrest', name: 'Labetalol', class: 'Beta/alpha blocker', indication: 'Peripartum hypertension / eclampsia',
         weightDose: '20 → 40 → 80 mg',
         packageSpec: '5 mg/mL',
@@ -5105,7 +5183,7 @@ function ccGetDrugsBase() {
           ['IV/IO', `${ccFmt(Math.min(0.2*kg, 5), 1)} mg (0.2 mg/kg, max 5)`, `${ccFmt(Math.min(0.2*kg, 5)/5, 2)} mL of 5 mg/mL`],
           ['IM/IN', `${ccFmt(Math.min(0.2*kg, 10), 1)} mg (0.2 mg/kg, max 10)`, `${ccFmt(Math.min(0.2*kg, 10)/5, 2)} mL of 5 mg/mL`],
         ]),
-        detail: '0.2 mg/kg IV/IO/IM/IN (max 5 mg IV / 10 mg IM-IN), repeat q5 min — max changes with route.', route: 'IV / IO / IM / IN', max: '5 mg IV / 10 mg IM-IN' },
+        detail: '0.2 mg/kg IV/IO (max 5 mg) or IM/IN (max 10 mg); may repeat every 5 minutes PRN — max changes with route. SWFL regional guideline.', route: 'IV / IO / IM / IN', max: '5 mg IV / 10 mg IM-IN' },
       { rhythm: 'non-arrest', name: 'Fentanyl (Sublimaze)', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(1*kg, 0)} mcg (1 mcg/kg)`,
         packageSpec: '50 mcg/mL',
@@ -5115,18 +5193,28 @@ function ccGetDrugsBase() {
       // Ketamine peds: contraindicated ≤ 3 months. Broselow 3/4/5 kg zones
       // are the "< 3 months" zones, so under 6 kg the row shows the
       // contraindication instead of computing a dose.
-      // There is deliberately NO pediatric Pain row: ketamine is not used
-      // for pediatric pain per medical direction 9/2026 (Dr. Dunavant).
-      { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
-        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(0.1*kg, 2)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
+      // Pain & Anxiety (regional): 0.2 mg/kg IV/IO/IM/IN q20 min.
+      // Procedural sedation (regional): 1 mg/kg IV/IO q10 min PRN, or 2 mg/kg IM/IN.
+      { rhythm: 'non-arrest', name: 'Ketamine — Pain', class: 'Dissociative analgesic', indication: 'Sub-dissociative pain',
+        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`,
         packageSpec: '100 mg/mL',
-        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `${ccFmt(0.1*kg/100, 3)} mL IV/IO of 100 mg/mL (undiluted)`,
+        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `${ccFmt(0.2*kg/100, 3)} mL of 100 mg/mL (undiluted)`,
         readyVol: '—',
         routeDoses: kg < 6 ? undefined : rcRouteDoses([
-          ['IV/IO', `${ccFmt(0.1*kg, 2)} mg (0.1 mg/kg)`, `${ccFmt(0.1*kg/100, 3)} mL of 100 mg/mL (undiluted)`, `${ccFmt(0.1*kg, 2)}–${ccFmt(0.2*kg, 2)} mg`],
+          ['IV/IO', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 3)} mL of 100 mg/mL (undiluted)`],
+          ['IM/IN', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 3)} mL of 100 mg/mL (undiluted)`],
+        ]),
+        detail: 'Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
+        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(1*kg, 1)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
+        packageSpec: '100 mg/mL',
+        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `${ccFmt(1*kg/100, 2)} mL IV/IO of 100 mg/mL (undiluted)`,
+        readyVol: '—',
+        routeDoses: kg < 6 ? undefined : rcRouteDoses([
+          ['IV/IO', `${ccFmt(1*kg, 1)} mg (1 mg/kg)`, `${ccFmt(1*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Morphine', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`,
         packageSpec: '4 mg/mL',
@@ -6826,7 +6914,10 @@ function crShowDefibModal() {
 function crCloseModal() {
   cr.modal = null;
   const mount = document.getElementById('cr-modal-mount');
-  if (mount) { mount.classList.remove('show'); mount.innerHTML = ''; }
+  if (mount) {
+    mount.classList.remove('show', 'cr-modal-refresh');
+    mount.innerHTML = '';
+  }
 }
 
 function crRenderModal() {
@@ -6835,12 +6926,26 @@ function crRenderModal() {
   const html = cr.modal.type === 'drug' ? renderDrugModal(cr.modal)
              : cr.modal.type === 'defib' ? renderDefibModal(cr.modal)
              : '';
+  const existing = mount.classList.contains('show') ? mount.querySelector('.cr-modal') : null;
+  if (existing) {
+    // Keep the same .cr-modal node so cr-pop-in / backdrop fade never restart.
+    mount.classList.add('cr-modal-refresh');
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    const neu = tmp.querySelector('.cr-modal');
+    if (neu) {
+      existing.innerHTML = neu.innerHTML;
+      bindModalEvents();
+      return;
+    }
+  }
+  mount.classList.remove('cr-modal-refresh');
   mount.innerHTML = html;
   mount.classList.add('show');
   bindModalEvents();
 }
 
-// Pharmacology reference (SWFL 2025 drug ref) — keyed by simple slug.
+// Pharmacology reference (SWFL Revised 8/2026 drug ref) — keyed by simple slug.
 // crDrugRef() maps any drug-list name (incl. concentration variants) to one entry.
 const CC_DRUG_REF = {
   epinephrine: { action: 'Alpha & beta agonist — ↑ heart rate, contractility, SVR & BP; bronchodilation.', contra: ['None in emergency settings'], precautions: ['Cardiovascular disease, hypertension, tachyarrhythmia','Protect from light; deactivated by alkaline solutions (bicarb)'] },
@@ -6907,6 +7012,39 @@ function fdParseDoseAmt(txt) {
   const b = m[2] != null ? parseFloat(m[2]) : a;
   return { min: Math.min(a, b), max: Math.max(a, b), unit: m[3] };
 }
+// Smallest mL figure in a delivery / volume string. Used to flag draws that
+// fall below a 1 mL syringe graduation (0.01 mL) — see Round 2 A1 / clinical-baseline.md.
+// "0.070 mL IV/IO of 100 mg/mL" → 0.07; "Push 5–10 mL" → 5; no mL → null.
+function fdParseDrawMl(txt) {
+  if (!txt || typeof txt !== 'string') return null;
+  let min = null;
+  const re = /([\d.]+)(?:\s*[–-]\s*([\d.]+))?\s*mL\b/gi;
+  let m;
+  while ((m = re.exec(txt)) !== null) {
+    const a = parseFloat(m[1]);
+    const b = m[2] != null ? parseFloat(m[2]) : a;
+    if (!isFinite(a)) continue;
+    const lo = Math.min(a, isFinite(b) ? b : a);
+    if (min == null || lo < min) min = lo;
+  }
+  return min;
+}
+// Finest graduation on a typical 1 mL syringe. Below this the draw cannot be
+// measured accurately — warn the crew; do not invent a dilution recipe.
+const FD_SYRINGE_GRAD_ML = 0.01;
+function fdMeasurableVolWarn(txt) {
+  const ml = fdParseDrawMl(txt);
+  if (ml == null) return null;
+  if (ml < FD_SYRINGE_GRAD_ML - 1e-12) {
+    return `Draw volume ${fdFmtAmt(ml)} mL is below a 1 mL syringe graduation (0.01 mL) — cannot be measured accurately. Confirm preparation with medical control / current protocol before drawing.`;
+  }
+  // < 0.1 mL is only a few graduations on a 1 mL syringe (adult ketamine
+  // 0.1 mg/kg undiluted ≈ 0.07 mL at 70 kg — Round 2 A1).
+  if (ml < 0.1 - 1e-12) {
+    return `Draw volume ${fdFmtAmt(ml)} mL is difficult to measure accurately on a 1 mL syringe. Partner cross-check the draw; confirm preparation with medical control if a dilution is approved.`;
+  }
+  return null;
+}
 // Selectable dose amounts for a display string.
 //   "300 mg → 150 mg"  → sequence [300, 150] (default follows dose count)
 //   "0.5–1 mg"         → stepped range [0.5, 0.6 … 1]
@@ -6941,12 +7079,12 @@ function fdMaxCum(d) {
   return m ? { amt: parseFloat(m[1]), unit: m[2] } : null;
 }
 // Default dose to log when the medic hasn't touched the picker:
-// sequences follow the dose count (1st 300, 2nd 150), ranges default
-// to the top of the range, fixed doses are themselves.
+// sequences follow the dose count (1st 300, 2nd 150); titratable ranges
+// start at the LOW end (safer for "titrate up"); fixed doses are themselves.
 function fdDefaultDose(d, dc) {
   if (!dc) return null;
   if (dc.kind === 'seq') return dc.choices[Math.min(fdGivenList(d.name).length, dc.choices.length - 1)];
-  return dc.choices[dc.choices.length - 1];
+  return dc.choices[0];
 }
 function fdFmtAmt(n) { return String(Math.round(n * 100) / 100); }
 function fdOrdinal(i) { return i === 1 ? '1st' : i === 2 ? '2nd' : i === 3 ? '3rd' : i + 'th'; }
@@ -6987,6 +7125,8 @@ function renderDrugModal(m) {
   const total = cumUnit ? fdGivenTotal(d.name, cumUnit) : 0;
   const maxed = !!(maxCum && total >= maxCum.amt - 1e-9);
   const wouldExceed = !!(maxCum && !maxed && dc && dc.unit === maxCum.unit && sel != null && total + sel > maxCum.amt + 1e-9);
+  const deliveryTxt = (d.routeDoses && d.routeDoses[cr.drugRoute] && d.routeDoses[cr.drugRoute].vol) || d.deliveryDose || d.readyVol || '—';
+  const volWarn = fdMeasurableVolWarn(deliveryTxt);
   const dosePicker = dc && dc.choices.length > 1 ? `
         <div class="cr-modal-row">
           <div class="cr-modal-label">Give:</div>
@@ -7033,8 +7173,13 @@ function renderDrugModal(m) {
         </div>
         <div class="cr-modal-row">
           <div class="cr-modal-label">Delivery:</div>
-          <div class="cr-modal-value white">${escapeHtml((d.routeDoses && d.routeDoses[cr.drugRoute] && d.routeDoses[cr.drugRoute].vol) || d.deliveryDose || d.readyVol || '—')}</div>
+          <div class="cr-modal-value white">${escapeHtml(deliveryTxt)}</div>
         </div>
+        ${volWarn ? `
+        <div class="cr-modal-note warn">
+          <span class="label">Measurable volume:</span>
+          <ul><li>${escapeHtml(volWarn)}</li></ul>
+        </div>` : ''}
         ${d.max && d.max !== 'Per protocol' ? `
         <div class="cr-modal-row">
           <div class="cr-modal-label">Max:</div>
@@ -7137,40 +7282,58 @@ function bindModalEvents() {
   // Close on backdrop click (but not inside modal)
   mount.onclick = (e) => { if (e.target === mount) crCloseModal(); };
 
+  // Clicks inside the card must not bubble to the backdrop — especially important
+  // when we remount/replace content mid-click (route/dose toggles).
+  const modalEl = mount.querySelector('.cr-modal');
+  if (modalEl) {
+    modalEl.onclick = (e) => e.stopPropagation();
+  }
+
   // Close button
   const closeBtn = document.getElementById('cr-modal-close-btn');
-  if (closeBtn) closeBtn.addEventListener('click', crCloseModal);
+  if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); crCloseModal(); });
+
+  // Defer content refresh until after the current click finishes so the
+  // backdrop never sees a retargeted click and we don't tear down the
+  // button mid-event.
+  const refreshSoon = () => {
+    requestAnimationFrame(() => crRenderModal());
+  };
 
   // Route toggle in drug modal
   mount.querySelectorAll('[data-cr-route]').forEach(b => {
-    b.addEventListener('click', () => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
       cr.drugRoute = b.dataset.crRoute;
       cr.doseSel = null; // route change can change the dose range
-      crRenderModal();
+      refreshSoon();
     });
   });
 
   // Dose-amount picker in drug modal (range / sequence doses)
   mount.querySelectorAll('[data-cr-dose]').forEach(b => {
-    b.addEventListener('click', () => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
       cr.doseSel = parseFloat(b.dataset.crDose);
-      crRenderModal();
+      refreshSoon();
     });
   });
 
   // Energy row selection in defib modal
   mount.querySelectorAll('[data-energy-idx]').forEach(b => {
-    b.addEventListener('click', () => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (cr.modal && cr.modal.type === 'defib') {
         cr.modal.selectedIdx = parseInt(b.dataset.energyIdx);
-        crRenderModal();
+        refreshSoon();
       }
     });
   });
 
   // Action buttons (Requested / Given / Shock Delivered / No Shock Advised)
   mount.querySelectorAll('[data-cr-action]').forEach(b => {
-    b.addEventListener('click', () => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
       const action = b.dataset.crAction;
       if (!cr.modal) return;
       if (cr.modal.type === 'drug') handleDrugModalAction(action);
@@ -7210,12 +7373,16 @@ function handleDrugModalAction(action) {
     const doseLogTxt = (amt != null && dc && dc.kind !== 'fixed') ? `${fdFmtAmt(amt)} ${unit}` : doseTxt;
     ctLogEvent('Drug', `${d.name} ${doseLogTxt} ${route} (${volTxt})`, { drug: d.name, amt: amt != null ? amt : undefined, unit: unit || undefined, route });
     ctShowCueBanner(`${d.name} given`, d.primary ? 'epi' : 'normal', 1800);
-    // Cumulative Epi tracking (arrest Epi only)
+  // Cumulative Epi tracking (arrest Epi only)
     const isArrestEpi = (d.name === 'Epinephrine' || d.name === 'Epinephrine 1:10,000') && d.rhythm === 'all';
     if (isArrestEpi) {
       ctState.lastEpiMs = ctState.elapsedMs;
       if (amt != null && unit === 'mg') ctState.cumulativeEpiMg += amt;
-      else { const m = (d.weightDose || '').match(/([\d.]+)\s*mg/); if (m) ctState.cumulativeEpiMg += parseFloat(m[1]); }
+      else {
+        const dc = fdDoseChoices(d.weightDose);
+        const def = fdDefaultDose(d, dc);
+        if (def != null) ctState.cumulativeEpiMg += def;
+      }
     }
     if (d.name === 'Amiodarone' || d.name === 'Lidocaine') ctState.antiDysrhythmicGiven = true;
   }
@@ -7468,6 +7635,7 @@ function renderCREntry() {
       <div class="fd-agency-row">
         <div class="fd-agency-name">
           ${p ? `<b>${escapeHtml(p.agency.name)}</b> · agency protocols active` : 'Regional defaults · no agency enrolled'}
+          ${p && fdPackUsageNote() ? `<div style="margin-top:4px;font-size:12px;color:var(--clin-text-dim);">${escapeHtml(fdPackUsageNote())}</div>` : ''}
         </div>
         <div style="display:flex;gap:6px;">
           <button class="fd-mini-btn" id="fd-agency-btn">${p ? 'Change' : 'Enter agency code'}</button>
@@ -7478,7 +7646,7 @@ function renderCREntry() {
       <div class="cc-disclaimer" style="margin-top: 8px;">
         <strong>⚠ Training & Reference Tool</strong>
         Pick patient type. Weight is locked once selected — start a New Patient if anything changes. Always confirm against current GNFR protocols and medical control. Always cross-check drug, dose, and delivery method with your partner.
-        <div style="margin-top:6px;opacity:0.75;font-size:11px;">Data source: SWFL Regional Common Treatment Guidelines, 2025 revision (GNFR 26-02).</div>
+        <div style="margin-top:6px;opacity:0.75;font-size:11px;">Data source: SWFL Regional Common Treatment Guidelines, Revised 8/2026 (GNFR 26-02).</div>
       </div>
     </div>
   `;
@@ -8017,7 +8185,7 @@ const CC_PROTOCOLS = [
   { cat: 'Neuro', list: [
     { id: 'seizure', name: 'Seizure', banner: 'Seizure / Status Epilepticus', sections: [
       { label: 'Check First', items: ['Blood glucose — if < 60, treat hypoglycemia'] },
-      { label: 'Anticonvulsant (choose one)', items: ['Midazolam 5 mg IV/IO or 10 mg IM/IN · repeat q5 min · Peds 0.2 mg/kg (max 5 mg IV / 10 mg IM-IN)','Lorazepam 2 mg IV/IO/IM · dilute 1:1 w/ NS for IV · may repeat ×1 (max 8 mg) · Peds 0.1 mg/kg (max 2 mg)','Diazepam 5 mg IV/IO · repeat q5 min · Peds 0.2 mg/kg (max 5 mg)'] },
+      { label: 'Anticonvulsant (choose one)', items: ['Midazolam 5 mg IV/IO or 10 mg IM/IN · may repeat every 5 min PRN · Peds 0.2 mg/kg (max 5 mg IV/IO / 10 mg IM/IN)','Lorazepam 2 mg IV/IO/IM · dilute 1:1 w/ NS for IV · may repeat ×1 (max 8 mg) · Peds 0.1 mg/kg (max 2 mg)','Diazepam 5 mg IV/IO · repeat q5 min · Peds 0.2 mg/kg (max 5 mg)'] },
       { label: 'Refractory / Prolonged', items: ['Levetiracetam (Keppra) 2 g IV/IO infusion'] },
     ], pearls: [ 'Levetiracetam is second-line for prolonged or refractory seizures' ]},
     { id: 'stroke', name: 'Stroke', banner: 'Suspected Stroke', sections: [
@@ -8050,22 +8218,34 @@ const CC_PROTOCOLS = [
   { cat: 'Pain / Sedation', list: [
     { id: 'pain', name: 'Pain & Anxiety', banner: 'Pain & Anxiety Management', sections: [
       { label: 'Opioid Analgesia (choose one)', items: ['Fentanyl 1 mcg/kg IV/IO/IM/IN q10 min PRN','Hydromorphone 1 mg IV/IO/IM/IN q20 min PRN · Peds 5 mcg/kg','Morphine 0.2 mg/kg IV/IO/IM/IN q20 min PRN · Peds 0.1 mg/kg'] },
-      { label: 'Non-Opioid (choose one)', items: ['Acetaminophen 1 g IV/IO over 15 min · Peds 15 mg/kg (max 500 mg)','Ketorolac 15 mg IV/IO/IM · Peds 0.5 mg/kg (max 15 mg)','Ketamine 0.1 mg/kg IV/IO (titrate to 0.2) · 0.2 mg/kg IM/IN · repeat PRN · adults only'] },
+      { label: 'Non-Opioid (choose one)', items: ['Acetaminophen 1 g IV/IO over 15 min · Peds 15 mg/kg (max 500 mg)','Ketorolac 15 mg IV/IO/IM · Peds 0.5 mg/kg (max 15 mg)','Ketamine 0.2 mg/kg IV/IO/IM/IN q20 min · Peds same'] },
       { label: 'IO Infusion Pain', items: ['Lidocaine 2% 40 mg IO over 2 min, dwell 60 s · Peds 0.5 mg/kg (max 40 mg)'] },
       { label: 'Severe Anxiety', items: ['Midazolam 2 mg IV/IO/IM/IN q10 min PRN'] },
     ], warn: { label: 'Caution', items: ['Ketorolac contraindicated in patients > 75 y/o'] }, pearls: [
       'Pain medication should not be held in fear of masking an injury/illness',
     ]},
     { id: 'nausea', name: 'Nausea & Vomiting', banner: 'Nausea & Vomiting', sections: [
-      { label: 'Antiemetic', items: ['Ondansetron 4 mg IV/IO/IM (or 4 mg ODT) · repeat 10 min · Peds 0.1 mg/kg'] },
+      { label: 'Antiemetic (choose one)', items: [
+        { t: 'Ondansetron 4 mg IV/IO/IM (or 4 mg ODT) · repeat 10 min · Peds 0.1 mg/kg', drug: 'Ondansetron' },
+        { t: 'Promethazine 25 mg IV', drug: 'Promethazine (Phenergan)' },
+        { t: 'Droperidol 1.25 mg IV/IO/IM', drug: 'Droperidol — Nausea' },
+      ] },
     ]},
     { id: 'delirium', name: 'Hyperactive Delirium', banner: 'Hyperactive Delirium', sections: [
-      { label: 'Dissociation (first-line)', items: ['Ketamine 4 mg/kg IM (max 500 mg) — target large muscle'] },
-      { label: 'Alternative', items: ['Midazolam 5 mg IV or 10 mg IM'] },
-    ], pearls: [
-      'First-line therapy; no absolute contraindications',
+      { label: 'Dissociation', items: [
+        { t: 'Primary: Ketamine 4 mg/kg IM (max 500 mg) — large muscle', drug: 'Ketamine — Delirium' },
+        { t: 'Option 1: Droperidol 5 mg IM/IV/IO', drug: 'Droperidol — Delirium' },
+        { t: 'Option 2: Midazolam 5 mg IV or 10 mg IM', drug: 'Midazolam — Seizure' },
+      ] },
+      { label: 'Dissociation Emergence (unlikely / rare)', items: [
+        { t: 'Primary: Ketamine 1 mg/kg IV/IO (max 500 mg) — 5–10 min after if inadequate', drug: 'Ketamine — Delirium Emergence' },
+        { t: 'Option 1: Droperidol 5 mg IM/IV/IO', drug: 'Droperidol — Delirium' },
+        { t: 'Option 2: Midazolam 5 mg IV or 10 mg IM', drug: 'Midazolam — Seizure' },
+      ] },
+    ], warn: { label: 'Pediatric', items: ['Contact Medical Control — no standing pediatric dose'] }, pearls: [
+      'Ketamine first-line; no absolute contraindications',
       'Patients shall never be placed prone',
-      'Document RASS like a vital sign',
+      'Document RASS like a vital sign — multiple times',
     ]},
   ]},
   { cat: 'Trauma', list: [
@@ -8169,6 +8349,9 @@ function crProtoDrugMatch(text) {
     ['acetaminophen', 'Acetaminophen (Tylenol)'],
     ['lorazepam', 'Lorazepam (Ativan)'],
     ['diazepam', 'Diazepam (Valium)'],
+    ['droperidol', 'Droperidol — Delirium'],
+    ['promethazine', 'Promethazine (Phenergan)'],
+    ['phenergan', 'Promethazine (Phenergan)'],
     ['labetalol', 'Labetalol'],
     ['levetiracetam', 'Levetiracetam (Keppra)'],
     ['keppra', 'Levetiracetam (Keppra)'],
@@ -8217,42 +8400,54 @@ const CC_FUTURE_USE = new Set([
 function crIsFutureUse(name) { return CC_FUTURE_USE.has(name); }
 
 function rcRenderProtocolDetail(p) {
-  const sec = (label, items, warn) => `
+  const sec = (label, items, warn) => {
+    const visible = (items || []).filter((itRaw) => {
+      const it = typeof itRaw === 'string' ? itRaw : itRaw;
+      const labelTxt = typeof it === 'string' ? it : (it.t || it.drug || '');
+      // Hide lines for drugs the enrolled agency omitted (GNFR pack).
+      if (fdPackOmits(labelTxt)) return false;
+      if (it && it.drug && fdPackOmits(it.drug)) return false;
+      return true;
+    });
+    if (!visible.length) return '';
+    return `
     <div class="cc-proto-section${warn ? ' warn' : ''}">
       <div class="cc-proto-section-label">${warn ? '⚠ ' : ''}${escapeHtml(label)}</div>
-      ${items.map(itRaw => {
+      ${visible.map(itRaw => {
         const it = typeof itRaw === 'string' ? fdProtoTokens(itRaw) : itRaw;
         if (it && it.jump) {
           return `<button class="cc-proto-item jump" data-proto-sel="${escapeAttr(it.jump)}"><span>${escapeHtml(it.t)}</span><span class="arrow">→</span></button>`;
         }
-        // Item is a plain string, or { t, drug } pinning the line to an exact
-        // drug row (for when keyword matching would pick the wrong variant).
-        // The pin only holds if that row exists for this patient; otherwise
-        // fall back to keyword matching against the current list.
-        const label = typeof it === 'string' ? it : fdProtoTokens(it.t || '');
+        const labelTxt = typeof it === 'string' ? it : fdProtoTokens(it.t || '');
         const explicit = (it && it.drug && ccGetDrugs().some(x => x.name === it.drug)) ? it.drug : null;
-        const match = warn ? null : (explicit || crProtoDrugMatch(label));
+        const match = warn ? null : (explicit || crProtoDrugMatch(labelTxt));
         if (match && crIsFutureUse(match))
-          return `<div class="cc-proto-item future"><span>${escapeHtml(label)}</span><span class="future-tag">FUTURE USE</span></div>`;
+          return `<div class="cc-proto-item future"><span>${escapeHtml(labelTxt)}</span><span class="future-tag">FUTURE USE</span></div>`;
         const gb = match ? fdGivenBadge(match) : '';
         return match
-          ? `<button class="cc-proto-item drug${gb ? ' given' : ''}" data-drug-name="${escapeAttr(match)}"><span>${escapeHtml(label)}</span>${gb}<span class="arrow">›</span></button>`
-          : `<div class="cc-proto-item">${escapeHtml(label)}</div>`;
+          ? `<button class="cc-proto-item drug${gb ? ' given' : ''}" data-drug-name="${escapeAttr(match)}"><span>${escapeHtml(labelTxt)}</span>${gb}<span class="arrow">›</span></button>`
+          : `<div class="cc-proto-item">${escapeHtml(labelTxt)}</div>`;
       }).join('')}
     </div>`;
+  };
   const pedsNote = (cr.patient && cr.patient.type === 'peds')
     ? `<div class="cc-proto-peds-note">⚠ Pediatric patient — tap a drug for the weight-based pediatric dose. Inline doses are reference values.</div>`
+    : '';
+  const usage = fdPackUsageNote();
+  const usageNote = usage
+    ? `<div class="cc-proto-peds-note">${escapeHtml((fdPack().agency && fdPack().agency.shortName) || 'Agency')} usage: ${escapeHtml(usage)}</div>`
     : '';
   let body;
   if (p.memory) {
     body = `<div class="cc-proto-memory">${p.memory.map(([d, dose]) => `<div class="cc-mem-row"><span class="cc-mem-drug">${escapeHtml(d)}</span><span class="cc-mem-dose">${escapeHtml(dose)}</span></div>`).join('')}</div>`;
   } else {
-    const pearls = (p.pearls || []).map(t => `<div class="cc-proto-pearl"><span class="lbl">PEARL</span> ${escapeHtml(t)}</div>`).join('');
+    const pearls = (p.pearls || []).filter((t) => !fdPackOmits(t)).map(t => `<div class="cc-proto-pearl"><span class="lbl">PEARL</span> ${escapeHtml(t)}</div>`).join('');
     body = `<div class="cc-proto-detail">${(p.sections || []).map(s => sec(s.label, s.items, false)).join('')}${p.warn ? sec(p.warn.label, p.warn.items, true) : ''}${pearls}</div>`;
   }
   return `
     <button class="cc-proto-back" data-proto-back>‹ All Protocols</button>
     <div class="cr-meds-banner"><span class="ico">▣</span><span>${escapeHtml(p.banner || p.name)}</span></div>
+    ${usageNote}
     ${pedsNote}
     ${body}
   `;

@@ -7282,40 +7282,58 @@ function bindModalEvents() {
   // Close on backdrop click (but not inside modal)
   mount.onclick = (e) => { if (e.target === mount) crCloseModal(); };
 
+  // Clicks inside the card must not bubble to the backdrop — especially important
+  // when we remount/replace content mid-click (route/dose toggles).
+  const modalEl = mount.querySelector('.cr-modal');
+  if (modalEl) {
+    modalEl.onclick = (e) => e.stopPropagation();
+  }
+
   // Close button
   const closeBtn = document.getElementById('cr-modal-close-btn');
-  if (closeBtn) closeBtn.addEventListener('click', crCloseModal);
+  if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); crCloseModal(); });
+
+  // Defer content refresh until after the current click finishes so the
+  // backdrop never sees a retargeted click and we don't tear down the
+  // button mid-event.
+  const refreshSoon = () => {
+    requestAnimationFrame(() => crRenderModal());
+  };
 
   // Route toggle in drug modal
   mount.querySelectorAll('[data-cr-route]').forEach(b => {
-    b.addEventListener('click', () => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
       cr.drugRoute = b.dataset.crRoute;
       cr.doseSel = null; // route change can change the dose range
-      crRenderModal();
+      refreshSoon();
     });
   });
 
   // Dose-amount picker in drug modal (range / sequence doses)
   mount.querySelectorAll('[data-cr-dose]').forEach(b => {
-    b.addEventListener('click', () => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
       cr.doseSel = parseFloat(b.dataset.crDose);
-      crRenderModal();
+      refreshSoon();
     });
   });
 
   // Energy row selection in defib modal
   mount.querySelectorAll('[data-energy-idx]').forEach(b => {
-    b.addEventListener('click', () => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (cr.modal && cr.modal.type === 'defib') {
         cr.modal.selectedIdx = parseInt(b.dataset.energyIdx);
-        crRenderModal();
+        refreshSoon();
       }
     });
   });
 
   // Action buttons (Requested / Given / Shock Delivered / No Shock Advised)
   mount.querySelectorAll('[data-cr-action]').forEach(b => {
-    b.addEventListener('click', () => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
       const action = b.dataset.crAction;
       if (!cr.modal) return;
       if (cr.modal.type === 'drug') handleDrugModalAction(action);

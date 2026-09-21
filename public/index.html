@@ -2751,6 +2751,10 @@
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
     animation: cr-pop-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
+  /* In-modal updates (route/dose toggles) remount HTML — skip pop-in so the card doesn't jerk. */
+  .cr-modal.cr-modal--static {
+    animation: none;
+  }
   @keyframes cr-pop-in {
     from { opacity: 0; transform: scale(0.92); }
     to   { opacity: 1; transform: scale(1); }
@@ -6914,11 +6918,17 @@ function crCloseModal() {
 function crRenderModal() {
   const mount = document.getElementById('cr-modal-mount');
   if (!mount || !cr.modal) return;
+  // Already open = content refresh (route/dose/energy), not a fresh open — don't replay pop-in.
+  const alreadyOpen = mount.classList.contains('show') && !!mount.querySelector('.cr-modal');
   const html = cr.modal.type === 'drug' ? renderDrugModal(cr.modal)
              : cr.modal.type === 'defib' ? renderDefibModal(cr.modal)
              : '';
   mount.innerHTML = html;
   mount.classList.add('show');
+  if (alreadyOpen) {
+    const modalEl = mount.querySelector('.cr-modal');
+    if (modalEl) modalEl.classList.add('cr-modal--static');
+  }
   bindModalEvents();
 }
 

@@ -761,6 +761,19 @@
     },
     {
      "rhythm": "non-arrest",
+     "name": "Ketamine — Pain",
+     "class": "Dissociative analgesic",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "CONTRAINDICATED ≤ 3 mo",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "Contraindicated ≤ 3 months of age",
+     "readyVol": "—",
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
      "name": "Ketamine — Sedation",
      "class": "Dissociative analgesic",
      "indication": "Procedural sedation",
@@ -768,7 +781,7 @@
      "packageSpec": "100 mg/mL",
      "deliveryDose": "Contraindicated ≤ 3 months of age",
      "readyVol": "—",
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -1440,23 +1453,52 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Sedation",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Procedural sedation",
-     "weightDose": "0.65 mg IV/IO · 13 mg IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "1.3 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL",
-     "deliveryDose": "0.007 mL IV/IO of 100 mg/mL (undiluted)",
+     "deliveryDose": "0.013 mL of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "0.65 mg (0.1 mg/kg)",
-       "vol": "0.007 mL of 100 mg/mL (undiluted)",
-       "range": "0.65–1.30 mg"
+       "dose": "1.3 mg (0.2 mg/kg)",
+       "vol": "0.013 mL of 100 mg/mL (undiluted)"
       },
       "IO": {
-       "dose": "0.65 mg (0.1 mg/kg)",
-       "vol": "0.007 mL of 100 mg/mL (undiluted)",
-       "range": "0.65–1.30 mg"
+       "dose": "1.3 mg (0.2 mg/kg)",
+       "vol": "0.013 mL of 100 mg/mL (undiluted)"
+      },
+      "IM": {
+       "dose": "1.3 mg (0.2 mg/kg)",
+       "vol": "0.013 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "1.3 mg (0.2 mg/kg)",
+       "vol": "0.013 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "6.5 mg IV/IO · 13 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.07 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "6.5 mg (1 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "6.5 mg (1 mg/kg)",
+       "vol": "0.07 mL of 100 mg/mL (undiluted)"
       },
       "IM": {
        "dose": "13 mg (2 mg/kg)",
@@ -1467,7 +1509,7 @@
        "vol": "0.13 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2139,23 +2181,52 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Sedation",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Procedural sedation",
-     "weightDose": "0.85 mg IV/IO · 17 mg IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "1.7 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL",
-     "deliveryDose": "0.009 mL IV/IO of 100 mg/mL (undiluted)",
+     "deliveryDose": "0.017 mL of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "0.85 mg (0.1 mg/kg)",
-       "vol": "0.009 mL of 100 mg/mL (undiluted)",
-       "range": "0.85–1.70 mg"
+       "dose": "1.7 mg (0.2 mg/kg)",
+       "vol": "0.017 mL of 100 mg/mL (undiluted)"
       },
       "IO": {
-       "dose": "0.85 mg (0.1 mg/kg)",
-       "vol": "0.009 mL of 100 mg/mL (undiluted)",
-       "range": "0.85–1.70 mg"
+       "dose": "1.7 mg (0.2 mg/kg)",
+       "vol": "0.017 mL of 100 mg/mL (undiluted)"
+      },
+      "IM": {
+       "dose": "1.7 mg (0.2 mg/kg)",
+       "vol": "0.017 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "1.7 mg (0.2 mg/kg)",
+       "vol": "0.017 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "8.5 mg IV/IO · 17 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.09 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "8.5 mg (1 mg/kg)",
+       "vol": "0.09 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "8.5 mg (1 mg/kg)",
+       "vol": "0.09 mL of 100 mg/mL (undiluted)"
       },
       "IM": {
        "dose": "17 mg (2 mg/kg)",
@@ -2166,7 +2237,7 @@
        "vol": "0.17 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -2838,23 +2909,52 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Sedation",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Procedural sedation",
-     "weightDose": "1.05 mg IV/IO · 21 mg IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "2.1 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL",
-     "deliveryDose": "0.011 mL IV/IO of 100 mg/mL (undiluted)",
+     "deliveryDose": "0.021 mL of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "1.05 mg (0.1 mg/kg)",
-       "vol": "0.011 mL of 100 mg/mL (undiluted)",
-       "range": "1.05–2.10 mg"
+       "dose": "2.1 mg (0.2 mg/kg)",
+       "vol": "0.021 mL of 100 mg/mL (undiluted)"
       },
       "IO": {
-       "dose": "1.05 mg (0.1 mg/kg)",
-       "vol": "0.011 mL of 100 mg/mL (undiluted)",
-       "range": "1.05–2.10 mg"
+       "dose": "2.1 mg (0.2 mg/kg)",
+       "vol": "0.021 mL of 100 mg/mL (undiluted)"
+      },
+      "IM": {
+       "dose": "2.1 mg (0.2 mg/kg)",
+       "vol": "0.021 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "2.1 mg (0.2 mg/kg)",
+       "vol": "0.021 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "10.5 mg IV/IO · 21 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.10 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "10.5 mg (1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "10.5 mg (1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)"
       },
       "IM": {
        "dose": "21 mg (2 mg/kg)",
@@ -2865,7 +2965,7 @@
        "vol": "0.21 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -3537,23 +3637,52 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Sedation",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Procedural sedation",
-     "weightDose": "1.30 mg IV/IO · 26 mg IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "2.6 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL",
-     "deliveryDose": "0.013 mL IV/IO of 100 mg/mL (undiluted)",
+     "deliveryDose": "0.026 mL of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "1.30 mg (0.1 mg/kg)",
-       "vol": "0.013 mL of 100 mg/mL (undiluted)",
-       "range": "1.30–2.60 mg"
+       "dose": "2.6 mg (0.2 mg/kg)",
+       "vol": "0.026 mL of 100 mg/mL (undiluted)"
       },
       "IO": {
-       "dose": "1.30 mg (0.1 mg/kg)",
-       "vol": "0.013 mL of 100 mg/mL (undiluted)",
-       "range": "1.30–2.60 mg"
+       "dose": "2.6 mg (0.2 mg/kg)",
+       "vol": "0.026 mL of 100 mg/mL (undiluted)"
+      },
+      "IM": {
+       "dose": "2.6 mg (0.2 mg/kg)",
+       "vol": "0.026 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "2.6 mg (0.2 mg/kg)",
+       "vol": "0.026 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "13.0 mg IV/IO · 26 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.13 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "13.0 mg (1 mg/kg)",
+       "vol": "0.13 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "13.0 mg (1 mg/kg)",
+       "vol": "0.13 mL of 100 mg/mL (undiluted)"
       },
       "IM": {
        "dose": "26 mg (2 mg/kg)",
@@ -3564,7 +3693,7 @@
        "vol": "0.26 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4236,23 +4365,52 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Sedation",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Procedural sedation",
-     "weightDose": "1.65 mg IV/IO · 33 mg IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "3.3 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL",
-     "deliveryDose": "0.017 mL IV/IO of 100 mg/mL (undiluted)",
+     "deliveryDose": "0.033 mL of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "1.65 mg (0.1 mg/kg)",
-       "vol": "0.017 mL of 100 mg/mL (undiluted)",
-       "range": "1.65–3.30 mg"
+       "dose": "3.3 mg (0.2 mg/kg)",
+       "vol": "0.033 mL of 100 mg/mL (undiluted)"
       },
       "IO": {
-       "dose": "1.65 mg (0.1 mg/kg)",
-       "vol": "0.017 mL of 100 mg/mL (undiluted)",
-       "range": "1.65–3.30 mg"
+       "dose": "3.3 mg (0.2 mg/kg)",
+       "vol": "0.033 mL of 100 mg/mL (undiluted)"
+      },
+      "IM": {
+       "dose": "3.3 mg (0.2 mg/kg)",
+       "vol": "0.033 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "3.3 mg (0.2 mg/kg)",
+       "vol": "0.033 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "16.5 mg IV/IO · 33 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.17 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "16.5 mg (1 mg/kg)",
+       "vol": "0.17 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "16.5 mg (1 mg/kg)",
+       "vol": "0.17 mL of 100 mg/mL (undiluted)"
       },
       "IM": {
        "dose": "33 mg (2 mg/kg)",
@@ -4263,7 +4421,7 @@
        "vol": "0.33 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -4935,23 +5093,52 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Sedation",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Procedural sedation",
-     "weightDose": "2.10 mg IV/IO · 42 mg IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "4.2 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL",
-     "deliveryDose": "0.021 mL IV/IO of 100 mg/mL (undiluted)",
+     "deliveryDose": "0.042 mL of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "2.10 mg (0.1 mg/kg)",
-       "vol": "0.021 mL of 100 mg/mL (undiluted)",
-       "range": "2.10–4.20 mg"
+       "dose": "4.2 mg (0.2 mg/kg)",
+       "vol": "0.042 mL of 100 mg/mL (undiluted)"
       },
       "IO": {
-       "dose": "2.10 mg (0.1 mg/kg)",
-       "vol": "0.021 mL of 100 mg/mL (undiluted)",
-       "range": "2.10–4.20 mg"
+       "dose": "4.2 mg (0.2 mg/kg)",
+       "vol": "0.042 mL of 100 mg/mL (undiluted)"
+      },
+      "IM": {
+       "dose": "4.2 mg (0.2 mg/kg)",
+       "vol": "0.042 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "4.2 mg (0.2 mg/kg)",
+       "vol": "0.042 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "21.0 mg IV/IO · 42 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.21 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "21.0 mg (1 mg/kg)",
+       "vol": "0.21 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "21.0 mg (1 mg/kg)",
+       "vol": "0.21 mL of 100 mg/mL (undiluted)"
       },
       "IM": {
        "dose": "42 mg (2 mg/kg)",
@@ -4962,7 +5149,7 @@
        "vol": "0.42 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -5634,23 +5821,52 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Sedation",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Procedural sedation",
-     "weightDose": "2.65 mg IV/IO · 53 mg IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "5.3 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL",
-     "deliveryDose": "0.027 mL IV/IO of 100 mg/mL (undiluted)",
+     "deliveryDose": "0.053 mL of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "2.65 mg (0.1 mg/kg)",
-       "vol": "0.027 mL of 100 mg/mL (undiluted)",
-       "range": "2.65–5.30 mg"
+       "dose": "5.3 mg (0.2 mg/kg)",
+       "vol": "0.053 mL of 100 mg/mL (undiluted)"
       },
       "IO": {
-       "dose": "2.65 mg (0.1 mg/kg)",
-       "vol": "0.027 mL of 100 mg/mL (undiluted)",
-       "range": "2.65–5.30 mg"
+       "dose": "5.3 mg (0.2 mg/kg)",
+       "vol": "0.053 mL of 100 mg/mL (undiluted)"
+      },
+      "IM": {
+       "dose": "5.3 mg (0.2 mg/kg)",
+       "vol": "0.053 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "5.3 mg (0.2 mg/kg)",
+       "vol": "0.053 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "26.5 mg IV/IO · 53 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.27 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "26.5 mg (1 mg/kg)",
+       "vol": "0.27 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "26.5 mg (1 mg/kg)",
+       "vol": "0.27 mL of 100 mg/mL (undiluted)"
       },
       "IM": {
        "dose": "53 mg (2 mg/kg)",
@@ -5661,7 +5877,7 @@
        "vol": "0.53 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -6333,23 +6549,52 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Sedation",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Procedural sedation",
-     "weightDose": "3.30 mg IV/IO · 66 mg IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "6.6 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL",
-     "deliveryDose": "0.033 mL IV/IO of 100 mg/mL (undiluted)",
+     "deliveryDose": "0.066 mL of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "3.30 mg (0.1 mg/kg)",
-       "vol": "0.033 mL of 100 mg/mL (undiluted)",
-       "range": "3.30–6.60 mg"
+       "dose": "6.6 mg (0.2 mg/kg)",
+       "vol": "0.066 mL of 100 mg/mL (undiluted)"
       },
       "IO": {
-       "dose": "3.30 mg (0.1 mg/kg)",
-       "vol": "0.033 mL of 100 mg/mL (undiluted)",
-       "range": "3.30–6.60 mg"
+       "dose": "6.6 mg (0.2 mg/kg)",
+       "vol": "0.066 mL of 100 mg/mL (undiluted)"
+      },
+      "IM": {
+       "dose": "6.6 mg (0.2 mg/kg)",
+       "vol": "0.066 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "6.6 mg (0.2 mg/kg)",
+       "vol": "0.066 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "33.0 mg IV/IO · 66 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.33 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "33.0 mg (1 mg/kg)",
+       "vol": "0.33 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "33.0 mg (1 mg/kg)",
+       "vol": "0.33 mL of 100 mg/mL (undiluted)"
       },
       "IM": {
        "dose": "66 mg (2 mg/kg)",
@@ -6360,7 +6605,7 @@
        "vol": "0.66 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -7187,7 +7432,7 @@
        "vol": "0.09 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adult row — see pediatric Ketamine — Pain for SWFL 0.2 mg/kg q20 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -7220,7 +7465,7 @@
        "vol": "0.9 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — adult IV/IO per medical direction 9/2026 (Dr. Dunavant). 2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Pediatric procedural sedation follows the regional 1 mg/kg IV/IO / 2 mg/kg IM/IN row.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8105,23 +8350,52 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Sedation",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Procedural sedation",
-     "weightDose": "1.00 mg IV/IO · 20 mg IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "2.0 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL",
-     "deliveryDose": "0.010 mL IV/IO of 100 mg/mL (undiluted)",
+     "deliveryDose": "0.020 mL of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "1.00 mg (0.1 mg/kg)",
-       "vol": "0.010 mL of 100 mg/mL (undiluted)",
-       "range": "1.00–2.00 mg"
+       "dose": "2.0 mg (0.2 mg/kg)",
+       "vol": "0.020 mL of 100 mg/mL (undiluted)"
       },
       "IO": {
-       "dose": "1.00 mg (0.1 mg/kg)",
-       "vol": "0.010 mL of 100 mg/mL (undiluted)",
-       "range": "1.00–2.00 mg"
+       "dose": "2.0 mg (0.2 mg/kg)",
+       "vol": "0.020 mL of 100 mg/mL (undiluted)"
+      },
+      "IM": {
+       "dose": "2.0 mg (0.2 mg/kg)",
+       "vol": "0.020 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "2.0 mg (0.2 mg/kg)",
+       "vol": "0.020 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "10.0 mg IV/IO · 20 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.10 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "10.0 mg (1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "10.0 mg (1 mg/kg)",
+       "vol": "0.10 mL of 100 mg/mL (undiluted)"
       },
       "IM": {
        "dose": "20 mg (2 mg/kg)",
@@ -8132,7 +8406,7 @@
        "vol": "0.20 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -8804,23 +9078,52 @@
     },
     {
      "rhythm": "non-arrest",
-     "name": "Ketamine — Sedation",
+     "name": "Ketamine — Pain",
      "class": "Dissociative analgesic",
-     "indication": "Procedural sedation",
-     "weightDose": "2.50 mg IV/IO · 50 mg IM/IN",
+     "indication": "Sub-dissociative pain",
+     "weightDose": "5.0 mg (0.2 mg/kg)",
      "packageSpec": "100 mg/mL",
-     "deliveryDose": "0.025 mL IV/IO of 100 mg/mL (undiluted)",
+     "deliveryDose": "0.050 mL of 100 mg/mL (undiluted)",
      "readyVol": "—",
      "routeDoses": {
       "IV": {
-       "dose": "2.50 mg (0.1 mg/kg)",
-       "vol": "0.025 mL of 100 mg/mL (undiluted)",
-       "range": "2.50–5.00 mg"
+       "dose": "5.0 mg (0.2 mg/kg)",
+       "vol": "0.050 mL of 100 mg/mL (undiluted)"
       },
       "IO": {
-       "dose": "2.50 mg (0.1 mg/kg)",
-       "vol": "0.025 mL of 100 mg/mL (undiluted)",
-       "range": "2.50–5.00 mg"
+       "dose": "5.0 mg (0.2 mg/kg)",
+       "vol": "0.050 mL of 100 mg/mL (undiluted)"
+      },
+      "IM": {
+       "dose": "5.0 mg (0.2 mg/kg)",
+       "vol": "0.050 mL of 100 mg/mL (undiluted)"
+      },
+      "IN": {
+       "dose": "5.0 mg (0.2 mg/kg)",
+       "vol": "0.050 mL of 100 mg/mL (undiluted)"
+      }
+     },
+     "detail": "Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.",
+     "route": "IV / IO / IM / IN",
+     "max": "Per protocol"
+    },
+    {
+     "rhythm": "non-arrest",
+     "name": "Ketamine — Sedation",
+     "class": "Dissociative analgesic",
+     "indication": "Procedural sedation",
+     "weightDose": "25.0 mg IV/IO · 50 mg IM/IN",
+     "packageSpec": "100 mg/mL",
+     "deliveryDose": "0.25 mL IV/IO of 100 mg/mL (undiluted)",
+     "readyVol": "—",
+     "routeDoses": {
+      "IV": {
+       "dose": "25.0 mg (1 mg/kg)",
+       "vol": "0.25 mL of 100 mg/mL (undiluted)"
+      },
+      "IO": {
+       "dose": "25.0 mg (1 mg/kg)",
+       "vol": "0.25 mL of 100 mg/mL (undiluted)"
       },
       "IM": {
        "dose": "50 mg (2 mg/kg)",
@@ -8831,7 +9134,7 @@
        "vol": "0.50 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
+     "detail": "Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -9658,7 +9961,7 @@
        "vol": "0.10 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adult row — see pediatric Ketamine — Pain for SWFL 0.2 mg/kg q20 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -9691,7 +9994,7 @@
        "vol": "1.0 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — adult IV/IO per medical direction 9/2026 (Dr. Dunavant). 2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Pediatric procedural sedation follows the regional 1 mg/kg IV/IO / 2 mg/kg IM/IN row.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -10557,7 +10860,7 @@
        "vol": "0.12 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adult row — see pediatric Ketamine — Pain for SWFL 0.2 mg/kg q20 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -10590,7 +10893,7 @@
        "vol": "1.2 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — adult IV/IO per medical direction 9/2026 (Dr. Dunavant). 2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Pediatric procedural sedation follows the regional 1 mg/kg IV/IO / 2 mg/kg IM/IN row.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -11456,7 +11759,7 @@
        "vol": "0.14 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adult row — see pediatric Ketamine — Pain for SWFL 0.2 mg/kg q20 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -11489,7 +11792,7 @@
        "vol": "1.4 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — adult IV/IO per medical direction 9/2026 (Dr. Dunavant). 2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Pediatric procedural sedation follows the regional 1 mg/kg IV/IO / 2 mg/kg IM/IN row.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12355,7 +12658,7 @@
        "vol": "0.15 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adult row — see pediatric Ketamine — Pain for SWFL 0.2 mg/kg q20 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -12388,7 +12691,7 @@
        "vol": "1.5 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — adult IV/IO per medical direction 9/2026 (Dr. Dunavant). 2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Pediatric procedural sedation follows the regional 1 mg/kg IV/IO / 2 mg/kg IM/IN row.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -13254,7 +13557,7 @@
        "vol": "0.16 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adult row — see pediatric Ketamine — Pain for SWFL 0.2 mg/kg q20 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -13287,7 +13590,7 @@
        "vol": "1.6 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — adult IV/IO per medical direction 9/2026 (Dr. Dunavant). 2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Pediatric procedural sedation follows the regional 1 mg/kg IV/IO / 2 mg/kg IM/IN row.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -14153,7 +14456,7 @@
        "vol": "0.18 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adult row — see pediatric Ketamine — Pain for SWFL 0.2 mg/kg q20 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -14186,7 +14489,7 @@
        "vol": "1.8 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — adult IV/IO per medical direction 9/2026 (Dr. Dunavant). 2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Pediatric procedural sedation follows the regional 1 mg/kg IV/IO / 2 mg/kg IM/IN row.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -15052,7 +15355,7 @@
        "vol": "0.20 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adult row — see pediatric Ketamine — Pain for SWFL 0.2 mg/kg q20 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -15085,7 +15388,7 @@
        "vol": "2.0 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — adult IV/IO per medical direction 9/2026 (Dr. Dunavant). 2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Pediatric procedural sedation follows the regional 1 mg/kg IV/IO / 2 mg/kg IM/IN row.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -15951,7 +16254,7 @@
        "vol": "0.20 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.",
+     "detail": "Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adult row — see pediatric Ketamine — Pain for SWFL 0.2 mg/kg q20 min.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },
@@ -15984,7 +16287,7 @@
        "vol": "2.0 mL of 100 mg/mL (undiluted)"
       }
      },
-     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).",
+     "detail": "Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — adult IV/IO per medical direction 9/2026 (Dr. Dunavant). 2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Pediatric procedural sedation follows the regional 1 mg/kg IV/IO / 2 mg/kg IM/IN row.",
      "route": "IV / IO / IM / IN",
      "max": "Per protocol"
     },

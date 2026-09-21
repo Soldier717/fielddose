@@ -30,16 +30,26 @@ Any regional content change must update the golden file and be re-reviewed.
 
 ## Known MD deltas (on top of SWFL)
 
-| Delta | Source | Status |
-|---|---|---|
-| Ketamine IV/IO pain & sedation → 0.1–0.2 mg/kg, undiluted, repeat PRN | Round 1 §1.1 / 1.5 (Dr. Dunavant) | Live — **measurable-volume problem open** (Round 2 A1) |
-| No ketamine for pediatric pain | Round 1 §1.3 | Live |
-| Drop droperidol & promethazine | Round 1 §3.1 / 5.1 | Live |
-| Midazolam anxiety — all routes, repeat PRN | Round 1 §2.3 | Live |
+| Delta | Scope | Source | Status |
+|---|---|---|---|
+| Ketamine IV/IO pain & sedation → 0.1–0.2 mg/kg, undiluted, repeat PRN | **Adult** | Round 1 §1.1 / 1.5 (Dr. Dunavant) | Live — measurable-volume caution on undiluted draws (Round 2 A1 still open for dilution recipe) |
+| Drop droperidol & promethazine | All | Round 1 §3.1 / 5.1 | Live |
+| Midazolam anxiety — all routes, repeat PRN | Adult | Round 1 §2.3 | Live |
 
-These diverge from or clarify the printed guideline. Keep them tagged in drug
-`detail` text (`Per medical direction …`) so crews and reviewers can see the
-override.
+### Pediatric ketamine — regional restored
+
+Working Round 1 answers that said “no peds pain” and collapsed peds sedation to
+0.1–0.2 mg/kg are **superseded by the printed SWFL Pain & Anxiety /
+Procedural Sedation text** (confirmed by agency):
+
+| Indication | Pediatric dose | Routes / interval |
+|---|---|---|
+| Pain & Anxiety | **0.2 mg/kg** | IV / IO / IM / IN every 20 min |
+| Procedural Sedation | **1 mg/kg** IV/IO *or* **2 mg/kg** IM/IN | IV/IO every 10 min PRN; IM/IN as listed |
+
+≤ 3 months / &lt; 6 kg hard-stop unchanged (Round 1 §1.4). Undiluted 100 mg/mL
+preparation still per Round 1 §1.1 — small pain volumes still trigger the
+measurable-volume warning until A1 dilution is decided.
 
 ## Open — cannot invent from the guideline alone
 
@@ -48,8 +58,8 @@ doses** — keep current display, warn where engineering can help, and leave TBD
 rows as contact-medical-control:
 
 - A1 Ketamine measurable preparation (10 mg/mL dilution proposed)
-- A2 Pediatric sedation 10× reduction confirmation
-- A3 IM/IN ketamine scope
+- A2 Pediatric sedation 10× reduction — **resolved: regional 1 mg/kg IV/IO restored**
+- A3 IM/IN ketamine scope — **resolved for peds sedation (2 mg/kg) and peds pain (0.2 all routes)**
 - A4 Delirium ketamine confirmation
 - B Coverage after droperidol/promethazine removal
 - C1 Midazolam route-dose map

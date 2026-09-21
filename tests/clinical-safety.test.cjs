@@ -38,13 +38,20 @@ const ketRow = ketPain || ketSed;
 const ketWarn = fdMeasurableVolWarn(ketRow.deliveryDose);
 assert.ok(ketWarn, `adult ketamine delivery "${ketRow.deliveryDose}" should warn`);
 
-// Peds sedation draw at small weight is unmeasurable / difficult undiluted
+// Peds pain 0.2 mg/kg undiluted is still a tiny draw at Pink-zone weights
 crNewPatient();
 crSetBroselow(BROSELOW.find(z => z.code === 'pink') || BROSELOW[0]);
+const pedsPain = ccGetDrugs().find(d => d.name && /ketamine/i.test(d.name) && /pain/i.test(d.name));
 const pedsKet = ccGetDrugs().find(d => d.name && /ketamine/i.test(d.name) && /sedation/i.test(d.name));
+assert.ok(pedsPain, 'peds ketamine pain row present (SWFL 0.2 mg/kg)');
 assert.ok(pedsKet, 'peds ketamine sedation row present');
-const pedsWarn = fdMeasurableVolWarn(pedsKet.deliveryDose);
-assert.ok(pedsWarn, `peds ketamine delivery "${pedsKet.deliveryDose}" should warn`);
+assert.ok(/0\.2 mg\/kg/.test(pedsPain.weightDose || '') || /0\.2 mg\/kg/.test(JSON.stringify(pedsPain.routeDoses || {})),
+  `peds pain dose is 0.2 mg/kg, got "${pedsPain.weightDose}"`);
+// Pink 6.5 kg → 1 mg/kg = 6.5 mg IV/IO · 2 mg/kg = 13 mg IM/IN
+assert.ok(/6\.5 mg IV\/IO/.test(pedsKet.weightDose || '') && /13 mg IM\/IN/.test(pedsKet.weightDose || ''),
+  `peds sedation is 1 mg/kg IV/IO · 2 mg/kg IM/IN, got "${pedsKet.weightDose}"`);
+const pedsPainWarn = fdMeasurableVolWarn(pedsPain.deliveryDose);
+assert.ok(pedsPainWarn, `peds pain delivery "${pedsPain.deliveryDose}" should warn (tiny undiluted draw)`);
 
 // ---- Arrest epi cumulative: timer shortcut counts ----
 crNewPatient();

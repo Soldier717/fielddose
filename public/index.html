@@ -4139,7 +4139,7 @@ function ctTick() {
     }
   }
 
-  // SWFL 2025: After 3rd shock + anti-dysrhythmic, prompt DSD for refractory VF/pVT
+  // SWFL Revised 8/2026: After 3rd shock + anti-dysrhythmic, prompt DSD for refractory VF/pVT
   if (!ctState.dsdCued && ctState.shockCount >= 3 && ctState.antiDysrhythmicGiven && ctState.lastRhythm === 'shockable') {
     ctState.dsdCued = true;
     ctShowCueBanner('Refractory VF/VT — Consider DSD (set up 2nd AED)', 'normal', 5000);
@@ -4850,7 +4850,7 @@ function ccGetDrugsBase() {
           ['IV/IO', `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`, `${ccFmt(0.1*kg/100, 2)} mL of 100 mg/mL (undiluted)`, `${ccFmt(0.1*kg, 1)}–${ccFmt(0.2*kg, 1)} mg`],
           ['IM/IN', `${ccFmt(0.2*kg, 0)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adults only — ketamine is not used for pediatric pain.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Sub-dissociative analgesia: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg; 0.2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial — the 1:1 NS dilution is no longer used. Per medical direction 9/2026 (Dr. Dunavant). Adult row — see pediatric Ketamine — Pain for SWFL 0.2 mg/kg q20 min.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
         weightDose: `${ccFmt(0.1*kg, 1)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
         packageSpec: '100 mg/mL',
@@ -4860,7 +4860,7 @@ function ccGetDrugsBase() {
           ['IV/IO', `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`, `${ccFmt(0.1*kg/100, 2)} mL of 100 mg/mL (undiluted)`, `${ccFmt(0.1*kg, 1)}–${ccFmt(0.2*kg, 1)} mg`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 1)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant).', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — adult IV/IO per medical direction 9/2026 (Dr. Dunavant). 2 mg/kg IM/IN. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Pediatric procedural sedation follows the regional 1 mg/kg IV/IO / 2 mg/kg IM/IN row.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Ketamine — Delirium', class: 'Dissociative analgesic', indication: 'Hyperactive delirium',
         weightDose: `${ccFmt(Math.min(4*kg, 500), 0)} mg (4 mg/kg, max 500)`,
         packageSpec: '100 mg/mL',
@@ -5134,18 +5134,28 @@ function ccGetDrugsBase() {
       // Ketamine peds: contraindicated ≤ 3 months. Broselow 3/4/5 kg zones
       // are the "< 3 months" zones, so under 6 kg the row shows the
       // contraindication instead of computing a dose.
-      // There is deliberately NO pediatric Pain row: ketamine is not used
-      // for pediatric pain per medical direction 9/2026 (Dr. Dunavant).
-      { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
-        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(0.1*kg, 2)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
+      // Pain & Anxiety (regional): 0.2 mg/kg IV/IO/IM/IN q20 min.
+      // Procedural sedation (regional): 1 mg/kg IV/IO q10 min PRN, or 2 mg/kg IM/IN.
+      { rhythm: 'non-arrest', name: 'Ketamine — Pain', class: 'Dissociative analgesic', indication: 'Sub-dissociative pain',
+        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`,
         packageSpec: '100 mg/mL',
-        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `${ccFmt(0.1*kg/100, 3)} mL IV/IO of 100 mg/mL (undiluted)`,
+        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `${ccFmt(0.2*kg/100, 3)} mL of 100 mg/mL (undiluted)`,
         readyVol: '—',
         routeDoses: kg < 6 ? undefined : rcRouteDoses([
-          ['IV/IO', `${ccFmt(0.1*kg, 2)} mg (0.1 mg/kg)`, `${ccFmt(0.1*kg/100, 3)} mL of 100 mg/mL (undiluted)`, `${ccFmt(0.1*kg, 2)}–${ccFmt(0.2*kg, 2)} mg`],
+          ['IV/IO', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 3)} mL of 100 mg/mL (undiluted)`],
+          ['IM/IN', `${ccFmt(0.2*kg, 1)} mg (0.2 mg/kg)`, `${ccFmt(0.2*kg/100, 3)} mL of 100 mg/mL (undiluted)`],
+        ]),
+        detail: 'Pain & Anxiety: 0.2 mg/kg IV/IO/IM/IN every 20 min. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline. CONTRAINDICATED in pediatrics ≤ 3 months.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+      { rhythm: 'non-arrest', name: 'Ketamine — Sedation', class: 'Dissociative analgesic', indication: 'Procedural sedation',
+        weightDose: kg < 6 ? 'CONTRAINDICATED ≤ 3 mo' : `${ccFmt(1*kg, 1)} mg IV/IO · ${ccFmt(2*kg, 0)} mg IM/IN`,
+        packageSpec: '100 mg/mL',
+        deliveryDose: kg < 6 ? 'Contraindicated ≤ 3 months of age' : `${ccFmt(1*kg/100, 2)} mL IV/IO of 100 mg/mL (undiluted)`,
+        readyVol: '—',
+        routeDoses: kg < 6 ? undefined : rcRouteDoses([
+          ['IV/IO', `${ccFmt(1*kg, 1)} mg (1 mg/kg)`, `${ccFmt(1*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
           ['IM/IN', `${ccFmt(2*kg, 0)} mg (2 mg/kg)`, `${ccFmt(2*kg/100, 2)} mL of 100 mg/mL (undiluted)`],
         ]),
-        detail: 'Procedural sedation: 0.1 mg/kg IV/IO, titratable to 0.2 mg/kg — the former 1 mg/kg IV/IO dose is no longer used. 2 mg/kg IM/IN unchanged. Repeat PRN. Given UNDILUTED from the 100 mg/mL vial. Per medical direction 9/2026 (Dr. Dunavant). NOT used for pediatric pain. CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
+        detail: 'Procedural sedation: 1 mg/kg IV/IO every 10 min PRN, or 2 mg/kg IM/IN. Given UNDILUTED from the 100 mg/mL vial. SWFL regional guideline (supersedes 9/2026 0.1–0.2 mg/kg for pediatrics). CONTRAINDICATED in pediatrics ≤ 3 months. Peds hyperactive delirium: contact medical control.', route: 'IV / IO / IM / IN', max: 'Per protocol' },
       { rhythm: 'non-arrest', name: 'Morphine', class: 'Opioid analgesic', indication: 'Pain management',
         weightDose: `${ccFmt(0.1*kg, 1)} mg (0.1 mg/kg)`,
         packageSpec: '4 mg/mL',
@@ -8114,7 +8124,7 @@ const CC_PROTOCOLS = [
   { cat: 'Pain / Sedation', list: [
     { id: 'pain', name: 'Pain & Anxiety', banner: 'Pain & Anxiety Management', sections: [
       { label: 'Opioid Analgesia (choose one)', items: ['Fentanyl 1 mcg/kg IV/IO/IM/IN q10 min PRN','Hydromorphone 1 mg IV/IO/IM/IN q20 min PRN · Peds 5 mcg/kg','Morphine 0.2 mg/kg IV/IO/IM/IN q20 min PRN · Peds 0.1 mg/kg'] },
-      { label: 'Non-Opioid (choose one)', items: ['Acetaminophen 1 g IV/IO over 15 min · Peds 15 mg/kg (max 500 mg)','Ketorolac 15 mg IV/IO/IM · Peds 0.5 mg/kg (max 15 mg)','Ketamine 0.1 mg/kg IV/IO (titrate to 0.2) · 0.2 mg/kg IM/IN · repeat PRN · adults only'] },
+      { label: 'Non-Opioid (choose one)', items: ['Acetaminophen 1 g IV/IO over 15 min · Peds 15 mg/kg (max 500 mg)','Ketorolac 15 mg IV/IO/IM · Peds 0.5 mg/kg (max 15 mg)','Ketamine 0.1 mg/kg IV/IO (titrate to 0.2) · 0.2 mg/kg IM/IN · repeat PRN · adults · Peds 0.2 mg/kg IV/IO/IM/IN q20 min'] },
       { label: 'IO Infusion Pain', items: ['Lidocaine 2% 40 mg IO over 2 min, dwell 60 s · Peds 0.5 mg/kg (max 40 mg)'] },
       { label: 'Severe Anxiety', items: ['Midazolam 2 mg IV/IO/IM/IN q10 min PRN'] },
     ], warn: { label: 'Caution', items: ['Ketorolac contraindicated in patients > 75 y/o'] }, pearls: [

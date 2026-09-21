@@ -29,14 +29,16 @@ assert.ok(near && /difficult to measure/i.test(near), 'cautions sub-0.1 mL draws
 // Comfortable volume — no warn
 assert.strictEqual(fdMeasurableVolWarn('Push 1 mL IV/IO'), null);
 
-// Live ketamine adult 70 kg IV/IO delivery should warn (0.07 mL undiluted)
+// Adult ketamine — SWFL: pain 0.2 mg/kg all routes; sedation 1 mg/kg IV / 2 mg/kg IM
 crSetAdultIBW(ADULT_IBW.find(a => a.kg === 70) || { lbs: 154, kg: 70, height: "5'7\"" });
 const ketPain = ccGetDrugs().find(d => d.name && /ketamine/i.test(d.name) && /pain/i.test(d.name));
 const ketSed = ccGetDrugs().find(d => d.name && /ketamine/i.test(d.name) && /sedation/i.test(d.name));
-assert.ok(ketPain || ketSed, 'adult ketamine row present');
-const ketRow = ketPain || ketSed;
-const ketWarn = fdMeasurableVolWarn(ketRow.deliveryDose);
-assert.ok(ketWarn, `adult ketamine delivery "${ketRow.deliveryDose}" should warn`);
+assert.ok(ketPain && ketSed, 'adult ketamine rows present');
+assert.ok(/0\.2 mg\/kg/.test(ketPain.weightDose), `adult pain 0.2 mg/kg, got "${ketPain.weightDose}"`);
+assert.ok(/70 mg IV\/IO/.test(ketSed.weightDose) && /140 mg IM\/IN/.test(ketSed.weightDose),
+  `adult sedation 1/2 mg/kg at 70 kg, got "${ketSed.weightDose}"`);
+// 0.2 mg/kg at 70 kg = 0.14 mL — above 0.1 mL caution floor; sedation 0.70 mL is fine
+assert.strictEqual(fdMeasurableVolWarn(ketSed.deliveryDose), null, 'adult sedation IV volume should be measurable');
 
 // Peds pain 0.2 mg/kg undiluted is still a tiny draw at Pink-zone weights
 crNewPatient();

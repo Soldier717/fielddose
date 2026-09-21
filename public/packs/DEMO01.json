@@ -4,13 +4,15 @@
     "name": "Demo Fire Rescue (sample)",
     "shortName": "DEMO"
   },
-  "version": "2026-09-21",
+  "version": "2026-09-21b",
   "defib": {
     "adultLadder": [200, 300, 360]
   },
   "clinical": {
     "omitDrugs": [],
-    "usage": "Regional SWFL guideline usage (no agency drug omissions). Droperidol & Promethazine remain on the card."
+    "usage": "Regional SWFL guideline usage (no agency drug omissions). Droperidol & Promethazine remain on the card.",
+    "concentrationsConfirmed": false,
+    "concentrationsNote": "Demo pack mirrors regional/GNFR concentration assumptions for training only. Confirm stocked concentrations in the agency pack before production enrollment."
   },
   "drugOverrides": [],
   "contacts": [

@@ -4,7 +4,7 @@
     "name": "Greater Naples Fire Rescue",
     "shortName": "GNFR"
   },
-  "version": "2026-09-21",
+  "version": "2026-09-21c",
   "timezone": "America/New_York",
   "defib": {
     "adultLadder": [120, 150, 200],
@@ -12,7 +12,17 @@
   },
   "clinical": {
     "omitDrugs": ["Droperidol", "Promethazine", "Phenergan"],
-    "usage": "Droperidol & Promethazine not carried (MD 9/2026). Ondansetron-only nausea; Midazolam alternate for delirium."
+    "usage": "Droperidol & Promethazine not carried (MD 9/2026). Ondansetron-only nausea; Midazolam alternate for delirium.",
+    "concentrationsConfirmed": true,
+    "concentrations": [
+      { "drug": "Fentanyl", "conc": "50 mcg/mL", "note": "100 mcg / 2 mL" },
+      { "drug": "Morphine", "conc": "4 mg/mL" },
+      { "drug": "Hydromorphone", "conc": "1 mg/mL" },
+      { "drug": "Ketorolac", "conc": "30 mg/mL" },
+      { "drug": "Diazepam", "conc": "5 mg/mL" },
+      { "drug": "Ketamine", "conc": "100 mg/mL", "note": "500 mg / 5 mL vial" },
+      { "drug": "Midazolam", "conc": "5 mg/mL" }
+    ]
   },
   "narcotics": {
     "transferMode": "keys",

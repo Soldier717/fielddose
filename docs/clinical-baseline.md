@@ -32,6 +32,7 @@ Any regional content change must update the golden file and be re-reviewed.
 | Usage | Where | Status |
 |---|---|---|
 | Drop droperidol & promethazine | `GNFR2026` `clinical.omitDrugs` | Live when enrolled with code **GNFR2026** |
+| Stocked concentrations (volume math) | Baseline mirrors GNFR; listed on `GNFR2026` | **GNFR confirmed**; other agencies must confirm before go-live |
 | Midazolam anxiety — all routes, repeat PRN | Regional + Round 1 §2.3 | Live in baseline |
 | Zoll cardioversion ladder | `GNFR2026` `defib.cardioversion` | Live on enroll |
 
@@ -61,7 +62,7 @@ rows as contact-medical-control:
 - A4 Delirium ketamine confirmation — **resolved SWFL 2026:** Dissociation 4 mg/kg IM max 500; Emergence 1 mg/kg IV/IO max 500; peds contact medical control. Droperidol remains on regional card; **GNFR omits via pack**.
 - B Coverage after droperidol/promethazine removal — **GNFR:** handled by pack omit (Ondansetron-only / Midazolam alternate). Other agencies still see full regional choose-one lists.
 - C1 Midazolam route-dose map — **confirmed SWFL:** adult 5 mg IV/IO / 10 mg IM/IN; peds 0.2 mg/kg (max 5 IV/IO / 10 IM/IN); may repeat every 5 min PRN
-- C2 Stocked concentrations
+- C2 Stocked concentrations — **GNFR:** app volumes mirror GNFR stock (recorded on `GNFR2026` pack; `concentrationsConfirmed: true`). **Every other agency** must confirm its own stocked concentrations in its pack **before production enrollment** — wrong conc ⇒ wrong mL on every draw.
 - C3 Hard-stop vs caution list
 - C4 Disclaimer blessing
 - D1 Hydrocortisone dose (guideline lists drug, no dose)

@@ -49,6 +49,11 @@ guideline when unenrolled.
   hidden too. Use agency-local removals here (not regional deletions).
 - `clinical.usage`: one-line usage note under the agency name and on protocol
   detail.
+- `clinical.concentrations` / `concentrationsConfirmed`: documents the stocked
+  concentrations the agency verified. Baseline volume math currently mirrors
+  **GNFR** stock. **Do not enroll a new agency for production until that
+  agency's pack has `concentrationsConfirmed: true`** (and corrections applied
+  if their vials differ).
 - `defib.adultLadder` / `defib.cardioversion`: energy policy overlays.
 - `drugOverrides`: exact row `name`; `set` shallow-merges (static strings only —
   no per-kg math). Prefer baseline conditionals for weight-based changes.

@@ -2736,6 +2736,9 @@
     display: flex;
     animation: cr-fade-in 0.18s ease-out;
   }
+  .cr-modal-backdrop.show.cr-modal-refresh {
+    animation: none;
+  }
   @keyframes cr-fade-in { from { opacity: 0; } to { opacity: 1; } }
 
   .cr-modal {
@@ -2749,12 +2752,10 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-    animation: cr-pop-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  /* In-modal updates (route/dose toggles) remount HTML — skip pop-in so the card doesn't jerk.
-     Class lives on the backdrop BEFORE innerHTML swap so the new .cr-modal never starts animating. */
-  .cr-modal-backdrop.cr-modal-refresh .cr-modal {
-    animation: none;
+  /* Pop-in only on first open — never when refreshing an already-open card. */
+  .cr-modal-backdrop.show:not(.cr-modal-refresh) > .cr-modal {
+    animation: cr-pop-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   @keyframes cr-pop-in {
     from { opacity: 0; transform: scale(0.92); }
@@ -6922,14 +6923,23 @@ function crCloseModal() {
 function crRenderModal() {
   const mount = document.getElementById('cr-modal-mount');
   if (!mount || !cr.modal) return;
-  // Already open = content refresh (route/dose/energy), not a fresh open — don't replay pop-in.
-  // Toggle refresh class BEFORE replacing HTML so the new .cr-modal never starts cr-pop-in.
-  const alreadyOpen = mount.classList.contains('show') && !!mount.querySelector('.cr-modal');
-  if (alreadyOpen) mount.classList.add('cr-modal-refresh');
-  else mount.classList.remove('cr-modal-refresh');
   const html = cr.modal.type === 'drug' ? renderDrugModal(cr.modal)
              : cr.modal.type === 'defib' ? renderDefibModal(cr.modal)
              : '';
+  const existing = mount.classList.contains('show') ? mount.querySelector('.cr-modal') : null;
+  if (existing) {
+    // Keep the same .cr-modal node so cr-pop-in / backdrop fade never restart.
+    mount.classList.add('cr-modal-refresh');
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    const neu = tmp.querySelector('.cr-modal');
+    if (neu) {
+      existing.innerHTML = neu.innerHTML;
+      bindModalEvents();
+      return;
+    }
+  }
+  mount.classList.remove('cr-modal-refresh');
   mount.innerHTML = html;
   mount.classList.add('show');
   bindModalEvents();

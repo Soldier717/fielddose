@@ -6988,6 +6988,14 @@ function crRenderModal() {
   mount.innerHTML = html;
   mount.classList.add('show');
   bindModalEvents();
+  // After the open animation finishes, treat further updates as refreshes
+  // so a style recalc can't replay pop-in / sheet-in on phone.
+  const opened = mount.querySelector('.cr-modal');
+  if (opened) {
+    const markSettled = () => { if (mount.classList.contains('show')) mount.classList.add('cr-modal-refresh'); };
+    opened.addEventListener('animationend', markSettled, { once: true });
+    setTimeout(markSettled, 280);
+  }
 }
 
 // Pharmacology reference (SWFL Revised 8/2026 drug ref) — keyed by simple slug.

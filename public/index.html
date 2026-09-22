@@ -2731,6 +2731,7 @@
     justify-content: center;
     z-index: 500;
     padding: 16px;
+    overscroll-behavior: none;
   }
   .cr-modal-backdrop.show {
     display: flex;
@@ -2748,10 +2749,13 @@
     width: 100%;
     max-width: 520px;
     max-height: 92vh;
+    max-height: 92dvh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    /* Keep the card's box stable across in-place content swaps. */
+    overflow-anchor: none;
   }
   /* Pop-in only on first open — never when refreshing an already-open card. */
   .cr-modal-backdrop.show:not(.cr-modal-refresh) > .cr-modal {
@@ -2820,6 +2824,9 @@
     padding: 20px 20px 16px;
     overflow-y: auto;
     flex: 1;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    overflow-anchor: none;
   }
   .cr-modal-prompt {
     color: #fdca68;
@@ -3057,7 +3064,30 @@
   button.cc-proto-item.drug.given .fd-given-pill { flex-shrink: 0; }
 
   @media (max-width: 520px) {
-    .cr-modal { max-width: 100%; border-radius: 12px; }
+    /* Bottom sheet: height changes grow upward so the card doesn't
+       re-center (the phone "jump/shake" when route/dose content reflows). */
+    .cr-modal-backdrop {
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+      padding-top: env(safe-area-inset-top);
+    }
+    .cr-modal {
+      max-width: 100%;
+      width: 100%;
+      border-radius: 16px 16px 0 0;
+      max-height: min(92vh, 100%);
+      max-height: min(92dvh, 100%);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    /* Slide up on first open — no scale bounce on phone. */
+    .cr-modal-backdrop.show:not(.cr-modal-refresh) > .cr-modal {
+      animation: cr-sheet-in 0.22s ease-out;
+    }
+    @keyframes cr-sheet-in {
+      from { opacity: 0.6; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
     .cr-modal-title { font-size: 19px; }
     .cr-modal-row { grid-template-columns: 90px 1fr; gap: 10px; }
     .cr-modal-label { font-size: 14px; }
@@ -6928,14 +6958,29 @@ function crRenderModal() {
              : '';
   const existing = mount.classList.contains('show') ? mount.querySelector('.cr-modal') : null;
   if (existing) {
-    // Keep the same .cr-modal node so cr-pop-in / backdrop fade never restart.
+    // Keep the same .cr-modal node so open animations never restart, and
+    // preserve body scroll + a floor height so phone layout doesn't jump
+    // when route/dose content gets taller or shorter.
     mount.classList.add('cr-modal-refresh');
+    const bodyEl = existing.querySelector('.cr-modal-body');
+    const scrollTop = bodyEl ? bodyEl.scrollTop : 0;
+    const prevH = existing.getBoundingClientRect().height;
     const tmp = document.createElement('div');
     tmp.innerHTML = html;
     const neu = tmp.querySelector('.cr-modal');
     if (neu) {
+      existing.style.minHeight = prevH + 'px';
       existing.innerHTML = neu.innerHTML;
+      const body2 = existing.querySelector('.cr-modal-body');
+      if (body2) body2.scrollTop = scrollTop;
       bindModalEvents();
+      // Release the height floor after paint so the sheet can shrink later
+      // without an animated jump under the finger.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (existing.isConnected) existing.style.minHeight = '';
+        });
+      });
       return;
     }
   }
@@ -7155,15 +7200,17 @@ function renderDrugModal(m) {
         <button class="cr-modal-close" id="cr-modal-close-btn" aria-label="Close">✕</button>
       </div>
       <div class="cr-modal-body">
+        <!-- Route first: Give/Dose rows below can grow/shrink on route
+             change without sliding the chips out from under the finger. -->
+        <div class="cr-modal-row">
+          <div class="cr-modal-label">Route:</div>
+          ${routeToggle}
+        </div>
         <div class="cr-modal-row">
           <div class="cr-modal-label">Dose:</div>
           <div class="cr-modal-value">${escapeHtml(activeDose || '—')}</div>
         </div>
         ${dosePicker}
-        <div class="cr-modal-row">
-          <div class="cr-modal-label">Route:</div>
-          ${routeToggle}
-        </div>
         <div class="cr-modal-row">
           <div class="cr-modal-label">Conc:</div>
           <div class="cr-modal-value">

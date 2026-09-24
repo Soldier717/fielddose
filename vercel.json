@@ -3,17 +3,38 @@
   "redirects": [
     {
       "source": "/:path+",
-      "has": [{ "type": "host", "value": "fielddose.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "fielddose.com"
+        }
+      ],
       "destination": "https://www.fielddose.com/:path+",
       "permanent": false
     }
   ],
   "rewrites": [
     {
+      "source": "/training",
+      "destination": "/public/training/index.html"
+    },
+    {
+      "source": "/training/",
+      "destination": "/public/training/index.html"
+    },
+    {
       "source": "/",
-      "has": [{ "type": "host", "value": "fielddose.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "fielddose.com"
+        }
+      ],
       "destination": "/public/landing.html"
     },
-    { "source": "/", "destination": "/public/index.html" }
+    {
+      "source": "/",
+      "destination": "/public/index.html"
+    }
   ]
 }

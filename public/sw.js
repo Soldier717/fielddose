@@ -6,7 +6,7 @@
  *  - Blob uploads:         cache-first (reference cards viewable offline once loaded).
  *  - Fonts + static files: cache-first.
  */
-const CACHE = 'fielddose-v19';
+const CACHE = 'fielddose-v20';
 
 const PRECACHE = [
   '/',
@@ -94,6 +94,12 @@ self.addEventListener('fetch', (e) => {
   if (req.mode === 'navigate') {
     const isRoot = url.pathname === '/' || url.pathname === '/index.html';
     e.respondWith(networkFirst(req, isRoot ? '/' : req));
+    return;
+  }
+
+  // Keep training assets fresh without replacing the offline dosing shell.
+  if (url.origin === self.location.origin && url.pathname.startsWith('/training/')) {
+    e.respondWith(networkFirst(req));
     return;
   }
 

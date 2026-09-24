@@ -27,4 +27,4 @@ The root service worker keeps visited training assets fresh online and caches th
 - Three-case bag exhaustion and no consecutive repeats; rotation survives reload; blocked/corrupt storage falls back safely.
 - PDF loads; no JavaScript errors. Mobile and desktop screenshots inspected.
 
-Release on a preview branch first. Review the preview before merging to main / production.
+Release: preview reviewed by Sean; production publication as Training Beta authorized September 24, 2026. Training-only and clinical-review-pending notices remain visible.

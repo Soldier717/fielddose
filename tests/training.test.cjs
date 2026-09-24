@@ -12,7 +12,7 @@ assert.equal(Object.keys(topics).length,20);assert.equal(drugs.length,36);
 assert.equal(drugs.filter(d=>d.setup?.length).length,14);assert.equal(cases.length,3);
 for(const q of questions){assert.equal(q.options.length,4,q.id);assert.equal(new Set(q.options).size,4,q.id);assert(q.options.includes(q.answer),q.id);assert.equal(q.blank.split('___').length,2,q.id);assert(Number.isInteger(q.page)&&q.page>0,q.id);assert(q.explanation,q.id);}
 const hashes=JSON.parse(fs.readFileSync(path.join(root,'docs/training-source-hashes.json')));
-for(const name of ['training-data.js','question-bank.js','app.js','references/swfl-2026-guidelines.pdf'])assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(dir,name))).digest('hex'),hashes[name],name+' clinical source changed; requires explicit review');
+for(const name of ['training-data.js','question-bank.js','app.js','references/swfl-2026-guidelines.pdf'])assert.equal(crypto.createHash('sha256').update(name.endsWith('.js') ? fs.readFileSync(path.join(dir,name),'utf8').replace(/\r\n/g,'\n') : fs.readFileSync(path.join(dir,name))).digest('hex'),hashes[name],name+' clinical source changed; requires explicit review');
 const html=fs.readFileSync(path.join(dir,'index.html'),'utf8');
 let last=-1;for(const name of ['training-data.js','question-bank.js','app.js','training.js']){const i=html.indexOf('src="/training/'+name+'"');assert(i>last);last=i;}
 for(const m of html.matchAll(/(?:src|href)="([/][^"#]+)(?:#[^"]*)?"/g)){if(m[1]==='/'||m[1]==='/training')continue;assert(fs.existsSync(path.join(root,'public',m[1])),m[1]);}

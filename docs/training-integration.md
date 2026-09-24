@@ -4,11 +4,11 @@ Training is a separate static document at /training and /training/. It uses the 
 
 ## Supplied content
 
-Imported from FieldDose-Codex-Handoff.zip (source snapshot f407dc2c498c8833ef5e70ef859b287bc6d90eef, September 24, 2026). Original hashes are in training-source-hashes.json. Training data, expanded question bank, scenario engine, and source PDF are unchanged. Integration edits add absolute asset/reference URLs, isolated FieldDose branding, navigation, and a visible training-only notice.
+Imported from FieldDose-Codex-Handoff.zip (source snapshot f407dc2c498c8833ef5e70ef859b287bc6d90eef, September 24, 2026). Original hashes are in training-source-hashes.json. Original training data, expanded question bank, and source PDF are unchanged. The scenario engine was expanded after launch; see training-scenarios.md. Integration edits add absolute asset/reference URLs, isolated FieldDose branding, navigation, and a visible training-only notice.
 
 - 200 unique questions: 114 protocol questions and 160 drug questions, with 74 shared.
 - 20 protocol topics, 36 medications, 14 setup drills.
-- Three scripted adult respiratory scenarios; not live AI generation.
+- Eight scripted adult scenarios across four topics; not live AI generation.
 - Multiple choice and dropdown blanks; filtering, capped rounds, feedback and retry.
 - Allergy, six-rights, partner-check and post-medication reassessment gates preserved.
 

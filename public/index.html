@@ -5366,10 +5366,12 @@ function crChartStart() {
   // Cardiac Arrest fast path: weight was picked via the arrest button —
   // land directly on the arrest algorithm instead of the med list.
   if (cr.arrestPending) {
+    const rhythmProtocol = cr.arrestPending;
     cr.arrestPending = false;
+    cr.arrestWorkflow = true;
     ctState.activeTab = 'meds';
     cr.medsView = 'protocol';
-    cr.protocolSel = 'vfvt';
+    cr.protocolSel = rhythmProtocol;
     ctLogEvent('Note', 'Cardiac arrest workflow started');
   }
 }
@@ -5395,6 +5397,8 @@ function chartOpen(id) {
     if (!confirm('Open this saved chart? Your current patient stays saved in the chart list.')) return;
     if (ctState.running) ctPause();
   }
+  cr.arrestPending = false;
+  cr.arrestWorkflow = false;
   cr.patient = chart.patient;
   cr.chartId = chart.id;
   cr.view = 'dose';
@@ -7383,6 +7387,8 @@ function crNewPatient() {
   ctState.activeTab = 'meds';
   crHTsAddressed.clear();
   cr.patient = null;
+  cr.arrestPending = false;
+  cr.arrestWorkflow = false;
   cr.view = 'entry';
   cr.medsView = 'full';
   cr.protocolSel = null;
@@ -7406,10 +7412,11 @@ function renderRunCode() {
   }
 
   // Entry views — render picker UI, no dose tabs, no patient bar
-  if (cr.view === 'entry' || cr.view === 'entry-adult' || cr.view === 'entry-peds') {
+  if (cr.view === 'entry' || cr.view === 'entry-adult' || cr.view === 'entry-peds' || cr.view === 'entry-arrest') {
     return renderRunCodeHeader() + `
       <div class="content ct-wrap rc-tabbed">
-        ${cr.view === 'entry' ? renderCREntry()
+        ${cr.view === 'entry-arrest' ? renderCRArrestWorkflow()
+          : cr.view === 'entry' ? renderCREntry()
           : cr.view === 'entry-adult' ? renderCREntryAdult()
           : renderCREntryPeds()}
       </div>
@@ -7497,7 +7504,7 @@ function renderCREntry() {
         <span class="arrow">›</span>
       </button>` : ''}
       <button class="fd-arrest-btn" id="fd-arrest-btn">⚡ CARDIAC ARREST<span>weight → straight to the algorithm</span></button>
-      <div class="cr-entry-title">New Patient</div>
+      <div class="cr-entry-title">${cr.arrestPending ? 'Select Patient Weight' : 'New Patient'}</div>
       <div class="cr-entry-sub">${fdPediatricOnly() ? 'Pediatric patients only · select Pediatric to begin' : 'Select patient type to begin'}</div>
       <div class="cr-entry-cards${fdPediatricOnly() ? ' pediatric-only' : ''}">
         <button class="cr-entry-card peds" id="cr-go-peds">
@@ -7540,6 +7547,65 @@ function renderCREntry() {
       </div>
     </div>
   `;
+}
+
+function renderCRArrestWorkflow() {
+  return `
+    <div class="cr-entry">
+      <div class="cr-entry-title">Cardiac Arrest</div>
+      <div class="cr-entry-sub">Begin resuscitation immediately — do not delay CPR for this tool.</div>
+      <div class="cc-proto-detail">
+        <div class="cc-proto-section">
+          <div class="cc-proto-section-label">Initial Assessment &amp; Setup</div>
+          <div class="cc-proto-item"><strong>1. Confirm cardiac arrest</strong> — unresponsive, no normal breathing or only gasping. Check for a pulse for no more than 10 seconds.</div>
+          <div class="cc-proto-item"><strong>2. Begin CPR</strong></div>
+          <div class="cc-proto-item"><strong>3. Apply pads and connect the monitor</strong> while CPR continues.</div>
+          <div class="cc-proto-item"><strong>4. Analyze rhythm</strong> with a brief interruption in compressions.</div>
+        </div>
+        <div class="cc-proto-section">
+          <div class="cc-proto-section-label">5. Select the Confirmed Rhythm</div>
+          <button class="cc-proto-btn" data-arrest-rhythm="vfvt"><span>VF / Pulseless VT · Shockable</span><span class="arrow">›</span></button>
+          <button class="cc-proto-btn" data-arrest-rhythm="peaasys"><span>PEA / Asystole · Nonshockable</span><span class="arrow">›</span></button>
+        </div>
+      </div>
+      ${!cr.patient ? '<button class="cr-back" id="cr-arrest-cancel">‹ Back to patient selection</button>' : ''}
+    </div>
+  `;
+}
+
+function crSelectArrestRhythm(protocol) {
+  if (protocol !== 'vfvt' && protocol !== 'peaasys') return;
+  cr.arrestWorkflow = true;
+  if (!cr.patient) {
+    cr.arrestPending = protocol;
+    cr.view = fdPediatricOnly() ? 'entry-peds' : 'entry';
+    render();
+    showToast('Select patient weight for the selected arrest protocol');
+    return;
+  }
+  ctState.activeTab = 'meds';
+  cr.medsView = 'protocol';
+  cr.protocolSel = protocol;
+  ctLogEvent('Rhythm', protocol === 'vfvt' ? 'VF / Pulseless VT — shockable protocol selected' : 'PEA / Asystole — nonshockable protocol selected');
+  rcPartialRender();
+}
+
+function crBindArrestWorkflow() {
+  document.querySelectorAll('[data-arrest-rhythm]').forEach(b =>
+    b.addEventListener('click', () => crSelectArrestRhythm(b.dataset.arrestRhythm)));
+  const review = document.querySelector('[data-arrest-review]');
+  if (review) review.addEventListener('click', () => {
+    cr.medsView = 'arrest';
+    cr.protocolSel = null;
+    rcPartialRender();
+  });
+  const cancel = document.getElementById('cr-arrest-cancel');
+  if (cancel) cancel.addEventListener('click', () => {
+    cr.arrestPending = false;
+    cr.arrestWorkflow = false;
+    cr.view = 'entry';
+    render();
+  });
 }
 
 function renderCREntryAdult() {
@@ -8337,6 +8403,7 @@ function rcRenderProtocolDetail(p) {
     body = `<div class="cc-proto-detail">${(p.sections || []).map(s => sec(s.label, s.items, false)).join('')}${p.warn ? sec(p.warn.label, p.warn.items, true) : ''}${pearls}</div>`;
   }
   return `
+    ${cr.arrestWorkflow ? '<button class="cc-proto-back" data-arrest-review>‹ Reassess / Select Rhythm</button>' : ''}
     <button class="cc-proto-back" data-proto-back>‹ All Protocols</button>
     <div class="cr-meds-banner"><span class="ico">▣</span><span>${escapeHtml(p.banner || p.name)}</span></div>
     ${pedsNote}
@@ -8348,6 +8415,7 @@ function rcRenderTabMeds(kg, elec) {
   // V2 tabular layout — Drug | Conc | Vol | Rt rows
   // Sub-views: 'full' (all meds alphabetical) | 'protocol' (treatment algorithms)
   const view = cr.medsView || 'full';
+  if (view === 'arrest') return renderCRArrestWorkflow();
 
   // By Protocol — structured treatment algorithms (select → drill in)
   if (view === 'protocol') {
@@ -8680,9 +8748,12 @@ function rcBindDynamicElements() {
     b.addEventListener('click', () => {
       cr.medsView = b.dataset.medsView;
       cr.protocolSel = null;
+      cr.arrestWorkflow = false;
       rcPartialRender();
     });
   });
+
+  crBindArrestWorkflow();
 
   // By Protocol — select a protocol / back to menu
   document.querySelectorAll('[data-proto-sel]').forEach(b => {
@@ -8814,6 +8885,7 @@ function rcBindDynamicElements() {
 }
 
 function bindRunCodeEvents() {
+  if (cr.view === 'entry-arrest') crBindArrestWorkflow();
   // Header phone button → contacts / medical direction sheet
   const callBtn = document.getElementById('fd-call-btn');
   if (callBtn) callBtn.addEventListener('click', fdShowContacts);
@@ -8864,10 +8936,10 @@ function bindRunCodeEvents() {
   const arrestBtn = document.getElementById('fd-arrest-btn');
   if (arrestBtn) arrestBtn.addEventListener('click', () => {
     if (!crGuardNewPatient()) return;
-    cr.arrestPending = true;
-    cr.view = fdPediatricOnly() ? 'entry-peds' : 'entry-adult';
+    cr.arrestPending = false;
+    cr.arrestWorkflow = true;
+    cr.view = 'entry-arrest';
     render();
-    showToast('Pick weight — jumping to the arrest algorithm');
   });
 
   // ENTRY FLOW — agency enrollment

@@ -5368,9 +5368,8 @@ function crChartStart() {
   if (cr.arrestPending) {
     cr.arrestPending = false;
     ctState.activeTab = 'meds';
-    cr.medsView = fdPediatricOnly() ? 'full' : 'protocol';
-    cr.protocolSel = fdPediatricOnly() ? null : 'vfvt';
-    if (fdPediatricOnly()) ctState.activeTab = 'code';
+    cr.medsView = 'protocol';
+    cr.protocolSel = 'vfvt';
     ctLogEvent('Note', 'Cardiac arrest workflow started');
   }
 }
@@ -8186,8 +8185,35 @@ const CC_PROTOCOLS = [
   ]},
 ];
 
+// Pediatric arrest protocols reuse the existing calculated medication rows.
+function crProtocolGroups() {
+  if (!fdPediatricOnly()) return CC_PROTOCOLS;
+  const drugs = ccGetDrugs();
+  const drugLine = (name) => {
+    const d = drugs.find(x => x.name === name);
+    return d ? { t: `${d.name} ${d.weightDose} · ${d.deliveryDose} · ${d.detail}`, drug: d.name } : null;
+  };
+  const lines = names => names.map(drugLine).filter(Boolean);
+  const list = CC_PROTOCOLS[0].list.filter(p => p.id === 'vfvt' || p.id === 'peaasys').map(p => {
+    const sections = p.sections.filter(s => !s.label.includes('(Adult)')).map(s => {
+      if (s.label.includes('Anti-Dysrhythmic')) return { ...s, items: lines(['Amiodarone', 'Lidocaine', 'Magnesium Sulfate — Torsades / VT']) };
+      if (s.label.includes('Secondary Medication')) return { ...s, items: lines(['Epinephrine']) };
+      if (s.label === 'Suspected Hyperkalemia') return { ...s, items: lines(['Calcium Chloride']) };
+      if (s.label === 'Primary Treatment') {
+        const items = s.items.filter(it => !it.startsWith('Epinephrine ')).map(it =>
+          it.startsWith('Defibrillation') ? `Defibrillation — ${ccGetElectrical().defib.primary} · ${ccGetElectrical().defib.detail}` : it);
+        if (p.id === 'peaasys') items.push(...lines(['Epinephrine']));
+        return { ...s, items };
+      }
+      return s;
+    }).filter(s => s.items.length);
+    return { ...p, banner: 'Pediatric · ' + p.banner, sections };
+  });
+  return [{ cat: 'Pediatric Cardiac Arrest', list }];
+}
+
 function crFindProto(id) {
-  for (const c of CC_PROTOCOLS) { const p = c.list.find(x => x.id === id); if (p) return p; }
+  for (const c of crProtocolGroups()) { const p = c.list.find(x => x.id === id); if (p) return p; }
   return null;
 }
 
@@ -8259,7 +8285,7 @@ function rcRenderProtocolView() {
     if (p) return rcRenderProtocolDetail(p);
     cr.protocolSel = null;
   }
-  const groups = CC_PROTOCOLS.map(c => `
+  const groups = crProtocolGroups().map(c => `
     <div class="cc-proto-group">
       <div class="cc-proto-cat-label">${escapeHtml(c.cat)}</div>
       ${c.list.map(p => `<button class="cc-proto-btn" data-proto-sel="${escapeAttr(p.id)}"><span>${escapeHtml(p.name)}</span><span class="arrow">›</span></button>`).join('')}
@@ -8301,7 +8327,7 @@ function rcRenderProtocolDetail(p) {
       }).join('')}
     </div>`;
   const pedsNote = (cr.patient && cr.patient.type === 'peds')
-    ? `<div class="cc-proto-peds-note">⚠ Pediatric patient — tap a drug for the weight-based pediatric dose. Inline doses are reference values.</div>`
+    ? `<div class="cc-proto-peds-note">${fdPediatricOnly() ? 'Pediatric doses calculated for the selected weight — tap a drug to confirm dose and delivery.' : '⚠ Pediatric patient — tap a drug for the weight-based pediatric dose. Inline doses are reference values.'}</div>`
     : '';
   let body;
   if (p.memory) {
@@ -8321,7 +8347,7 @@ function rcRenderProtocolDetail(p) {
 function rcRenderTabMeds(kg, elec) {
   // V2 tabular layout — Drug | Conc | Vol | Rt rows
   // Sub-views: 'full' (all meds alphabetical) | 'protocol' (treatment algorithms)
-  const view = fdPediatricOnly() ? 'full' : (cr.medsView || 'full');
+  const view = cr.medsView || 'full';
 
   // By Protocol — structured treatment algorithms (select → drill in)
   if (view === 'protocol') {
@@ -8378,7 +8404,7 @@ function rcRenderTabMeds(kg, elec) {
       </div>
       <div class="cr-meds-subtabs">
         <button class="cr-meds-subtab active" data-meds-view="full">Full List</button>
-        ${fdPediatricOnly() ? '' : '<button class="cr-meds-subtab" data-meds-view="protocol">By Protocol</button>'}
+        <button class="cr-meds-subtab" data-meds-view="protocol">By Protocol</button>
       </div>
       <div class="cr-drug-table">
         <div class="cr-drug-row header">

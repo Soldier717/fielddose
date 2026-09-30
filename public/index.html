@@ -4103,7 +4103,7 @@ function ctTick() {
     let breathBeatN = 0;
     if (ctState.ventCueOn && ctState.advancedAirway) {
       const kg = parseFloat(ccState.weight) || 70;
-      const band = kg < 5 ? 'neonatal' : kg < 40 ? 'pediatric' : 'adult';
+      const band = rcDeriveBand(kg);
       const ventSec = band === 'adult' ? 6 : band === 'pediatric' ? 4 : 3;
       breathBeatN = Math.max(1, Math.round((ventSec / 60) * ctState.bpm));
     }
@@ -4463,6 +4463,10 @@ function fdPackGet() {
   } catch (_) { return null; }
 }
 function fdPack() { const p = fdPackGet(); return p ? p.pack : null; }
+function fdPediatricOnly() {
+  const p = fdPack();
+  return !!(p && p.patientScope === 'pediatric');
+}
 function fdPackStore(code, pack) {
   try { localStorage.setItem(FD_PACK_KEY, JSON.stringify({ code, pack, fetchedAt: Date.now() })); } catch (_) {}
 }
@@ -5245,6 +5249,9 @@ const CC_HS_TS = [
    RUN A CODE — merged timer + weight-based drug doses
 ============================================================ */
 function rcDeriveBand(kg) {
+  if (fdPediatricOnly() && cr.patient && cr.patient.type === 'peds') {
+    return kg < 5 ? 'neonatal' : 'pediatric';
+  }
   if (kg < 5) return 'neonatal';
   if (kg < 40) return 'pediatric';
   return 'adult';
@@ -5352,8 +5359,9 @@ function crChartStart() {
   if (cr.arrestPending) {
     cr.arrestPending = false;
     ctState.activeTab = 'meds';
-    cr.medsView = 'protocol';
-    cr.protocolSel = 'vfvt';
+    cr.medsView = fdPediatricOnly() ? 'full' : 'protocol';
+    cr.protocolSel = fdPediatricOnly() ? null : 'vfvt';
+    if (fdPediatricOnly()) ctState.activeTab = 'code';
     ctLogEvent('Note', 'Cardiac arrest workflow started');
   }
 }
@@ -5369,6 +5377,10 @@ function chartDelete(id) {
 function chartOpen(id) {
   const chart = chartsLoadAll().find((c) => c.id === id);
   if (!chart) { showToast('Chart no longer available', true); render(); return; }
+  if (fdPediatricOnly() && chart.patient.type !== 'peds') {
+    showToast('This agency pack supports pediatric patients only', true);
+    return;
+  }
   // Reachable with a live session via ⌂ Home — switching is safe (the
   // active session is continuously saved as its own chart) but confirm.
   if (cr.patient && cr.chartId !== id) {
@@ -7266,6 +7278,7 @@ function handleDefibModalAction(action) {
 }
 
 function crSetAdultIBW(ibw) {
+  if (fdPediatricOnly()) return;
   cr.patient = {
     type: 'adult',
     weight: ibw.kg,
@@ -7281,6 +7294,7 @@ function crSetAdultIBW(ibw) {
 }
 
 function crSetAdultCustom(kg) {
+  if (fdPediatricOnly()) return;
   if (!kg || kg < 30 || kg > 250) { showToast('Enter weight 30-250 kg', true); return; }
   const lbs = Math.round(kg * 2.2046);
   cr.patient = {
@@ -7372,6 +7386,16 @@ function crNewPatient() {
 function renderRunCode() {
   ctLoadSettings();
   ccState.unit = 'kg';
+  if (fdPediatricOnly()) {
+    if (cr.patient && cr.patient.type !== 'peds') {
+      if (ctState.running) ctPause();
+      chartSaveActive();
+      cr.view = 'entry';
+      cr.modal = null;
+    } else if (cr.view === 'entry-adult') {
+      cr.view = 'entry-peds';
+    }
+  }
 
   // Entry views — render picker UI, no dose tabs, no patient bar
   if (cr.view === 'entry' || cr.view === 'entry-adult' || cr.view === 'entry-peds') {
@@ -7420,7 +7444,7 @@ function renderRunCodeHeader() {
 }
 
 function renderCREntryCharts() {
-  const charts = chartsLoadAll();
+  const charts = chartsLoadAll().filter(c => !fdPediatricOnly() || c.patient.type === 'peds');
   const rows = charts.length === 0
     ? `<div class="cr-charts-empty">No saved charts — a chart is created automatically when you select a patient</div>`
     : charts.map((c) => {
@@ -7451,7 +7475,7 @@ function renderCREntryCharts() {
 
 function renderCREntry() {
   // Reached via ⌂ Home with a patient still active → offer the way back
-  const p = cr.patient;
+  const p = cr.patient && (!fdPediatricOnly() || cr.patient.type === 'peds') ? cr.patient : null;
   const resumeSummary = p
     ? (p.type === 'peds'
         ? `${p.zoneLabel ? p.zoneLabel + ' · ' : ''}${p.weight} kg${ctState.running ? ' · CPR RUNNING' : ''}`
@@ -7466,24 +7490,24 @@ function renderCREntry() {
       </button>` : ''}
       <button class="fd-arrest-btn" id="fd-arrest-btn">⚡ CARDIAC ARREST<span>weight → straight to the algorithm</span></button>
       <div class="cr-entry-title">New Patient</div>
-      <div class="cr-entry-sub">Select patient type to begin</div>
+      <div class="cr-entry-sub">${fdPediatricOnly() ? 'Pediatric patients only · select Pediatric to begin' : 'Select patient type to begin'}</div>
       <div class="cr-entry-cards">
         <button class="cr-entry-card peds" id="cr-go-peds">
           <div class="plus">+</div>
           <div class="icon">🧒</div>
           <div class="label">Pediatric</div>
         </button>
-        <button class="cr-entry-card adult" id="cr-go-adult">
+        ${fdPediatricOnly() ? '' : `<button class="cr-entry-card adult" id="cr-go-adult">
           <div class="plus">+</div>
           <div class="icon">🧑</div>
           <div class="label">Adult</div>
-        </button>
+        </button>`}
       </div>
       ${renderCREntryCharts()}
-      <a class="fd-narc-btn" href="/training" target="_blank" rel="noopener" aria-label="Training Beta (opens in a new tab)" style="text-decoration:none;">
+      ${fdPediatricOnly() ? '' : `<a class="fd-narc-btn" href="/training" target="_blank" rel="noopener" aria-label="Training Beta (opens in a new tab)" style="text-decoration:none;">
         <span>Training · Beta<small>Protocol questions, medication drills, and practice scenarios</small></span>
         <span aria-hidden="true">›</span>
-      </a>
+      </a>`}
       <button class="fd-narc-btn" id="fd-narc-btn">
         <span>🔒 Narcotics — Daily Transfer<small>Chain-of-custody sign-over · inventory · expirations</small></span>
         <span style="font-size:18px;color:var(--clin-text-muted);">›</span>
@@ -7503,7 +7527,7 @@ function renderCREntry() {
       })()}
       <div class="cc-disclaimer" style="margin-top: 8px;">
         <strong>⚠ Training & Reference Tool</strong>
-        Pick patient type. Weight is locked once selected — start a New Patient if anything changes. Always confirm against current GNFR protocols and medical control. Always cross-check drug, dose, and delivery method with your partner.
+        ${fdPediatricOnly() ? 'Pediatric patients only.' : 'Pick patient type.'} Weight is locked once selected — start a New Patient if anything changes. Always confirm against current GNFR protocols and medical control. Always cross-check drug, dose, and delivery method with your partner.
         <div style="margin-top:6px;opacity:0.75;font-size:11px;">Data source: SWFL Regional Common Treatment Guidelines, 2025 revision (GNFR 26-02).</div>
       </div>
     </div>
@@ -7511,6 +7535,7 @@ function renderCREntry() {
 }
 
 function renderCREntryAdult() {
+  if (fdPediatricOnly()) return renderCREntryPeds();
   return `
     <div class="cr-entry">
       <button class="cr-back" id="cr-entry-back">‹ Back</button>
@@ -8287,7 +8312,7 @@ function rcRenderProtocolDetail(p) {
 function rcRenderTabMeds(kg, elec) {
   // V2 tabular layout — Drug | Conc | Vol | Rt rows
   // Sub-views: 'full' (all meds alphabetical) | 'protocol' (treatment algorithms)
-  const view = cr.medsView || 'full';
+  const view = fdPediatricOnly() ? 'full' : (cr.medsView || 'full');
 
   // By Protocol — structured treatment algorithms (select → drill in)
   if (view === 'protocol') {
@@ -8344,7 +8369,7 @@ function rcRenderTabMeds(kg, elec) {
       </div>
       <div class="cr-meds-subtabs">
         <button class="cr-meds-subtab active" data-meds-view="full">Full List</button>
-        <button class="cr-meds-subtab" data-meds-view="protocol">By Protocol</button>
+        ${fdPediatricOnly() ? '' : '<button class="cr-meds-subtab" data-meds-view="protocol">By Protocol</button>'}
       </div>
       <div class="cr-drug-table">
         <div class="cr-drug-row header">
@@ -8477,7 +8502,7 @@ function rcRenderTabEquipment(a) {
 
 function rcPartialRender() {
   // V2: only meaningful in dose view; full re-render handles entry views
-  if (cr.view !== 'dose' || !cr.patient) { render(); return; }
+  if (cr.view !== 'dose' || !cr.patient || (fdPediatricOnly() && cr.patient.type !== 'peds')) { render(); return; }
 
   const content = document.querySelector('.content.ct-wrap');
   if (!content) return;
@@ -8805,7 +8830,7 @@ function bindRunCodeEvents() {
   if (arrestBtn) arrestBtn.addEventListener('click', () => {
     if (!crGuardNewPatient()) return;
     cr.arrestPending = true;
-    cr.view = 'entry-adult';
+    cr.view = fdPediatricOnly() ? 'entry-peds' : 'entry-adult';
     render();
     showToast('Pick weight — jumping to the arrest algorithm');
   });

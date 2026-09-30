@@ -4,7 +4,7 @@
     "name": "Greater Naples Fire Rescue",
     "shortName": "GNFR"
   },
-  "version": "2026-09-18b",
+  "version": "2026-09-30",
   "timezone": "America/New_York",
   "defib": {
     "adultLadder": [
@@ -153,5 +153,6 @@
       "sub": "Dive emergency",
       "num": "919-684-9111"
     }
-  ]
+  ],
+  "patientScope": "pediatric"
 }

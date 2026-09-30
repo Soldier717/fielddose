@@ -28,8 +28,8 @@ enrolled device picks it up on next open (toast: "<Agency> protocols updated").
 - `agency` (required): `name` shown on the entry screen; `shortName` tags the header.
 - `patientScope`: optional `"pediatric"` restricts patient selection, chart reopening,
   and arrest entry to pediatric patients. Adult charts remain stored but hidden;
-  adult-oriented protocol references and the mixed-population Training link are
-  hidden. Pediatric patients keep pediatric calculations above 40 kg. Omit this
+  protocol references use pediatric arrest workflows. The Training link remains
+  available (Training includes mixed-population educational content). Pediatric patients keep pediatric calculations above 40 kg. Omit this
   field for the regional adult/pediatric interface.
 - `defib.adultLadder`: adult escalating biphasic sequence; last value repeats
   for subsequent shocks. Pediatric 2/4 J/kg is universal and not overridable.

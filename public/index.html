@@ -1354,6 +1354,15 @@
     gap: 14px;
     margin-bottom: 30px;
   }
+  .cr-entry-cards.pediatric-only {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+  .cr-entry-cards.pediatric-only .cr-entry-card {
+    width: calc((100% - 14px) / 2);
+    min-width: 180px;
+    max-width: 100%;
+  }
   .cr-entry-card {
     background: var(--bg-elev);
     border: 2px solid var(--border-bright);
@@ -7491,7 +7500,7 @@ function renderCREntry() {
       <button class="fd-arrest-btn" id="fd-arrest-btn">⚡ CARDIAC ARREST<span>weight → straight to the algorithm</span></button>
       <div class="cr-entry-title">New Patient</div>
       <div class="cr-entry-sub">${fdPediatricOnly() ? 'Pediatric patients only · select Pediatric to begin' : 'Select patient type to begin'}</div>
-      <div class="cr-entry-cards">
+      <div class="cr-entry-cards${fdPediatricOnly() ? ' pediatric-only' : ''}">
         <button class="cr-entry-card peds" id="cr-go-peds">
           <div class="plus">+</div>
           <div class="icon">🧒</div>

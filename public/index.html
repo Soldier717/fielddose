@@ -10,7 +10,8 @@
 <meta property="og:url" content="https://fielddose.com">
 <meta property="og:type" content="website">
 <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#0d0e10">
+<meta name="theme-color" content="#fdfaf4">
+<script src="/theme.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -3573,6 +3574,7 @@
     .cr-more-subtab { font-size: 11px; padding: 12px 4px; letter-spacing: 0.02em; }
   }
 </style>
+<link rel="stylesheet" href="/theme.css">
 
 <style>
   /* ============================================================
@@ -7449,6 +7451,7 @@ function renderRunCode() {
 function renderRunCodeHeader() {
   return `
     <div class="header fd-header">
+      <label class="fd-theme-control"><select data-fd-theme aria-label="Color theme" title="Color theme"><option value="light">Light</option><option value="dark">Dark</option><option value="system">System</option></select></label>
       <img src="/fielddose-logo.png" alt="FieldDose — Calculate. Confirm. Save Lives." class="fd-logo">
       <div class="page-meta fd-sub">${(() => { const p = fdPack(); return p ? escapeHtml(p.agency.shortName || p.agency.name) + ' · ' : ''; })()}Regional Common Treatment Guidelines</div>
       <button class="fd-call-fab" id="fd-call-btn" title="Contacts · Medical Direction" aria-label="Contacts and medical direction phone numbers">

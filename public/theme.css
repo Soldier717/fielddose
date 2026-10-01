@@ -1,0 +1,62 @@
+/* Shared theme controls. Clinical colors and Broselow zone swatches retain their meaning. */
+.fd-theme-control { display:inline-flex; align-items:center; gap:6px; color:inherit; font:12px Inter,system-ui,sans-serif; }
+.fd-theme-control select { width:88px; min-width:0; min-height:40px; padding:7px; border:1px solid #ffffff66; border-radius:7px; background:#ffffff; color:#263342; font:inherit; cursor:pointer; }
+.fd-theme-control select:focus-visible { outline:3px solid #fdca68; outline-offset:2px; }
+.fd-header .fd-theme-control { position:absolute; right:12px; top:50%; transform:translateY(-50%); }
+body.on-coderun .main .header.fd-header { padding-right:110px; }
+@media(max-width:640px) {
+ body.on-coderun .main .header.fd-header { padding-right:108px; padding-left:60px; }
+ body.on-coderun .main .header.fd-header .fd-logo { max-width:100%; }
+}
+html[data-fd-theme="light"] {
+ --bg:#fdfaf4; --bg-elev:#ffffff; --bg-elev-2:#f4efe6;
+ --border:#d9d4ca; --border-bright:#bcb6ab; --text:#383838; --text-dim:#54595f; --text-muted:#65625c;
+}
+html[data-fd-theme="dark"] {
+ --bg:#10151c; --bg-elev:#19222d; --bg-elev-2:#23303e;
+ --border:#354354; --border-bright:#52667c; --text:#edf2f7; --text-dim:#bbc7d4; --text-muted:#9cabbc;
+ --clin-bg:#10151c; --clin-surface:#19222d; --clin-surface-alt:#23303e; --clin-border:#354354;
+ --clin-text:#edf2f7; --clin-text-dim:#bbc7d4; --clin-text-muted:#9cabbc;
+ --clin-blue:#ef7183; --clin-blue-light:#412832; --clin-pink:#412832; --clin-red:#ff8290;
+ --clin-green:#65ca84; --clin-shadow:0 2px 8px #0005;
+}
+html[data-fd-theme="dark"] .fd-theme-control select { background:#23303e; color:#edf2f7; border-color:#52667c; }
+html[data-fd-theme="dark"] body.on-coderun .main .header.fd-header { background:#781322; border-color:#b71125; }
+html[data-fd-theme="dark"] body.on-coderun .main .cr-entry-card.peds:hover,
+html[data-fd-theme="dark"] body.on-coderun .main .cr-ibw-tile:hover { background:var(--clin-surface-alt); }
+html[data-fd-theme="dark"] .fd-chk.on,
+html[data-fd-theme="dark"] .cr-etco2-band.good { background:#17372a; color:#9ce3b3; }
+html[data-fd-theme="dark"] .cc-proto-section.warn .cc-proto-item,
+html[data-fd-theme="dark"] .cr-etco2-band.danger { background:#412832; color:#ffc0c8; }
+html[data-fd-theme="dark"] .cr-etco2-band.warning { background:#3c3320; color:#fdca68; }
+html[data-fd-theme="dark"] :is(.cr-rhythm-btn-v2.nonshockable,.cr-rhythm-entry .rhythm.nonshockable,.cr-meds-footnote strong) { color:#fdca68; }
+html[data-fd-theme="dark"] .fd-call-fab { background:var(--clin-surface); }
+html[data-fd-theme="dark"] .fd-call-fab svg { stroke:#65ca84; }
+/* Training uses its own layout but shares the preference and readable surfaces. */
+html[data-fd-theme="dark"] { --navy:#edf2f7; --teal:#ff94a3; --line:#354354; background:#10151c; color:#edf2f7; }
+html[data-fd-theme="dark"] .fd-training { --navy:#edf2f7; --teal:#ff94a3; --line:#354354; background:#10151c; color:#edf2f7; }
+html[data-fd-theme="dark"] .fd-training-header { background:#781322; color:white; }
+html[data-fd-theme="dark"] .fd-training :is(.card,dialog,select,input,textarea,button,.drugOverview details,.skip-training) { background:#19222d; color:#edf2f7; border-color:#52667c; }
+html[data-fd-theme="dark"] .fd-training :is(.fact,.transport,.dispatchCard,.hint,.drugPick.selected,.formatChoice label:has(input:checked),.answerOption:has(input:checked),.blankSentence select) { background:#23303e; color:#edf2f7; border-color:#52667c; }
+html[data-fd-theme="dark"] .fd-training :is(.muted,.title p,.topline,.step,.edition,.trainingFoot,.questionMeta,.answerLetter,.drugOverview p,.drugPick small,.bankStats span,.formatChoice small,.rightCheck small,.action small,.log time,.trainingTab small,.fd-training-notice) { color:#bbc7d4; }
+html[data-fd-theme="dark"] .fd-training :is(.quote,.tileNum,.bankStats b) { color:#edf2f7; }
+html[data-fd-theme="dark"] .fd-training :is(.monitor,.response,.trainingTab.selected) { background:#23303e; color:#edf2f7; border-color:#52667c; }
+html[data-fd-theme="dark"] .fd-training :is(.monitor .status,.monitor .clock,.monitor h3,.monitor label,.trainingTab.selected small) { color:#bbc7d4; }
+html[data-fd-theme="dark"] .fd-training button.primary { background:#a5131f; border-color:#df5262; color:white; }
+html[data-fd-theme="dark"] .fd-training button:hover:not(:disabled) { background:#354354; }
+html[data-fd-theme="dark"] .fd-training button.primary:hover:not(:disabled) { background:#ba2534; }
+html[data-fd-theme="dark"] .fd-training :is(.homeLink,.brand,.pill) { color:white; }
+html[data-fd-theme="dark"] .fd-training :is(.notice,.answerFeedback.review,.answerOption.incorrect) { background:#3c3320; color:#ffddb0; border-color:#957344; }
+html[data-fd-theme="dark"] .fd-training :is(.action.done,.answerFeedback.success,.answerOption.correct) { background:#17372a; color:#b2efd0; border-color:#4b9e70; }
+html[data-fd-theme="dark"] .fd-training .error { color:#ff9aa6; }
+html[data-fd-theme="dark"] .fd-training .fd-beta { background:#412832; color:#ffc0c8; border-color:#8b4b58; }
+
+/* Filled controls keep white text on darker semantic colors. */
+html[data-fd-theme="dark"] :is(.cr-manual-btn,.cpr-reset-btn,.cr-modal-head,.cr-vitals-head .ico,.qref-head,.qref-viewer-head,.qref-gcs-mode button.active,.qref-btn.active,.qref-prompt-save),
+html[data-fd-theme="dark"] body.on-coderun .main .rc-tabbar { background:#a5131f; color:#fff; }
+html[data-fd-theme="dark"] body.on-coderun .main .cr-entry-card.adult .plus { background:#a5131f; color:#fff; }
+html[data-fd-theme="dark"] body.on-coderun .main .cr-entry-card.peds .plus,
+html[data-fd-theme="dark"] :is(.cpr-ratio-btn.active,.cr-modal-btn.given,.cr-modal-btn.shock,.cr-dose-toggle button.active) { background:#217440; color:#fff; }
+html[data-fd-theme="dark"] :is(.cr-cpr-toggle-btn.active,.cr-cpr-toggle-btn:hover,.cpr-action-btn.defib:hover,.cr-rhythm-btn-v2.shockable:hover,.cr-elec-action:hover,button.cc-proto-item.jump:hover) { background:#a5131f; color:#fff; }
+html[data-fd-theme="dark"] .cr-rhythm-btn-v2.rosc:hover { background:#217440; color:#fff; }
+html[data-fd-theme="dark"] .cr-rhythm-btn-v2.nonshockable:hover { background:#fdca68; color:#263342; }

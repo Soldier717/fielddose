@@ -3581,6 +3581,27 @@
   .fd-appearance-row .fd-theme-control select {
     border-color:var(--clin-border); background:var(--clin-surface); color:var(--clin-text);
   }
+  .fd-header-actions {
+    position:absolute; right:10px; top:50%; transform:translateY(-50%);
+    display:flex; align-items:center; gap:8px;
+  }
+  .fd-header-actions .fd-call-fab {
+    position:static; transform:none; flex:0 0 40px;
+  }
+  .fd-header-actions .fd-call-fab:active { transform:scale(0.94); }
+  .fd-theme-toggle {
+    width:40px; height:40px; flex:0 0 40px; border:1px solid #ffffff80;
+    border-radius:10px; background:#fff; color:#263342; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:25px;
+  }
+  .fd-theme-toggle:focus-visible { outline:3px solid #fdca68; outline-offset:2px; }
+  .fd-theme-sun { display:none; }
+  html[data-fd-theme="dark"] .fd-theme-moon { display:none; }
+  html[data-fd-theme="dark"] .fd-theme-sun { display:inline; }
+  html[data-fd-theme="dark"] .fd-theme-toggle { background:#23303e; color:#fdca68; border-color:#52667c; }
+  @media(max-width:640px) {
+    body.on-coderun .main .header.fd-header .fd-logo { max-width:100%; }
+  }
 </style>
 <link rel="stylesheet" href="/theme.css">
 
@@ -7458,12 +7479,17 @@ function renderRunCode() {
 ============================================================ */
 function renderRunCodeHeader() {
   return `
-    <div class="header fd-header" style="padding-right:14px;">
-      <img src="/fielddose-logo.png" alt="FieldDose — Calculate. Confirm. Save Lives." class="fd-logo">
-      <div class="page-meta fd-sub">${(() => { const p = fdPack(); return p ? escapeHtml(p.agency.shortName || p.agency.name) + ' · ' : ''; })()}Regional Common Treatment Guidelines</div>
+    <div class="header fd-header" style="padding-right:110px;padding-left:14px;">
+      <div class="fd-header-actions">
+        <button class="fd-theme-toggle" id="fd-theme-toggle" aria-label="Switch between light and dark mode" title="Toggle light / dark mode"><span class="fd-theme-moon" aria-hidden="true">☾</span><span class="fd-theme-sun" aria-hidden="true">☀</span></button>
+        <select data-fd-theme id="fd-theme-bridge" hidden aria-hidden="true" tabindex="-1"><option value="light">Light</option><option value="dark">Dark</option><option value="system">System</option></select>
       <button class="fd-call-fab" id="fd-call-btn" title="Contacts · Medical Direction" aria-label="Contacts and medical direction phone numbers">
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </button>
+      </div>
+      <img src="/fielddose-logo.png" alt="FieldDose — Calculate. Confirm. Save Lives." class="fd-logo">
+      <div class="page-meta fd-sub">${(() => { const p = fdPack(); return p ? escapeHtml(p.agency.shortName || p.agency.name) + ' · ' : ''; })()}Regional Common Treatment Guidelines</div>
+
     </div>
   `;
 }
@@ -8896,6 +8922,13 @@ function rcBindDynamicElements() {
 }
 
 function bindRunCodeEvents() {
+  const themeToggle = document.getElementById('fd-theme-toggle');
+  if (themeToggle) themeToggle.addEventListener('click', () => {
+    const bridge = document.getElementById('fd-theme-bridge');
+    if (!bridge) return;
+    bridge.value = document.documentElement.getAttribute('data-fd-theme') === 'dark' ? 'light' : 'dark';
+    bridge.dispatchEvent(new Event('change', { bubbles: true }));
+  });
   if (cr.view === 'entry-arrest') crBindArrestWorkflow();
   // Header phone button → contacts / medical direction sheet
   const callBtn = document.getElementById('fd-call-btn');
